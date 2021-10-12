@@ -338,6 +338,9 @@ class ControladorBruTur{
 		
 		}
 		
+		$respuestaBrucelosis = ControladorBruTur::ctrMostrarPendientes('brucelosis');
+		$respuestaTuberulosis = ControladorBruTur::ctrMostrarPendientes('tuberculosis');
+
 		$nombreArchivo = 'EnviadosSenasa('.date('d-m-Y').").xls";
 		
 		$today = date('d-m-Y');
@@ -350,7 +353,7 @@ class ControladorBruTur{
 		header('Content-Description: File Transfer');
 		header('Last-Modified: '.date('D, d M Y H:i:s'));
 		header("Pragma: public"); 
-		header('Content-Disposition:; filename="'.$Name.'"');
+		header('Content-Disposition:; filename="'.$nombreArchivo.'"');
 		header("Content-Transfer-Encoding: binary");
 
 		echo utf8_decode("<table border='0'> 
@@ -363,20 +366,17 @@ class ControladorBruTur{
 				<td style='font-weight:bold; border:1px solid #eee;'>FECHA MUESTRA</td>	
 				</tr>");
 
+		if(!empty($respuestaBrucelosis)){
 
-		$respuesta = ControladorBruTur::ctrMostrarPendientes('brucelosis');
-	
-		if(!empty($respuesta)){
-
-			for ($i=0; $i < sizeof($respuesta) ; $i++) { 
+			for ($i=0; $i < sizeof($respuestaBrucelosis) ; $i++) { 
 				
-				$fechaMuestra = formatearFecha($respuesta[$i]['fechaEstado']);
-				$fechaCarga = formatearFecha($respuesta[$i]['fechaCarga']);
+				$fechaMuestra = formatearFecha($respuestaBrucelosis[$i]['fechaEstado']);
+				$fechaCarga = formatearFecha($respuestaBrucelosis[$i]['fechaCarga']);
 				
 				echo utf8_decode("<tr> 
 				<td style='font-weight:bold; border:1px solid #eee;'>".$fechaCarga."</td> 
-				<td style='font-weight:bold; border:1px solid #eee;'>".$respuesta[$i]['renspa']."</td> 
-				<td style='font-weight:bold; border:1px solid #eee;'>".$respuesta[$i]['protocolo']."</td> 
+				<td style='font-weight:bold; border:1px solid #eee;'>".$respuestaBrucelosis[$i]['renspa']."</td> 
+				<td style='font-weight:bold; border:1px solid #eee;'>".$respuestaBrucelosis[$i]['protocolo']."</td> 
 				<td style='font-weight:bold; border:1px solid #eee;'>BRUCELOSIS</td>
 				<td style='font-weight:bold; border:1px solid #eee;'>".$fechaMuestra."</td>	
 				</tr>");
@@ -385,19 +385,18 @@ class ControladorBruTur{
 
 		}
 				
-		$respuesta = ControladorBruTur::ctrMostrarPendientes('tuberculosis');
 
-		if(!empty($respuesta)){
+		if(!empty($respuestaTuberulosis)){
 
-			for ($i=0; $i < sizeof($respuesta) ; $i++) { 
+			for ($i=0; $i < sizeof($respuestaTuberulosis) ; $i++) { 
 				
-				$fechaMuestra = formatearFecha($respuesta[$i]['fechaEstado']);
-				$fechaCarga = formatearFecha($respuesta[$i]['fechaCarga']);
+				$fechaMuestra = formatearFecha($respuestaTuberulosis[$i]['fechaEstado']);
+				$fechaCarga = formatearFecha($respuestaTuberulosis[$i]['fechaCarga']);
 				
 				echo utf8_decode("<tr> 
 				<td style='font-weight:bold; border:1px solid #eee;'>".$fechaCarga."</td> 
-				<td style='font-weight:bold; border:1px solid #eee;'>".$respuesta[$i]['renspa']."</td> 
-				<td style='font-weight:bold; border:1px solid #eee;'>".$respuesta[$i]['protocolo']."</td> 
+				<td style='font-weight:bold; border:1px solid #eee;'>".$respuestaTuberulosis[$i]['renspa']."</td> 
+				<td style='font-weight:bold; border:1px solid #eee;'>".$respuestaTuberulosis[$i]['protocolo']."</td> 
 				<td style='font-weight:bold; border:1px solid #eee;'>TUBERCULOSIS</td>
 				<td style='font-weight:bold; border:1px solid #eee;'>".$fechaMuestra."</td>	
 				</tr>");

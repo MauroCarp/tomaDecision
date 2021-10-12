@@ -106,7 +106,7 @@ if($_SESSION["perfil"] == "Especial"){
 
                     <td>'.($key+1).'</td>
 
-                    <td>'.utf8_decode($value["nombre"]).'</td>
+                    <td>'.$value["nombre"].'</td>
 
                     <td>'.$value["matricula"].'</td>
 

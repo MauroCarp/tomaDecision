@@ -150,6 +150,59 @@ class ControladorVeterinarios{
 
 	}
 
+	/*=============================================
+	GENERAR EXCEL VETERINARIOS
+	=============================================*/
+
+	static public function ctrGenerarExcelVeterinarios(){
+		
+		$item = null;
+
+		$valor = null;
+		
+		$respuestaVeterinarios = ControladorVeterinarios::ctrMostrarVeterinarios($item,$valor);
+
+		$nombreArchivo = 'Nomina Veterinarios.xls';
+		
+		header('Expires: 0');
+		header('Cache-control: private');
+		header("Content-type: application/vnd.ms-excel"); // Archivo de Excel
+		header("Cache-Control: cache, must-revalidate"); 
+		header('Content-Description: File Transfer');
+		header('Last-Modified: '.date('D, d M Y H:i:s'));
+		header("Pragma: public"); 
+		header('Content-Disposition:; filename="'.$nombreArchivo.'"');
+		header("Content-Transfer-Encoding: binary");
+
+		echo utf8_decode("<table border='0'> 
+
+			<tr> 
+			<td style='font-weight:bold; border:1px solid #eee;'>NOMBRE</td> 
+			<td style='font-weight:bold; border:1px solid #eee;'>MATRICULA</td>
+			<td style='font-weight:bold; border:1px solid #eee;'>DOMICILIO</td>
+			<td style='font-weight:bold; border:1px solid #eee;'>TELEFONO</td>
+			<td style='font-weight:bold; border:1px solid #eee;'>E-MAIL</td>	
+			<td style='font-weight:bold; border:1px solid #eee;'>TIPO</td>	
+			</tr>");
+
+
+			for ($i=0; $i < sizeof($respuestaVeterinarios) ; $i++) { 
+				
+
+				echo utf8_decode("<tr> 
+				<td style='font-weight:bold; border:1px solid #eee;'>".$respuestaVeterinarios[$i]['nombre']."</td> 
+				<td style='font-weight:bold; border:1px solid #eee;'>".$respuestaVeterinarios[$i]['matricula']."</td> 
+				<td style='font-weight:bold; border:1px solid #eee;'>".$respuestaVeterinarios[$i]['domicilio']."</td> 
+				<td style='font-weight:bold; border:1px solid #eee;'>".$respuestaVeterinarios[$i]['telefono']."</td> 
+				<td style='font-weight:bold; border:1px solid #eee;'>".$respuestaVeterinarios[$i]['email']."</td> 		
+				<td style='font-weight:bold; border:1px solid #eee;'>".$respuestaVeterinarios[$i]['tipo']."</td> 		
+				</tr>");
+
+			}
+
+		echo "</table>";
+
+	}
 
 
 }

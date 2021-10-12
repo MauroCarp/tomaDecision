@@ -12,6 +12,11 @@ if($_SESSION["perfil"] == "Especial"){
 
 }
 
+$respuestaBrucelosis = ControladorBruTur::ctrMostrarPendientes('brucelosis');
+$respuestaTuberculosis = ControladorBruTur::ctrMostrarPendientes('tuberculosis');
+
+$btnValido = (!empty($respuestaBrucelosis) OR !empty($respuestaTuberculosis)) ? '' : 'disabled';
+
 ?>
 
 <div class="content-wrapper">
@@ -41,7 +46,7 @@ if($_SESSION["perfil"] == "Especial"){
       <div class="box-body">
 
           
-          <button class="btn btn-primary" id="btnEnviarSenasa">Enviar a Senasa</button>
+          <button class="btn btn-primary" id="btnEnviarSenasa" <?php echo $btnValido;?>>Enviar a Senasa</button>
        
 
         <hr>
@@ -66,26 +71,26 @@ if($_SESSION["perfil"] == "Especial"){
   
           <?php
   
-            $respuesta = ControladorBruTur::ctrMostrarPendientes('brucelosis');
+            $respuestaBrucelosis = ControladorBruTur::ctrMostrarPendientes('brucelosis');
 
-            if(!empty($respuesta)){
+            if(!empty($respuestaBrucelosis)){
              
-              for ($i=0; $i < sizeof($respuesta) ; $i++) { 
+              for ($i=0; $i < sizeof($respuestaBrucelosis) ; $i++) { 
               
                 echo "            
                 <tr>
     
-                  <td>".$respuesta[$i]['renspa']."</td>
+                  <td>".$respuestaBrucelosis[$i]['renspa']."</td>
                   
-                  <td>".$respuesta[$i]['establecimiento']."</td>
+                  <td>".$respuestaBrucelosis[$i]['establecimiento']."</td>
                   
-                  <td>".$respuesta[$i]['protocolo']."</td>
+                  <td>".$respuestaBrucelosis[$i]['protocolo']."</td>
                   
                   <td>Brucelosis</td>
                   
-                  <td>".formatearFecha($respuesta[$i]['fechaCarga'])."</td>
+                  <td>".formatearFecha($respuestaBrucelosis[$i]['fechaCarga'])."</td>
                   
-                  <td>".formatearFecha($respuesta[$i]['fechaEstado'])."</td>
+                  <td>".formatearFecha($respuestaBrucelosis[$i]['fechaEstado'])."</td>
                   
                 </tr>";
     
@@ -93,25 +98,24 @@ if($_SESSION["perfil"] == "Especial"){
     
             }
            
-            $respuesta = ControladorBruTur::ctrMostrarPendientes('tuberculosis');
-            if(!empty($respuesta)){
+            if(!empty($respuestaTuberculosis)){
 
-              for ($i=0; $i < sizeof($respuesta) ; $i++) { 
+              for ($i=0; $i < sizeof($respuestaTuberculosis) ; $i++) { 
                               
                 echo "            
                 <tr>
     
-                  <td>".$respuesta[$i]['renspa']."</td>
+                  <td>".$respuestaTuberculosis[$i]['renspa']."</td>
                   
-                  <td>".$respuesta[$i]['establecimiento']."</td>
+                  <td>".$respuestaTuberculosis[$i]['establecimiento']."</td>
                   
-                  <td>".$respuesta[$i]['protocolo']."</td>
+                  <td>".$respuestaTuberculosis[$i]['protocolo']."</td>
                   
                   <td>Tuberculosis</td>
                   
-                  <td>".formatearFecha($respuesta[$i]['fechaCarga'])."</td>
+                  <td>".formatearFecha($respuestaTuberculosis[$i]['fechaCarga'])."</td>
                   
-                  <td>".formatearFecha($respuesta[$i]['fechaEstado'])."</td>
+                  <td>".formatearFecha($respuestaTuberculosis[$i]['fechaEstado'])."</td>
                   
                 </tr>";
                 
