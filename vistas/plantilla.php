@@ -35,6 +35,7 @@ function formatearFecha($fecha){
 
   return $fechaFormateada;
 }
+
 ?>
 <!DOCTYPE html>
 <html>

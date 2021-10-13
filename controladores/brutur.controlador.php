@@ -413,6 +413,8 @@ class ControladorBruTur{
 		$today = date('d-m-Y');
 		$Name = 'hola.xls';
 
+		$item = 'renspa';
+
 		header('Expires: 0');
 		header('Cache-control: private');
 		header("Content-type: application/vnd.ms-excel"); // Archivo de Excel
@@ -426,11 +428,11 @@ class ControladorBruTur{
 		echo utf8_decode("<table border='0'> 
 
 				<tr> 
-				<td style='font-weight:bold; border:1px solid #eee;'>FECHA CARGADO</td> 
 				<td style='font-weight:bold; border:1px solid #eee;'>RENSPA</td>
-				<td style='font-weight:bold; border:1px solid #eee;'>PROTOCOLO</td>
+				<td style='font-weight:bold; border:1px solid #eee;'>PRODUCTOR</td>
 				<td style='font-weight:bold; border:1px solid #eee;'>MOTIVO</td>
 				<td style='font-weight:bold; border:1px solid #eee;'>FECHA MUESTRA</td>	
+				<td style='font-weight:bold; border:1px solid #eee;'>VETERINARIOO</td> 
 				</tr>");
 
 		if(!empty($respuestaBrucelosis)){
@@ -438,14 +440,17 @@ class ControladorBruTur{
 			for ($i=0; $i < sizeof($respuestaBrucelosis) ; $i++) { 
 				
 				$fechaMuestra = formatearFecha($respuestaBrucelosis[$i]['fechaEstado']);
-				$fechaCarga = formatearFecha($respuestaBrucelosis[$i]['fechaCarga']);
 				
+				$valor = $respuestaBrucelosis[$i]['renspa'];
+
+				$veterinario = ControladorBruTur::ctrMostrarVeterinarioMatricula($item,$valor);
+
 				echo utf8_decode("<tr> 
-				<td style='font-weight:bold; border:1px solid #eee;'>".$fechaCarga."</td> 
 				<td style='font-weight:bold; border:1px solid #eee;'>".$respuestaBrucelosis[$i]['renspa']."</td> 
-				<td style='font-weight:bold; border:1px solid #eee;'>".$respuestaBrucelosis[$i]['protocolo']."</td> 
-				<td style='font-weight:bold; border:1px solid #eee;'>BRUCELOSIS</td>
+				<td style='font-weight:bold; border:1px solid #eee;'>".$respuestaBrucelosis[$i]['productor']."</td> 
+				<td style='font-weight:bold; border:1px solid #eee;'>".$respuestaBrucelosis[$i]['estado']."</td> 
 				<td style='font-weight:bold; border:1px solid #eee;'>".$fechaMuestra."</td>	
+				<td style='font-weight:bold; border:1px solid #eee;'>".$respuestaBrucelosis[$i]['']."</td>
 				</tr>");
 
 			}
@@ -458,14 +463,17 @@ class ControladorBruTur{
 			for ($i=0; $i < sizeof($respuestaTuberulosis) ; $i++) { 
 				
 				$fechaMuestra = formatearFecha($respuestaTuberulosis[$i]['fechaEstado']);
-				$fechaCarga = formatearFecha($respuestaTuberulosis[$i]['fechaCarga']);
+
+				$valor = $respuestaTuberulosis[$i]['renspa'];
+				
+				$veterinario = ControladorBruTur::ctrMostrarVeterinarioMatricula($item,$valor);
 				
 				echo utf8_decode("<tr> 
-				<td style='font-weight:bold; border:1px solid #eee;'>".$fechaCarga."</td> 
-				<td style='font-weight:bold; border:1px solid #eee;'>".$respuestaTuberulosis[$i]['renspa']."</td> 
-				<td style='font-weight:bold; border:1px solid #eee;'>".$respuestaTuberulosis[$i]['protocolo']."</td> 
-				<td style='font-weight:bold; border:1px solid #eee;'>TUBERCULOSIS</td>
+				<td style='font-weight:bold; border:1px solid #eee;'>".$respuestaTuberculosis[$i]['renspa']."</td> 
+				<td style='font-weight:bold; border:1px solid #eee;'>".$respuestaTuberculosis[$i]['productor']."</td> 
+				<td style='font-weight:bold; border:1px solid #eee;'>".$respuestaTuberculosis[$i]['estado']."</td> 
 				<td style='font-weight:bold; border:1px solid #eee;'>".$fechaMuestra."</td>	
+				<td style='font-weight:bold; border:1px solid #eee;'>".$respuestaTuberculosis[$i]['']."</td>
 				</tr>");
 
 			}
@@ -483,6 +491,20 @@ class ControladorBruTur{
 		$respuesta = ControladorBruTur::ctrEnviarPendientes($item, $valor, $valor2);
 
     }
+
+	/*=============================================
+	MOSTRAR VETERINARIO SEGUN MATRICULA
+	=============================================*/
+
+	static public function ctrMostrarVeterinarioMatricula($item, $valor){
+		
+		$tabla = "establecimientos";
+
+		$respuesta = ModeloBruTur::mdlMostrarVeterinarioMatricula($tabla, $item, $valor);
+
+		return $respuesta;
+
+	}
 
 }
 

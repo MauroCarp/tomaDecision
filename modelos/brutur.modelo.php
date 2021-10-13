@@ -387,4 +387,25 @@ class ModeloBruTur{
 
 	}
 
+	/*=============================================
+	MOSTRAR VETERINARIO SEGUN MATRICULA
+	=============================================*/
+
+	static public function ctrMostrarVeterinarioMatricula($item, $valor){
+		
+		$stmt = Conexion::conectar()->prepare("SELECT vet FROM $tabla WHERE $item = :$item");
+
+		$stmt->bindParam(":".$item, $valor, PDO::PARAM_STR);
+
+		$stmt->execute();
+
+		// return $stmt->errorInfo();
+		return $stmt->fetch();
+
+		$stmt->close();
+
+		$stmt = null;
+
+	}
+
 }
