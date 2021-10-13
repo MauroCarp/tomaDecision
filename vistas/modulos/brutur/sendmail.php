@@ -1,7 +1,15 @@
 <?php
-function sendemail($mail_username,$mail_userpassword,$mail_setFromEmail,$mail_setFromName,$mail_addAddress,$txt_message,$mail_subject, $template){
+function sendemail($mail_username,$mail_userpassword,$mail_setFromEmail,$mail_setFromName,$mail_addAddress,$txt_message,$mail_subject, $template,$notificar){
+
+	if($notificar){
+
+		require 'extensiones/PHPMailer/PHPMailerAutoload.php';
+		
+	}else{
+		
+		require '../../../extensiones/PHPMailer/PHPMailerAutoload.php';
 	
-	require 'extensiones/PHPMailer/PHPMailerAutoload.php';
+	}
 	
 	$mail = new PHPMailer;
 	

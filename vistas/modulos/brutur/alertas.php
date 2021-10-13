@@ -47,7 +47,7 @@ function generarAlerta($registros,$tipoAlerta,$today,$tabla1){
 
                 <div class='btn-group'>
                 
-                    <button class='btn btn-warning btnNotificar' renspa='".$registros[$i]['renspa']."' campania='".$tabla1."' alerta='".$tipoAlerta."'><i class='fa fa-bell-o'></i></button>
+                    <button class='btn btn-warning btnNotificar' renspa='".$registros[$i]['renspa']."' campania='".$tabla1."' alerta='".$tipoAlerta."' estado='".$registros[$i]['estado']."'><i class='fa fa-bell-o'></i></button>
                 
                 </div>
             

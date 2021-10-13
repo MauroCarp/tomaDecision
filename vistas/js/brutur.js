@@ -141,13 +141,14 @@ $('#generarInformeGeneral').click(()=>{
 NOTIFICAR VACUNADOR
 =============================================*/
 $(".tablas").on("click", ".btnNotificar", function(){
-    console.log('asdasd');
     
 	let renspa = $(this).attr("renspa");
 
 	let campania = $(this).attr("campania");
 	
     let alerta = $(this).attr("alerta");
+
+    let estado = $(this).attr("estado");
 	
 	swal({
         title: '¿Notificar a Vacunador?',
@@ -161,7 +162,8 @@ $(".tablas").on("click", ".btnNotificar", function(){
       }).then(function(result){
         if (result.value) {
           
-            window.location = `index.php?ruta=brutur/alertas&renspa=${renspa}&campania=${campania}&alerta=${alerta}`;
+            window.location = `index.php?ruta=brutur/alertas&renspa=${renspa}&campania=${campania}&alerta=${alerta}&estado=${estado}&notificar=true`;
+        
         }
 
   })

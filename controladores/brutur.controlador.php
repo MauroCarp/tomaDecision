@@ -37,7 +37,7 @@ class ControladorBruTur{
     static public function ctrNotificar(){
 
 		if(isset($_GET["alerta"])){
-
+				
 			   $tabla = $_GET["campania"];
 			
                $renspa = $_GET["renspa"];
@@ -48,7 +48,11 @@ class ControladorBruTur{
 
 			   $campania = $_GET["campania"];
 
-               $respuesta = ModeloBruTur::mdlNotificar($tabla, $renspa);
+			   if(isset($_GET['notificar'])){
+
+				   $respuesta = ModeloBruTur::mdlNotificar($tabla, $renspa);
+				
+				}
 
                $item = 'renspa';
                
@@ -72,9 +76,15 @@ class ControladorBruTur{
 
 			   $mailEnviado = FALSE;
 
+			   if(isset($_GET['notificar'])){
 
                include('vistas/modulos/brutur/mailNotificacion.php');	
-
+			   
+				}else{
+				
+				include('mailNotificacion.php');	
+				
+				}
 			 //  echo "<script>
 			 //	window.location = 'index.php?ruta=brutur/actualizarStatus&renspa=".$valor."';  
 			  // </script>";
@@ -175,15 +185,15 @@ class ControladorBruTur{
 			//DATOS  BRUCELOSIS
 			
 			$datosBrucelosis = array(
-			'campania'=>'brucelosis',
-			'renspa'=>$valor,
-			'vacas'=>$_POST['vacasBruceAct'],
-			'vaquillonas'=>$_POST['vaquillonasBruceAct'],
-			'toros'=>$_POST['torosBruceAct'],
-			'protocolo'=>$_POST['protocoloBruceAct'],
-			'estado'=>$_POST['estadoBruceAct'],
-			'estadoSenasa'=> 'Pendiente',
-			'fechaEstado'=>$_POST['fechaMuestraBruceAct']);
+				'campania'=>'brucelosis',
+				'renspa'=>$valor,
+				'vacas'=>$_POST['vacasBruceAct'],
+				'vaquillonas'=>$_POST['vaquillonasBruceAct'],
+				'toros'=>$_POST['torosBruceAct'],
+				'protocolo'=>$_POST['protocoloBruceAct'],
+				'estado'=>$_POST['estadoBruceAct'],
+				'estadoSenasa'=> 'Pendiente',
+				'fechaEstado'=>$_POST['fechaMuestraBruceAct']);
 			
 			if($datosBrucelosis['estado'] == 'MuVe'){
 
@@ -197,19 +207,19 @@ class ControladorBruTur{
 			//DATOS  TUBERCULOSIS
 			
 			$datosTuberculosis = array(
-			'campania'=>'tuberculosis',
-			'renspa'=>$valor,
-			'vacas'=>$_POST['vacasTuberAct'],
-			'vaquillonas'=>$_POST['vaquillonasTuberAct'],
-			'terneros'=>$_POST['ternerosTuberAct'],
-			'terneras'=>$_POST['ternerasTuberAct'],
-			'toros'=>$_POST['torosTuberAct'],
-			'novillos'=>$_POST['novillosTuberAct'],
-			'novillitos'=>$_POST['novillitosTuberAct'],
-			'protocolo'=>$_POST['protocoloTuberAct'],
-			'estado'=>$_POST['estadoTuberAct'],
-			'estadoSenasa'=> 'Pendiente',
-			'fechaEstado'=>$_POST['fechaMuestraTuberAct']);
+				'campania'=>'tuberculosis',
+				'renspa'=>$valor,
+				'vacas'=>$_POST['vacasTuberAct'],
+				'vaquillonas'=>$_POST['vaquillonasTuberAct'],
+				'terneros'=>$_POST['ternerosTuberAct'],
+				'terneras'=>$_POST['ternerasTuberAct'],
+				'toros'=>$_POST['torosTuberAct'],
+				'novillos'=>$_POST['novillosTuberAct'],
+				'novillitos'=>$_POST['novillitosTuberAct'],
+				'protocolo'=>$_POST['protocoloTuberAct'],
+				'estado'=>$_POST['estadoTuberAct'],
+				'estadoSenasa'=> 'Pendiente',
+				'fechaEstado'=>$_POST['fechaMuestraTuberAct']);
 			
 			if($datosTuberculosis['estado'] == 'En Saneamiento'){
 
@@ -229,11 +239,16 @@ class ControladorBruTur{
 			$actualizarBrucelosis = ControladorBruTur::ctrActualizarBruTur($tabla,$item,$datosBrucelosis);
 			$errores[] = $actualizarBrucelosis;
 			
+			$cambios = '';
+
 			if($_POST['cambiosBrucelosis']){
 				
 				$estadoBrucelosis= ControladorBruTur::ctrActualizarEstadoBruTur($tabla,$item,$datosBrucelosis);
 
 				$errores[] = $estadoBrucelosis;
+
+				$cambios = 'brucelosis';
+
 				
 			}
 
@@ -251,13 +266,65 @@ class ControladorBruTur{
 				
 				$estadoBrucelosis= ControladorBruTur::ctrActualizarEstadoBruTur($tabla,$item,$datosTuberculosis);
 				$errores[] = $estadoBrucelosis;
-			
+
+				($cambios != '') ? 'bruTur' : 'tuberculosis';
+
 			}
 
-			// $cargarRegistroTuberculosis = ControladorBruTur::ctrIngresarRegistroHistorial($datosTuberculosis);
-			// $errores[] = $cargarRegistroTuberculosis;
+			$estados[] = $datosBrucelosis['estado'];
+
+			$estados[] = $datosTuberculosis['estado'];
+
+			$estados = implode(',',$estados);
+
+			$cargarRegistroTuberculosis = ControladorBruTur::ctrIngresarRegistroHistorial($datosTuberculosis);
+
+			$errores[] = $cargarRegistroTuberculosis;
+
+			if(!in_array('error',$errores)){
+
+				echo'<script>
+
+				swal({
+					  type: "success",
+					  title: "El Status ha sido actualizado correctamente",
+					  showConfirmButton: true,
+					  confirmButtonText: "Cerrar"
+					  })
+					  .then(()=>{
+								
+						swal({
+							title: "¿Notificar a Vacunador?",
+							text: "¡Si no puede cancelar la acción!",
+							type: "warning",
+							showCancelButton: true,
+							confirmButtonColor: "#3085d6",
+							cancelButtonColor: "#d33",
+							cancelButtonText: "Cancelar",
+							confirmButtonText: "Si, notificar a Vacunador!"
+						  })
+						.then(function(result){
+								
+							if (result.value) {
+							  
+								window.open("vistas/modulos/brutur/notificarVeterinario.php?renspa='.$valor.'&campania='.$cambios.'&estado='.$estados.'&alerta=cambioStatus" , "_blank")
+										
+							}
+
+						})
+						.then(function(){
+							
+							window.location = "index.php?ruta=brutur/actualizarStatus&renspa='.$valor.'"
+
+						})
+					})
+
+				</script>';
+			
+			}
 			
 		}
+
 	}
 	
 	/*=============================================
