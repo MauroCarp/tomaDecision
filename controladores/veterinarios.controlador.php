@@ -17,12 +17,10 @@ class ControladorVeterinarios{
 							   "domicilio"=>$_POST["domicilio"],
 							   "telefono"=>$_POST["telefono"],
 							   "mail"=>$_POST["email"],
+							   "cuit"=>$_POST["cuit"],
 							   "tipo"=>$_POST["tipo"]);
 
 			   	$respuesta = ModeloVeterinarios::mdlIngresarVeterinario($tabla, $datos);
-				
-				// return $respuesta;
-				//    die();
 			   
 				if($respuesta == "ok"){
 
@@ -79,6 +77,7 @@ class ControladorVeterinarios{
 								"domicilio"=>$_POST["domicilioEdit"],
 								"telefono"=>$_POST["telefonoEdit"],
 								"mail"=>$_POST["emailEdit"],
+								"cuit"=>$_POST["cuitEdit"],
 								"tipo"=>$_POST["tipoEdit"],
 					        	"id"=>$_POST["idEdit"]);
 				

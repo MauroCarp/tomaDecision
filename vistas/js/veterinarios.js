@@ -23,25 +23,27 @@ $(".tablas").on("click", ".btnEditarVeterinario", function(){
       success:function(respuesta){
         console.log(respuesta);
         
-      	$("#idEdit").val(respuesta["vacunador_id"]);
+      	$("#idEdit").val(respuesta.vacunador_id);
       	
-        $("#nombreEdit").val(respuesta["nombre"]);
+        $("#nombreEdit").val(respuesta.nombre);
         
-        $("#matriculaEdit").val(respuesta["matricula"]);  
+        $("#matriculaEdit").val(respuesta.matricula);  
         
-        $("#domicilioEdit").val(respuesta["domicilio"]);
+        $("#domicilioEdit").val(respuesta.domicilio);
         
-        $("#telefonoEdit").val(respuesta["telefono"]);
+        $("#telefonoEdit").val(respuesta.telefono);
         
-        $("#emailEdit").val(respuesta["email"]);
+        $("#emailEdit").val(respuesta.email);
+        
+        $("#cuitEdit").val(respuesta.cuit);
 	    
-        $("#tipoEdit").html(generarSelect(tipo,respuesta["tipo"],null));
+        $("#tipoEdit").html(generarSelect(tipo,respuesta.tipo,null));
         
 	  }
 
-  	})
+  	});
 
-})
+});
 
 /*=============================================
 ELIMINAR VETERINARIO

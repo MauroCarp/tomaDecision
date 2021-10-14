@@ -28,7 +28,7 @@
 
             <div class="row">
 
-                <div class="col-md-2">
+                <div class="col-md-3">
             
                     <div class="form-group">
 
@@ -46,7 +46,7 @@
                 
                 </div>
 
-                <div class="col-md-2">
+                <div class="col-md-3">
             
                     <div class="form-group">
 
@@ -64,7 +64,7 @@
                 
                 </div>
 
-                <div class="col-md-2">
+                <div class="col-md-3">
             
                     <div class="form-group">
 
@@ -82,7 +82,7 @@
                 
                 </div>
 
-                <div class="col-md-2">
+                <div class="col-md-3">
             
                     <div class="form-group">
 
@@ -99,8 +99,12 @@
                     </div>
                 
                 </div>
-               
-                <div class="col-md-2">
+            
+            </div>
+            
+            <div class="row">
+
+                <div class="col-md-3">
             
                     <div class="form-group">
 
@@ -118,7 +122,25 @@
                 
                 </div>
 
-                <div class="col-md-2">
+                <div class="col-md-3">
+            
+                    <div class="form-group">
+
+                        <label>CUIT</label>
+                    
+                        <div class="input-group">
+                        
+                            <span class="input-group-addon"><i class="fa fa-at"></i></span> 
+
+                            <input type="text" class="form-control input-lg" name="cuit" placeholder="CUIT">
+
+                        </div>
+
+                    </div>
+                
+                </div>
+
+                <div class="col-md-3">
             
                     <div class="form-group">
 

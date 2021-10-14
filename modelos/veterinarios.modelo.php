@@ -10,14 +10,15 @@ class ModeloVeterinarios{
 
 	static public function mdlIngresarVeterinario($tabla, $datos){
 
-		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(matricula,nombre,domicilio,telefono,email,tipo)
-		VALUES (:matricula,:nombre,:domicilio,:telefono,:email,:tipo)");
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(matricula,nombre,domicilio,telefono,email,cuit,tipo)
+		VALUES (:matricula,:nombre,:domicilio,:telefono,:email,:cuit,:tipo)");
 
 		$stmt->bindParam(":matricula", $datos["matricula"], PDO::PARAM_STR);
 		$stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
 		$stmt->bindParam(":domicilio", $datos["domicilio"], PDO::PARAM_STR);
 		$stmt->bindParam(":telefono", $datos["telefono"], PDO::PARAM_STR);
 		$stmt->bindParam(":email", $datos["mail"], PDO::PARAM_STR);
+		$stmt->bindParam(":cuit", $datos["cuit"], PDO::PARAM_STR);
 		$stmt->bindParam(":tipo", $datos["tipo"], PDO::PARAM_STR);
 
 		// $stmt->execute();
@@ -84,6 +85,7 @@ class ModeloVeterinarios{
 		domicilio = :domicilio,
 		telefono = :telefono,
 		email = :email,
+		cuit = :cuit,
 		tipo = :tipo
 		WHERE vacunador_id = :id");
 
@@ -92,6 +94,7 @@ class ModeloVeterinarios{
 		$stmt->bindParam(":domicilio", $datos["domicilio"], PDO::PARAM_STR);
 		$stmt->bindParam(":telefono", $datos["telefono"], PDO::PARAM_STR);
 		$stmt->bindParam(":email", $datos["mail"], PDO::PARAM_STR);
+		$stmt->bindParam(":cuit", $datos["cuit"], PDO::PARAM_STR);
 		$stmt->bindParam(":tipo", $datos["tipo"], PDO::PARAM_STR);
 		$stmt->bindParam(":id", $datos["id"], PDO::PARAM_INT);
 
