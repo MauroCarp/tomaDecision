@@ -6,7 +6,7 @@ class ControladorTuberculosis{
 	SUMAR REGISTROS 
     =============================================*/
 
-	static public function ctrSumarRegistros($item,$valor,$valor2,$item2,$item3,$rango){
+	static public function ctrSumarRegistros($item,$valor,$operador,$item3,$rango){
     
         $tabla = "tuberculosis";
 
@@ -16,7 +16,7 @@ class ControladorTuberculosis{
         
         $hasta = $rango[1];
 		
-        $respuesta = ModeloTuberculosis::mdlSumarRegistros($tabla, $item, $valor,$valor2,$item2,$item3,$desde,$hasta);
+        $respuesta = ModeloTuberculosis::mdlSumarRegistros($tabla, $item, $valor,$operador,$item3,$desde,$hasta);
 
 		return $respuesta;
     

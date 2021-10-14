@@ -95,10 +95,12 @@ class ModeloBrucelosis{
     static public function mdlContarSumarRegistrosPosNegSos($tabla, $item,$valor,$item2,$desde,$hasta,$operacion){
 
 
-		$stmt = Conexion::conectar()->prepare("SELECT COUNT($item) as total FROM $tabla WHERE $item != :$item AND fechaSaneamiento BETWEEN '$desde' AND '$hasta'");
+		$stmt = Conexion::conectar()->prepare("SELECT COUNT($item) as total FROM $tabla WHERE $item != :$item AND fechaEstado BETWEEN '$desde' AND '$hasta'");
 		
 		if($operacion == 'sumar')
-			$stmt = Conexion::conectar()->prepare("SELECT SUM($item) as total FROM $tabla WHERE $item != :$item AND fechaSaneamiento BETWEEN '$desde' AND '$hasta'");
+			$stmt = Conexion::conectar()->prepare("SELECT SUM($item) as total FROM $tabla WHERE $item != :$item AND fechaEstado BETWEEN '$desde' AND '$hasta'");
+			
+			// return $stmt;
 
 		$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
 		// var_dump($stmt);

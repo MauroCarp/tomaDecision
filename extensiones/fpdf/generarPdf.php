@@ -24,57 +24,6 @@ class GenerarPDF{
 
   public $rango;
 
-  public function informeEstablecimientosSD(){
-
-    include('fpdf.php');
-
-    $item = "estado";
-
-    $valor = "S/D";
-
-    $rango = $this->rango;
-
-    $respuesta = ControladorBrucelosis::ctrMostrarSD($item, $valor,$rango);
-
-    $pdf = new FPDF('P','mm','A4');	
-    $pdf->AddPage();
-    $pdf->SetFillColor(0,255,0);
-    $pdf->SetTitle('Informe Entes Brucelosis');
-    $pdf->SetDisplayMode('fullpage', 'single');
-    $pdf->SetAutoPageBreak(1,1);
-    $pdf->Image('img/logo-fissa.png', 15, 10,40);
-    $pdf->SetFont('helvetica','B',16);
-    $pdf->Ln(6);
-    $pdf->SetX(60);
-    $pdf->Cell(50,7,'Establecimientos SIN DATOS',0,0,'L',0);
-    $pdf->Ln(25);
-    $pdf->Cell(22);
-    $pdf->SetFont('Times','B',12);
-    $pdf->SetX(10);
-    $pdf->Cell(8,7,utf8_decode('N°'),0,0,'L',0);
-    $pdf->Cell(30,7,'Renspa',0,0,'L',0);
-    $pdf->Cell(130,7,'Propietario',0,0,'L',0);
-    $pdf->Cell(40,7,'Fecha de Status',0,1,'L',0);
-    $pdf->SetFont('Times','',10);
-
-    for ($i=0; $i < sizeof($respuesta) ; $i++) { 
-
-      $num = $i + 1;
-
-      $pdf->Cell(8,7,$num,0,0,'L',0);
-      $pdf->Cell(30,7,$respuesta[$i]['renspa'],0,0,'L',0);
-      $pdf->Cell(130,7,$respuesta[$i]['propietario'],0,0,'L',0);
-      $pdf->Cell(40,7,formatearFecha($respuesta[$i]['fechaSD']),0,1,'L',0);
-
-    }
-
-
-    $pdf->Output();
-
-  }
-
-
-
   public function informeGeneral(){
 
     //REQUERIMOS LA CLASE TCPDF
@@ -94,139 +43,185 @@ class GenerarPDF{
     /*BRUCELOSIS*/
 
     // CANTIDAD DE ESTABLECIMIENTOS
-    // $item = 'estado';
+    $item = 'estado';
 
-    // $valor = 'Saneado';
+    $valor = 'DOES Total';
 
-    // $valor2 = null;
+    $valor2 = null;
 
-    // $item2 = 'fechaSaneado';
+    $item2 = 'fechaEstado';
 
-    // $cantEstSaneado = ControladorBrucelosis::ctrContarRegistros($item,$valor,$valor2,$item2,$rango,null);
+    $cantEstDOEStotal = ControladorBrucelosis::ctrContarRegistros($item,$valor,$valor2,$item2,$rango,null);
 
-    // $valor = 'En Saneamiento';
+    $valor = 'DOES Parcial';
 
-    // $item2 = 'fechaSaneamiento';
+    $cantEstDOESParcial = ControladorBrucelosis::ctrContarRegistros($item,$valor,$valor2,$item2,$rango,null);
 
-    // $cantEstSaneamiento = ControladorBrucelosis::ctrContarRegistros($item,$valor,$valor2,$item2,$rango,null);
+    $valor = 'MuVe';
 
-    // $valor = 'S/D';
+    $cantEstMuve = ControladorBrucelosis::ctrContarRegistros($item,$valor,$valor2,$item2,$rango,null);
 
-    // $item2 = 'fechaSD';
+    $valor = 'SAN';
 
-    // $cantEstSD = ControladorBrucelosis::ctrContarRegistros($item,$valor,$valor2,$item2,$rango,null);
+    $cantEstSAN = ControladorBrucelosis::ctrContarRegistros($item,$valor,$valor2,$item2,$rango,null);
 
-    // $valor = '0';
+    $valor = 'CSM';
 
-    // $item = 'positivo';
+    $cantEstCSM = ControladorBrucelosis::ctrContarRegistros($item,$valor,$valor2,$item2,$rango,null);
 
-    // $cantEstPositivos = ControladorBrucelosis::ctrContarSumarRegistrosPosNegSos($item,$valor,$item2,$rango,null);
+    $valor = 'Control Interno';
 
-    // $item = 'negativo';
+    $cantEstConInt = ControladorBrucelosis::ctrContarRegistros($item,$valor,$valor2,$item2,$rango,null);
 
-    // $cantEstNegativos = ControladorBrucelosis::ctrContarSumarRegistrosPosNegSos($item,$valor,$item2,$rango,null);
+    $valor = 'Remuestreo';
 
-    // $item = 'sospechoso';
+    $cantEstRemuestreo = ControladorBrucelosis::ctrContarRegistros($item,$valor,$valor2,$item2,$rango,null);
 
-    // $cantEstSospechosos = ControladorBrucelosis::ctrContarSumarRegistrosPosNegSos($item,$valor,$item2,$rango,null);
+    $valor = '0';
+
+    $item = 'positivo';
+
+    $cantEstPositivos = ControladorBrucelosis::ctrContarSumarRegistrosPosNegSos($item,$valor,$item2,$rango,null);
+
+    $item = 'negativo';
+
+    $cantEstNegativos = ControladorBrucelosis::ctrContarSumarRegistrosPosNegSos($item,$valor,$item2,$rango,null);
+
+    $item = 'sospechoso';
+
+    $cantEstSospechosos = ControladorBrucelosis::ctrContarSumarRegistrosPosNegSos($item,$valor,$item2,$rango,null);
 
     // // CANTIDAD DE ANIMALES
-    // $item = 'positivo';
 
-    // $cantAnimalesPositivos = ControladorBrucelosis::ctrContarSumarRegistrosPosNegSos($item,$valor,$item2,$rango,'sumar');
+    $item = 'positivo';
 
-    // $item = 'negativo';
+    $cantAnimalesPositivos = ControladorBrucelosis::ctrContarSumarRegistrosPosNegSos($item,$valor,$item2,$rango,'sumar');
 
-    // $cantAnimalesNegativos = ControladorBrucelosis::ctrContarSumarRegistrosPosNegSos($item,$valor,$item2,$rango,'sumar');
+    $cantAnimalesPositivos = ($cantAnimalesPositivos == null) ? 0 : $cantAnimalesPositivos;
+    
+    $item = 'negativo';
+    
+    $cantAnimalesNegativos = ControladorBrucelosis::ctrContarSumarRegistrosPosNegSos($item,$valor,$item2,$rango,'sumar');
+    
+    $cantAnimalesNegativos = ($cantAnimalesNegativos == null) ? 0 : $cantAnimalesNegativos;
+    
+    $item = 'sospechoso';
+    
+    $cantAnimalesSospechosos = ControladorBrucelosis::ctrContarSumarRegistrosPosNegSos($item,$valor,$item2,$rango,'sumar');
+    
+    $cantAnimalesSospechosos = ($cantAnimalesSospechosos == null) ? 0 : $cantAnimalesSospechosos;
+   
+    $item = 'estado';
 
-    // $item = 'sospechoso';
+    $valor = 'DOES Total';
 
-    // $cantAnimalesSospechosos = ControladorBrucelosis::ctrContarSumarRegistrosPosNegSos($item,$valor,$item2,$rango,'sumar');
+    $valor2 = null;
 
-    // $item = 'estado';
+    $item2 = 'fechaEstado';
 
-    // $valor = 'En Saneamiento';
+    $cantAnimalesDOESTotal = ControladorBrucelosis::ctrSumarRegistros($item,$valor,$valor2,$item2,$rango);
 
-    // $valor2 = null;
+    $valor = 'DOES Parcial';
 
-    // $item2 = 'fechaSaneamiento';
+    $cantAnimalesDOESParcial = ControladorBrucelosis::ctrSumarRegistros($item,$valor,$valor2,$item2,$rango);
 
-    // $cantAnimalesSaneamiento = ControladorBrucelosis::ctrSumarRegistros($item,$valor,$valor2,$item2,$rango);
+    $valor = 'MuVe';
 
-    // $valor = 'Saneado';
+    $cantAnimalesMuVe = ControladorBrucelosis::ctrSumarRegistros($item,$valor,$valor2,$item2,$rango);
 
-    // $item2 = 'fechaSaneado';
+    $valor = 'SAN';
 
-    // $cantAnimalesSaneados = ControladorBrucelosis::ctrSumarRegistros($item,$valor,$valor2,$item2,$rango);
+    $cantAnimalesSAN = ControladorBrucelosis::ctrSumarRegistros($item,$valor,$valor2,$item2,$rango);
 
-    // $valor = 'S/D';
+    $valor = 'CSM';
 
-    // $item2 = 'fechaSD';
+    $cantAnimalesCSM = ControladorBrucelosis::ctrSumarRegistros($item,$valor,$valor2,$item2,$rango);
 
-    // $cantAnimalesSD = ControladorBrucelosis::ctrSumarRegistros($item,$valor,$valor2,$item2,$rango);
+    $valor = 'Control Interno';
+
+    $cantAnimalesContInt = ControladorBrucelosis::ctrSumarRegistros($item,$valor,$valor2,$item2,$rango);
+
+    $valor = 'Remuestreo';
+
+    $cantAnimalesRemuestreo = ControladorBrucelosis::ctrSumarRegistros($item,$valor,$valor2,$item2,$rango);
 
     // // CANTIDAD DE ESTABLECIMIENTOS LIBRES
-    // $valor = 'Libre';
+    $valor = 'DOES Total';
 
-    // $valor2 = 'RecertificaciÃ³n';
+    $valor2 = 'MuVe';
 
-    // $item2 = 'fechaLibre';
+    $cantUPLibres = ControladorBrucelosis::ctrContarRegistros($item,$valor,$valor2,$item2,$rango);
 
-    // $cantUPLibres = ControladorBrucelosis::ctrContarRegistros($item,$valor,$valor2,$item2,$rango);
+    $item2 = 'fechaCarga';
 
-    // $item2 = 'fechaCarga';
-
-    // $cantUPLibresCargadas = ControladorBrucelosis::ctrContarRegistros($item,$valor,$valor2,$item2,$rango);
+    $cantUPLibresCargadas = ControladorBrucelosis::ctrContarRegistros($item,$valor,$valor2,$item2,$rango);
 
     // // CANTIDAD DE ANIMALES LIBRES
-    // $item2 = 'fechaLibre';
 
-    // $cantAnimalesLibres = ControladorBrucelosis::ctrSumarRegistros($item,$valor,$valor2,$item2,$rango);
+    $cantAnimalesLibres = ControladorBrucelosis::ctrSumarRegistros($item,$valor,$valor2,$item2,$rango);
 
 
     // /*TUBERCULOSIS*/
 
-    // $item = 'estado';
+    $item = 'estado';
 
-    // $valor = 'En Saneamiento';
+    $valor = 'No Libre';
 
-    // $valor2 = 'Libre';
+    $operador = '!=';
+    
+    $item2 = 'fechaEstado';
+    
+    $cantAnimalesTuberculinizados = ControladorTuberculosis::ctrSumarRegistros($item,$valor,$operador,$item2,$rango);
+        
+    $valor = 'Libre';
+    
+    $valor2 = null;
+    
+    $item2 = 'fechaEstado';
+    
+    $operador = '=';
 
-    // $item2 = 'fechaLibre';
+    $cantAnimalesLibresTuberculinizados = ControladorTuberculosis::ctrSumarRegistros($item,$valor,$operador,$item2,$rango);
 
-    // $item3 = 'fechaSaneamiento';
+    // CONTAR ESTABLECIMIENTOS LIBRES
 
-    // $cantAnimalesTuberculinizados = ControladorTuberculosis::ctrSumarRegistros($item,$valor,$valor2,$item2,$item3,$rango);
+    $valor = 'Libre';
 
-    // // var_dump($cantAnimalesTuberculinizados);
+    $valor2 = 'RecertificaciÃ³n';
 
-    // $valor = 'Libre';
+    $cantEstLibres = ControladorTuberculosis::ctrContarRegistros($item,$valor,$valor2,$item2,$rango);
 
-    // $valor2 = null;
+    $item2 = 'fechaCarga';
 
-    // $item2 = 'fechaLibre';
-
-    // $item3 = null;
-
-    // $cantAnimalesLibresTuberculinizados = ControladorTuberculosis::ctrSumarRegistros($item,$valor,$valor2,$item2,$item3,$rango);
-
-    // // CONTAR ESTABLECIMIENTOS LIBRES
-
-    // $valor = 'Libre';
-
-    // $valor2 = 'RecertificaciÃ³n';
-
-    // $item2 = 'fechaLibre';
-
-    // $cantEstLibres = ControladorTuberculosis::ctrContarRegistros($item,$valor,$valor2,$item2,$rango);
-
-    // $item2 = 'fechaCarga';
-
-    // $cantEstLibresCargados = ControladorTuberculosis::ctrContarRegistros($item,$valor,$valor2,$item2,$rango);
+    $cantEstLibresCargados = ControladorTuberculosis::ctrContarRegistros($item,$valor,$valor2,$item2,$rango);
 
     $titulo = 'Informe Entes Brucelosis-Tuberculosis';
 
     $cabezera = 'Informe Entes Brucelosis-Tuberculosis';
+
+// print_r($cantEstDOEStotal);
+// print_r($cantEstDOESParcial);
+// print_r($cantEstMuve);
+// print_r($cantEstSAN);
+// print_r($cantEstCSM);
+// print_r($cantEstConInt);
+// print_r($cantEstRemuestreo);
+// print_r($cantEstPositivos);
+// print_r($cantEstNegativos);
+// print_r($cantEstSospechosos);
+// print_r($cantAnimalesNegativos);
+// print_r($cantAnimalesSospechosos);
+// print_r($cantAnimalesDOESTotal);
+// print_r($cantAnimalesDOESParcial);
+// print_r($cantAnimalesMuVe);
+// print_r($cantAnimalesSAN);
+// print_r($cantAnimalesCSM);
+// print_r($cantAnimalesConInt);
+// print_r($cantAnimalesRemuestreo);
+// print_r($cantUPLibres);
+// print_r($cantUPLibresCargadas);
+// print_r($cantAnimalesLibres);
+    // die();
 
     include 'cabezera.php';
 
@@ -241,67 +236,66 @@ class GenerarPDF{
     $pdf->SetFillColor(255,255,204);
     $pdf->Cell(190,7,'BRUCELOSIS',1,1,'C',1);
     $pdf->SetFont('helvetica','',12);
-    $pdf->Cell(180,7,'Cantidad de Establecimientos DOES:',1,0,'L',0);
-    // $pdf->Cell(10,7,$cantEstSaneamiento[0][0],1,1,'C',0);
-    $pdf->Cell(10,7,'',1,1,'C',0);
+    $pdf->Cell(180,7,'Cantidad de Establecimientos DOES Total:',1,0,'L',0);
+    $pdf->Cell(10,7,$cantEstDOEStotal[0][0],1,1,'C',0);
+    $pdf->Cell(180,7,'Cantidad de Establecimientos DOES Parcial:',1,0,'L',0);
+    $pdf->Cell(10,7,$cantEstDOESParcial[0][0],1,1,'C',0);
     $pdf->Cell(180,7,'Cantidad de Establecimientos MuVe:',1,0,'L',0);
-    // $pdf->Cell(10,7,$cantEstSaneado[0][0],1,1,'C',0);
-    $pdf->Cell(10,7,'',1,1,'C',0);
-    $pdf->Cell(180,7,'Cantidad de Establecimientos S/D Acumulado:',1,0,'L',0);
-    // $pdf->Cell(10,7,$cantEstSD[0][0],1,1,'C',0);
-    $pdf->Cell(10,7,'',1,1,'C',0);
+    $pdf->Cell(10,7,$cantEstMuve[0][0],1,1,'C',0);
+    $pdf->Cell(180,7,'Cantidad de Establecimientos SAN:',1,0,'L',0);
+    $pdf->Cell(10,7,$cantEstSAN[0][0],1,1,'C',0);
+    $pdf->Cell(180,7,'Cantidad de Establecimientos CSM:',1,0,'L',0);
+    $pdf->Cell(10,7,$cantEstCSM[0][0],1,1,'C',0);
+    $pdf->Cell(180,7,'Cantidad de Establecimientos Control Interno:',1,0,'L',0);
+    $pdf->Cell(10,7,$cantEstConInt[0][0],1,1,'C',0);
+    $pdf->Cell(180,7,'Cantidad de Establecimientos Remuestreo:',1,0,'L',0);
+    $pdf->Cell(10,7,$cantEstRemuestreo[0][0],1,1,'C',0);
     $pdf->Cell(180,7,'Cantidad de Establecimientos con A. Positivos:',1,0,'L',0);
-    // $pdf->Cell(10,7,$cantEstPositivos[0][0],1,1,'C',0);
-    $pdf->Cell(10,7,'',1,1,'C',0);
+    $pdf->Cell(10,7,$cantEstPositivos[0][0],1,1,'C',0);
     $pdf->Cell(180,7,'Cantidad de Establecimientos con A. Negativos:',1,0,'L',0);
-    // $pdf->Cell(10,7,$cantEstNegativos[0][0],1,1,'C',0);
-    $pdf->Cell(10,7,'',1,1,'C',0);
+    $pdf->Cell(10,7,$cantEstNegativos[0][0],1,1,'C',0);
     $pdf->Cell(180,7,'Cantidad de Establecimientos con A. Sospechosos:',1,0,'L',0);
-    // $pdf->Cell(10,7,$cantEstSospechosos[0][0],1,1,'C',0);
-    $pdf->Cell(10,7,'',1,1,'C',0);
+    $pdf->Cell(10,7,$cantEstSospechosos[0][0],1,1,'C',0);
+    $pdf->Cell(180,7,'Cantidad de Animales SAN:',1,0,'L',0);
+    $pdf->Cell(10,7,$cantAnimalesSAN[0][0],1,1,'C',0);
+    $pdf->Cell(180,7,'Cantidad de Animales CSM:',1,0,'L',0);
+    $pdf->Cell(10,7,$cantAnimalesCSM[0][0],1,1,'C',0);
+    $pdf->Cell(180,7,'Cantidad de Animales en Control Interno:',1,0,'L',0);
+    $pdf->Cell(10,7,$cantAnimalesContInt[0][0],1,1,'C',0);
+    $pdf->Cell(180,7,'Cantidad de Animales en Remuestreo:',1,0,'L',0);
+    $pdf->Cell(10,7,$cantAnimalesRemuestreo[0][0],1,1,'C',0);
     $pdf->Cell(180,7,'Cantidad de Animales Positivos:',1,0,'L',0);
-    // $pdf->Cell(10,7,$cantAnimalesPositivos[0][0],1,1,'C',0);
-    $pdf->Cell(10,7,'',1,1,'C',0);
+    $pdf->Cell(10,7,$cantAnimalesPositivos[0][0],1,1,'C',0);
     $pdf->Cell(180,7,'Cantidad de Animales Negativos:',1,0,'L',0);
-    // $pdf->Cell(10,7,$cantAnimalesNegativos[0][0],1,1,'C',0);
-    $pdf->Cell(10,7,'',1,1,'C',0);
+    $pdf->Cell(10,7,$cantAnimalesNegativos[0][0],1,1,'C',0);
     $pdf->Cell(180,7,'Cantidad de Animales Sospechosos:',1,0,'L',0);
-    // $pdf->Cell(10,7,$cantAnimalesSospechosos[0][0],1,1,'C',0);
-    $pdf->Cell(10,7,'',1,1,'C',0);
-    $pdf->Cell(180,7,'Cantidad de Animales en Saneamiento:',1,0,'L',0);
-    // $pdf->Cell(10,7,$cantAnimalesSaneamiento[0][0],1,1,'C',0);
-    $pdf->Cell(10,7,'',1,1,'C',0);
-    $pdf->Cell(180,7,'Cantidad de Animales S/D:',1,0,'L',0);
-    // $pdf->Cell(10,7,$cantAnimalesSD[0][0],1,1,'C',0);
-    $pdf->Cell(10,7,'',1,1,'C',0);
+    $pdf->Cell(10,7,$cantAnimalesSospechosos[0][0],1,1,'C',0);
     $pdf->Cell(180,7,'Cantidad de U.P Libres Certificadas en el Mes:',1,0,'L',0);
-    // $pdf->Cell(10,7,$cantUPLibres[0][0],1,1,'C',0);
-    $pdf->Cell(10,7,'',1,1,'C',0);
+    $pdf->Cell(10,7,$cantUPLibres[0][0],1,1,'C',0);
     $pdf->Cell(180,7,'Cantidad de U.P Libres Certificadas CARGADAS en el Mes:',1,0,'L',0);
-    // $pdf->Cell(10,7,$cantUPLibresCargadas[0][0],1,1,'C',0);
-    $pdf->Cell(10,7,'',1,1,'C',0);
+    $pdf->Cell(10,7,$cantUPLibresCargadas[0][0],1,1,'C',0);
     $pdf->Cell(180,7,'Cantidad de Animales Libres Total:',1,0,'L',0);
-    // $pdf->Cell(10,7,$cantAnimalesLibres[0][0],1,1,'C',0);
-    $pdf->Cell(10,7,'',1,1,'C',0);
+    $pdf->Cell(10,7,$cantAnimalesLibres[0][0],1,1,'C',0);
 
+    
     $pdf->Ln(5);
     $pdf->SetFont('helvetica','B',12);
     $pdf->SetFillColor(204,255,229);
     $pdf->Cell(190,7,'TUBERCULOSIS',1,1,'C',1);
     $pdf->SetFont('helvetica','',12);
     $pdf->Cell(180,7,'Cantidad de Animales Tuberculinizados:',1,0,'L',0);
-    // $pdf->Cell(10,7,$cantAnimalesLibresTuberculinizados[0][0],1,1,'C',0);
-    $pdf->Cell(10,7,'',1,1,'C',0);
-    $pdf->Cell(180,7,'Cantidad de Animales Libres Tuberculinizados:',1,0,'L',0);
-    // $pdf->Cell(10,7,$cantAnimalesLibresTuberculinizados[0][0],1,1,'C',0);
-    $pdf->Cell(10,7,'',1,1,'C',0);
-    $pdf->Cell(180,7,'Cantidad de Establecimientos Libres Certificados:',1,0,'L',0);
-    // $pdf->Cell(10,7,$cantEstLibres[0][0],1,1,'C',0);
-    $pdf->Cell(10,7,'',1,1,'C',0);
-    $pdf->Cell(180,7,'Cantidad de Establecimientos Libres Certificados CARGADOS:',1,0,'L',0);
-    // $pdf->Cell(10,7,$cantEstLibresCargados[0][0],1,1,'C',0);
-    $pdf->Cell(10,7,'',1,1,'C',0);
+    $pdf->Cell(10,7,$cantAnimalesLibresTuberculinizados[0][0],1,1,'C',0);
 
+    $pdf->Cell(180,7,'Cantidad de Animales Libres Tuberculinizados:',1,0,'L',0);
+    $pdf->Cell(10,7,$cantAnimalesLibresTuberculinizados[0][0],1,1,'C',0);
+
+    $pdf->Cell(180,7,'Cantidad de Establecimientos Libres Certificados:',1,0,'L',0);
+    $pdf->Cell(10,7,$cantEstLibres[0][0],1,1,'C',0);
+
+    $pdf->Cell(180,7,'Cantidad de Establecimientos Libres Certificados CARGADOS:',1,0,'L',0);
+    $pdf->Cell(10,7,$cantEstLibresCargados[0][0],1,1,'C',0);
+
+    
     $pdf->Output();
 
   }
@@ -370,13 +364,6 @@ class GenerarPDF{
 
 }
 
-if($accion == 'establecimientosSD'){
-
-    $establecimientosSD = new GenerarPDF();
-    $establecimientosSD -> rango = $_GET["rango"];
-    $establecimientosSD -> informeEstablecimientosSD();
-
-}
 
 if($accion == 'informeGeneral'){
 

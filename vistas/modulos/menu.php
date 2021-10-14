@@ -80,17 +80,6 @@
 						</a>
 
 					</li>
-
-					<li>
-
-						<a href="#" data-toggle="modal" data-target="#ventanaModalEstablecimientosSD">
-							
-							<i class="fa fa-circle-o"></i>
-							<span>Establecimientos S/D</span>
-
-						</a>
-
-					</li>
 					
 					<li>
 

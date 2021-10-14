@@ -182,6 +182,7 @@ class ControladorVeterinarios{
 			<td style='font-weight:bold; border:1px solid #eee;'>DOMICILIO</td>
 			<td style='font-weight:bold; border:1px solid #eee;'>TELEFONO</td>
 			<td style='font-weight:bold; border:1px solid #eee;'>E-MAIL</td>	
+			<td style='font-weight:bold; border:1px solid #eee;'>CUIT</td>	
 			<td style='font-weight:bold; border:1px solid #eee;'>TIPO</td>	
 			</tr>");
 
@@ -195,6 +196,7 @@ class ControladorVeterinarios{
 				<td style='font-weight:bold; border:1px solid #eee;'>".$respuestaVeterinarios[$i]['domicilio']."</td> 
 				<td style='font-weight:bold; border:1px solid #eee;'>".$respuestaVeterinarios[$i]['telefono']."</td> 
 				<td style='font-weight:bold; border:1px solid #eee;'>".$respuestaVeterinarios[$i]['email']."</td> 		
+				<td style='font-weight:bold; border:1px solid #eee;'>".$respuestaVeterinarios[$i]['cuit']."</td> 		
 				<td style='font-weight:bold; border:1px solid #eee;'>".$respuestaVeterinarios[$i]['tipo']."</td> 		
 				</tr>");
 

@@ -33,18 +33,20 @@ class ModeloTuberculosis{
 	SUMAR REGISTROS
 	=============================================*/
 
-    static public function mdlSumarRegistros($tabla, $item,$valor,$valor2,$item2,$item3,$desde,$hasta){
+    static public function mdlSumarRegistros($tabla, $item,$valor,$operador,$item2,$desde,$hasta){
 
-		$stmt = Conexion::conectar()->prepare("SELECT  SUM(vacas + vaquillonas + terneros + terneras + toros) as total FROM $tabla WHERE $item = :$item AND $item2 BETWEEN '$desde' AND '$hasta'");
-		$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+		$stmt = Conexion::conectar()->prepare("SELECT  SUM(vacas + vaquillonas + terneros + terneras + toros) as total FROM $tabla WHERE $item $operador :$item AND $item2 BETWEEN '$desde' AND '$hasta'");
 		
-		if($valor2 != null){
+		if($operador == '!='){
 			
 			$stmt = Conexion::conectar()->prepare("SELECT SUM(vacas + vaquillonas + terneros + terneras + toros) as total FROM $tabla WHERE 
-			($item = '$valor' OR $item = 'RecertificaciÃ³n' OR $item = '$valor2') AND $item2 BETWEEN '$desde' AND '$hasta' OR $item3 BETWEEN '$desde' AND '$hasta'");
-			// var_dump($item3);
+			$item $operador '$valor' AND $item2 BETWEEN '$desde' AND '$hasta'");
+
 		}
 
+		$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+		
+		// return $stmt;
 		$stmt -> execute();
 
 		return $stmt -> fetchAll();

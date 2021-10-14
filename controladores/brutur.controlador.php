@@ -443,14 +443,24 @@ class ControladorBruTur{
 				
 				$valor = $respuestaBrucelosis[$i]['renspa'];
 
-				$veterinario = ControladorBruTur::ctrMostrarVeterinarioMatricula($item,$valor);
+				$respuesta = ControladorProductores::ctrMostrarProductores($item,$valor);
+
+				$propietario = $respuesta['propietario'];
+
+				$matriculaVet  = $respuesta['veterinario'];
+
+				$item = 'matricula';
+
+				$respuesta = ControladorVeterinarios::ctrMostrarVeterinarios($item,$matriculaVet);
+
+				$veterinario = $respuesta['nombre'];
 
 				echo utf8_decode("<tr> 
 				<td style='font-weight:bold; border:1px solid #eee;'>".$respuestaBrucelosis[$i]['renspa']."</td> 
-				<td style='font-weight:bold; border:1px solid #eee;'>".$respuestaBrucelosis[$i]['productor']."</td> 
+				<td style='font-weight:bold; border:1px solid #eee;'>".$propietario."</td> 
 				<td style='font-weight:bold; border:1px solid #eee;'>".$respuestaBrucelosis[$i]['estado']."</td> 
 				<td style='font-weight:bold; border:1px solid #eee;'>".$fechaMuestra."</td>	
-				<td style='font-weight:bold; border:1px solid #eee;'>".$respuestaBrucelosis[$i]['']."</td>
+				<td style='font-weight:bold; border:1px solid #eee;'>".$veterinario."</td>
 				</tr>");
 
 			}
@@ -466,14 +476,24 @@ class ControladorBruTur{
 
 				$valor = $respuestaTuberulosis[$i]['renspa'];
 				
-				$veterinario = ControladorBruTur::ctrMostrarVeterinarioMatricula($item,$valor);
-				
+				$respuesta = ControladorProductores::ctrMostrarProductores($item,$valor);
+
+				$propietario = $respuesta['propietario'];
+
+				$matriculaVet  = $respuesta['veterinario'];
+
+				$item = 'matricula';
+
+				$respuesta = ControladorVeterinarios::ctrMostrarVeterinarios($item,$matriculaVet);
+
+				$veterinario = $respuesta['nombre'];
+
 				echo utf8_decode("<tr> 
 				<td style='font-weight:bold; border:1px solid #eee;'>".$respuestaTuberculosis[$i]['renspa']."</td> 
-				<td style='font-weight:bold; border:1px solid #eee;'>".$respuestaTuberculosis[$i]['productor']."</td> 
+				<td style='font-weight:bold; border:1px solid #eee;'>".$propietario."</td> 
 				<td style='font-weight:bold; border:1px solid #eee;'>".$respuestaTuberculosis[$i]['estado']."</td> 
 				<td style='font-weight:bold; border:1px solid #eee;'>".$fechaMuestra."</td>	
-				<td style='font-weight:bold; border:1px solid #eee;'>".$respuestaTuberculosis[$i]['']."</td>
+				<td style='font-weight:bold; border:1px solid #eee;'>".$matriculaVet."</td>
 				</tr>");
 
 			}
@@ -491,20 +511,6 @@ class ControladorBruTur{
 		$respuesta = ControladorBruTur::ctrEnviarPendientes($item, $valor, $valor2);
 
     }
-
-	/*=============================================
-	MOSTRAR VETERINARIO SEGUN MATRICULA
-	=============================================*/
-
-	static public function ctrMostrarVeterinarioMatricula($item, $valor){
-		
-		$tabla = "establecimientos";
-
-		$respuesta = ModeloBruTur::mdlMostrarVeterinarioMatricula($tabla, $item, $valor);
-
-		return $respuesta;
-
-	}
 
 }
 
