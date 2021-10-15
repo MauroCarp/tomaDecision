@@ -199,30 +199,6 @@ class GenerarPDF{
 
     $cabezera = 'Informe Entes Brucelosis-Tuberculosis';
 
-// print_r($cantEstDOEStotal);
-// print_r($cantEstDOESParcial);
-// print_r($cantEstMuve);
-// print_r($cantEstSAN);
-// print_r($cantEstCSM);
-// print_r($cantEstConInt);
-// print_r($cantEstRemuestreo);
-// print_r($cantEstPositivos);
-// print_r($cantEstNegativos);
-// print_r($cantEstSospechosos);
-// print_r($cantAnimalesNegativos);
-// print_r($cantAnimalesSospechosos);
-// print_r($cantAnimalesDOESTotal);
-// print_r($cantAnimalesDOESParcial);
-// print_r($cantAnimalesMuVe);
-// print_r($cantAnimalesSAN);
-// print_r($cantAnimalesCSM);
-// print_r($cantAnimalesConInt);
-// print_r($cantAnimalesRemuestreo);
-// print_r($cantUPLibres);
-// print_r($cantUPLibresCargadas);
-// print_r($cantAnimalesLibres);
-    // die();
-
     include 'cabezera.php';
 
     $pdf->Cell(200,7,'Periodo: '.date("d-m-Y", strtotime($fechaDesde)). ' al '.date("d-m-Y", strtotime($fechaHasta)),0,0,'C',0);

@@ -309,7 +309,31 @@
                         
                             <span class="input-group-addon"><i class="fa fa-map-marker"></i></span> 
                             
-                            <select name="distritoEdit" id="distritoEdit" id="distrito" class="form-control input-lg" required>
+                            <select name="distritoEdit" id="distritoEdit"  class="form-control input-lg" required>
+                            
+                            </select>
+
+                        </div>
+
+                    </div>
+                
+                </div>
+            
+            </div>
+            
+            <div class="row"> 
+
+                <div class="col-md-2">
+            
+                    <div class="form-group">
+    
+                        <label>Veterinario</label>
+
+                        <div class="input-group">
+                        
+                            <span class="input-group-addon"><i class="fa fa-map-marker"></i></span> 
+                            
+                                <select name="veterinarioEdit" id="veterinarioEdit" class="form-control input-lg" required>
                             
                             </select>
 

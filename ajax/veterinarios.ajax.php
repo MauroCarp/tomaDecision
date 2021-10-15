@@ -38,10 +38,22 @@ class AjaxVeterinarios{
 
 	}
 
+	public function ajaxMostrarVeterinarios(){
+
+		$item = null;
+		$valor = null;
+
+		$respuesta = ControladorVeterinarios::ctrMostrarVeterinarios($item, $valor);
+
+		echo json_encode($respuesta);
+
+
+	}
+
 }
 
 /*=============================================
-EDITAR CLIENTE
+EDITAR VETERINARIO
 =============================================*/	
 
 if(isset($_POST["idVeterinario"])){
@@ -52,18 +64,29 @@ if(isset($_POST["idVeterinario"])){
 
 }
 
+
 /*=============================================
 MOSTRAR VETERINARIO
 =============================================*/	
 
 if(isset($_POST['accion'])){
+	
 	$accion = $_POST['accion'];
 
-	if ($accion = 'mostrarVeterinario') {
+	if ($accion == 'mostrarVeterinario') {
 
 		$mostrarVeterinario = new AjaxVeterinarios();
 		$mostrarVeterinario -> matriculaVeterinario = $_POST["matricula"];
 		$mostrarVeterinario -> ajaxMostrarVeterinario();
 
 	}
+	
+	if ($accion == 'listarVeterinarios') {
+
+		$mostrarVeterinario = new AjaxVeterinarios();
+		$mostrarVeterinario -> ajaxMostrarVeterinarios();
+
+	}
+
+
 }

@@ -609,13 +609,6 @@ setTimeout(() => {
     
     }
 
-    if(estadoBruce == 'MuVe'){
-
-        $(`#inputSaneamientoBruce`).css('display','block')
-    
-    }
-
-
 }, 500);
 
 })

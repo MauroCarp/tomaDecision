@@ -38,7 +38,7 @@
                         
                             <span class="input-group-addon"><i class="fa fa-barcode"></i></span> 
 
-                            <input type="text" class="form-control input-lg" name="renspa" value="<?php echo $renspa;?>" required>
+                            <input type="text" class="form-control input-lg" name="renspa" value="<?php echo $preRenspa;?>" required>
 
                         </div>
 
@@ -362,6 +362,30 @@
                 
                 </div>
             
+            </div>
+
+            <div class="row"> 
+
+                <div class="col-md-2">
+
+                    <div class="form-group">
+
+                        <label>Veterinario</label>
+
+                        <div class="input-group">
+                        
+                            <span class="input-group-addon"><i class="fa fa-map-marker"></i></span> 
+                            
+                                <select name="veterinario" id="veterinario" class="form-control input-lg" required>
+                            
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
             </div>
 
           </div>

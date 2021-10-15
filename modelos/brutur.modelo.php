@@ -10,6 +10,8 @@ class ModeloBruTur{
 
 	static public function mdlEsVencido($tabla1,$tabla2,$today){
 		
+		$whereClause = ($tabla1 == 'brucelosis') ? $tabla1.".estado = 'DOES Total' OR ".$tabla1.".estado = 'MuVe' OR ".$tabla1.".estado = 'Libre' OR ".$tabla1.".estado = 'RecertificaciÃ³n'" : $tabla1.".estado = 'Libre' OR ".$tabla1.".estado = 'RecertificaciÃ³n'";
+
 		$stmt = Conexion::conectar()->prepare("SELECT 
 		$tabla1.renspa, 
 		$tabla2.establecimiento, 
@@ -18,13 +20,12 @@ class ModeloBruTur{
 		$tabla2.veterinario,
 		$tabla1.estado,
 		DATE_ADD($tabla1.fechaEstado, INTERVAL 365 DAY) as fechaVencido
-
 		FROM $tabla1 
 		INNER JOIN $tabla2 
 		ON $tabla1.renspa = $tabla2.renspa 
 		WHERE 
 		DATE_ADD($tabla1.fechaEstado, INTERVAL 365 DAY) < '$today' 
-		AND notificado = 0 
+		AND notificado = 0 AND ($whereClause)
 		ORDER BY $tabla1.fechaEstado ASC");
 
 		// return $stmt;
@@ -209,15 +210,12 @@ class ModeloBruTur{
 
 		$saneamiento = '';
 
-		if($datos['estado'] ==  'En Saneamiento' OR $datos['estado'] ==  'MuVe'){
-
-			$saneamiento = ',saneamientoNumero = :saneamientoNumero,positivo = :positivo,negativo = :negativo,sospechoso = :sospechoso';
-
-		}	
+		$saneamiento = ',saneamientoNumero = :saneamientoNumero,positivo = :positivo,negativo = :negativo,sospechoso = :sospechoso';
 
 		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET 
 		fechaCarga = :fechaCarga,
 		protocolo = :protocolo,
+		notificado = 0,
 		vacas = :vacas,
 		vaquillonas = :vaquillonas,
 		toros = :toros,
@@ -226,9 +224,17 @@ class ModeloBruTur{
 
 		if($tabla == 'tuberculosis'){
 
+						
+			if($datos['estado'] ==  'Libre' OR $datos['estado'] ==  'RecertificaciÃ³n' OR $datos['estado'] ==  'No Libre'){
+
+				$saneamiento = '';
+				
+			}	
+
 			$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET 
 			fechaCarga = :fechaCarga,
 			protocolo = :protocolo,
+			notificado = 0,
 			vacas = :vacas,
 			vaquillonas = :vaquillonas,
 			terneros = :terneros,
@@ -253,23 +259,23 @@ class ModeloBruTur{
 		$stmt->bindParam(":toros", $datos['toros'], PDO::PARAM_STR);
 		$stmt->bindParam(":fechaEstado", $datos['fechaEstado'], PDO::PARAM_STR);
 		$stmt->bindParam(":item", $datos['renspa'], PDO::PARAM_STR);
-	
-		if($datos['estado'] ==  'En Saneamiento' OR $datos['estado'] ==  'MuVe' ){
+		
+		
+		if($datos['estado'] !=  'Libre' OR $datos['estado'] !=  'RecertificaciÃ³n' OR $datos['estado'] !=  'No Libre'){
 
 			$stmt->bindParam(":saneamientoNumero", $datos['saneamientoNum'], PDO::PARAM_STR);
 			$stmt->bindParam(":positivo", $datos['positivo'], PDO::PARAM_STR);
 			$stmt->bindParam(":negativo", $datos['negativo'], PDO::PARAM_STR);
 			$stmt->bindParam(":sospechoso", $datos['sospechoso'], PDO::PARAM_STR);
-			
 		}
 	
-
 		if($stmt->execute()){
 			
 			return 'ok';
 			
 		}else{
-			var_dump($stmt->errorInfo());
+
+			return($stmt->errorInfo());
 			return 'error';
 
 		};

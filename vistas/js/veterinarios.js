@@ -21,6 +21,7 @@ $(".tablas").on("click", ".btnEditarVeterinario", function(){
       processData: false,
       dataType:"json",
       success:function(respuesta){
+
         console.log(respuesta);
         
       	$("#idEdit").val(respuesta.vacunador_id);
@@ -38,7 +39,7 @@ $(".tablas").on("click", ".btnEditarVeterinario", function(){
         $("#cuitEdit").val(respuesta.cuit);
 	    
         $("#tipoEdit").html(generarSelect(tipo,respuesta.tipo,null));
-        
+                
 	  }
 
   	});

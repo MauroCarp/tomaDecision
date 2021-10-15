@@ -183,9 +183,9 @@ $tituloModal = 'Historial de Registros Brucelosis';
                    
                    <div class="row">
                        
-                       <div class="col-md-12">
+                       <div class="col-md-12" style="overflow-y:scroll;max-height:600px;">
 
-                            <table class="table table-stripped historial" style="overflow-y:scroll;">
+                            <table class="table table-stripped historial">
                                
                                 <thead>
                                
@@ -280,9 +280,9 @@ $tituloModal = 'Historial de Registros Tuberculosis ';
                    
                    <div class="row">
                        
-                       <div class="col-md-12">
+                       <div class="col-md-12" style="overflow-y:scroll;max-height:600px;">
 
-                            <table class="table table-stripped historial" style="overflow-y:scroll;">
+                            <table class="table table-stripped historial">
                                
                                 <thead>
                                
@@ -499,8 +499,8 @@ $tituloModal = 'Actualizar Status Sanitario';
 
                                     </div>
                                     
-                                    <!-- DATOS MuVe -->
-                                    <div class="row" id="inputSaneamientoBruce" style="display:none;">
+                                    <!-- DATOS POSITIVOS, NEGATIVOS , SOSPECHOSOS -->
+                                    <div class="row">
 
                                         <div class="col-md-3">
                                         

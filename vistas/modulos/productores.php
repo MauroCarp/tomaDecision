@@ -54,7 +54,7 @@ function nombreDistrito($distritoNumero,$distritos){
 
       <div class="box-header with-border">
   
-        <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarProductor">
+        <button class="btn btn-primary" id="btnNuevoProductor" data-toggle="modal" data-target="#modalAgregarProductor">
           
           Nuevo Productor/Establecimiento
 

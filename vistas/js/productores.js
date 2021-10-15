@@ -68,6 +68,7 @@ $(".tablas").on("click", ".btnEditarProductor", function(){
       processData: false,
       dataType:"json",
       success:function(respuesta){
+      console.log(respuesta);
       
       	$("#idEdit").val(respuesta["productor_id"]);
       	
@@ -116,6 +117,21 @@ $(".tablas").on("click", ".btnEditarProductor", function(){
        
         $("#distritoEdit").html(generarSelect(distritos,respuesta["distrito"],'distritos'));
         
+        
+        $.ajax({
+          url:'ajax/veterinarios.ajax.php',
+          data:'accion=listarVeterinarios',
+          method: 'post',
+          success:(response)=>{
+
+            let veterinarios = JSON.parse(response);
+            
+            $("#veterinarioEdit").html(generarSelect(veterinarios,respuesta["veterinario"],'veterinarios'));
+
+          }
+
+        })
+        
 	  }
 
   	})
@@ -156,27 +172,29 @@ GENERAR SELECTS
 =============================================*/
 
 const generarSelect = (array,valueBD,tipo)=>{
-  console.log(valueBD);
   
   let select = '';
   
   array.forEach((value,key)=>{
     
-    tipo == 'distritos' ? select += `<option value="${key}" ` : select += `<option value="${value}" `;
-
     if (tipo == 'distritos') {
       
+      select += `<option value="${key}`
+      
       if(valueBD == key)
-        select += 'selected';
+        select += 'selected'
+      
+      select += `>${utf8(value)}</option>`
 
     }
-
-    if(valueBD == value)
-      select += 'selected';
-
-
+    
     if(tipo == 'iva'){
       
+      select += `<option value="${value}" `
+
+      if(valueBD == value)
+      select += 'selected';
+
       switch (value) {
         case 'RI':
             select += '>Responsable Inscripto</option>';
@@ -197,15 +215,44 @@ const generarSelect = (array,valueBD,tipo)=>{
         default:
           break;
       }
-
-    }else{
       
-      select += `>${utf8(value)}</option>`;
-
     }
 
+    if(tipo == 'veterinarios'){
+
+      select += `<option value="${value.matricula}" `
+
+      if(valueBD == value.matricula)
+        select += 'selected';
+      // console.log(value.nombre);
+      
+      select += `>${utf8(value.nombre)}</option>`;
+            
+    }
+
+    
   });
   
   return select;
 
 }
+
+// CARGAR VETERINARIOS NUEVO PRODUCTOR
+
+$('#btnNuevoProductor').on('click',()=>{
+
+  $.ajax({
+    url:'ajax/veterinarios.ajax.php',
+    data:'accion=listarVeterinarios',
+    method: 'post',
+    success:(response)=>{
+
+      let veterinarios = JSON.parse(response);
+      
+      $("#veterinario").html(generarSelect(veterinarios,null,'veterinarios'));
+
+    }
+
+  })
+  
+});
