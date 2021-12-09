@@ -6,9 +6,9 @@ const iva = ['RI','MT','EX','CF'];
 
 const tipoDoc = ['DNI','CUIL','CUIT'];
 
-const tipoExplotacion = ['CabaÃ±a','CIA','CrÃ­a','CrÃ­a/Invernada','Feedlot','U.P Feedlot'];
+const tipoExplotacion = ['Cabaña','CIA','Cria','Cria/Invernada','Feedlot','U.P Feedlot'];
 
-const regimen = ['Arrendatario','CapitalizaciÃ³n','Pastajero','Propietario'];
+const regimen = ['Arrendatario','Capitalizacion','Pastajero','Propietario'];
 
 const utf8 = (texto)=>{
   
@@ -68,7 +68,6 @@ $(".tablas").on("click", ".btnEditarProductor", function(){
       processData: false,
       dataType:"json",
       success:function(respuesta){
-      console.log(respuesta);
       
       	$("#idEdit").val(respuesta["productor_id"]);
       	
@@ -78,7 +77,7 @@ $(".tablas").on("click", ".btnEditarProductor", function(){
 	      
         $("#establecimientoEdit").val(respuesta["establecimiento"]);
 	      
-        $("#tipoExplotacionEdit").html(generarSelect(tipoExplotacion, respuesta["explotacion"],'explotacion'));
+        $("#tipoExplotacionEdit").html(generarSelect(tipoExplotacion, respuesta["explotacion"],null));
 	      
         $("#regimenEdit").html(generarSelect(regimen,respuesta["regimen"],null));
 	      
@@ -126,7 +125,7 @@ $(".tablas").on("click", ".btnEditarProductor", function(){
 
             let veterinarios = JSON.parse(response);
             
-            $("#veterinarioEdit").html(generarSelect(veterinarios,respuesta["veterinario"],'veterinarios'));
+            $("#veterinarioEdit").html(generarSelect(veterinarios,respuesta.veterinario,'veterinarios'));
 
           }
 
@@ -176,60 +175,70 @@ const generarSelect = (array,valueBD,tipo)=>{
   let select = '';
   
   array.forEach((value,key)=>{
+    if(tipo != null){
     
-    if (tipo == 'distritos') {
-      
-      select += `<option value="${key}`
-      
-      if(valueBD == key)
-        select += 'selected'
-      
-      select += `>${utf8(value)}</option>`
+      if (tipo == 'distritos') {
+        
+        select += `<option value="${key}"`
+        
+        if(valueBD == key)
+          select += ' selected'
+        
+        select += `>${utf8(value)}</option>`
 
-    }
-    
-    if(tipo == 'iva'){
-      
-      select += `<option value="${value}" `
-
-      if(valueBD == value)
-      select += 'selected';
-
-      switch (value) {
-        case 'RI':
-            select += '>Responsable Inscripto</option>';
-          break;
-      
-        case 'MT':
-            select += '>Responsable Monotributo</option>';
-          break;
-      
-        case 'EX':
-            select += '>Exento</option>';
-          break;
-      
-        case 'CF':
-            select += '>Consumidor Final</option>';
-          break;
-      
-        default:
-          break;
       }
       
-    }
+      if(tipo == 'iva'){
+        
+        select += `<option value="${value}" `
 
-    if(tipo == 'veterinarios'){
+        if(valueBD == value)
+        select += ' selected';
 
-      select += `<option value="${value.matricula}" `
+        switch (value) {
+          case 'RI':
+              select += '>Responsable Inscripto</option>';
+            break;
+        
+          case 'MT':
+              select += '>Responsable Monotributo</option>';
+            break;
+        
+          case 'EX':
+              select += '>Exento</option>';
+            break;
+        
+          case 'CF':
+              select += '>Consumidor Final</option>';
+            break;
+        
+          default:
+            break;
+        }
+        
+      }
 
-      if(valueBD == value.matricula)
-        select += 'selected';
-      // console.log(value.nombre);
+      if(tipo == 'veterinarios'){
+
+        select += `<option value="${value.matricula}" `
+
+        if(valueBD == value.matricula)
+          select += ' selected';
+        
+        select += `>${utf8(value.nombre)}</option>`;
+              
+      }
+    
+    }else{
+        
+      select += `<option value="${utf8(value)}"`
       
-      select += `>${utf8(value.nombre)}</option>`;
-            
-    }
+      if(valueBD == value)
+        select += ' selected'
+      
+        select += `>${utf8(value)}</option>`
 
+    }
     
   });
   
@@ -249,7 +258,10 @@ $('#btnNuevoProductor').on('click',()=>{
 
       let veterinarios = JSON.parse(response);
       
-      $("#veterinario").html(generarSelect(veterinarios,null,'veterinarios'));
+      let selectVeterinarios = generarSelect(veterinarios,null,'veterinarios')
+      console.log(selectVeterinarios);
+      
+      $("#veterinario").html(selectVeterinarios);
 
     }
 

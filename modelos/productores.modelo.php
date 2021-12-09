@@ -10,8 +10,8 @@ class ModeloProductores{
 
 	static public function mdlIngresarProductor($tabla, $datos){
 
-		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(renspa,propietario,establecimiento,explotacion,regimen,tipoDoc,numDoc,iva,telefono,email,domicilio,localidad,provincia,departamento,distrito)
-		VALUES (:renspa, :propietario, :establecimiento, :explotacion, :regimen, :tipoDoc, :numDoc, :iva, :telefono, :mail, :domicilio, :localidad, :provincia, :departamento, :distrito)");
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(renspa,propietario,establecimiento,explotacion,regimen,tipoDoc,numDoc,iva,telefono,email,domicilio,localidad,provincia,departamento,distrito,veterinario)
+		VALUES (:renspa, :propietario, :establecimiento, :explotacion, :regimen, :tipoDoc, :numDoc, :iva, :telefono, :mail, :domicilio, :localidad, :provincia, :departamento, :distrito,:veterinario)");
 
 		$departamento = 8;
 		$stmt->bindParam(":renspa", $datos["renspa"], PDO::PARAM_STR);
@@ -29,12 +29,8 @@ class ModeloProductores{
 		$stmt->bindParam(":provincia", $datos["provincia"], PDO::PARAM_STR);
 		$stmt->bindParam(":departamento", $departamento, PDO::PARAM_INT);
 		$stmt->bindParam(":distrito", $datos["distrito"], PDO::PARAM_INT);
+		$stmt->bindParam(":veterinario", $datos["veterinario"], PDO::PARAM_STR);
 
-		// $stmt->execute();
-		
-		// var_dump($stmt ->errorInfo());
-
-		// return $stmt;
 		if($stmt->execute()){
 
 			return "ok";
@@ -88,8 +84,7 @@ class ModeloProductores{
 	=============================================*/
 
 	static public function mdlEditarProductor($tabla, $datos){
-		var_dump($datos);
-
+	
 		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET 
 		renspa = :renspa,
 		propietario = :propietario,
@@ -104,8 +99,11 @@ class ModeloProductores{
 		domicilio = :domicilio,
 		localidad = :localidad,
 		provincia = :provincia,
-		distrito = :distrito
+		distrito = :distrito,
+		veterinario = :veterinario
 		WHERE productor_id = :id");
+
+
 
 		$stmt->bindParam(":renspa", $datos["renspa"], PDO::PARAM_STR);
 		$stmt->bindParam(":propietario", $datos["propietario"], PDO::PARAM_STR);
@@ -121,14 +119,10 @@ class ModeloProductores{
 		$stmt->bindParam(":localidad", $datos["localidad"], PDO::PARAM_STR);
 		$stmt->bindParam(":provincia", $datos["provincia"], PDO::PARAM_STR);
 		$stmt->bindParam(":distrito", $datos["distrito"], PDO::PARAM_INT);
+		$stmt->bindParam(":veterinario", $datos["veterinario"], PDO::PARAM_STR);
 		$stmt->bindParam(":id", $datos["id"], PDO::PARAM_INT);
+	
 
-		
-		// $stmt->execute();
-		
-		// var_dump($stmt ->errorInfo());
-
-		// return $stmt;
 		if($stmt->execute()){
 
 			return "ok";
@@ -148,11 +142,21 @@ class ModeloProductores{
 	ELIMINAR PRODUCTOR
 	=============================================*/
 
-	static public function mdlEliminarProductor($tabla, $datos){
+	static public function mdlEliminarProductor($tabla,$datos){
 
-		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE productor_id = :id");
-
-		$stmt -> bindParam(":id", $datos, PDO::PARAM_INT);
+		if(is_array($datos)){
+			
+			$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE renspa = :renspa");
+			
+			$stmt -> bindParam(":renspa", $datos['renspa'], PDO::PARAM_INT);
+			
+		}else{
+			
+			$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE productor_id = :id");
+			
+			$stmt -> bindParam(":id", $datos, PDO::PARAM_INT);
+		
+		}
 
 		if($stmt -> execute()){
 

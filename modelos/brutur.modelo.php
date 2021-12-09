@@ -42,7 +42,9 @@ class ModeloBruTur{
 	}
 
     static public function mdlPorVencer($tabla1,$tabla2,$today){
-	
+		
+		$whereClause = ($tabla1 == 'brucelosis') ? $tabla1.".estado = 'DOES Total' OR ".$tabla1.".estado = 'MuVe' OR ".$tabla1.".estado = 'Libre' OR ".$tabla1.".estado = 'RecertificaciÃ³n'" : $tabla1.".estado = 'Libre' OR ".$tabla1.".estado = 'RecertificaciÃ³n'";
+
 		$stmt = Conexion::conectar()->prepare("SELECT 
 		$tabla1.renspa, 
 		$tabla2.establecimiento, 
@@ -56,7 +58,7 @@ class ModeloBruTur{
 		INNER JOIN $tabla2 
 		ON $tabla1.renspa = $tabla2.renspa 
 		WHERE '$today' <  DATE_ADD($tabla1.fechaEstado, INTERVAL 365 DAY)AND '$today' > DATE_ADD($tabla1.fechaEstado, INTERVAL 11 MONTH) 
-		AND notificado = 0 
+		AND notificado = 0 AND ($whereClause)
 		ORDER BY $tabla1.fechaEstado ASC");
 
 

@@ -1,4 +1,51 @@
 /*=============================================
+EXISTE ELEMENTO
+=============================================*/
+const  isInPage = node=>{
+
+	return (node === document.body) ? false : document.body.contains(node);
+
+}
+
+/*=============================================
+GET COOKIE
+=============================================*/
+
+const getCookie = cname=>{
+	
+	let name = cname + "=";
+	
+	let decodedCookie = decodeURIComponent(document.cookie);
+	
+	let ca = decodedCookie.split(';');
+	
+	for(let i = 0; i <ca.length; i++) {
+	  let c = ca[i];
+	  while (c.charAt(0) == ' ') {
+		c = c.substring(1);
+	  }
+	
+	  if (c.indexOf(name) == 0) {
+		return c.substring(name.length, c.length);
+	  }
+	
+	}
+	
+	return null;
+  
+}
+
+/*=============================================
+PRIMER LETRA MAYUSCULAS
+=============================================*/
+
+const capitalizarPrimeraLetra = (str)=>{
+
+	return str.charAt(0).toUpperCase() + str.slice(1);
+
+}
+
+/*=============================================
 SideBar Menu
 =============================================*/
 
@@ -90,7 +137,7 @@ btnStatusVeterinario.addEventListener("click",()=>{
 const btnNotificados = document.getElementById('notificados');
 btnNotificados.addEventListener("click",()=>{redireccionarMenu('brutur/notificados')});
 
-const getQueryVariable = (variable) => {
+const getQueryVariable = variable => {
 
 	var query = window.location.search.substring(1);
   
@@ -134,34 +181,15 @@ const sumarFecha = (fecha,dato,cantidad) =>{
 
 }
 
-const formatearFecha = (fecha) =>{
+const formatearFecha = fecha =>{
 
 	return fecha.replace(/^(\d{4})-(\d{2})-(\d{2})$/g,'$3/$2/$1');
 
 }
 
-// 
-// COMPROBAR CAMPAÑA DEFINIDA
-// 
-
-const comprobarCampania = (campania)=>{
-	
-	if(campania != null)  
-	{
-
-		$('#ventanaModalCargarActa').modal('toggle');
-
-	}else{
-
-		$('#ventanaModalCampania').modal('toggle');
-		
-	}
-}
-
 /*=============================================
 ACCESOS DIRECTOS ACTUALIZAR STATUS BRUTUR Y CARGAR/MODIFICAR ACTA AFTOSA
 =============================================*/
-
 
 window.addEventListener("keydown", function (event) {
 	
@@ -176,7 +204,7 @@ window.addEventListener("keydown", function (event) {
 	
 	if(functionKey == 'F9'){
 	
-		let campania = localStorage.getItem('campania');
+		let campania = getCookie('campania');
 	
 		comprobarCampania(campania);
 		
@@ -186,31 +214,49 @@ window.addEventListener("keydown", function (event) {
 	},false);
 
 /*=============================================
-MENU CARGAR ACTA
+COMPROBAR CAMPANIA
 =============================================*/	
 
-$('#cargarActa').click(function(){
+$('#menuAftosa').on('click',()=>{
+
+	let campania = getCookie('campania');
+
+	setTimeout(()=>{
+
+		if(campania == null)
+			document.getElementById('desplegableAftosa').style.display = 'none'
 	
-	let campania = localStorage.getItem('campania');
-
-	comprobarCampania(campania);
-
+		},500)
+	
+	
+	validarCampania()
 });
 
 
 /*=============================================
 ASIGNAR CAMPAÑA
 =============================================*/	
+
 $('#asignarCampania').click(()=>{
 
 	let campania = $('#campaniaNum').val();
 
-	localStorage.setItem('campania',campania);
+	document.cookie = `campania=${campania}`
 
-	$('#ventanaModalCargarActa').modal('toggle');
-	
 	$('#ventanaModalCampania').modal('toggle');
 
 
 });
 
+/*=============================================
+VALIDAR CAMPAÑA
+=============================================*/	
+
+const validarCampania = ()=>{
+
+	let campania = getCookie('campania');
+	
+	if(campania == null)  
+		$('#ventanaModalCampania').modal('toggle');
+
+}

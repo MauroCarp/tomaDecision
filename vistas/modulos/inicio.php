@@ -8,3 +8,9 @@
 
 </div>
  
+<?php
+
+$cargarCampania = new ControladorAftosa();
+$cargarCampania ->ctrCargarCampania();
+
+?>

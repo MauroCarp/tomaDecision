@@ -12,7 +12,7 @@ if($_SESSION["perfil"] == "Especial"){
 
 }
 
-$estadosBrucelosis = array('DOES Total','DOES Muestreo','MuVe','SAN','CSM','Control Interno','Remuestreo');
+$estadosBrucelosis = array('DOES Total','DOES Muestreo','Tecnica PAL','MuVe','SAN','CSM','Control Interno','Remuestreo');
 
 $estadosTuberculosis = array('Libre','Recertificacion','No Libre','En Saneamiento');
 

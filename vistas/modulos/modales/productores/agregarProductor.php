@@ -95,13 +95,13 @@
                             <select name="tipoExplotacion" id="tipoExplotacion" class="form-control input-lg" required>
 
                                 
-                                <option value="Caba&ntilde;a">Caba&ntilde;a</option>
+                                <option value="Cabaña">Cabaña</option>
                                 
                                 <option value="CIA">CIA</option>
                                 
-                                <option value="Cr&iacute;a">Cr&iacute;a</option>
+                                <option value="Cria">Cria</option>
                                 
-                                <option value="Cr&iacute;a/Invernada">Cr&iacute;a / Invernada</option>
+                                <option value="Cria/Invernada">Cria / Invernada</option>
                                 
                                 <option value="Feedlot">Feedlot</option>
                                 
@@ -129,7 +129,7 @@
 
                                 <option value="Arrendatario">Arrendatario</option>
                                 
-                                <option value="Capitalizaci&oacute;n">Capitalizaci&oacute;n</option>
+                                <option value="Capitalizacion">Capitalizacion</option>
                                 
                                 <option value="Pastajero">Pastajero</option>
                                                                 

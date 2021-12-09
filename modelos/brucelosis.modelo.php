@@ -19,7 +19,7 @@ class ModeloBrucelosis{
 			return "ok";
 
 		}else{
-
+			var_dump($stmt->errorInfo());
 			return "error";
 		
 		}

@@ -25,7 +25,6 @@ class AjaxVeterinarios{
 
 	}
 
-
 	public function ajaxMostrarVeterinario(){
 
 		$item = 'matricula';
@@ -87,6 +86,6 @@ if(isset($_POST['accion'])){
 		$mostrarVeterinario -> ajaxMostrarVeterinarios();
 
 	}
-
+	
 
 }

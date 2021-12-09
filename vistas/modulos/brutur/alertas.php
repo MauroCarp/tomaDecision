@@ -126,8 +126,7 @@ function generarAlerta($registros,$tipoAlerta,$today,$tabla1){
               $tabla1 = 'brucelosis';
 
               $establecimientosVencidosBrucelosis = ControladorBruTur::ctrEsVencido($tabla1,$today);
-  // var_dump($establecimientosVencidosBrucelosis);
-  // die();
+
                 generarAlerta($establecimientosVencidosBrucelosis,'vencido',$today,$tabla1);
 
               // BRUCELOSIS POR VENCER
@@ -170,12 +169,3 @@ $notificarProductor = new ControladorBruTur();
 $notificarProductor -> ctrNotificar();
 
 ?>  
-
-<script>
-
-$(function(){
-
-
-});
-
-</script>

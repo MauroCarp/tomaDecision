@@ -191,6 +191,8 @@ CUERPO DOCUMENTO
          $_GET["ruta"] == "brutur/informePendientes" ||
          $_GET["ruta"] == "brutur/enviarPendientes" ||
          $_GET["ruta"] == "aftosa/acta" ||
+         $_GET["ruta"] == "aftosa/recepcion" ||
+         $_GET["ruta"] == "aftosa/distribucion" ||
          $_GET["ruta"] == "usuarios" ||
          $_GET["ruta"] == "productos" ||
          $_GET["ruta"] == "clientes" ||

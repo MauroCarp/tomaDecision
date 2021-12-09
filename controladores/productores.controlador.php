@@ -26,23 +26,21 @@ class ControladorProductores{
 							   "localidad"=>$_POST["localidad"],
 							   "provincia"=>$_POST["provincia"],
 							   "departamento"=>$_POST["departamento"],
+							   "veterinario"=>$_POST["veterinario"],
 							   "distrito"=>$_POST["distrito"]);
 
-			   	$respuesta = ModeloProductores::mdlIngresarProductor($tabla, $datos);
+				$respuesta = ModeloProductores::mdlIngresarProductor($tabla, $datos);
 
 				$tabla = "brucelosis";
-
-			   	$datos = array("renspa"=>$_POST["renspa"]);
-
-			   	$respuesta = ModeloBrucelosis::mdlIngresarRegistro($tabla, $datos);
+				
+				$datos = array("renspa"=>$_POST["renspa"]);
+				
+				$respuesta = ModeloBrucelosis::mdlIngresarRegistro($tabla, $datos);
 				
 				$tabla = "tuberculosis";
-
-			   	$respuesta = ModeloTuberculosis::mdlIngresarRegistro($tabla, $datos);
 				
-				// return $respuesta;
-				//    die();
-			   
+				$respuesta = ModeloTuberculosis::mdlIngresarRegistro($tabla, $datos);
+				
 				if($respuesta == "ok"){
 
 					echo'<script>
@@ -50,6 +48,41 @@ class ControladorProductores{
 					swal({
 						  type: "success",
 						  title: "El Productor/Establecimiento ha sido guardado correctamente",
+						  showConfirmButton: true,
+						  confirmButtonText: "Cerrar"
+						  }).then(function(result){
+									if (result.value) {
+
+									window.location = "productores";
+
+									}
+								})
+
+					</script>';
+
+				}else{
+
+					$datos = array("renspa"=>$_POST["renspa"]);
+					
+					$tabla = "productores";
+
+					$respuesta = ModeloProductores::mdlEliminarProductor($tabla, $datos);
+				
+					$tabla = "brucelosis";
+
+					$respuesta = ModeloProductores::mdlEliminarProductor($tabla, $datos);
+				
+					$tabla = "tuberculosis";
+
+					$respuesta = ModeloProductores::mdlEliminarProductor($tabla, $datos);
+
+					var_dump($respueta);
+
+					echo'<script>
+
+					swal({
+						  type: "error",
+						  title: "Hubo un error. El registro no fue guardado",
 						  showConfirmButton: true,
 						  confirmButtonText: "Cerrar"
 						  }).then(function(result){
@@ -88,53 +121,54 @@ class ControladorProductores{
 	=============================================*/
 
 	static public function ctrEditarProductor(){
-
+	
 		if(isset($_POST["renspaEdit"])){
 
-			   	$tabla = "productores";
+			$tabla = "productores";
 
-			   	$datos = array("renspa"=>$_POST["renspaEdit"],
-					           "propietario"=>$_POST["propietarioEdit"],
-					           "establecimiento"=>$_POST["establecimientoEdit"],
-					           "explotacion"=>$_POST["tipoExplotacionEdit"],
-					           "regimen"=>$_POST["regimenEdit"],
-					           "tipoDoc"=>$_POST["tipoDocEdit"],
-					           "numDoc"=>$_POST["numDocEdit"],
-					           "iva"=>$_POST["ivaEdit"],
-					           "telefono"=>$_POST["telefonoEdit"],
-					           "mail"=>$_POST["mailEdit"],
-					           "domicilio"=>$_POST["domicilioEdit"],
-					           "localidad"=>$_POST["localidadEdit"],
-					           "provincia"=>$_POST["provinciaEdit"],
-					           "departamento"=>$_POST["departamentoEdit"],
-					           "distrito"=>$_POST["distritoEdit"],
-					           "id"=>$_POST["idEdit"]);
-				
-				$respuesta = ModeloProductores::mdlEditarProductor($tabla, $datos);
-							//    return $respuesta;
-							// 	  die();
-			   	if($respuesta == "ok"){
+			$datos = array("renspa"=>$_POST["renspaEdit"],
+						"propietario"=>$_POST["propietarioEdit"],
+						"establecimiento"=>$_POST["establecimientoEdit"],
+						"explotacion"=>$_POST["tipoExplotacionEdit"],
+						"regimen"=>$_POST["regimenEdit"],
+						"tipoDoc"=>$_POST["tipoDocEdit"],
+						"numDoc"=>$_POST["numDocEdit"],
+						"iva"=>$_POST["ivaEdit"],
+						"telefono"=>$_POST["telefonoEdit"],
+						"mail"=>$_POST["mailEdit"],
+						"domicilio"=>$_POST["domicilioEdit"],
+						"localidad"=>$_POST["localidadEdit"],
+						"provincia"=>$_POST["provinciaEdit"],
+						"departamento"=>$_POST["departamentoEdit"],
+						"distrito"=>$_POST["distritoEdit"],
+						"veterinario"=>$_POST["veterinarioEdit"],
+						"hola"=>$_POST["veterinarioEdit"],
+						"id"=>$_POST["idEdit"]);
 
-					echo'<script>
+			$respuesta = ModeloProductores::mdlEditarProductor($tabla, $datos);
 
-					swal({
-						  type: "success",
-						  title: "El Productor ha sido modificado correctamente",
-						  showConfirmButton: true,
-						  confirmButtonText: "Cerrar"
-						  }).then(function(result){
-									if (result.value) {
+			if($respuesta == "ok"){
 
-									window.location = "productores";
+				echo'<script>
 
-									}
-								})
+				swal({
+					type: "success",
+					title: "El Productor ha sido modificado correctamente",
+					showConfirmButton: true,
+					confirmButtonText: "Cerrar"
+					}).then(function(result){
+								if (result.value) {
 
-					</script>';
+								window.location = "productores";
 
-				}
+								}
+							})
 
-		}
+				</script>';
+
+			}
+
+			}
 
 	}
 

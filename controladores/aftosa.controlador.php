@@ -3,7 +3,69 @@
 class ControladorAftosa{
     
     /*=============================================
-	MOSTRAR REGISTROS SEGUN ESTADO / RANGO
+	CARGAR NUEVA CAMPANIA
+	=============================================*/
+
+	static public function ctrCargarCampania(){
+    
+        if(isset($_GET['campania'])){
+            
+            $tabla = "campanias";
+            
+            $item = 'numero';
+
+            $valor = $_GET['campania'];
+
+            $respuesta = ModeloAftosa::mdlCargarCampania($tabla, $item, $valor);
+    
+            if($respuesta == "ok"){
+
+                echo'<script>
+
+                swal({
+                      type: "success",
+                      title: "La campaña fue cargada correctamente",
+                      showConfirmButton: true,
+                      confirmButtonText: "Cerrar"
+                      }).then(function(result){
+                                if (result.value) {
+
+                                document.cookie = "campania='.$valor.'"
+
+                                window.location = "inicio";
+
+                                }
+                            })
+
+                </script>';
+
+            }else{
+
+                echo'<script>
+
+                swal({
+                      type: "error",
+                      title: "Hubo un error. El registro no fue guardado",
+                      showConfirmButton: true,
+                      confirmButtonText: "Cerrar"
+                      }).then(function(result){
+                                if (result.value) {
+
+                                window.location = "inicio";
+
+                                }
+                            })
+
+                </script>';
+
+            }
+
+        }
+    
+    }
+
+    /*=============================================
+    MOSTRAR DATOS CAMPANIA
 	=============================================*/
 
 	static public function ctrMostrarDatosCampania($item,$valor){
@@ -16,93 +78,159 @@ class ControladorAftosa{
     
     }
 
-    // /*=============================================
-	// CONTAR REGISTROS SEGUN ESTADO / RANGO
-	// =============================================*/
+    /*=============================================
+    EDITAR DATOS CAMPANIA
+	=============================================*/
 
-	// static public function ctrContarRegistros($item,$valor,$valor2,$item2,$rango){
+	static public function ctrEditarDatosCampania(){
     
-    //     $tabla = "brucelosis";
+        if(isset($_POST['editarCampania'])){
+            
+            $tabla = "campanias";
 
-    //     $rango = explode('/',$rango);
+            $datos = array('numero' => $_POST['campaniaNumero'],'fechaInicio' => $_POST['fechaInicio'],'fechaCierre' => $_POST['fechaCierre'],'precioAdmAftosa' => $_POST['precioAdmAftosa'],'precioVacunaAftosa' => $_POST['precioVacunaAftosa'],'precioVeterinarioAftosa' => $_POST['precioVacunaAftosa'],'precioAdmCarb' => $_POST['precioAdmCarb'],'precioVacunaCarb' => $_POST['precioVacunaCarb'],'precioVeterinarioCarb' => $_POST['precioVacunaCarb']);
+            
+            $respuesta = ModeloAftosa::mdlEditarDatosCampania($tabla,$datos);
 
-    //     $desde = $rango[0];
+            if($respuesta == "ok"){
+
+                echo'<script>
+
+                swal({
+                      type: "success",
+                      title: "La campaña fue modificada correctamente",
+                      showConfirmButton: true,
+                      confirmButtonText: "Cerrar"
+                      }).then(function(result){
+                                if (result.value) {
+
+                                window.location = "inicio";
+
+                                }
+                            })
+
+                </script>';
+
+            }else{
+
+                echo'<script>
+
+                swal({
+                      type: "error",
+                      title: "Hubo un error. El registro no fue guardado",
+                      showConfirmButton: true,
+                      confirmButtonText: "Cerrar"
+                      }).then(function(result){
+                                if (result.value) {
+
+                                window.location = "inicio";
+
+                                }
+                            })
+
+                </script>';
+
+            }
         
-    //     $hasta = $rango[1];
-		
-    //     $respuesta = ModeloBrucelosis::mdlContarRegistros($tabla, $item, $valor,$valor2,$item2,$desde,$hasta);
-
-	// 	return $respuesta;
+        }
     
-    // }
+    }
 
-    // /*=============================================
-	// CONTAR/SUMAR REGISTROS SEGUN + - S
-    // =============================================*/
+    /*=============================================
+    MOSTRAR DATOS
+    =============================================*/
 
-	// static public function ctrContarSumarRegistrosPosNegSos($item,$valor,$item2,$rango,$operacion){
+	static public function ctrMostrarDatos($tabla,$item,$valor,$orden){
     
-    //     $tabla = "brucelosis";
+        return $respuesta = ModeloAftosa::mdlMostrarDatos($tabla, $item, $valor, $orden);
 
-    //     $rango = explode('/',$rango);
+    }
 
-    //     $desde = $rango[0];
+    /*=============================================
+    ELIMINAR DATOS
+    =============================================*/
+
+	static public function ctrEliminarRecepcion(){
+    
+        if(isset($_GET['id'])){
+
+            $tabla = 'recepcion';
+
+            $item = 'recepcion_id';
+
+            $valor = $_GET['id'];
+
+            $respuesta = ModeloAftosa::mdlEliminarDato($tabla, $item, $valor);
         
-    //     $hasta = $rango[1];
-		
-    //     $respuesta = ModeloBrucelosis::mdlContarSumarRegistrosPosNegSos($tabla, $item, $valor,$item2,$desde,$hasta,$operacion);
+            if($respuesta == "ok"){
 
-	// 	return $respuesta;
+                echo'<script>
+
+                swal({
+                      type: "success",
+                      title: "La Recepcion fue eliminada correctamente",
+                      showConfirmButton: true,
+                      confirmButtonText: "Cerrar"
+                      }).then(function(result){
+                                if (result.value) {
+
+                                window.location = "index.php?ruta=aftosa/recepcion";
+
+                                }
+                            })
+
+                </script>';
+
+            }else{
+
+                echo'<script>
+
+                swal({
+                      type: "error",
+                      title: "Hubo un error. El registro no fue guardado",
+                      showConfirmButton: true,
+                      confirmButtonText: "Cerrar"
+                      }).then(function(result){
+                                if (result.value) {
+
+                                    window.location = "index.php?ruta=aftosa/recepcion";
+
+                                }
+                            })
+
+                </script>';
+
+            }
+        }
+
+    }
+
+    /*=============================================
+    CARGAR RECEPCION
+    =============================================*/
+
+	static public function ctrCargarRecepcion($datos){
     
-    // }
+        $tabla = 'recepcion'; 
 
-    // /*=============================================
-	// SUMAR REGISTROS 
-    // =============================================*/
+        return $respuesta = ModeloAftosa::mdlCargarRecepcion($tabla, $datos);
 
-	// static public function ctrSumarRegistros($item,$valor,$valor2,$item2,$rango){
+    }
+
+    /*=============================================
+    MOSTRAR DISTRIBUCION
+    =============================================*/
+
+	static public function ctrMostrarDistribucion($item,$valor,$item2,$valor2){
     
-    //     $tabla = "brucelosis";
+        $tabla = 'distribucion'; 
 
-    //     $rango = explode('/',$rango);
+        return $respuesta = ModeloAftosa::mdlMostrarDistribucion($tabla, $item,$valor,$item2,$valor2);
 
-    //     $desde = $rango[0];
-        
-    //     $hasta = $rango[1];
-		
-    //     $respuesta = ModeloBrucelosis::mdlSumarRegistros($tabla, $item, $valor,$valor2,$item2,$desde,$hasta);
+    }
 
-	// 	return $respuesta;
-    
-    // }
 
-    
-    // /*=============================================
-	// MOSTAR REGISTROS 
-    // =============================================*/
-	// static public function ctrMostrarRegistros($item, $valor){
 
-	// 	$tabla = "brucelosis";
-
-	// 	$respuesta = ModeloBrucelosis::mdlMostrarRegistros($tabla, $item, $valor);
-
-	// 	return $respuesta;
-
-	// }
-
-    // /*=============================================
-	// MOSTAR HISTORIAL
-    // =============================================*/
-
-	// static public function ctrMostrarHistorial($item, $valor,$item2,$valor2){
-
-	// 	$tabla = "registros";
-
-	// 	$respuesta = ModeloBrucelosis::mdlMostrarHistorial($tabla, $item, $valor,$item2,$valor2);
-
-	// 	return $respuesta;
-
-	// }
 
 }
 

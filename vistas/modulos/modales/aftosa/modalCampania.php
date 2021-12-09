@@ -3,7 +3,7 @@
  
  <div class="modal-dialog">
 
-   <div class="modal-content" id="modalPrincipal" style="width:250px">
+   <div class="modal-content" id="modalPrincipal" style="width:400px">
 
 
        <!--=====================================
@@ -60,6 +60,53 @@
                                             
                                             </select>
                                         
+                                    </div>
+
+                                </div>
+
+                                <br>
+                                
+                                <div class="row">
+                                   
+                                    <div class="col-lg-12">
+                                        
+                                        <button class="btn btn-primary btn-block" id="nuevaCampania">
+                                            
+                                            <b>Nueva Campa&ntilde;a</b>
+                                        
+                                        </button>
+                                
+                                    </div>
+
+                                </div>
+
+                                <div class="row" style="display:none" id="inputNuevaCampania">
+                                    
+                                    <hr>
+
+                                    <div class="col-lg-6">
+
+                                        <div class="form-group">
+
+                                            <label>Campa&ntilde;a</label>
+
+                                            <div class="input-group">
+
+                                                <span class="input-group-addon">N°</span> 
+
+                                                <input type="number" name="nuevaCampaniaNumero" id="nuevaCampaniaNumero" class="form-control">
+
+                                            </div>
+
+                                            </div>
+
+
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                            <br>
+                                        <button id="cargarNuevaCampania" class="btn btn-primary btn-block" style="margin-top:5px;"><b>Cargar</b></button>
+
                                     </div>
 
                                 </div>

@@ -127,218 +127,218 @@
 
 				</ul>
 
-			</li>';
+			</li>
 
-			// <li class="treeview">
+			<li class="treeview">
 
-			// 	<a href="#">
+				<a href="#" id="menuAftosa">
 
-			// 		<i class="icon-aftosa" style="font-size:2.5em;padding-right:5px;"></i>
+					<i class="icon-aftosa" style="font-size:2.5em;padding-right:5px;"></i>
 					
-			// 		<span>Aftosa</span>
+					<span>Aftosa</span>
 					
-			// 		<span class="pull-right-container">
+					<span class="pull-right-container">
 					
-			// 			<i class="fa fa-angle-left pull-right"></i>
+						<i class="fa fa-angle-left pull-right"></i>
 
-			// 		</span>
+					</span>
 
-			// 	</a>
+				</a>
 
-			// 	<ul class="treeview-menu">
+				<ul class="treeview-menu" id="desplegableAftosa">
 					
-			// 		<li>
+					<li>
 
-			// 			<li class="treeview">
+						<li class="treeview">
 
-			// 				<a href="#">
+							<a href="#">
 			
-			// 					<i class="fa fa-plus-square"></i>
+								<i class="fa fa-plus-square"></i>
 								
-			// 					<span>Vacunas</span>
+								<span>Vacunas</span>
 								
-			// 					<span class="pull-right-container">
+								<span class="pull-right-container">
 								
-			// 						<i class="fa fa-angle-left pull-right"></i>
+									<i class="fa fa-angle-left pull-right"></i>
 			
-			// 					</span>
+								</span>
 			
-			// 				</a>
+							</a>
 		
-			// 				<ul class="treeview-menu">
+							<ul class="treeview-menu">
 								
-			// 					<li>
+								<li>
 			
-			// 						<a href="aftosa/recepcion">
+									<a href="index.php?ruta=aftosa/recepcion">
 										
-			// 							<i class="fa fa-sign-in"></i>
-			// 							<span>Recepci&oacute;n</span>
+										<i class="fa fa-sign-in"></i>
+										<span>Recepci&oacute;n</span>
 			
-			// 						</a>
+									</a>
 			
-			// 					</li>
+								</li>
 								
-			// 					<li>
+								<li>
 			
-			// 						<a href="aftosa/distribucion">
+									<a href="index.php?ruta=aftosa/distribucion">
 										
-			// 							<i class="fa fa-sign-out"></i>
-			// 							<span>Distribuci&oacute;n</span>
+										<i class="fa fa-sign-out"></i>
+										<span>Distribuci&oacute;n</span>
 			
-			// 						</a>
+									</a>
 			
-			// 					</li>
-			// 				</ul>
+								</li>
+							</ul>
 
-			// 			</li>
+						</li>
 						
-			// 		</li>
+					</li>
 					
-			// 		<li>
+					<li>
 
-			// 			<li class="treeview">
+						<li class="treeview">
 
-			// 				<a href="#">
+							<a href="#">
 			
-			// 					<i class="fa fa-list-ul"></i>
+								<i class="fa fa-list-ul"></i>
 								
-			// 					<span>Actas</span>
+								<span>Actas</span>
 								
-			// 					<span class="pull-right-container">
+								<span class="pull-right-container">
 								
-			// 						<i class="fa fa-angle-left pull-right"></i>
+									<i class="fa fa-angle-left pull-right"></i>
 			
-			// 					</span>
+								</span>
 			
-			// 				</a>
+							</a>
 		
-			// 				<ul class="treeview-menu">
+							<ul class="treeview-menu">
 								
-			// 					<li>
+								<li>
 			
-			// 						<a href="#" id="cargarActa">
+									<a href="#" id="cargarActa">
 										
-			// 							<i class="fa fa-pencil-square-o"></i>
-			// 							<span>Cargar Acta</span>
+										<i class="fa fa-pencil-square-o"></i>
+										<span>Cargar Acta</span>
 			
-			// 						</a>
+									</a>
 			
-			// 					</li>
+								</li>
 								
-			// 					<li>
+								<li>
 			
-			// 						<a href="aftosa/actraProductor">
+									<a href="aftosa/actraProductor">
 										
-			// 							<i class="fa fa-circle-o"></i>
-			// 							<span>Actas por Poductor</span>
+										<i class="fa fa-circle-o"></i>
+										<span>Actas por Poductor</span>
 			
-			// 						</a>
+									</a>
 			
-			// 					</li>
+								</li>
 
-			// 				</ul>
+							</ul>
 
-			// 			</li>
+						</li>
 					
-			// 		</li>
+					</li>
 
-			// 		<li>
+					<li>
 
-			// 			<a href="aftosa/informes">
+						<a href="aftosa/informes">
 							
-			// 				<i class="fa fa-file-text"></i>
-			// 				<span>Informes</span>
+							<i class="fa fa-file-text"></i>
+							<span>Informes</span>
 
-			// 			</a>
+						</a>
 
-			// 		</li>
+					</li>
 					
-			// 		<li>
+					<li>
 						
-			// 			<li class="treeview">
+						<li class="treeview">
 
-			// 				<a href="#">
+							<a href="#">
 			
-			// 					<i class="fa fa-list-ul"></i>
+								<i class="fa fa-list-ul"></i>
 								
-			// 					<span>Consultas</span>
+								<span>Consultas</span>
 								
-			// 					<span class="pull-right-container">
+								<span class="pull-right-container">
 								
-			// 						<i class="fa fa-angle-left pull-right"></i>
+									<i class="fa fa-angle-left pull-right"></i>
 			
-			// 					</span>
+								</span>
 			
-			// 				</a>
+							</a>
 
-			// 				<ul class="treeview-menu">
+							<ul class="treeview-menu">
 								
-			// 					<li>
+								<li>
 			
-			// 						<a href="aftosa/noVacunados">
+									<a href="aftosa/noVacunados">
 										
-			// 							<i class="fa fa-circle-o"></i>
-			// 							<span>Est. NO vacunados</span>
+										<i class="fa fa-circle-o"></i>
+										<span>Est. NO vacunados</span>
 			
-			// 						</a>
+									</a>
 			
-			// 					</li>
+								</li>
 								
-			// 					<li>
+								<li>
 			
-			// 						<a href="aftosa/diferencia">
+									<a href="aftosa/diferencia">
 										
-			// 							<i class="fa fa-circle-o"></i>
-			// 							<span>Busqueda Diferencia</span>
+										<i class="fa fa-circle-o"></i>
+										<span>Busqueda Diferencia</span>
 			
-			// 						</a>
+									</a>
 			
-			// 					</li>
+								</li>
 								
-			// 					<li>
+								<li>
 			
-			// 						<a href="aftosa/diferenciaParcial">
+									<a href="aftosa/diferenciaParcial">
 										
-			// 							<i class="fa fa-circle-o"></i>
-			// 							<span>Busqueda Diferencia Parcial</span>
+										<i class="fa fa-circle-o"></i>
+										<span>Busqueda Diferencia Parcial</span>
 			
-			// 						</a>
+									</a>
 			
-			// 					</li>
+								</li>
 
-			// 				</ul>
+							</ul>
 
-			// 			</li>
+						</li>
 
-			// 		</li>
+					</li>
 
 					
-			// 		<li>
+					<li>
 
-			// 			<a href="aftosa/situacionProductor">
+						<a href="aftosa/situacionProductor">
 							
-			// 				<i class="fa fa-circle-o"></i>
-			// 				<span>Situaci&oacute;n Productor</span>
+							<i class="fa fa-circle-o"></i>
+							<span>Situaci&oacute;n Productor</span>
 
-			// 			</a>
+						</a>
 
-			// 		</li>
+					</li>
 					
-			// 		<li>
+					<li>
 
-			// 			<a href="aftosa/campania">
+					<a href="#" data-toggle="modal" data-target="#ventanaModalEditarCampania" id="btnMenuCampania" class="desactivado>
 							
-			// 				<i class="fa fa-circle-o"></i>
-			// 				<span>Campa&ntilde;a</span>
+							<i class="fa fa-circle-o"></i>
+							<span>Campa&ntilde;a</span>
 
-			// 			</a>
+						</a>
 
-			// 		</li>
+					</li>
 
-			// 	</ul>
+				</ul>
 
-			// </li>
-			echo '
+			</li>
+
 			<li>
 
 				<a href="usuarios">
@@ -420,6 +420,8 @@ $idBtnGenerar = 'asignarCampania';
 $motivo = null;
 
 include 'modales/aftosa/modalCampania.php';
+
+include 'modales/aftosa/modalEditarCampania.php';
 
 
 

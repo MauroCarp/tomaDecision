@@ -74,17 +74,12 @@ function alertaTuberculosis($estado,$campania,$nombreVeterinario,$establecimient
 
 function alertaBrucelosis($estado,$campania,$nombreVeterinario,$establecimiento,$propietario){
      
-        if ($estado == "MuVe") {
+    if ($estado == "MuVe" || $estado == "DOES") {
             
-        $txt_message = "<h1>".ucfirst($campania)."</h1>Le comunicamos al veterinario $nombreVeterinario que el establecimiento $establecimiento, de $propietario, esta en MuVe.";
+        $txt_message = "<h1>".ucfirst($campania)."</h1>Le comunicamos al veterinario $nombreVeterinario que el establecimiento $establecimiento, de $propietario, esta en ".$estado;
     
         }
         
-        if ($estado == "DOES") {
-            
-        $txt_message = "<h1>".ucfirst($campania)."</h1>Le comunicamos al veterinario $nombreVeterinario que el establecimiento $establecimiento, de $propietario, esta en DOES.";
-    
-        }
         
         if ($estado == "CSM") {
             
@@ -92,18 +87,12 @@ function alertaBrucelosis($estado,$campania,$nombreVeterinario,$establecimiento,
     
         }
         
-        if ($estado == "Control Interno") {
+        if ($estado == "Control Interno" || $estado == "Remuestreo") {
             
-        $txt_message = "<h1>".ucfirst($campania)."</h1>Le comunicamos al veterinario $nombreVeterinario que el establecimiento $establecimiento, de $propietario, se hizo un Control Interno";
+        $txt_message = "<h1>".ucfirst($campania)."</h1>Le comunicamos al veterinario $nombreVeterinario que el establecimiento $establecimiento, de $propietario, se hizo un ".$estado;
     
         }
         
-        if ($estado == "Remuestreo") {
-            
-        $txt_message = "<h1>".ucfirst($campania)."</h1>Le comunicamos al veterinario $nombreVeterinario que el establecimiento $establecimiento, de $propietario, se realizo un Remuestreo";
-    
-        }
-   
         return $txt_message;
 
 }
@@ -111,7 +100,7 @@ function alertaBrucelosis($estado,$campania,$nombreVeterinario,$establecimiento,
 if ($alerta == "cambioStatus") {
     
     $estado = explode(',',$estado); 
-    
+
     $txt_message = '';
 
     $txt = "La certificaci&oacute;n tiene una validez de 365 d&iacute;as.";
