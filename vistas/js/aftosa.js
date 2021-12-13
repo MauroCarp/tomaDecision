@@ -79,9 +79,10 @@ btnNuevaCampania.addEventListener('click',()=>{
 })
 
 /*=============================================
-CARGAR ACTA
+ACTAS
 =============================================*/
 
+// CARGAR ACTAS
 const btnCargarActa = document.getElementById('btnCargarActa');
 
 btnCargarActa.addEventListener('click',()=>{
@@ -96,6 +97,47 @@ btnCargarActa.addEventListener('click',()=>{
     window.location = `index.php?ruta=aftosa/acta&renspa=${renspa}&campania=${campania}&intercampania=${intercampania}`
 
 });
+
+// ACTAS POR PRODUCTOR
+
+const btnBuscarActasProductor = document.getElementById('btnBuscarActasProductor')
+
+btnBuscarActasProductor.addEventListener('click',(e)=>{
+
+    e.preventDefault()
+
+    let renspa = document.getElementById('renspaActasProductor').value
+
+    renspa.trim()
+
+    if(renspa.length == 17){
+        console.log(productorExistente(renspa));
+        
+        if(productorExistente(renspa))
+                window.location = `index.php?ruta=aftosa/actasProductor&renspa=${renspa}`
+        else   swal({
+            type: "error",
+            title: "R.E.N.S.P.A Inexistente",
+            showConfirmButton: true,
+            confirmButtonText: "Cerrar"
+            })
+
+    }else{
+        
+        swal({
+            type: "error",
+            title: "R.E.N.S.P.A Incorrecto",
+            showConfirmButton: true,
+            confirmButtonText: "Cerrar"
+            })
+            
+    }
+
+
+    
+    
+})
+
 
 /*=============================================
 RECEPCION

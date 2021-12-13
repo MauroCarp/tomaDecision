@@ -13,14 +13,15 @@ class ModeloAftosa{
 		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(numero)
 		VALUES (:numero)");
 
-		$stmt->bindParam(":numero", $datos["numero"], PDO::PARAM_STR);
+		$stmt->bindParam(":numero", $valor, PDO::PARAM_STR);
+
 
 		if($stmt->execute()){
 
 			return "ok";
 
 		}else{
-			print_r($stmt->errorInfo());
+			return $stmt->errorInfo();
 			return "error";
 		
 		}

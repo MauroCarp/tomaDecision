@@ -216,7 +216,7 @@
 								
 								<li>
 			
-									<a href="#" id="cargarActa">
+									<a href="#" data-toggle="modal" data-target="#ventanaModalRenspaActa" id="cargarActa">
 										
 										<i class="fa fa-pencil-square-o"></i>
 										<span>Cargar Acta</span>
@@ -227,7 +227,7 @@
 								
 								<li>
 			
-									<a href="aftosa/actraProductor">
+									<a href="#" data-toggle="modal" data-target="#ventanaModalRenspaActaProductor" id="actaProductor">
 										
 										<i class="fa fa-circle-o"></i>
 										<span>Actas por Poductor</span>
@@ -326,12 +326,12 @@
 					
 					<li>
 
-					<a href="#" data-toggle="modal" data-target="#ventanaModalEditarCampania" id="btnMenuCampania" class="desactivado>
+					<a href="#" data-toggle="modal" data-target="#ventanaModalEditarCampania" id="btnMenuCampania">
 							
-							<i class="fa fa-circle-o"></i>
-							<span>Campa&ntilde;a</span>
+						<i class="fa fa-circle-o"></i>
+						<span>Campa&ntilde;a</span>
 
-						</a>
+					</a>
 
 					</li>
 
@@ -373,7 +373,7 @@ $motivo = 'bruTur';
 
 $btnText = 'Actualizar Status';
 
-include 'modales/brutur/modalRenspa.php';
+include 'modales/modalRenspa.php';
 
 $idVentanaModal = 'ventanaModalEstablecimientosSD';
 
@@ -397,7 +397,8 @@ include 'modales/brutur/modalRangoFecha.php';
 
 // AFTOSA
 
-$idVentanaModal = 'ventanaModalCargarActa';
+// cargar Acta
+$idVentanaModal = 'ventanaModalRenspaActa';
 
 $tituloModal = 'Acta Aftosa';
 
@@ -409,7 +410,25 @@ $motivo = 'aftosa';
 
 $btnText = 'Ingresar Acta';
 
-include 'modales/brutur/modalRenspa.php';
+include 'modales/modalRenspa.php';
+
+// acta Por Productor
+
+$idVentanaModal = 'ventanaModalRenspaActaProductor';
+
+$tituloModal = 'Actas Por Productor';
+
+$idRenspa = 'renspaActasProductor';
+
+$idBtnGenerar = 'btnBuscarActasProductor';
+
+$motivo = null;
+
+$btnText = 'Acta por Productor';
+
+include 'modales/modalRenspa.php';
+
+// asignar Campaña
 
 $idVentanaModal = 'ventanaModalCampania';
 

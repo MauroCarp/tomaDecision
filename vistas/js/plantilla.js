@@ -245,7 +245,6 @@ $('#asignarCampania').click(()=>{
 
 	$('#ventanaModalCampania').modal('toggle');
 
-
 });
 
 /*=============================================
@@ -253,10 +252,25 @@ VALIDAR CAMPAÑA
 =============================================*/	
 
 const validarCampania = ()=>{
-
+	
 	let campania = getCookie('campania');
 	
 	if(campania == null)  
-		$('#ventanaModalCampania').modal('toggle');
-
+	$('#ventanaModalCampania').modal('toggle');
+	
 }
+
+/*=============================================
+CERRAR SESION
+=============================================*/	
+
+// const btnCerrarSesion = document.getElementById('btnSalir')
+// btnCerrarSesion.addEventListener('click',(e)=>{
+
+// 	e.preventDefault()
+
+// 	document.cookie = "campania" + "=; Path=/sanidadAnimal; Expires=Thu, 01 Jan 1970 00:00:01 GMT;"
+
+// 	// window.location = 'index.php?ruta=salir'
+
+// })

@@ -10,6 +10,7 @@ class AjaxProductores{
 	=============================================*/	
 
 	public $idProductor;
+	public $renspa;
 
 	public function ajaxEditarProductor(){
 
@@ -22,6 +23,30 @@ class AjaxProductores{
 
 
 	}
+
+	public function ajaxProductorExistente(){
+
+		$item = "renspa";
+		$valor = $this->renspa;
+
+		$respuesta = ControladorProductores::ctrMostrarProductores($item, $valor);
+
+		echo json_encode($respuesta);
+
+
+	}
+
+}
+
+/*=============================================
+PRODUCTOR EXISTENTE
+=============================================*/	
+
+if(isset($_POST["renspa"])){
+
+	$productorExistente = new AjaxProductores();
+	$productorExistente -> renspa = $_POST["renspa"];
+	$productorExistente -> ajaxProductorExistente();
 
 }
 

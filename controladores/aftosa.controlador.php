@@ -17,7 +17,7 @@ class ControladorAftosa{
             $valor = $_GET['campania'];
 
             $respuesta = ModeloAftosa::mdlCargarCampania($tabla, $item, $valor);
-    
+
             if($respuesta == "ok"){
 
                 echo'<script>

@@ -15,6 +15,7 @@ const utf8 = (texto)=>{
   let respuesta;
   
   switch (texto) {
+    
     case 'CabaÃ±a':
 
         respuesta = 'Cabaña';
@@ -45,6 +46,31 @@ const utf8 = (texto)=>{
   }
 
   return respuesta;
+}
+
+
+/*=============================================
+EXISTE PRODUCTOR
+=============================================*/
+
+const productorExistente = (renspa)=>{
+
+  let url = 'ajax/productores.ajax.php'
+
+  let data = new FormData()
+  data.append('renspa',renspa)
+
+  fetch(url,{
+    method:'post',
+    body:data
+  }).then(resp => resp.json())
+  .then(respuesta => {
+    
+    if(respuesta != false)
+    return true
+
+  })
+
 }
 
 /*=============================================
