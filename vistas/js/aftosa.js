@@ -109,19 +109,12 @@ btnBuscarActasProductor.addEventListener('click',(e)=>{
     let renspa = document.getElementById('renspaActasProductor').value
 
     renspa.trim()
-
+    console.log(renspa);
+    
     if(renspa.length == 17){
-        console.log(productorExistente(renspa));
-        
-        if(productorExistente(renspa))
-                window.location = `index.php?ruta=aftosa/actasProductor&renspa=${renspa}`
-        else   swal({
-            type: "error",
-            title: "R.E.N.S.P.A Inexistente",
-            showConfirmButton: true,
-            confirmButtonText: "Cerrar"
-            })
 
+        productorExistente(renspa)
+        
     }else{
         
         swal({
@@ -132,12 +125,32 @@ btnBuscarActasProductor.addEventListener('click',(e)=>{
             })
             
     }
-
-
-    
     
 })
 
+if(ruta == 'aftosa/actasProductor'){
+    
+    let renspa = getQueryVariable('renspa')
+    
+    // CARGAR PROPIETARIO Y RENSPA
+
+    let url = 'ajax/productores.ajax.php'
+
+    let data = new FormData()
+    data.append('renspa',renspa)
+
+    fetch(url,{
+        method:'post',
+        body:data
+    })
+    .then(resp => resp.json())
+    .then(respuesta => {
+
+        document.getElementById('dataPropietarioActas').innerText = `${respuesta.propietario} || ${respuesta.renspa}`
+
+    })
+
+}
 
 /*=============================================
 RECEPCION
@@ -383,7 +396,8 @@ const cargarDistribuciones = (matricula,idTBody)=>{
     })
     .then(resp => resp.json())
     .then(respuesta =>{
-
+        console.log(respuesta);
+        
         if(respuesta.length > 0){
             let tbody = document.getElementById(idTBody)
 
@@ -438,7 +452,19 @@ const cargarDistribuciones = (matricula,idTBody)=>{
             
         }else{
             
-            document.getElementById(idTBody).innerHTML = '' 
+            let tr = document.createElement('TR')
+            tr.setAttribute('class','odd')
+
+            let td  = document.createElement('TD')
+            td.setAttribute('valign','top')
+            td.setAttribute('colspan','6')
+            td.setAttribute('class','dataTables_empty')
+            td.innerText = 'Ningún dato disponible en esta tabla'
+
+            tr.appendChild(td)
+
+            document.getElementById(idTBody).innerHTML = ''
+            document.getElementById(idTBody).appendChild(tr)
             
         }
     
@@ -459,10 +485,12 @@ const cargarDistribuciones = (matricula,idTBody)=>{
 const btnCargarDistribuciones = document.querySelector('#cargarDistribuciones')
 
 if(isInPage(btnCargarDistribuciones)){
+    console.log('hola');
+    
     btnCargarDistribuciones.addEventListener('click',()=>{
-   
+
     let matricula = document.getElementById('vacunadorDistri').value
- 
+
     cargarDistribuciones(matricula,'tablaDistribucion')
    
     })
@@ -470,6 +498,7 @@ if(isInPage(btnCargarDistribuciones)){
   
 
 }
+
 
 
 // // GENERAR INPUT DISTRIBUCION

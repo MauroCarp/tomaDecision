@@ -65,9 +65,15 @@ const productorExistente = (renspa)=>{
     body:data
   }).then(resp => resp.json())
   .then(respuesta => {
-    
-    if(respuesta != false)
-    return true
+
+            if(respuesta)
+                window.location = `index.php?ruta=aftosa/actasProductor&renspa=${renspa}`
+            else   swal({
+                type: "error",
+                title: "R.E.N.S.P.A Inexistente",
+                showConfirmButton: true,
+                confirmButtonText: "Cerrar"
+                })
 
   })
 

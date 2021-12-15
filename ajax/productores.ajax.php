@@ -5,9 +5,6 @@ require_once "../modelos/productores.modelo.php";
 
 class AjaxProductores{
 
-	/*=============================================
-	EDITAR CLIENTE
-	=============================================*/	
 
 	public $idProductor;
 	public $renspa;
@@ -51,7 +48,7 @@ if(isset($_POST["renspa"])){
 }
 
 /*=============================================
-EDITAR CLIENTE
+EDITAR PRODUCTOR
 =============================================*/	
 
 if(isset($_POST["idProductor"])){

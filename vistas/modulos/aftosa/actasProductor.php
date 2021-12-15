@@ -39,26 +39,8 @@ if($_SESSION["perfil"] == "Especial"){
     <div class="box">
 
         <div class="box-header with-border">
-
-            <div class="row">
-
-                    <div class="col-lg-12">
                     
-                    <h1>Actas por Productor<h1>
-                    
-                    </div>
-            
-            </div>
-
-            <div class="row">
-
-                    <div class="col-lg-12">
-                    
-                    <h3>Propietario: <span id="dataPropietarioActas"></span><h3>
-                    
-                    </div>
-            
-            </div>
+          <h3>Propietario: <span id="dataPropietarioActas"></span><h3>
             
         </div>
 
@@ -86,14 +68,66 @@ if($_SESSION["perfil"] == "Especial"){
                 
                 <th>Pago</th>
                 
-                <th></th>
-
             </tr> 
 
         </thead>
 
-        <tbody id="tablaActasProductores">
- 
+        <tbody>
+
+        <?php
+
+          $item = 'renspa';
+
+          $valor = $_GET['renspa'];
+
+          $tabla = 'actas';
+          
+          $orden = 'fechaVacunacion';
+          
+          $actas = ControladorAftosa::ctrMostrarDatos($tabla,$item,$valor,$orden);
+          
+          $item = 'matricula';
+          
+          foreach ($actas as $key => $value) {
+            
+            $vacunador =  ControladorVeterinarios::ctrMostrarVeterinarios($item,$value['matricula']);
+
+            if($value['pago'])
+              $pago = array('tipo'=>'success','icon'=>'check') ;
+            else $pago = array('tipo'=>'danger','icon'=>'times') ;
+
+            $celdaPago = "<span class='btn btn-".$pago['tipo']."'><i class='fa fa-".$pago['icon']."'></i></span>";
+
+            
+            echo '<tr>
+
+            <td>'.formatearFecha($value["fechaVacunacion"]).'</td>
+
+            <td>'.formatearFecha($value["fechaRecepcion"]).'</td>
+
+            <td>'.$vacunador['nombre'].'</td>
+
+            <td>'.$value["cantidadPar"].'</td>
+
+            <td>'.utf8_decode($value["marcaVacuna"]).'</td>
+
+            <td>'.$value["acta"].'</td>
+
+            <td>
+
+                <div class="btn-group">
+
+                    '.$celdaPago.'
+
+                </div>  
+
+            </td>
+
+          </tr>';
+
+          }
+          ?>
+
         </tbody>
 
       </table>

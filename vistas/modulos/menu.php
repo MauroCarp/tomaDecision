@@ -315,7 +315,7 @@
 					
 					<li>
 
-						<a href="aftosa/situacionProductor">
+						<a href="#" data-toggle="modal" data-target="#ventanaModalRenspaSituacionProductor">
 							
 							<i class="fa fa-circle-o"></i>
 							<span>Situaci&oacute;n Productor</span>
@@ -425,6 +425,22 @@ $idBtnGenerar = 'btnBuscarActasProductor';
 $motivo = null;
 
 $btnText = 'Acta por Productor';
+
+include 'modales/modalRenspa.php';
+
+// Situacion Productor
+
+$idVentanaModal = 'ventanaModalRenspaSituacionProductor';
+
+$tituloModal = 'Situacion Productor';
+
+$idRenspa = 'renspaSituacionProductor';
+
+$idBtnGenerar = 'btnBuscarSituacionProductor';
+
+$motivo = null;
+
+$btnText = 'Situacion Productor';
 
 include 'modales/modalRenspa.php';
 

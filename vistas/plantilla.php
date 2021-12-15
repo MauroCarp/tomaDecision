@@ -193,6 +193,7 @@ CUERPO DOCUMENTO
          $_GET["ruta"] == "aftosa/acta" ||
          $_GET["ruta"] == "aftosa/recepcion" ||
          $_GET["ruta"] == "aftosa/distribucion" ||
+         $_GET["ruta"] == "aftosa/actasProductor" ||
          $_GET["ruta"] == "usuarios" ||
          $_GET["ruta"] == "productos" ||
          $_GET["ruta"] == "clientes" ||
