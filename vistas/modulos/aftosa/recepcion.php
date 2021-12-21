@@ -20,7 +20,7 @@ if($_SESSION["perfil"] == "Especial"){
     
     <h1>
       
-      Distribuci&oacute;n de Vacunas
+      Recepci&oacute;n de Vacunas
 
     </h1>
 

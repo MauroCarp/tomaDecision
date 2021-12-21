@@ -15,6 +15,14 @@ class AjaxAftosa{
         echo json_encode($respuesta);
       
     }
+
+    public function ajaxCargarDistribucion($datos){
+
+		$respuesta = ControladorAftosa::ctrCargarDistribucion($datos);
+
+        echo json_encode($respuesta);
+      
+    }
     
 	
     public function ajaxMostrarDistribucion($matricula){
@@ -45,6 +53,16 @@ class AjaxAftosa{
       
     }
 
+    public function ajaxMarcasVacunas(){
+
+        $item = 'marca';
+
+		$respuesta = ControladorAftosa::ctrMostrarMarcas($item);
+
+        echo json_encode($respuesta);
+      
+    }
+
 }
 
 
@@ -60,6 +78,13 @@ if(isset($_POST["accion"])){
 		$cargarRecepcion -> ajaxCargarRecepcion($_POST);
 
     }
+
+	if($accion == 'cargarDistribucion'){
+
+		$cargarDistribucion = new AjaxAftosa();
+		$cargarDistribucion -> ajaxCargarDistribucion($_POST);
+
+    }
 	
 	if($accion == 'mostrarDistribucion'){
 
@@ -72,6 +97,13 @@ if(isset($_POST["accion"])){
 
 		$mostrarCampania = new AjaxAftosa();
 		$mostrarCampania -> ajaxDataCampania();
+
+    }
+
+    if($accion == 'marcasVacunas'){
+
+		$marcasVacunas = new AjaxAftosa();
+		$marcasVacunas -> ajaxMarcasVacunas();
 
     }
 	

@@ -181,12 +181,30 @@ const generarInputRecepcion = ()=>{
     let inputUel = inputFechaIng.cloneNode(true)
     
     let inputCantidad =  inputFechaIng.cloneNode(true) 
-    
-    let inputMarca =  inputFechaIng.cloneNode(true) 
-    
+        
     let inputSerie =  inputFechaIng.cloneNode(true) 
     
     let inputFechaVenc =  inputFechaIng.cloneNode(true) 
+
+    let inputMarca =  document.createElement('SELECT') 
+    inputMarca.setAttribute('class','form-control')
+    inputMarca.setAttribute('id','marcaRecepcion')
+
+    let  optMarca = document.createElement('OPTION')
+    optMarca.setAttribute('value',' ')
+    optMarca.innerText = 'Seleccionar Marca'
+
+    let params = {
+        idSelect:'marcaRecepcion',
+        accion:'marcasVacunas',
+        ajax:'aftosa',
+        value:'marca',
+        optText:'marca'
+    }
+    
+    cargarSelect(params)
+
+    inputMarca.appendChild(optMarca)
 
     inputFechaIng.setAttribute('type','date')
     inputFechaIng.setAttribute('name','fechaIngRecepcion')
@@ -202,7 +220,6 @@ const generarInputRecepcion = ()=>{
     inputCantidad.setAttribute('name','cantidadRecepcion')
     tdCantidad.appendChild(inputCantidad)
 
-    inputMarca.setAttribute('type','select')
     inputMarca.setAttribute('name','marcaRecepcion')
     tdMarca.appendChild(inputMarca)
 
@@ -263,126 +280,99 @@ const eliminarRegistro = (id,ruta)=>{
 
 if(ruta == 'aftosa/recepcion'){
 
-// MOSTRAR INPUT RECEPCION
+    // MOSTRAR INPUT RECEPCION
 
-let btnAgregarRecepcion = document.getElementById('btnAgregarRecepcion')
+    let btnAgregarRecepcion = document.getElementById('btnAgregarRecepcion')
 
-if(isInPage(btnAgregarRecepcion))
-    btnAgregarRecepcion.addEventListener('click',function(){
+    if(isInPage(btnAgregarRecepcion))
+        btnAgregarRecepcion.addEventListener('click',function(){
 
-        let tbody = document.getElementById('tablaRecepcion')
-        
-        let input = generarInputRecepcion()
-        
-        tbody.prepend(input)
-        
-        // CARGAR RECEPCION
-        document.getElementById('agregarRecepcion').addEventListener('click',()=>{
-        
-            let fechaIng = document.querySelector('input[name="fechaIngRecepcion"]').value
-            let uel = document.querySelector('input[name="uelRecepcion"]').value
-            let cantidad = document.querySelector('input[name="cantidadRecepcion"]').value
-            let marca = document.querySelector('input[name="marcaRecepcion"]').value
-            let serie = document.querySelector('input[name="serieRecepcion"]').value
-            let fechaVenc = document.querySelector('input[name="fechaVenRepecion"]').value
+            let tbody = document.getElementById('tablaRecepcion')
             
-            if(fechaIng != '' && uel != '' && cantidad != '' && marca != '' && serie != '' && fechaVenc != ''){
-
-                let  url = 'ajax/aftosa.ajax.php';
-
-                let accion = 'cargarRecepcion'
-
-                let campania = getCookie('campania') 
-
-                console.log(campania);
+            let input = generarInputRecepcion()
+            
+            tbody.prepend(input)
+            
+            // CARGAR RECEPCION
+            document.getElementById('agregarRecepcion').addEventListener('click',()=>{
+            
+                let fechaIng = document.querySelector('input[name="fechaIngRecepcion"]').value
+                let uel = document.querySelector('input[name="uelRecepcion"]').value
+                let cantidad = document.querySelector('input[name="cantidadRecepcion"]').value
+                let marca = document.querySelector('select[name="marcaRecepcion"]').value
+                let serie = document.querySelector('input[name="serieRecepcion"]').value
+                let fechaVenc = document.querySelector('input[name="fechaVenRepecion"]').value
                 
-                let  formData = new FormData()
-                
-                formData.append('accion',accion)
-                formData.append('campania',campania)
-                formData.append('fechaIng',fechaIng)
-                formData.append('uel',uel)
-                formData.append('cantidad',cantidad)
-                formData.append('marca',marca)
-                formData.append('serie',serie)
-                formData.append('fechaVenc',fechaVenc)
+                if(fechaIng != '' && uel != '' && cantidad != '' && marca != '' && serie != '' && fechaVenc != ''){
 
-                console.log(formData.get('accion'));
-                
+                    let  url = 'ajax/aftosa.ajax.php';
 
-                fetch(url, {
-                    method: 'POST', 
-                    body: formData,
+                    let accion = 'cargarRecepcion'
 
-                }).then(respuesta => respuesta.json())
-                .then(response => {
+                    let campania = getCookie('campania') 
+
+                    console.log(campania);
                     
-                    if(response == 'ok'){
-                        window.location = 'index.php?ruta=aftosa/recepcion'
-                    }
+                    let  formData = new FormData()
+                    
+                    formData.append('accion',accion)
+                    formData.append('campania',campania)
+                    formData.append('fechaIng',fechaIng)
+                    formData.append('uel',uel)
+                    formData.append('cantidad',cantidad)
+                    formData.append('marca',marca)
+                    formData.append('serie',serie)
+                    formData.append('fechaVenc',fechaVenc)
 
-                })
-                .catch(error => console.error('Error:', error))
+                    console.log(formData.get('accion'));
+                    
 
-            }else{
+                    fetch(url, {
+                        method: 'POST', 
+                        body: formData,
 
-                swal({
-                    title: "Hay campos vacios",
-                    type: "error",
-                    confirmButtonText: "¡Cerrar!"
+                    }).then(respuesta => respuesta.json())
+                    .then(response => {
+                        
+                        if(response == 'ok'){
+                            window.location = 'index.php?ruta=aftosa/recepcion'
+                        }
+
                     })
+                    .catch(error => console.error('Error:', error))
 
-            }   
+                }else{
 
-                
-        })
+                    swal({
+                        title: "Hay campos vacios",
+                        type: "error",
+                        confirmButtonText: "¡Cerrar!"
+                        })
 
-        this.setAttribute('disabled','disabled')
+                }   
 
-    })
-
-}
-
-/*=============================================
-DISTRIBUCION
-=============================================*/
-const cargarSelectVeterinarios = (idSelect)=>{
-
-        let data = new FormData()
-        data.append("accion","listarVeterinarios");
-      
-        let url = 'ajax/veterinarios.ajax.php';
-      
-        fetch(url,{
-            method:'POST',
-            body:data
-        })
-        .then(resp => resp.json())
-        .then(response=> {
-
-            let options = document.createDocumentFragment()
-            response.map(vet => {
-
-                let opt = document.createElement('OPTION')
-                opt.setAttribute('value',vet.matricula)
-                opt.textContent = vet.nombre
-
-                options.append(opt)
-
+                    
             })
 
-            const selectVet = document.getElementById(idSelect)
-            if(isInPage(selectVet))
-                selectVet.appendChild(options)
+            this.setAttribute('disabled','disabled')
 
         })
-        .catch(err=>console.log(err))
 
 }
 
-cargarSelectVeterinarios('vacunadorDistri')
+let params = {
+    idSelect:'vacunadorDistri',
+    accion:'listarVeterinarios',
+    ajax:'veterinarios',
+    value:'matricula',
+    optText:'nombre'
+}
+
+cargarSelect(params)
 
 const cargarDistribuciones = (matricula,idTBody)=>{
+
+    localStorage.setItem('matricula',matricula)
 
     let url = 'ajax/aftosa.ajax.php'
 
@@ -396,7 +386,6 @@ const cargarDistribuciones = (matricula,idTBody)=>{
     })
     .then(resp => resp.json())
     .then(respuesta =>{
-        console.log(respuesta);
         
         if(respuesta.length > 0){
             let tbody = document.getElementById(idTBody)
@@ -449,8 +438,11 @@ const cargarDistribuciones = (matricula,idTBody)=>{
 
             tbody.appendChild(rows)
 
+            document.getElementById('btnAgregarDistribucion').style.display = 'block'
             
         }else{
+            
+            document.getElementById('btnAgregarDistribucion').style.display = 'none'
             
             let tr = document.createElement('TR')
             tr.setAttribute('class','odd')
@@ -485,202 +477,181 @@ const cargarDistribuciones = (matricula,idTBody)=>{
 const btnCargarDistribuciones = document.querySelector('#cargarDistribuciones')
 
 if(isInPage(btnCargarDistribuciones)){
-    console.log('hola');
     
     btnCargarDistribuciones.addEventListener('click',()=>{
 
+    document.getElementById('btnAgregarDistribucion').removeAttribute('disabled')
+    
     let matricula = document.getElementById('vacunadorDistri').value
 
     cargarDistribuciones(matricula,'tablaDistribucion')
    
     })
 
-  
-
 }
-
-
 
 // // GENERAR INPUT DISTRIBUCION
 
-// const generarInputDistribucion = ()=>{
-//     let form = document.createElement('POST')
+const generarInputDistribucion = ()=>{
 
-//     let trInput = document.createElement('TR')
+    let form = document.createElement('POST')
+
+    let trInput = document.createElement('TR')
     
-//     let tdFechaIng = document.createElement('TD')
+    let tdMatricula = document.createElement('TD')
 
-//     let tdUel = tdFechaIng.cloneNode(true)
+    let tdUel = tdMatricula.cloneNode(true)
     
-//     let tdCantidad = tdFechaIng.cloneNode(true)
+    let tdCantidad = tdMatricula.cloneNode(true)
     
-//     let tdMarca = tdFechaIng.cloneNode(true)
-    
-//     let tdSerie = tdFechaIng.cloneNode(true)
-    
-//     let tdFechaVenc = tdFechaIng.cloneNode(true)
-
-//     let inputFechaIng = document.createElement('INPUT')
-//     inputFechaIng.setAttribute('class','form-control')
-
-//     let inputUel = inputFechaIng.cloneNode(true)
-    
-//     let inputCantidad =  inputFechaIng.cloneNode(true) 
-    
-//     let inputMarca =  inputFechaIng.cloneNode(true) 
-    
-//     let inputSerie =  inputFechaIng.cloneNode(true) 
-    
-//     let inputFechaVenc =  inputFechaIng.cloneNode(true) 
-
-//     inputFechaIng.setAttribute('type','date')
-//     inputFechaIng.setAttribute('name','fechaIngRecepcion')
-//     tdFechaIng.appendChild(inputFechaIng)
-
-//     inputUel.setAttribute('type','text')
-//     inputUel.setAttribute('name','uelRecepcion')
-//     inputUel.setAttribute('value','F.I.S.S.A')
-//     inputUel.setAttribute('readOnly','readOnly')
-//     tdUel.appendChild(inputUel)
-
-//     inputCantidad.setAttribute('type','number')
-//     inputCantidad.setAttribute('name','cantidadRecepcion')
-//     tdCantidad.appendChild(inputCantidad)
-
-//     inputMarca.setAttribute('type','select')
-//     inputMarca.setAttribute('name','marcaRecepcion')
-//     tdMarca.appendChild(inputMarca)
-
-//     inputSerie.setAttribute('type','text')
-//     inputSerie.setAttribute('name','serieRecepcion')
-//     tdSerie.appendChild(inputSerie)
-
-//     inputFechaVenc.setAttribute('type','date')
-//     inputFechaVenc.setAttribute('name','fechaVenRepecion')
-//     tdFechaVenc.appendChild(inputFechaVenc)
-
-//     trInput.appendChild(tdFechaIng)
-//     trInput.appendChild(tdUel)
-//     trInput.appendChild(tdCantidad)
-//     trInput.appendChild(tdMarca)
-//     trInput.appendChild(tdSerie)
-//     trInput.appendChild(tdFechaVenc)
-
-//     let btnAgregar = document.createElement('BUTTON')
-//     btnAgregar.setAttribute('class','btn btn-primary')
-//     btnAgregar.setAttribute('type','button')
-//     btnAgregar.setAttribute('id','agregarRecepcion')
-//     btnAgregar.style.marginTop = '10px'
-//     btnAgregar.style.marginLeft = '10px'
-//     btnAgregar.textContent = 'Cargar Recepción'
-//     trInput.appendChild(btnAgregar)
-//     form.appendChild(trInput)
-
-//     return trInput
-
-// }
-
-// // MOSTRAR INPUT DISTRIBUCION
-
-// let btnAgregarRecepcion = document.getElementById('btnAgregarRecepcion')
-
-// btnAgregarRecepcion.addEventListener('click',function(){
-
-//         let tbody = document.getElementById('tablaRecepcion')
+    let tdMarca = tdMatricula.cloneNode(true)
         
-//         let input = generarInputRecepcion()
+    let tdFechaEntrega = tdMatricula.cloneNode(true)
+
+    let inputMatricula = document.createElement('INPUT')
+    inputMatricula.setAttribute('class','form-control')
+    
+    let matricula = localStorage.getItem('matricula')
+
+    let inputUel = inputMatricula.cloneNode(true)
+    
+    let inputCantidad =  inputMatricula.cloneNode(true) 
+    
+    let inputFechaEntrega =  inputMatricula.cloneNode(true) 
+    
+    let inputMarca =  document.createElement('SELECT') 
+    inputMarca.setAttribute('class','form-control')
+    inputMarca.setAttribute('id','marcaDistribucion')
+
+    let  optMarca = document.createElement('OPTION')
+    optMarca.setAttribute('value',' ')
+    optMarca.innerText = 'Seleccionar Marca'
+
+    inputMarca.appendChild(optMarca)
+
+    inputMatricula.setAttribute('type','text')
+    inputMatricula.setAttribute('name','matriculaDistribucion')
+    tdMatricula.appendChild(inputMatricula)
+
+    inputUel.setAttribute('type','text')
+    inputUel.setAttribute('name','uelDistribucion')
+    inputUel.setAttribute('value','F.I.S.S.A')
+    inputUel.setAttribute('readOnly','readOnly')
+    tdUel.appendChild(inputUel)
+
+    inputCantidad.setAttribute('type','number')
+    inputCantidad.setAttribute('name','cantidadDistribucion')
+    tdCantidad.appendChild(inputCantidad)
+
+    inputMarca.setAttribute('name','marcaDistribucion')
+    tdMarca.appendChild(inputMarca)
+
+    let params = {
+        idSelect:'marcaDistribucion',
+        accion:'marcasVacunas',
+        ajax:'aftosa',
+        value:'marca',
+        optText:'marca'
+    }
+
+    cargarSelect(params)
+
+    inputFechaEntrega.setAttribute('type','date')
+    inputFechaEntrega.setAttribute('name','fechaEntregaDistribucion')
+    tdFechaEntrega.appendChild(inputFechaEntrega)
+
+    inputMatricula.setAttribute('readOnly','readOnly')
+    inputMatricula.setAttribute('value',matricula)
+
+    trInput.appendChild(tdMatricula)
+    trInput.appendChild(tdUel)
+    trInput.appendChild(tdMarca)
+    trInput.appendChild(tdCantidad)
+    trInput.appendChild(tdFechaEntrega)
+
+    let btnAgregar = document.createElement('BUTTON')
+    btnAgregar.setAttribute('class','btn btn-primary')
+    btnAgregar.setAttribute('type','button')
+    btnAgregar.setAttribute('id','agregarDistribucion')
+    btnAgregar.style.marginTop = '10px'
+    btnAgregar.style.marginLeft = '10px'
+    btnAgregar.textContent = 'Cargar Distribucion'
+    trInput.appendChild(btnAgregar)
+    form.appendChild(trInput)
+
+    return trInput
+
+}
+
+// MOSTRAR INPUT DISTRIBUCION
+
+let btnAgregarDistribucion = document.getElementById('btnAgregarDistribucion')
+
+if(isInPage(btnAgregarDistribucion)){
+    btnAgregarDistribucion.addEventListener('click',function(){
+
+        let tbody = document.getElementById('tablaDistribucion')
         
-//         tbody.prepend(input)
+        let input = generarInputDistribucion()
         
-//         // CARGAR RECEPCION
-//         document.getElementById('agregarRecepcion').addEventListener('click',()=>{
+        tbody.prepend(input)
         
-//             let fechaIng = document.querySelector('input[name="fechaIngRecepcion"]').value
-//             let uel = document.querySelector('input[name="uelRecepcion"]').value
-//             let cantidad = document.querySelector('input[name="cantidadRecepcion"]').value
-//             let marca = document.querySelector('input[name="marcaRecepcion"]').value
-//             let serie = document.querySelector('input[name="serieRecepcion"]').value
-//             let fechaVenc = document.querySelector('input[name="fechaVenRepecion"]').value
+        // CARGAR DISTRIBUCION
+        document.getElementById('agregarDistribucion').addEventListener('click',()=>{
+            console.log('hola');
             
-//             if(fechaIng != '' && uel != '' && cantidad != '' && marca != '' && serie != '' && fechaVenc != ''){
-
-//                 let  url = 'ajax/aftosa.ajax.php';
-
-//                 let accion = 'cargarRecepcion'
-
-//                 let campania = getCookie('campania') 
-
-//                 console.log(campania);
-                
-//                 let  formData = new FormData()
-                
-//                 formData.append('accion',accion)
-//                 formData.append('campania',campania)
-//                 formData.append('fechaIng',fechaIng)
-//                 formData.append('uel',uel)
-//                 formData.append('cantidad',cantidad)
-//                 formData.append('marca',marca)
-//                 formData.append('serie',serie)
-//                 formData.append('fechaVenc',fechaVenc)
-
-//                 console.log(formData.get('accion'));
-                
-
-//                 fetch(url, {
-//                     method: 'POST', 
-//                     body: formData,
-
-//                 }).then(respuesta => respuesta.json())
-//                 .then(response => {
-                    
-//                     if(response == 'ok'){
-//                         window.location = 'index.php?ruta=aftosa/recepcion'
-//                     }
-
-//                 })
-//                 .catch(error => console.error('Error:', error))
-
-//             }else{
-
-//                 swal({
-//                     title: "Hay campos vacios",
-//                     type: "error",
-//                     confirmButtonText: "¡Cerrar!"
-//                     })
-
-//             }   
-
-                
-//         })
-
-//         this.setAttribute('disabled','disabled')
-
-// })
-
-
-// document.querySelector('.btnEliminarRecepcion').addEventListener('click',function(){
-
-//     let idRecepcion = this.id
-
-//     console.log(idRecepcion);
-    
-//     swal({
-//         title: "¿Eliminar Recepción?",
-//         text: "¡Si no puede cancelar la acción!",
-//         type: "warning",
-//         showCancelButton: true,
-//         confirmButtonColor: "#3085d6",
-//         cancelButtonColor: "#d33",
-//         cancelButtonText: "Cancelar",
-//         confirmButtonText: "Si, Eliminar"
-//       })
-//     .then(function(result){
+            let matricula = document.querySelector('input[name="matriculaDistribucion"]').value
+            let uel = document.querySelector('input[name="uelDistribucion"]').value
+            let cantidad = document.querySelector('input[name="cantidadDistribucion"]').value
+            let marca = document.querySelector('select[name="marcaDistribucion"]').value
+            let fechaEntrega = document.querySelector('input[name="fechaEntregaDistribucion"]').value
             
-//         if (result.value) {
-              
-//             window.location = `index.php?ruta=aftosa/recepcion&id=${idRecepcion}`
-                    
-//         }
+            if(matricula != '' && uel != '' && cantidad != '' && marca != '' && fechaEntrega != ''){
 
-//     })
-// })
+                let  url = 'ajax/aftosa.ajax.php';
+
+                let accion = 'cargarDistribucion'
+
+                let campania = getCookie('campania') 
+                
+                let  formData = new FormData()
+                
+                formData.append('accion',accion)
+                formData.append('campania',campania)
+                formData.append('matricula',matricula)
+                formData.append('uel',uel)
+                formData.append('cantidad',cantidad)
+                formData.append('marca',marca)
+                formData.append('fechaEntrega',fechaEntrega)                
+
+                fetch(url, {
+                    method: 'POST', 
+                    body: formData,
+
+                }).then(respuesta => respuesta.json())
+                .then(response => {
+                    
+                    if(response == 'ok'){
+                        window.location = 'index.php?ruta=aftosa/distribucion'
+                    }
+
+                })
+                .catch(error => console.error('Error:', error))
+
+            }else{
+
+                swal({
+                    title: "Hay campos vacios",
+                    type: "error",
+                    confirmButtonText: "¡Cerrar!"
+                    })
+
+            }   
+
+                
+        })
+
+        this.setAttribute('disabled','disabled')
+
+    })
+}

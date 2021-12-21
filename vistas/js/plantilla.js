@@ -261,16 +261,39 @@ const validarCampania = ()=>{
 }
 
 /*=============================================
-CERRAR SESION
+GENERAR SELECT
 =============================================*/	
+const cargarSelect = (params)=>{
 
-// const btnCerrarSesion = document.getElementById('btnSalir')
-// btnCerrarSesion.addEventListener('click',(e)=>{
+	let url = `ajax/${params.ajax}.ajax.php`
 
-// 	e.preventDefault()
+	let formData = new FormData()
 
-// 	document.cookie = "campania" + "=; Path=/sanidadAnimal; Expires=Thu, 01 Jan 1970 00:00:01 GMT;"
+	formData.append('accion',params.accion)
 
-// 	// window.location = 'index.php?ruta=salir'
+	fetch(url,{
+		method:'post',
+		body:formData
+	}).then(resp=>resp.json())
+	.then(respuesta=>{
 
-// })
+		console.log(respuesta);
+		
+		options = document.createDocumentFragment()
+
+		respuesta.map(option=>{		
+
+			let opt = document.createElement('OPTION')
+			
+			opt.setAttribute('value',option[params.value])
+			opt.innerText = option[params.optText]
+
+			options.append(opt)
+			
+		})
+
+		document.getElementById(params.idSelect).appendChild(options)
+
+	})
+	.catch(er => console.log(er))
+}

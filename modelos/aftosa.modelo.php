@@ -130,6 +130,20 @@ class ModeloAftosa{
         
 
     }
+	
+	/*=============================================
+	MOSTRAR MARCAS
+	=============================================*/
+
+	static public function mdlMostrarMarcas($tabla,$item){
+    
+			$stmt = Conexion::conectar()->prepare("SELECT DISTINCT($item) FROM $tabla");
+
+			$stmt -> execute();
+
+            return $stmt -> fetchAll();
+
+    }
 
 	/*=============================================
 	ELIMINAR DATOS
@@ -193,7 +207,7 @@ class ModeloAftosa{
     
 		if($item != null){
 
-			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item AND $item2 = :$item2");
+			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item AND $item2 = :$item2 ORDER BY fechaEntrega	DESC");
 
 			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
 			$stmt -> bindParam(":".$item2, $valor2, PDO::PARAM_STR);
@@ -220,5 +234,35 @@ class ModeloAftosa{
     }
 
    
+	/*=============================================
+	CARGAR DISTRIBUCION
+	=============================================*/
 
+	static public function mdlCargarDistribucion($tabla,$datos){
+    
+	
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(campania,marca,uel,fechaEntrega,matricula,cantidad)
+		VALUES (:campania, :marca, :uel, :fechaEntrega, :matricula, :cantidad)");
+
+		$stmt->bindParam(":campania", $datos["campania"], PDO::PARAM_STR);
+		$stmt->bindParam(":marca", $datos["marca"], PDO::PARAM_STR);
+		$stmt->bindParam(":uel", $datos["uel"], PDO::PARAM_STR);
+		$stmt->bindParam(":matricula", $datos["matricula"], PDO::PARAM_STR);
+		$stmt->bindParam(":cantidad", $datos["cantidad"], PDO::PARAM_STR);
+		$stmt->bindParam(":fechaEntrega", $datos["fechaEntrega"], PDO::PARAM_STR);
+
+		if($stmt->execute()){
+
+			return "ok";
+
+		}else{
+			print_r($stmt->errorInfo());
+			return "error";
+		
+		}
+		
+		$stmt->close();
+		$stmt = null;
+
+    }
 }

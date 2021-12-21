@@ -147,6 +147,18 @@ class ControladorAftosa{
     }
 
     /*=============================================
+    MOSTRAR DATOS
+    =============================================*/
+
+	static public function ctrMostrarMarcas($item){
+    
+        $tabla = 'recepcion';
+
+        return $respuesta = ModeloAftosa::mdlMostrarMarcas($tabla, $item);
+
+    }
+
+    /*=============================================
     ELIMINAR DATOS
     =============================================*/
 
@@ -229,6 +241,17 @@ class ControladorAftosa{
 
     }
 
+    /*=============================================
+    CARGAR DISTRIBUCION
+    =============================================*/
+
+	static public function ctrCargarDistribucion($datos){
+    
+        $tabla = 'distribucion'; 
+
+        return $respuesta = ModeloAftosa::mdlCargarDistribucion($tabla, $datos);
+
+    }
 
 
 

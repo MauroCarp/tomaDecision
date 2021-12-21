@@ -39,42 +39,53 @@ if($_SESSION["perfil"] == "Especial"){
     <div class="box">
 
         <div class="box-header with-border">
-
+          
           <div class="row">
 
             <div class="col-lg-2">
-            
-              <div class="form-group">
-
-                <label>Seleccionar Vacunador</label>
-
-                <select name="vacunadorDistri" id="vacunadorDistri" class="form-control">
-                
-                  <option value="">Seleccionar Vacunador</option>
-               
-                </select>
-
-              </div>
-            
-            </div>
-            
-            <div class="col-lg-1">
-
+  
               <div class="form-group">
       
+                  <label>Seleccionar Vacunador</label>
+                  
+                  <div class="input-group">
+                                
+                      <select name="vacunadorDistri" id="vacunadorDistri" class="form-control">
+      
+                        <option value="">Seleccionar Vacunador</option>
+      
+                      </select>
+      
+                      <span class="input-group-btn">
+                      
+                        <button type="button" class="btn btn-success btn-flat" id="cargarDistribuciones"><i class="fa fa-check"></i></button>
+                        
+                      </span>
+      
+                  </div>
+      
+              </div>
+
+            </div>
+            
+            <div class="col lg-5">
+            
+                <div class="form-group">
+                      
                   <br>
-
+  
                   <div class="btn-group" style="margin-top:5px">
-      
-                      <button class="btn btn-success" id="cargarDistribuciones"><i class="fa fa-check"></i></button>
-      
+  
+                      <button class="btn btn-default" id="btnAgregarDistribucion" style="display:none">Agregar Distribuci&oacute;n</button>
+  
                   </div>  
-      
+  
+                </div>
+                
               </div>
-
-            </div>
-
+          
           </div>
+
           
         </div>
 
@@ -117,16 +128,6 @@ if($_SESSION["perfil"] == "Especial"){
 </div>
 
 <?php
-
-// $item = 'matricula';
-
-// $valor = '2-1156';
-
-// $item2 = 'campania';
-
-// $valor2 = $_COOKIE['campania'];
-
-// $respuesta = ControladorAftosa::ctrMostrarDistribucion($item,$valor,$item2,$valor2);
 
 // $eliminarDistribucion = new ControladorAftosa();
 // $eliminarDistribucion -> ctrEliminarDistribucion();
