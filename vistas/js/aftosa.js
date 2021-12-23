@@ -1,3 +1,10 @@
+// const cabecerasTabla = document.querySelectorAll('th')
+// cabecerasTabla.forEach(cabezera =>{
+//     cabezera.classList.remove('sorting')
+//     cabezera.classList.remove('sorting_asc')
+// })
+
+
 const ruta = getQueryVariable('ruta')
 
 /*=============================================
@@ -109,20 +116,23 @@ btnBuscarActasProductor.addEventListener('click',(e)=>{
     let renspa = document.getElementById('renspaActasProductor').value
 
     renspa.trim()
-    console.log(renspa);
-    
+
     if(renspa.length == 17){
 
-        productorExistente(renspa)
+        let ruta = `index.php?ruta=aftosa/actasProductor&renspa=${renspa}`
+
+        productorExistente(renspa,ruta,false)
         
     }else{
         
         swal({
+
             type: "error",
             title: "R.E.N.S.P.A Incorrecto",
             showConfirmButton: true,
             confirmButtonText: "Cerrar"
-            })
+
+         })
             
     }
     
@@ -360,15 +370,6 @@ if(ruta == 'aftosa/recepcion'){
 
 }
 
-let params = {
-    idSelect:'vacunadorDistri',
-    accion:'listarVeterinarios',
-    ajax:'veterinarios',
-    value:'matricula',
-    optText:'nombre'
-}
-
-cargarSelect(params)
 
 const cargarDistribuciones = (matricula,idTBody)=>{
 
@@ -478,6 +479,16 @@ const btnCargarDistribuciones = document.querySelector('#cargarDistribuciones')
 
 if(isInPage(btnCargarDistribuciones)){
     
+    let params = {
+        idSelect:'vacunadorDistri',
+        accion:'listarVeterinarios',
+        ajax:'veterinarios',
+        value:'matricula',
+        optText:'nombre'
+    }
+    
+    cargarSelect(params)
+
     btnCargarDistribuciones.addEventListener('click',()=>{
 
     document.getElementById('btnAgregarDistribucion').removeAttribute('disabled')
@@ -655,3 +666,4 @@ if(isInPage(btnAgregarDistribucion)){
 
     })
 }
+

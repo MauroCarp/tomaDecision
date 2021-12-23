@@ -275,7 +275,7 @@
 								
 								<li>
 			
-									<a href="aftosa/noVacunados">
+									<a href="index.php?ruta=aftosa/noVacunados">
 										
 										<i class="fa fa-circle-o"></i>
 										<span>Est. NO vacunados</span>

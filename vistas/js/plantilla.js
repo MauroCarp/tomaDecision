@@ -77,10 +77,11 @@ $(".tablas").DataTable({
 		"sNext":     "Siguiente",
 		"sPrevious": "Anterior"
 		},
-		"oAria": {
-			"sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
-			"sSortDescending": ": Activar para ordenar la columna de manera descendente"
-		}
+		"ordering":"false",
+		// "oAria": {
+		// 	"sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+		// 	"sSortDescending": ": Activar para ordenar la columna de manera descendente"
+		// }
 
 	}
 

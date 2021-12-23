@@ -209,6 +209,45 @@ class ModeloProductores{
 
 		$stmt = Conexion::conectar()->prepare("SELECT $tabla.establecimiento, $tabla2.estado as estadoBrucelosis,$tabla3.estado as estadoTuberculosis FROM $tabla INNER JOIN $tabla2 ON $tabla.renspa = $tabla2.renspa INNER JOIN $tabla3 ON $tabla.renspa = $tabla3.renspa WHERE $tabla.$item = :$item");
 
+		$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+
+		$stmt -> execute();
+
+		return $stmt -> fetchAll();
+
+		$stmt -> close();
+
+		$stmt = null;
+
+	}
+
+		/*=============================================
+	SITUACION PRODUCTOR
+	=============================================*/
+	static public function mdlSituacionProductor($tablas, $item, $valor, $item2, $valor2){
+
+		$stmt = Conexion::conectar()->prepare("SELECT * FROM $tablas[0] INNER JOIN $tablas[1] ON $tablas[0].$item = $tablas[1].$item WHERE $tablas[0].$item = :$item AND $tablas[1].$item2 = :$item2");
+
+		$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+		$stmt -> bindParam(":".$item2, $valor2, PDO::PARAM_STR);
+
+		$stmt -> execute();
+
+		return $stmt -> fetch();
+
+
+		$stmt -> close();
+
+		$stmt = null;
+
+	}
+
+	/*=============================================
+	SITUACION PRODUCTOR
+	=============================================*/
+	static public function mdlMostrarEstNoVac($tablas, $item, $valor,$orden){
+
+		$stmt = Conexion::conectar()->prepare("SELECT * FROM $tablas[0] WHERE renspa NOT IN (SELECT renspa FROM $tablas[1] WHERE $item = :$item) ORDER BY $orden ASC");
 
 		$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
 

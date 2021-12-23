@@ -230,5 +230,44 @@ class ControladorProductores{
 
 	}
 
+	
+	/*=============================================
+	SITUACION PRODUCTOR
+	=============================================*/
+	static public function ctrSituacionProductor($item, $valor,$item2, $valor2){
+		
+		$tablas = array();
+		$tablas[] = 'productores';
+		$tablas[] = 'actas';
+
+		return $respuesta = ModeloProductores::mdlSituacionProductor($tablas,$item,$valor,$item2,$valor2); 
+
+	}
+
+	/*=============================================
+	SITUACION PRODUCTOR
+	=============================================*/
+	static public function ctrAnimalesProductor($item, $valor,$item2, $valor2){
+		
+		$tablas = array();
+		$tablas[] = 'productores';
+		$tablas[] = 'animales';
+
+		return $respuesta = ModeloProductores::mdlSituacionProductor($tablas,$item,$valor,$item2,$valor2); 
+
+	}
+	/*=============================================
+	ESTAB. NO VACUNADOS
+	=============================================*/
+	static public function ctrMostrarEstNoVac($item, $valor,$orden){
+		
+		$tablas = array();
+		$tablas[] = 'productores';
+		$tablas[] = 'actas';
+
+		return $respuesta = ModeloProductores::mdlMostrarEstNoVac($tablas,$item, $valor,$orden); 
+
+	}
+	
 }
 

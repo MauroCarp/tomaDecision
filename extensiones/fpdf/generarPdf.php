@@ -24,6 +24,8 @@ class GenerarPDF{
 
   public $rango;
 
+  public $renspa;
+
   public function informeGeneral(){
 
     //REQUERIMOS LA CLASE TCPDF
@@ -338,6 +340,143 @@ class GenerarPDF{
 
   }
 
+  public function situacionProductor(){
+
+      //REQUERIMOS LA CLASE TCPDF
+
+      include('fpdf.php');
+
+      $item = 'renspa';
+
+      $renspa = $this->renspa;
+
+      $item2 = "campania";
+
+      $campania = $_COOKIE['campania'];
+      
+      $productor = ControladorProductores::ctrSituacionProductor($item, $renspa,$item2, $campania);
+
+      $animales = ControladorProductores::ctrAnimalesProductor($item, $renspa,$item2, $campania);
+
+      if(!$productor){
+        echo "<script>
+          alert('Establecimiento NO vacunado');
+          window.close()
+          </script>";
+
+       }
+
+      $pdf = new FPDF('L','mm','A4');	
+      $pdf->AddPage();
+      $pdf->SetFillColor(0,4,162);
+      $pdf->SetTitle(utf8_decode('Informe de Situación del Productor'));
+      $pdf->SetDisplayMode('fullpage', 'single');
+      $pdf->SetAutoPageBreak(1,1);
+      $pdf->Image('img/logo-fissa.png', 120, 5,55);
+      $pdf->Ln(18);
+      $pdf->SetFont('Times','B',11);
+      $pdf->SetX(10);
+      $pdf->Cell(100,7,utf8_decode('Sistema de Gestión de Aftosa'),0,1,'L',0);
+      $pdf->Ln(1);
+      $pdf->SetFont('Times','B',18);
+      $pdf->Cell(190,10,utf8_decode('Sistema integrado de Vacunación Anti-Aftosa'),0,1,'L',0);
+      $pdf->Cell(190,10,utf8_decode('Informe de Situación de Productor'),0,1,'L',0);
+      $pdf->SetFont('Times','B',11);
+      $pdf->Cell(190,10,utf8_decode('(Para presentar a quien corresponda)'),0,1,'L',0);
+      $pdf->SetFont('Times','B',18);
+      $pdf->SetTextColor(0,4,162);
+      $pdf->SetX(25);
+      $pdf->Cell(25,10,'Renspa:',0,0,'L',0);
+      $pdf->SetTextColor(0,0,0);
+      $pdf->Cell(80,10,$renspa,0,0,'L',0);
+      $pdf->SetTextColor(0,4,162);
+      $pdf->Cell(15,10,'Doc:',0,0,'L',0);
+      $pdf->SetTextColor(0,0,0);
+      $pdf->Cell(25,10,$productor['tipoDoc'],0,0,'L',0);
+      $pdf->Cell(30,10,$productor['numDoc'],0,1,'L',0);
+      $pdf->Ln(1);
+      $pdf->SetFont('Times','B',10);
+      $pdf->Cell(75,7,'Productor',0,0,'L',0);
+      $pdf->Cell(60,7,'Departamento/Localidad',0,0,'L',0);
+      $pdf->Cell(70,7,'Establecimiento',0,0,'L',0);
+      $pdf->Cell(100,7,utf8_decode('Explotación'),0,1,'L',0);
+      $pdf->Cell(230,.5,'',0,1,'L',1);
+
+      $pdf->Cell(75,7,utf8_decode($productor['propietario']),0,0,'L',0);
+      $pdf->Cell(60,7,'IRIONDO',0,0,'L',0);
+      $pdf->Cell(70,7,$productor['establecimiento'],0,0,'L',0);
+      $pdf->Cell(100,7,utf8_decode($productor['explotacion']),0,1,'L',0);
+      $pdf->Cell(75,7,'',0,0,'L',0);
+      $pdf->Cell(60,7,utf8_decode($productor['localidad']),0,0,'L',0);
+      $pdf->Ln(2);
+      $pdf->SetFont('Times','B',11);
+      $pdf->Cell(100,7,utf8_decode('Composición del Rodeo'),0,1,'L',0);	
+      $pdf->SetFont('helvetica','B',10);
+      $pdf->SetTextColor(111,0,0);
+      $pdf->Cell(30,7,'Vacas:',0,0,'R',0);
+      $pdf->SetTextColor(0,0,0);
+      $pdf->Cell(40,7,$animales['vacas'],0,0,'L',0);
+      $pdf->SetTextColor(111,0,0);
+      $pdf->Cell(18,7,'Toros:',0,0,'L',0);
+      $pdf->SetTextColor(0,0,0);
+      $pdf->Cell(30,7,$animales['toros'],0,0,'L',0);
+      $pdf->SetTextColor(111,0,0);
+      $pdf->Cell(20,7,'Toritos:',0,0,'L',0);
+      $pdf->SetTextColor(0,0,0);
+      $pdf->Cell(10,7,$animales['toritos'],0,1,'L',0);
+      $pdf->SetTextColor(111,0,0);
+
+      $pdf->Cell(30,7,'Vaquillonas:',0,0,'R',0);
+      $pdf->SetTextColor(0,0,0);
+      $pdf->Cell(40,7,$animales['vaquillonas'],0,0,'L',0);
+      $pdf->SetTextColor(111,0,0);
+      $pdf->Cell(18,7,'Novillos:',0,0,'L',0);
+      $pdf->SetTextColor(0,0,0);
+      $pdf->Cell(30,7,$animales['novillos'],0,0,'L',0);
+      $pdf->SetTextColor(111,0,0);
+      $pdf->Cell(20,7,'Novillitos:',0,0,'L',0);
+      $pdf->SetTextColor(0,0,0);
+      $pdf->Cell(10,7,$animales['novillitos'],0,1,'L',0);
+      $pdf->SetTextColor(111,0,0);
+
+      $pdf->Cell(30,7,'Terneros:',0,0,'R',0);
+      $pdf->SetTextColor(0,0,0);
+      $pdf->Cell(40,7,$animales['terneros'],0,0,'L',0);
+      $pdf->SetTextColor(111,0,0);
+      $pdf->Cell(18,7,'Terneras:',0,0,'L',0);
+      $pdf->SetTextColor(0,0,0);
+      $pdf->Cell(30,7,$animales['terneras'],0,1,'L',0);
+      $pdf->SetTextColor(111,0,0);
+
+      $pdf->Cell(30,7,utf8_decode('Búfalos Mayores:'),0,0,'R',0);
+      $pdf->SetTextColor(0,0,0);
+      $pdf->Cell(40,7,$animales['bufaloMay'],0,0,'L',0);
+      $pdf->SetTextColor(111,0,0);
+      $pdf->Cell(32,7,utf8_decode('Búfalos Menores:'),0,0,'L',0);
+      $pdf->SetTextColor(0,0,0);
+      $pdf->Cell(30,7,$animales['bufaloMen'],0,1,'L',0);
+
+      $pdf->Ln(8);
+      $pdf->SetFont('Times','',11);
+      $pdf->Cell(32,7,utf8_decode('Fecha Vacunación:'),0,0,'L',0);
+      $pdf->Cell(62,7,formatearFecha($productor['fechaVacunacion']),0,0,'L',0);
+      $pdf->SetTextColor(111,0,0);
+      $pdf->SetFont('helvetica','B',11);
+      $pdf->Cell(45,7,utf8_decode('Regimen de Tenencia:'),0,0,'L',0);
+      $pdf->SetTextColor(0,0,0);
+      $pdf->SetFont('times','',11);
+      $pdf->Cell(32,7,$productor['regimen'],0,1,'L',0);
+
+      $pdf->Ln(15);
+      $pdf->SetFont('times','B',11);
+      $pdf->Cell(45,7,date('d/m/Y'),0,0,'L',0);
+
+
+
+      $pdf->Output();
+
+  }
+
 }
 
 
@@ -353,6 +492,14 @@ if($accion == 'statusVeterinario'){
 
     $statusVeterinario = new GenerarPDF();
     $statusVeterinario -> statusVeterinario();
+
+}
+
+if($accion == 'situacionProductor'){
+
+  $situacionProductor = new GenerarPDF();
+  $situacionProductor -> renspa = $_GET['renspa'];
+  $situacionProductor -> situacionProductor();
 
 }
 

@@ -48,7 +48,7 @@ if($_SESSION["perfil"] == "Especial"){
 
     <div class="box-body">
         
-      <table class="table table-bordered table-striped dt-responsive tablas" width="100%">
+      <table class="table table-bordered table-striped dt-responsive tablas"  data-ordering="false" width="100%">
         
         <thead>
         
@@ -89,9 +89,9 @@ if($_SESSION["perfil"] == "Especial"){
           $item = 'matricula';
           
           foreach ($actas as $key => $value) {
-            
-            $vacunador =  ControladorVeterinarios::ctrMostrarVeterinarios($item,$value['matricula']);
 
+            $vacunador =  ControladorVeterinarios::ctrMostrarVeterinarios($item,$value['matricula']);
+            
             if($value['pago'])
               $pago = array('tipo'=>'success','icon'=>'check') ;
             else $pago = array('tipo'=>'danger','icon'=>'times') ;

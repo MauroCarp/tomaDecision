@@ -53,7 +53,7 @@ const utf8 = (texto)=>{
 EXISTE PRODUCTOR
 =============================================*/
 
-const productorExistente = (renspa)=>{
+const productorExistente = (renspa,ruta,redirect)=>{
 
   let url = 'ajax/productores.ajax.php'
 
@@ -66,15 +66,19 @@ const productorExistente = (renspa)=>{
   }).then(resp => resp.json())
   .then(respuesta => {
 
-            if(respuesta)
-                window.location = `index.php?ruta=aftosa/actasProductor&renspa=${renspa}`
-            else   swal({
+            if(respuesta){
+              
+              if(redirect)
+                window.open(ruta ,'_blank')
+                else window.location = ruta
+            
+              }else{   swal({
                 type: "error",
                 title: "R.E.N.S.P.A Inexistente",
                 showConfirmButton: true,
                 confirmButtonText: "Cerrar"
                 })
-
+              }
   })
 
 }
@@ -300,3 +304,69 @@ $('#btnNuevoProductor').on('click',()=>{
   })
   
 });
+
+/*=============================================
+SITUACION PRODUCTOR
+=============================================*/
+
+const btnSituacionProductor = document.getElementById('btnBuscarSituacionProductor')
+
+btnSituacionProductor.addEventListener('click',()=>{
+
+  let renspa = document.getElementById('renspaSituacionProductor').value
+
+  renspa.trim()
+
+  if(renspa.length == 17){
+
+      let ruta = `extensiones/fpdf/generarPdf.php?renspa=${renspa}&accion=situacionProductor`
+
+      productorExistente(renspa, ruta,true)
+      
+  }else{
+      
+      swal({
+          type: "error",
+          title: "R.E.N.S.P.A Incorrecto",
+          showConfirmButton: true,
+          confirmButtonText: "Cerrar"
+          })
+          
+  }
+    
+  
+})
+
+/*=============================================
+ESTABLECIMIENTOS NO VACUNADOS
+=============================================*/
+
+$('.tablaNoVacunados').DataTable( {
+  "ajax": "ajax/datatable-noVacunados.ajax.php",
+  "deferRender": true,
+  "retrieve": true,
+  "processing": true,
+  "language": {
+
+    "sProcessing":     "Procesando...",
+    "sLengthMenu":     "Mostrar _MENU_ registros",
+    "sZeroRecords":    "No se encontraron resultados",
+    "sEmptyTable":     "Ningún dato disponible en esta tabla",
+    "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_",
+    "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0",
+    "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+    "sInfoPostFix":    "",
+    "sSearch":         "Buscar:",
+    "sUrl":            "",
+    "sInfoThousands":  ",",
+    "sLoadingRecords": "Cargando...",
+    "oPaginate": {
+    "sFirst":    "Primero",
+    "sLast":     "Último",
+    "sNext":     "Siguiente",
+    "sPrevious": "Anterior"
+    }
+
+}
+
+} );
