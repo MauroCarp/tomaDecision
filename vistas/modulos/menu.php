@@ -373,6 +373,8 @@ $motivo = 'bruTur';
 
 $btnText = 'Actualizar Status';
 
+$form = 'formRenspaActStatus';
+
 include 'modales/modalRenspa.php';
 
 $idVentanaModal = 'ventanaModalEstablecimientosSD';
@@ -410,6 +412,8 @@ $motivo = 'aftosa';
 
 $btnText = 'Ingresar Acta';
 
+$form = 'formRenspaActa';
+
 include 'modales/modalRenspa.php';
 
 // acta Por Productor
@@ -426,6 +430,8 @@ $motivo = null;
 
 $btnText = 'Acta por Productor';
 
+$form = 'formRenspaActaProductor';
+
 include 'modales/modalRenspa.php';
 
 // Situacion Productor
@@ -441,6 +447,8 @@ $idBtnGenerar = 'btnBuscarSituacionProductor';
 $motivo = null;
 
 $btnText = 'Situacion Productor';
+
+$form = 'formRenspaSitProductor';
 
 include 'modales/modalRenspa.php';
 

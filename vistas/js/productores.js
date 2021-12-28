@@ -311,7 +311,10 @@ SITUACION PRODUCTOR
 
 const btnSituacionProductor = document.getElementById('btnBuscarSituacionProductor')
 
-btnSituacionProductor.addEventListener('click',()=>{
+btnSituacionProductor.addEventListener('click',(e)=>{
+console.log(e);
+
+  e.preventDefault()
 
   let renspa = document.getElementById('renspaSituacionProductor').value
 

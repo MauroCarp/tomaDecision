@@ -37,7 +37,7 @@
                                 
                                 </div>
 
-                                <form id="formRenspa">
+                                <form id="<?php echo $form;?>">
 
                                     <div class="row">
                                         
@@ -87,7 +87,7 @@
 
             <div class="modal-footer">
 
-                <button type="submit" class="btn btn-primary" form="formRenspa" id="<?php echo $idBtnGenerar;?>"><?php echo $btnText;?></button>
+                <button type="submit" class="btn btn-primary" form="<?php echo $form;?>" id="<?php echo $idBtnGenerar;?>"><?php echo $btnText;?></button>
 
             </div>
 

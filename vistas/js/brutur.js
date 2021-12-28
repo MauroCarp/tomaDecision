@@ -70,7 +70,7 @@ MODAL ACTUALIZAR STATUS
 =============================================*/
 $('#actualizarStatus').on('click',function(e){
     
-    e.preventDefatult(e)
+    e.preventDefault()
 
     let renspa = $('#renspa').val()
 
