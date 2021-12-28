@@ -182,8 +182,11 @@ class ControladorBruTur{
 			$item = 'renspa';
 
 			$valor = $_POST['renspaHidden'];
+
 			//DATOS  BRUCELOSIS
 			
+			$saneamientoNumBruce = ($_POST['saneamientoNumBruceAct'] == null) ? 0 : $_POST['saneamientoNumBruceAct'];
+
 			$datosBrucelosis = array(
 				'campania'=>'brucelosis',
 				'renspa'=>$valor,
@@ -194,16 +197,16 @@ class ControladorBruTur{
 				'estado'=>$_POST['estadoBruceAct'],
 				'estadoSenasa'=> 'Pendiente',
 				'fechaEstado'=>$_POST['fechaMuestraBruceAct'],
-				'saneamientoNum' => $_POST['saneamientoNumBruceAct'],
+				'saneamientoNum' => $saneamientoNumBruce,
 				'positivo' => $_POST['positivoBruceAct'],
 				'negativo' => $_POST['negativoBruceAct'],
 				'sospechoso' => $_POST['sospechosoBruceAct']);
-			
 
-
-
+		
 			//DATOS  TUBERCULOSIS
-			
+		
+			$saneamientoNumTuber = ($_POST['saneamientoNumTuberAct'] == null) ? 0 : $_POST['saneamientoNumTuberAct'];
+
 			$datosTuberculosis = array(
 				'campania'=>'tuberculosis',
 				'renspa'=>$valor,
@@ -221,7 +224,7 @@ class ControladorBruTur{
 			
 			if($datosTuberculosis['estado'] == 'En Saneamiento'){
 
-				$datosTuberculosis['saneamientoNum'] = $_POST['saneamientoNumTuberAct'];
+				$datosTuberculosis['saneamientoNum'] = $saneamientoNumTuber;
 				$datosTuberculosis['positivo'] = $_POST['positivoTuberAct'];
 				$datosTuberculosis['negativo'] = $_POST['negativoTuberAct'];
 				$datosTuberculosis['sospechoso'] = $_POST['sospechosoTuberAct'];
@@ -229,6 +232,10 @@ class ControladorBruTur{
 			}
 
 			$errores = array();
+
+			/*=========================
+				//  BRUCELOSIS
+			=========================*/
 
 			$tabla = 'brucelosis';
 			
@@ -241,28 +248,33 @@ class ControladorBruTur{
 			$cambios = '';
 
 			if($_POST['cambiosBrucelosis']){
-				
+
 				$estadoBrucelosis= ControladorBruTur::ctrActualizarEstadoBruTur($tabla,$item,$datosBrucelosis);
 
 				$errores[] = $estadoBrucelosis;
 
 				$cambios = 'brucelosis';
 
-				
 			}
-
+		
 			$cargarRegistroBrucelosis = ControladorBruTur::ctrIngresarRegistroHistorial($datosBrucelosis);
 
 			$errores[] = $cargarRegistroBrucelosis;
-			
+
+
+			/*=========================
+					  TUBERCULOSIS
+			=========================*/			
 			$tabla = 'tuberculosis';
 			
 			$actualizarTuberculosis = ControladorBruTur::ctrActualizarBruTur($tabla,$item,$datosTuberculosis);
 
 			$errores[] = $actualizarTuberculosis;
-			
+
+
 			if($_POST['cambiosTuberculosis']){
 				
+
 				$estadoBrucelosis= ControladorBruTur::ctrActualizarEstadoBruTur($tabla,$item,$datosTuberculosis);
 				$errores[] = $estadoBrucelosis;
 
@@ -280,7 +292,6 @@ class ControladorBruTur{
 
 			$errores[] = $cargarRegistroTuberculosis;
 
-			var_dump($errores);
 			if(!in_array('error',$errores)){
 
 				echo'<script>

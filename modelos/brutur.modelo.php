@@ -210,24 +210,12 @@ class ModeloBruTur{
 
 		$fechaHoy = Date('Y-m-d');
 
-		$saneamiento = '';
-
 		$saneamiento = ',saneamientoNumero = :saneamientoNumero,positivo = :positivo,negativo = :negativo,sospechoso = :sospechoso';
-
-		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET 
-		fechaCarga = :fechaCarga,
-		protocolo = :protocolo,
-		notificado = 0,
-		vacas = :vacas,
-		vaquillonas = :vaquillonas,
-		toros = :toros,
-		fechaEstado = :fechaEstado $saneamiento	
-		WHERE $item = :item");
 
 		if($tabla == 'tuberculosis'){
 
 						
-			if($datos['estado'] ==  'Libre' OR $datos['estado'] ==  'RecertificaciÃ³n' OR $datos['estado'] ==  'No Libre'){
+			if($datos['estado'] ==  'Libre' OR $datos['estado'] ==  'RecertificaciÃ³n' OR $datos['estado'] ==  'Recertificacion' OR $datos['estado'] ==  'No Libre'){
 
 				$saneamiento = '';
 				
@@ -252,6 +240,19 @@ class ModeloBruTur{
 			$stmt->bindParam(":novillos", $datos['novillos'], PDO::PARAM_STR);
 			$stmt->bindParam(":novillitos", $datos['novillitos'], PDO::PARAM_STR);
 
+
+		}else{
+
+			$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET 
+			fechaCarga = :fechaCarga,
+			protocolo = :protocolo,
+			notificado = 0,
+			vacas = :vacas,
+			vaquillonas = :vaquillonas,
+			toros = :toros,
+			fechaEstado = :fechaEstado $saneamiento	
+			WHERE $item = :item");
+		
 		}
 
 		$stmt->bindParam(":fechaCarga", $fechaHoy, PDO::PARAM_STR);
@@ -262,15 +263,15 @@ class ModeloBruTur{
 		$stmt->bindParam(":fechaEstado", $datos['fechaEstado'], PDO::PARAM_STR);
 		$stmt->bindParam(":item", $datos['renspa'], PDO::PARAM_STR);
 		
-		
-		if($datos['estado'] !=  'Libre' OR $datos['estado'] !=  'RecertificaciÃ³n' OR $datos['estado'] !=  'No Libre'){
+		if($datos['estado'] !=  'Libre' AND $datos['estado'] !=  'RecertificaciÃ³n' AND $datos['estado'] !=  'Recertificacion' AND $datos['estado'] !=  'No Libre'){
 
 			$stmt->bindParam(":saneamientoNumero", $datos['saneamientoNum'], PDO::PARAM_STR);
 			$stmt->bindParam(":positivo", $datos['positivo'], PDO::PARAM_STR);
 			$stmt->bindParam(":negativo", $datos['negativo'], PDO::PARAM_STR);
 			$stmt->bindParam(":sospechoso", $datos['sospechoso'], PDO::PARAM_STR);
+
 		}
-	
+
 		if($stmt->execute()){
 			
 			return 'ok';

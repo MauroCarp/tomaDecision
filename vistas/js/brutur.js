@@ -113,6 +113,9 @@ const corroborarCambios = (idCampo,idCambios)=>{
 corroborarCambios('estadoBruceAct','cambiosBrucelosis')
 corroborarCambios('estadoTuberAct','cambiosTuberculosis')
 
+corroborarCambios('fechaMuestraTuberAct','cambiosTuberculosis')
+corroborarCambios('fechaMuestraBruceAct','cambiosBrucelosis')
+
 
 /*=============================================
 GENERAR INFORME SD
@@ -408,7 +411,7 @@ const mostrarHistorial = (renspa)=>{
                 tbody += `<tr>
                     <td>${formatearFecha(respuesta[index]['fechaEstado'])}</td>
                     <td>${respuesta[index]['protocolo']}</td>
-                    <td>${respuesta[index]['estado']}</td>
+                    <td>${utf8(respuesta[index]['estado'])}</td>
                     <td>${cantMuestras}</td>
                     <td>${respuesta[index]['saneamientoNumero']}</td>
                     <td>${respuesta[index]['positivo']}</td>
@@ -451,7 +454,7 @@ const mostrarHistorial = (renspa)=>{
                 tbody += `<tr>
                     <td>${formatearFecha(respuesta[index]['fechaEstado'])}</td>
                     <td>${respuesta[index]['protocolo']}</td>
-                    <td>${respuesta[index]['estado']}</td>
+                    <td>${utf8(respuesta[index]['estado'])}</td>
                     <td>${cantMuestras}</td>
                     <td>${respuesta[index]['saneamientoNumero']}</td>
                     <td>${respuesta[index]['positivo']}</td>

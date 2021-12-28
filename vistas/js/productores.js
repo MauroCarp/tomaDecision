@@ -34,6 +34,12 @@ const utf8 = (texto)=>{
       
     break;
   
+    case 'RecertificaciÃ³n':
+
+      respuesta = 'Recertificación';
+      
+    break;
+
     case 'CapitalizaciÃ³n':
 
       respuesta = 'Capitalización';
