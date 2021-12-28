@@ -207,6 +207,8 @@ class ControladorBruTur{
 		
 			$saneamientoNumTuber = ($_POST['saneamientoNumTuberAct'] == null) ? 0 : $_POST['saneamientoNumTuberAct'];
 
+			$estadoSenasaTuber = ($_POST['estado'] == 'En Saneamiento') ? null : 'Pendiente';
+
 			$datosTuberculosis = array(
 				'campania'=>'tuberculosis',
 				'renspa'=>$valor,
@@ -255,11 +257,12 @@ class ControladorBruTur{
 
 				$cambios = 'brucelosis';
 
+				$cargarRegistroBrucelosis = ControladorBruTur::ctrIngresarRegistroHistorial($datosBrucelosis);
+	
+				$errores[] = $cargarRegistroBrucelosis;
+
 			}
 		
-			$cargarRegistroBrucelosis = ControladorBruTur::ctrIngresarRegistroHistorial($datosBrucelosis);
-
-			$errores[] = $cargarRegistroBrucelosis;
 
 
 			/*=========================
@@ -280,6 +283,10 @@ class ControladorBruTur{
 
 				($cambios != '') ? 'bruTur' : 'tuberculosis';
 
+				$cargarRegistroTuberculosis = ControladorBruTur::ctrIngresarRegistroHistorial($datosTuberculosis);
+
+				$errores[] = $cargarRegistroTuberculosis;
+
 			}
 
 			$estados[] = $datosBrucelosis['estado'];
@@ -287,10 +294,6 @@ class ControladorBruTur{
 			$estados[] = $datosTuberculosis['estado'];
 
 			$estados = implode(',',$estados);
-
-			$cargarRegistroTuberculosis = ControladorBruTur::ctrIngresarRegistroHistorial($datosTuberculosis);
-
-			$errores[] = $cargarRegistroTuberculosis;
 
 			if(!in_array('error',$errores)){
 
@@ -417,14 +420,13 @@ class ControladorBruTur{
 		}
 		
 		$respuestaBrucelosis = ControladorBruTur::ctrMostrarPendientes('brucelosis');
-		$respuestaTuberulosis = ControladorBruTur::ctrMostrarPendientes('tuberculosis');
+
+		$respuestaTuberculosis = ControladorBruTur::ctrMostrarPendientes('tuberculosis');
 
 		$nombreArchivo = 'EnviadosSenasa('.date('d-m-Y').").xls";
 		
 		$today = date('d-m-Y');
 		$Name = 'hola.xls';
-
-		$item = 'renspa';
 
 		header('Expires: 0');
 		header('Cache-control: private');
@@ -450,6 +452,8 @@ class ControladorBruTur{
 
 			for ($i=0; $i < sizeof($respuestaBrucelosis) ; $i++) { 
 				
+				$item = 'renspa';
+
 				$fechaMuestra = formatearFecha($respuestaBrucelosis[$i]['fechaEstado']);
 				
 				$valor = $respuestaBrucelosis[$i]['renspa'];
@@ -479,13 +483,15 @@ class ControladorBruTur{
 		}
 				
 
-		if(!empty($respuestaTuberulosis)){
+		if(!empty($respuestaTuberculosis)){
 
-			for ($i=0; $i < sizeof($respuestaTuberulosis) ; $i++) { 
-				
-				$fechaMuestra = formatearFecha($respuestaTuberulosis[$i]['fechaEstado']);
+			for ($i=0; $i < sizeof($respuestaTuberculosis) ; $i++) { 
+			
+				$item = 'renspa';
 
-				$valor = $respuestaTuberulosis[$i]['renspa'];
+				$fechaMuestra = formatearFecha($respuestaTuberculosis[$i]['fechaEstado']);
+
+				$valor = $respuestaTuberculosis[$i]['renspa'];
 				
 				$respuesta = ControladorProductores::ctrMostrarProductores($item,$valor);
 
@@ -504,7 +510,7 @@ class ControladorBruTur{
 				<td style='font-weight:bold; border:1px solid #eee;'>".$propietario."</td> 
 				<td style='font-weight:bold; border:1px solid #eee;'>".$respuestaTuberculosis[$i]['estado']."</td> 
 				<td style='font-weight:bold; border:1px solid #eee;'>".$fechaMuestra."</td>	
-				<td style='font-weight:bold; border:1px solid #eee;'>".$matriculaVet."</td>
+				<td style='font-weight:bold; border:1px solid #eee;'>".$veterinario."</td>
 				</tr>");
 
 			}

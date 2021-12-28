@@ -92,8 +92,9 @@ ACTAS
 // CARGAR ACTAS
 const btnCargarActa = document.getElementById('btnCargarActa');
 
-btnCargarActa.addEventListener('click',()=>{
+btnCargarActa.addEventListener('click',(e)=>{
 
+    e.preventDefault()
 
     let campania = getCookie('campania');
     

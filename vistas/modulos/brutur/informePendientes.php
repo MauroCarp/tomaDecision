@@ -71,7 +71,6 @@ $btnValido = (!empty($respuestaBrucelosis) OR !empty($respuestaTuberculosis)) ? 
   
           <?php
   
-            $respuestaBrucelosis = ControladorBruTur::ctrMostrarPendientes('brucelosis');
 
             if(!empty($respuestaBrucelosis)){
              

@@ -110,11 +110,26 @@ const corroborarCambios = (idCampo,idCambios)=>{
 
 }
 
+// ESTADO
 corroborarCambios('estadoBruceAct','cambiosBrucelosis')
 corroborarCambios('estadoTuberAct','cambiosTuberculosis')
-
+// FECHA MUESTRA
 corroborarCambios('fechaMuestraTuberAct','cambiosTuberculosis')
 corroborarCambios('fechaMuestraBruceAct','cambiosBrucelosis')
+// PROTOCOLO
+corroborarCambios('protocoloTuberAct','cambiosTuberculosis')
+corroborarCambios('protocoloBruceAct','cambiosBrucelosis')
+// SANEAMIENTOS
+corroborarCambios('saneamientoNumTuberAct','cambiosTuberculosis')
+corroborarCambios('saneamientoNumBruceAct','cambiosBrucelosis')
+corroborarCambios('positivoTuberAct','cambiosTuberculosis')
+corroborarCambios('positivoBruceAct','cambiosBrucelosis')
+corroborarCambios('negativoTuberAct','cambiosTuberculosis')
+corroborarCambios('negativoBruceAct','cambiosBrucelosis')
+corroborarCambios('sospechosoTuberAct','cambiosTuberculosis')
+corroborarCambios('sospechosoBruceAct','cambiosBrucelosis')
+
+
 
 
 /*=============================================
