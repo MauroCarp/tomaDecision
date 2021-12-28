@@ -191,7 +191,7 @@ class ControladorVeterinarios{
 
 				echo utf8_decode("<tr> 
 				<td style='font-weight:bold; border:1px solid #eee;'>".$respuestaVeterinarios[$i]['nombre']."</td> 
-				<td style='font-weight:bold; border:1px solid #eee;'>".$respuestaVeterinarios[$i]['matricula']."</td> 
+				<td style='font-weight:bold; border:1px solid #eee;'>'".$respuestaVeterinarios[$i]['matricula']."'</td> 
 				<td style='font-weight:bold; border:1px solid #eee;'>".$respuestaVeterinarios[$i]['domicilio']."</td> 
 				<td style='font-weight:bold; border:1px solid #eee;'>".$respuestaVeterinarios[$i]['telefono']."</td> 
 				<td style='font-weight:bold; border:1px solid #eee;'>".$respuestaVeterinarios[$i]['email']."</td> 		
