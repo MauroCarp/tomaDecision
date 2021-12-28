@@ -36,40 +36,45 @@
                                     </div>
                                 
                                 </div>
-                                
-                                <div class="row">
-                                    
-                                    <div class="col-md-12">
-                                    
-                                            <input type="text" name="<?php echo $idRenspa;?>" id="<?php echo $idRenspa;?>" style="font-size:2em;font-weight:bold;" value="<?php echo $preRenspa;?>">
+
+                                <form id="formRenspa">
+
+                                    <div class="row">
                                         
+                                        <div class="col-md-12">
+                                        
+                                                <input type="text" name="<?php echo $idRenspa;?>" id="<?php echo $idRenspa;?>" style="font-size:2em;font-weight:bold;" value="<?php echo $preRenspa;?>">
+                                            
+                                        </div>
+
                                     </div>
+                                    
+                                    <?php 
+                                    
+                                    if($motivo == 'aftosa'){ ?>
 
-                                </div>
-                                
-                                <?php 
-                                
-                                if($motivo == 'aftosa'){ ?>
-
-                                <div class="row">
- 
-                                    <div class="checkbox" style="font-size:1em;">
-                                        <label>
+                                    <div class="row">
+    
+                                        <div class="checkbox" style="font-size:1em;">
                                             <label>
+                                                <label>
 
-                                                <input type="checkbox" name="interCampania" id="interCampania" value="true"><b> InterCampa&ntilde;a</b>
+                                                    <input type="checkbox" name="interCampania" id="interCampania" value="true"><b> InterCampa&ntilde;a</b>
+
+                                                </label>
 
                                             </label>
 
-                                        </label>
-
+                                        </div>
+                                    
                                     </div>
                                 
-                                </div>
+                                    <?php 
+                                    }
+                                    ?>
                                 
-                                <?php 
-                                }
-                                ?>
+                                </form>
+
                         </div>
 
                 </div>
@@ -82,7 +87,7 @@
 
             <div class="modal-footer">
 
-                <button type="submit" class="btn btn-primary" id="<?php echo $idBtnGenerar;?>"><?php echo $btnText;?></button>
+                <button type="submit" class="btn btn-primary" form="formRenspa" id="<?php echo $idBtnGenerar;?>"><?php echo $btnText;?></button>
 
             </div>
 

@@ -1,10 +1,10 @@
 <?php
 session_start();
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
 
-error_reporting(E_ALL);
+// error_reporting(E_ALL);
 
 
 // $departamento = 'BELGRANO';
@@ -34,6 +34,21 @@ function formatearFecha($fecha){
   $fechaFormateada = $fechaExplode[2]."-".$fechaExplode[1]."-".$fechaExplode[0];
 
   return $fechaFormateada;
+
+}
+
+function distrito($departamento,$distrito,$conexion){
+
+  $item = 'departamento';
+
+  $item2 = 'localidad';
+
+  $distrito = ControladorProductores::ctrMostrarDatos($item,$departamento,$item2,$distrito);
+
+	$nombre = $fila['nombre'];
+
+	return $distrito;
+
 }
 
 ?>
@@ -156,77 +171,53 @@ CUERPO DOCUMENTO
  
   <?php
 
+function encryptCookie( $userid ) {
+   
+  $key = hex2bin(random_bytes(4));
+  $cipher = "aes-256-cbc";
+  $ivlen = openssl_cipher_iv_length($cipher);
+  $iv = openssl_random_pseudo_bytes($ivlen);
+
+  $ciphertext = openssl_encrypt($userid, $cipher, $key, 0, $iv);
+  
+
+  return( base64_encode($ciphertext . '::' . $iv.'::'.$key) );
+}
+
+// Decrypt cookie
+function decryptCookie( $ciphertext ) {
+  
+  $cipher = "aes-256-cbc";
+
+  list($encrypted_data, $iv,$key) = explode('::', base64_decode($ciphertext));
+  
+  return openssl_decrypt($encrypted_data, $cipher, $key, 0, $iv);
+
+}
+
   if(isset($_SESSION["iniciarSesion"]) && $_SESSION["iniciarSesion"] == "ok"){
 
-   echo '<div class="wrapper">';
+    include "cuerpo.php";
 
-    /*=============================================
-    CABEZOTE
-    =============================================*/
 
-    include "modulos/cabezote.php";
+  }else if( isset($_COOKIE['rememberme']  )){
+   
+    // Decrypt cookie variable value
+    $userid = decryptCookie($_COOKIE['rememberme']);
+               
+    $item = 'id';
 
-    /*=============================================
-    MENU
-    =============================================*/
+    $count = ControladorUsuarios::ctrContarUsuarios($item,$userid);
+    
+    if( $count > 0 ){
 
-    include "modulos/menu.php";
-
-    /*=============================================
-    CONTENIDO
-    =============================================*/
-
-    if(isset($_GET["ruta"])){
-
-      if($_GET["ruta"] == "inicio" ||
-         $_GET["ruta"] == "productores" ||
-         $_GET["ruta"] == "verProductor" ||
-         $_GET["ruta"] == "veterinarios" ||
-         $_GET["ruta"] == "brutur/alertas" ||
-         $_GET["ruta"] == "brutur/actualizarStatus" ||
-         $_GET["ruta"] == "brutur/establecimientosSD" ||
-         $_GET["ruta"] == "brutur/informeGeneral" ||
-         $_GET["ruta"] == "brutur/statusVeterinario" ||
-         $_GET["ruta"] == "brutur/notificados" ||
-         $_GET["ruta"] == "brutur/informePendientes" ||
-         $_GET["ruta"] == "brutur/enviarPendientes" ||
-         $_GET["ruta"] == "aftosa/acta" ||
-         $_GET["ruta"] == "aftosa/recepcion" ||
-         $_GET["ruta"] == "aftosa/distribucion" ||
-         $_GET["ruta"] == "aftosa/noVacunados" ||
-         $_GET["ruta"] == "aftosa/actasProductor" ||
-         $_GET["ruta"] == "usuarios" ||
-         $_GET["ruta"] == "productos" ||
-         $_GET["ruta"] == "clientes" ||
-         $_GET["ruta"] == "ventas" ||
-         $_GET["ruta"] == "crear-venta" ||
-         $_GET["ruta"] == "editar-venta" ||
-         $_GET["ruta"] == "reportes" ||
-         $_GET["ruta"] == "salir"){
-
-        include "modulos/".$_GET["ruta"].".php";
-
-      }else{
-
-        include "modulos/404.php";
-
-      }
-
-    }else{
-
-      include "modulos/inicio.php";
+        $_SESSION['id'] = $userid; 
+       
+        include "cuerpo.php";
 
     }
 
-    /*=============================================
-    FOOTER
-    =============================================*/
-
-    include "modulos/footer.php";
-
-    echo '</div>';
-
-  }else{
+ }else{
 
     include "modulos/login.php";
 

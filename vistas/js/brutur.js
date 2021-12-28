@@ -68,7 +68,9 @@ $('#daterange-btnInforme').html('<span><i class="fa fa-calendar"></i> Rango de f
 /*=============================================
 MODAL ACTUALIZAR STATUS
 =============================================*/
-$('#actualizarStatus').on('click',function(){
+$('#actualizarStatus').on('click',function(e){
+    
+    e.preventDefatult(e)
 
     let renspa = $('#renspa').val()
 

@@ -56,11 +56,37 @@ if($_SESSION["perfil"] == "Especial"){
 
                     <th>Explotacion</th>
 
-                    <th></th>
-
                 </tr> 
 
             </thead>
+
+            <tbody>
+
+            <?php
+            
+            $item =  'campania';
+		
+            $valor = $_COOKIE['campania'];
+            
+            $orden = 'propietario';
+        
+            $noVacunados = ControladorProductores::ctrMostrarEstNoVac($item, $valor,$orden);
+
+            for ($i=0; $i < sizeof($noVacunados) ; $i++) { 
+              echo "<tr>
+                <td>".$noVacunados[$i]["propietario"]."</td>
+                <td>".$noVacunados[$i]["renspa"]."</td>
+                <td>".$noVacunados[$i]["establecimiento"]."</td>
+                <td>".$noVacunados[$i]["departamento"]."</td>
+                <td>".$noVacunados[$i]["distrito"]."</td>
+                <td>".$noVacunados[$i]["explotacion"]."</td>
+              </tr>";
+
+            }
+            
+            ?>
+
+            </tbody>
 
         </table>
 

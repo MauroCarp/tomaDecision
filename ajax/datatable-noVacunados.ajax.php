@@ -10,13 +10,12 @@ class TablaNoVacunados{
 
 	public function mostrarTabla(){
 
-
 		$item =  'campania';
 		
 		$valor = $_COOKIE['campania'];
 		
 		$orden = 'propietario';
-		
+
 		$noVacunados = ControladorProductores::ctrMostrarEstNoVac($item, $valor,$orden);
 
         if(count($noVacunados) == 0){
@@ -36,7 +35,12 @@ class TablaNoVacunados{
   		// 	=============================================*/ 
 
 		  	$datosJson .='[
-
+				"'.$noVacunados[$i]["propietario"].'",
+				"'.$noVacunados[$i]["renspa"].'",
+				"'.$noVacunados[$i]["establecimiento"].'",
+				"'.$noVacunados[$i]["departamento"].'",
+				"'.$noVacunados[$i]["distrito"].'",
+				"'.$noVacunados[$i]["explotacion"].'"
 			    ],';
 
 		  }
@@ -56,8 +60,9 @@ class TablaNoVacunados{
 }
 
 /*=============================================
-ACTIVAR TABLA DE PRODUCTOS
+ACTIVAR TABLA DE NO VACUNADOS
 =============================================*/ 
+
 $mostrarTabla = new TablaNoVacunados();
 $mostrarTabla -> mostrarTabla();
 

@@ -151,4 +151,26 @@ class ModeloUsuarios{
 
 	}
 
+	/*=============================================
+	CONTAR USUARIOS
+	=============================================*/
+
+	static public function mdlContarUsuarios($tabla, $item,$valor){
+
+		$stmt = Conexion::conectar()->prepare("SELECT count(*) as cntUser FROM usuarios WHERE id=:id");
+
+		$stmt -> bindParam(":id", $valor, PDO::PARAM_INT);
+
+		$stmt->execute(); 
+
+		return $stmt->fetchColumn(); 
+
+		$stmt -> close();
+
+		$stmt = null;
+
+
+	}
+
+
 }

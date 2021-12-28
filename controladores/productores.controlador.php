@@ -256,6 +256,8 @@ class ControladorProductores{
 		return $respuesta = ModeloProductores::mdlSituacionProductor($tablas,$item,$valor,$item2,$valor2); 
 
 	}
+
+
 	/*=============================================
 	ESTAB. NO VACUNADOS
 	=============================================*/
@@ -266,6 +268,17 @@ class ControladorProductores{
 		$tablas[] = 'actas';
 
 		return $respuesta = ModeloProductores::mdlMostrarEstNoVac($tablas,$item, $valor,$orden); 
+
+	}
+
+
+	/*=============================================
+	TABGEO
+	=============================================*/
+	static public function ctrMostrarLocation($item, $valor,$item2,$valor2){
+		
+		$tabla = 'tabgeo';
+		return $respuesta = ModeloProductores::ctrMostrarLocation($tabla,$item, $valor,$item2,$valor2); 
 
 	}
 	

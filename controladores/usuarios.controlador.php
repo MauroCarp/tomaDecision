@@ -17,6 +17,7 @@ class ControladorUsuarios{
 				$tabla = "usuarios";
 
 				$item = "usuario";
+
 				$valor = $_POST["ingUsuario"];
 
 				$respuesta = ModeloUsuarios::MdlMostrarUsuarios($tabla, $item, $valor);
@@ -31,12 +32,33 @@ class ControladorUsuarios{
 						$_SESSION["usuario"] = $respuesta["usuario"];
 						$_SESSION["foto"] = $respuesta["foto"];
 						$_SESSION["perfil"] = $respuesta["perfil"];
+						
+						if( isset($_POST['rememberme']) ){
+														
+							// Set cookie variables
+							$value = encryptCookie($respuesta["id"]);
+			
+							echo '<script>	
 
+							let date = new Date()
+
+							date.setTime(date.getTime()+(30*24*60*60*1000))
+
+							let expires = date.toGMTString()
+							
+							document.cookie = `rememberme = '.$value.'";path=/sanidadAnimal;Expires=${expires}`
+
+							</script>';
+							
+						}
+
+							
+			 
 						/*=============================================
 						REGISTRAR FECHA PARA SABER EL ÚLTIMO LOGIN
 						=============================================*/
 
-						date_default_timezone_set('America/Bogota');
+						date_default_timezone_set('America/Argentina/Buenos_Aires');
 
 						$fecha = date('Y-m-d');
 						$hora = date('H:i:s');
@@ -468,6 +490,18 @@ class ControladorUsuarios{
 			}		
 
 		}
+
+	}
+
+	/*=============================================
+	CONTAR USUARIOS
+	=============================================*/
+
+	static public function ctrContarUsuarios($item,$valor){
+
+		$tabla = 'usuarios';
+
+		return $respuesta = ModeloUsuarios::mdlContarUsuarios($tabla, $item,$valor);
 
 	}
 

@@ -27,6 +27,22 @@
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       
       </div>
+      
+      <div class="form-group">
+                  
+        <div class="checkbox" style="width:100%;">
+                    
+                  <label>
+                  
+                    <input type="checkbox" name="rememberme" value="true">
+                    
+                    Recordarme
+                    
+                  </label>
+                  
+        </div>
+          
+      </div>
 
       <div class="row">
        
