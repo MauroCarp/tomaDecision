@@ -33,8 +33,15 @@
         $valor = $_GET['renspa'];
 
         $resultado = ControladorProductores::ctrMostrarProductores($item,$valor);
-      
+
+        $item = 'matricula';
+
+        $valor = $resultado['veterinario'];
+
+        $veterinario = ControladorVeterinarios::ctrMostrarVeterinarios($item,$valor);
+
       ?>
+
       <div class="row">
     
         <div class="col-md-3">
@@ -45,11 +52,12 @@
               
               <input type="text" class="form-control"  style="font-size:1.2em;" id="renspaProductor" value="<?php echo $resultado['renspa'];?>" readOnly>
             
+              <input type="hidden" id="matriculaVeterinario" value="<?php echo $resultado['veterinario'];?>">
           </div>
         
         </div>
         
-        <div class="col-md-4">
+        <div class="col-md-3">
 
           <div class="form-group">
               
@@ -61,13 +69,25 @@
         
         </div>
   
-        <div class="col-md-4">
+        <div class="col-md-3">
         
           <div class="form-group">
                 
                 <label for="establecimiento"><b>Establecimiento: </b></label>
                 
                 <input type="text" class="form-control" style="font-size:1.2em;"  id="establecimiento"  value="<?php echo $resultado['establecimiento'];?>" readOnly>
+              
+          </div>
+           
+        </div>
+
+        <div class="col-md-3">
+        
+          <div class="form-group">
+                
+                <label for="veterinario"><b>Veterinario: </b></label>
+                
+                <input type="text" class="form-control" style="font-size:1.2em;"  id="veterinario"  value="<?php echo $veterinario['nombre'];?>" readOnly>
               
           </div>
            

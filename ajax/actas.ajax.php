@@ -38,7 +38,7 @@ if(isset($_POST["accion"])){
 		$validarActa = new AjaxActas();
         $validarActa-> campania = $_POST['campania'];
         $validarActa-> renspa = $_POST['renspa'];
-		$validarActa -> ajaxValidarActa($_POST);
+		$validarActa -> ajaxValidarActa();
 
     }
 

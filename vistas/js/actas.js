@@ -22,7 +22,58 @@ const sumaParcialTotal = (tipoSuma)=>{
 
 }
 
+const cargarAnimalesActa = (renspa,campania)=>{
+
+    let url = 'ajax/animales.ajax.php'
+
+    let data = new FormData()
+    data.append('accion','cargarAnimales')
+    data.append('renspa',renspa)
+    data.append('campania',campania)
+
+    fetch(url,{
+        method:'post',
+        body:data
+    }).then(resp => resp.json())
+    .then(respuesta=> {
+
+        document.querySelector('input[name=vacas]').value = respuesta.vacas
+        document.querySelector('input[name=toros]').value = respuesta.toros
+        document.querySelector('input[name=toritos]').value = respuesta.toritos
+        document.querySelector('input[name=novillos]').value = respuesta.novillos
+        document.querySelector('input[name=novillitos]').value = respuesta.novillitos
+        document.querySelector('input[name=vaquillonas]').value = respuesta.vaquillonas
+        document.querySelector('input[name=terneras]').value = respuesta.terneras
+        document.querySelector('input[name=terneros]').value = respuesta.terneros
+        document.querySelector('input[name=bufaloMay]').value = respuesta.bufaloMay
+        document.querySelector('input[name=bufaloMen]').value = respuesta.bufaloMen
+        document.querySelector('input[name=caprinos]').value = respuesta.caprinos
+        document.querySelector('input[name=ovinos]').value = respuesta.ovinos
+        document.querySelector('input[name=porcinos]').value = respuesta.porcinos
+        document.querySelector('input[name=equinos]').value = respuesta.equinos
+
+
+
+    }).then(()=>{
+
+        document.getElementById('campoTotal').value = sumaParcialTotal('sumTotal')
+        document.getElementById('campoParcial').value = sumaParcialTotal('sumParcial')
+
+    })
+    
+}
+
 if(seccionURL == 'aftosa/acta'){
+
+    let renspa = getQueryVariable('renspa')
+
+    let campania = getCookie('campania')
+
+    // CARGAR ANIMALES EN EXISTENCIA
+
+    cargarAnimalesActa(renspa,campania)
+
+    // SELECCIONAR VETERINARIO
 
     // SUMAR TOTALES Y PARCIALES
 
@@ -66,7 +117,7 @@ if(seccionURL == 'aftosa/acta'){
 
 }
 
-// CARGAR ACTAS
+// BTN CARGAR RENSPA ACTAS
 const btnCargarActa = document.getElementById('btnCargarActa');
 
 btnCargarActa.addEventListener('click',(e)=>{
@@ -152,7 +203,9 @@ btnCargarActa.addEventListener('click',(e)=>{
 
 });
 
-// ACTAS POR PRODUCTOR
+/*=============================================
+ACTAS POR PRODUCTOR
+=============================================*/
 
 const btnBuscarActasProductor = document.getElementById('btnBuscarActasProductor')
 
