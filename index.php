@@ -9,6 +9,7 @@ require_once "controladores/brucelosis.controlador.php";
 require_once "controladores/tuberculosis.controlador.php";
 require_once "controladores/notificados.controlador.php";
 require_once "controladores/aftosa.controlador.php";
+require_once "controladores/actas.controlador.php";
 
 require_once "modelos/usuarios.modelo.php";
 require_once "modelos/productores.modelo.php";
@@ -18,6 +19,7 @@ require_once "modelos/brucelosis.modelo.php";
 require_once "modelos/tuberculosis.modelo.php";
 require_once "modelos/notificados.modelo.php";
 require_once "modelos/aftosa.modelo.php";
+require_once "modelos/actas.modelo.php";
 require_once "extensiones/vendor/autoload.php";
 
 $plantilla = new ControladorPlantilla();

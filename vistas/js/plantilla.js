@@ -297,8 +297,6 @@ const cargarSelect = (params)=>{
 		body:formData
 	}).then(resp=>resp.json())
 	.then(respuesta=>{
-
-		console.log(respuesta);
 		
 		options = document.createDocumentFragment()
 
