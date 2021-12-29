@@ -1,10 +1,10 @@
 <?php
 session_start();
 
-// ini_set('display_errors', 1);
-// ini_set('display_startup_errors', 1);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
 
-// error_reporting(E_ALL);
+error_reporting(E_ALL);
 
 
 // $departamento = 'BELGRANO';
@@ -233,6 +233,7 @@ function decryptCookie( $ciphertext ) {
 <script src="vistas/js/actualizarStatus.js"></script>
 <script src="vistas/js/pendientes.js"></script>
 <script src="vistas/js/aftosa.js"></script>
+<script src="vistas/js/actas.js"></script>
 <script src="vistas/js/usuarios.js"></script>
 <script src="vistas/js/reportes.js"></script>
 

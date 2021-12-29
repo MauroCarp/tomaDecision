@@ -1,12 +1,3 @@
-// const cabecerasTabla = document.querySelectorAll('th')
-// cabecerasTabla.forEach(cabezera =>{
-//     cabezera.classList.remove('sorting')
-//     cabezera.classList.remove('sorting_asc')
-// })
-
-
-const ruta = getQueryVariable('ruta')
-
 /*=============================================
 EDITAR CAMPANIA
 =============================================*/
@@ -139,7 +130,7 @@ btnBuscarActasProductor.addEventListener('click',(e)=>{
     
 })
 
-if(ruta == 'aftosa/actasProductor'){
+if(seccionURL == 'aftosa/actasProductor'){
     
     let renspa = getQueryVariable('renspa')
     
@@ -289,7 +280,7 @@ const eliminarRegistro = (id,ruta)=>{
 
 }
 
-if(ruta == 'aftosa/recepcion'){
+if(seccionURL == 'aftosa/recepcion'){
 
     // MOSTRAR INPUT RECEPCION
 
@@ -371,6 +362,9 @@ if(ruta == 'aftosa/recepcion'){
 
 }
 
+/*=============================================
+DISTRIBUCION
+=============================================*/
 
 const cargarDistribuciones = (matricula,idTBody)=>{
 

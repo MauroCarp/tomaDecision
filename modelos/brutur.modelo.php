@@ -164,9 +164,9 @@ class ModeloBruTur{
 	
 		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(renspa,campania,protocolo,estado,fechaEstado,fechaCarga,saneamientoNumero,positivo,negativo,sospechoso) VALUES(:renspa,:campania,:protocolo,:estado,:fechaEstado,:fechaCarga,:saneamientoNumero,:positivo,:negativo,:sospechoso)");
 
-		if($datos['estado'] == 'En Saneamiento' OR $datos['estado'] == 'MuVe'){
+		if($datos['estado'] != 'Libre' OR $datos['estado'] != 'Recertificacion'){
 
-			$stmt->bindParam(":saneamientoNumero", $datos['saneamientoNumero'], PDO::PARAM_STR);
+			$stmt->bindParam(":saneamientoNumero", $datos['saneamientoNum'], PDO::PARAM_STR);
 			$stmt->bindParam(":positivo", $datos['positivo'], PDO::PARAM_STR);
 			$stmt->bindParam(":negativo", $datos['negativo'], PDO::PARAM_STR);
 			$stmt->bindParam(":sospechoso", $datos['sospechoso'], PDO::PARAM_STR);

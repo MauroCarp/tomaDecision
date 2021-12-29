@@ -189,6 +189,12 @@ const formatearFecha = fecha =>{
 }
 
 /*=============================================
+RUTA
+=============================================*/
+
+const seccionURL = getQueryVariable('ruta');
+
+/*=============================================
 ACCESOS DIRECTOS ACTUALIZAR STATUS BRUTUR Y CARGAR/MODIFICAR ACTA AFTOSA
 =============================================*/
 
@@ -231,6 +237,7 @@ $('#menuAftosa').on('click',()=>{
 	
 	
 	validarCampania()
+
 });
 
 
@@ -246,6 +253,8 @@ $('#asignarCampania').click(()=>{
 
 	$('#ventanaModalCampania').modal('toggle');
 
+	document.getElementById('campaniaNumeroInfo').innerText = `N° ${getCookie('campania')}`
+
 });
 
 /*=============================================
@@ -260,6 +269,17 @@ const validarCampania = ()=>{
 	$('#ventanaModalCampania').modal('toggle');
 	
 }
+
+/*=============================================
+MOSTRAR CAMPAÑA
+=============================================*/	
+
+if(getCookie('campania')){
+
+	document.getElementById('campaniaNumeroInfo').innerText = `N° ${getCookie('campania')}`
+	
+}
+
 
 /*=============================================
 GENERAR SELECT
