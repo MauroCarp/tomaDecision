@@ -73,8 +73,6 @@ if(seccionURL == 'aftosa/acta'){
 
     cargarAnimalesActa(renspa,campania)
 
-    // SELECCIONAR VETERINARIO
-
     // SUMAR TOTALES Y PARCIALES
 
     let cantidadesTotal = document.getElementsByClassName('sumTotal')
@@ -113,6 +111,14 @@ if(seccionURL == 'aftosa/acta'){
     
     cargarSelect(params)
 
+    // SELECCIONAR VETERINARIO
+    let matricula = document.getElementById('matriculaVeterinario').value
+
+    setTimeout(() => {
+        
+        document.querySelector('#vacunador').value = matricula 
+    
+    }, 200);
 
 
 }
