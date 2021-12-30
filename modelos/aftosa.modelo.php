@@ -265,4 +265,5 @@ class ModeloAftosa{
 		$stmt = null;
 
     }
+
 }

@@ -5,7 +5,7 @@ require_once "conexion.php";
 class ModeloAnimales{
 
 	/*=============================================
-	VALIDAR ACTA
+	MOSTRAR ANIMALES
 	=============================================*/
 
 	static public function mdlMostrarAnimales($tabla,$item,$valor,$item2,$valor2){
@@ -22,6 +22,64 @@ class ModeloAnimales{
 		$stmt -> close();
 
 		$stmt = null;
+
+    }
+
+	/*=============================================
+	ACTUALIZAR EXISTENCIA
+	=============================================*/
+
+	static public function mdlActualizarExistencia($tabla,$datos){
+    
+        $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET
+        	vacas = :vacas,
+          vaquillonas = :vaquillonas,	
+          toros = :toros,	
+          toritos = :toritos,	
+          terneros = :terneros,	
+          terneras = :terneras,	
+          novillos = :novillos,	
+          novillitos = :novillitos,	
+          caprinos = :caprinos,	
+          ovinos = :ovinos,	
+          porcinos = :porcinos,	
+          equinos = :equinos,	
+          bufaloMay = :bufaloMay,	
+          bufaloMen = :bufaloMen
+         WHERE renspa = :renspa AND campania= :campania");
+
+        $stmt -> bindParam(":renspa", $datos['renspa'], PDO::PARAM_STR);
+        $stmt -> bindParam(":campania", $datos['campania'], PDO::PARAM_STR);
+        $stmt -> bindParam(":vacas", $datos['vacas'], PDO::PARAM_STR);
+        $stmt -> bindParam(":vaquillonas", $datos['vaquillonas'], PDO::PARAM_STR);
+        $stmt -> bindParam(":toros", $datos['toros'], PDO::PARAM_STR);
+        $stmt -> bindParam(":toritos", $datos['toritos'], PDO::PARAM_STR);
+        $stmt -> bindParam(":terneros", $datos['terneros'], PDO::PARAM_STR);
+        $stmt -> bindParam(":terneras", $datos['terneras'], PDO::PARAM_STR);
+        $stmt -> bindParam(":novillos", $datos['novillos'], PDO::PARAM_STR);
+        $stmt -> bindParam(":novillitos", $datos['novillitos'], PDO::PARAM_STR);
+        $stmt -> bindParam(":caprinos", $datos['caprinos'], PDO::PARAM_STR);
+        $stmt -> bindParam(":ovinos", $datos['ovinos'], PDO::PARAM_STR);
+        $stmt -> bindParam(":porcinos", $datos['porcinos'], PDO::PARAM_STR);
+        $stmt -> bindParam(":equinos", $datos['equinos'], PDO::PARAM_STR);
+        $stmt -> bindParam(":bufaloMay", $datos['bufaloMay'], PDO::PARAM_STR);
+        $stmt -> bindParam(":bufaloMen", $datos['bufaloMen'], PDO::PARAM_STR);
+
+      	if($stmt->execute()){
+
+          return "ok";
+    
+        }else{
+    
+          // return $stmt->errorInfo();
+          return "error";
+        
+        }
+        
+        $stmt->close();
+        $stmt = null;
+    
+    
 
     }
 

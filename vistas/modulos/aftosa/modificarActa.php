@@ -98,7 +98,19 @@
       
       <div class="lineaSeparadora"></div>
 
-      <!-- CARGAR DATOS ACTA -->
+      <!---------------------------------------
+                    CARGAR DATOS ACTA 
+                    ------------------------------------------>
+
+        <?php
+
+            $item = 'renspa';
+
+            $valor = $resultado['renspa'];
+
+            $dataActa = ControladorActas::ctrMostrarActa($item,$valor);
+    
+      ?>
       <div class="row">
 
         <div class="col-md-2">
@@ -107,7 +119,7 @@
             
             <label for="fechaVacunacion">Fecha de Vacunaci&oacute;n</label>
             
-            <input type="date" class="form-control" id="fechaVacunacion" name="fechaVacunacion" required>
+            <input type="date" class="form-control" id="fechaVacunacion" name="fechaVacunacion" value="<?php echo $dataActa['fechaVacunacion'];?>" required>
           
           </div>
 
@@ -119,7 +131,7 @@
             
             <label for="fechaRecepcion">Fecha de Recepci&oacute;n</label>
             
-            <input type="date" class="form-control" id="fechaRecepcion" name="fechaRecepcion" required>
+            <input type="date" class="form-control" id="fechaRecepcion" name="fechaRecepcion" value="<?php echo $dataActa['fechaRecepcion'];?>" required>
           
           </div>
 
@@ -145,7 +157,7 @@
             
             <label for="cantidadVacunas">Vacunas Suministradas</label>
             
-            <input type="number" class="form-control" id="cantidadVacunas" name="cantidadVacunas" value="0">
+            <input type="number" class="form-control" id="cantidadVacunas" name="cantidadVacunas" value="<?php echo $dataActa['cantidadPar'];?>">
           
           </div>
 
@@ -157,7 +169,7 @@
             
             <label for="actaNumero">Acta</label>
             
-            <input type="text" class="form-control" id="actaNumero" name="actaNumero" required>
+            <input type="text" class="form-control" id="actaNumero" name="actaNumero" value="<?php echo $dataActa['acta'];?>" required>
           
           </div>
 
@@ -169,7 +181,7 @@
             
             <label for="pago">Pag&oacute;</label>
             <br>
-            <input type="checkbox" class="checkbox" id="pago" name="pago">
+            <input type="checkbox" class="checkbox" id="pago" name="pago" <?php if($dataActa['pago']){ echo 'checked';} ?>>
           
           </div>
 
@@ -337,13 +349,13 @@
               
                 <div class="col-md-2">
                 
-                  <input type="checkbox" class="checkbox" id="vacunoCarbunclo" name="vacunoCarbunclo"> 
+                  <input type="checkbox" class="checkbox" id="vacunoCarbunclo" name="vacunoCarbunclo" <?php if($dataActa['vacunoCar']){echo 'checked';}?>> 
                 
                 </div>
 
                 <div class="col-md-5">
                 
-                  <input type="number" class="form-control" id="cantidadCarbunclo" name="cantidadCarbunclo" value="0">
+                  <input type="number" class="form-control" id="cantidadCarbunclo" name="cantidadCarbunclo" value="<?php echo $dataActa['cantidadCar']?>">
                 
                 </div>
             
@@ -363,13 +375,13 @@
               
                 <div class="col-md-2">
                 
-                  <input type="checkbox" class="checkbox" id="vacunoBrucelosis"  name="vacunoBrucelosis">
+                  <input type="checkbox" class="checkbox" id="vacunoBrucelosis"  name="vacunoBrucelosis" <?php if($dataActa['vacunoBruce']){echo 'checked';}?>>
                 
                 </div>
 
                 <div class="col-md-5">
                 
-                  <input type="number" class="form-control" id="cantidadBrucelosis"  name="cantidadBrucelosis" value="0">
+                  <input type="number" class="form-control" id="cantidadBrucelosis"  name="cantidadBrucelosis" value="<?php echo $dataActa['cantidadBruce']?>">
                 
                 </div>
               
@@ -389,7 +401,7 @@
       <div class="row">
 
         <div class="col-md-4"></div>
-        <div class="col-md-4"><button type="submit" class="btn btn-primary btn-lg btn-block" id="btnIngresarActa" name="btnIngresarActa">Cargar Acta</button></div>
+        <div class="col-md-4"><button type="submit" class="btn btn-primary btn-lg btn-block" id="btnIngresarActa" name="btnIngresarActa">Modificar Acta</button></div>
         <div class="col-md-4"></div>
       
       </div>
@@ -484,7 +496,7 @@
 
 <?php
 
-$cargarActa = new ControladorActas();
-$cargarActa -> ctrCargarActa();
+$actualizarActa = new ControladorActas();
+$actualizarActa -> ctrActualizarActa();
 
 ?>

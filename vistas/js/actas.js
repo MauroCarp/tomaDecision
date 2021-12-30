@@ -120,8 +120,164 @@ if(seccionURL == 'aftosa/acta'){
     
     }, 200);
 
+    
+
+// BTN INGRESA ACTA
+
+const btnIngresarActa = document.getElementById('btnIngresarActa')
+
+btnIngresarActa.addEventListener('click',(e)=>{
+    e.preventDefault()
+
+    let fechaRecepcion = document.getElementById('fechaRecepcion').value
+    let fechaVacunacion = document.getElementById('fechaVacunacion').value
+    let acta = document.getElementById('actaNumero').value
+
+    if(fechaRecepcion == '' || fechaVacunacion == '' || acta == ''){
+
+        swal({
+              type: "error",
+              title: "Hay campos que no puede ir vacios",
+              showConfirmButton: true,
+              confirmButtonText: "Cerrar"
+            })
+            
+    }else{
+
+        swal({
+            title: "¿Cargar Acta?",
+            text: "Revisar datos antes de confirmar",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            cancelButtonText: "Cancelar",
+            confirmButtonText: "Si, cargar Acta!"
+        })
+        .then(function(result){
+                
+            if (result.value) {
+            
+                document.getElementById('form-acta').submit()
+                        
+            }
+
+        })
+
+    }
+
+})
+
 
 }
+
+if(seccionURL == 'aftosa/modificarActa'){
+    console.log('hola')
+    let renspa = getQueryVariable('renspa')
+
+    let campania = getCookie('campania')
+
+    // CARGAR ANIMALES EN EXISTENCIA
+
+    cargarAnimalesActa(renspa,campania)
+
+    // SUMAR TOTALES Y PARCIALES
+
+    let cantidadesTotal = document.getElementsByClassName('sumTotal')
+
+    for (const cantidad of cantidadesTotal) {
+        
+        cantidad.addEventListener('change',()=>{
+
+            document.getElementById('campoTotal').value = sumaParcialTotal('sumTotal')
+
+        })  
+              
+    }
+
+    let cantidadesParcial = document.getElementsByClassName('sumParcial')
+
+    for (const cantidad of cantidadesParcial) {
+        
+        cantidad.addEventListener('change',()=>{
+
+            document.getElementById('campoParcial').value = sumaParcialTotal('sumParcial')
+
+        })  
+
+    }
+
+    // CARGAR SELECT VETERINARIOS
+
+    let params = {
+        idSelect:'vacunador',
+        accion:'listarVeterinarios',
+        ajax:'veterinarios',
+        value:'matricula',
+        optText:'nombre'
+    }
+    
+    cargarSelect(params)
+
+    // SELECCIONAR VETERINARIO
+    let matricula = document.getElementById('matriculaVeterinario').value
+
+    setTimeout(() => {
+        
+        document.querySelector('#vacunador').value = matricula 
+    
+    }, 200);
+
+    
+
+// BTN INGRESA ACTA
+
+const btnIngresarActa = document.getElementById('btnIngresarActa')
+
+btnIngresarActa.addEventListener('click',(e)=>{
+    e.preventDefault()
+
+    let fechaRecepcion = document.getElementById('fechaRecepcion').value
+    let fechaVacunacion = document.getElementById('fechaVacunacion').value
+    let acta = document.getElementById('actaNumero').value
+
+    if(fechaRecepcion == '' || fechaVacunacion == '' || acta == ''){
+
+        swal({
+              type: "error",
+              title: "Hay campos que no puede ir vacios",
+              showConfirmButton: true,
+              confirmButtonText: "Cerrar"
+            })
+            
+    }else{
+
+        swal({
+            title: "¿Modificar Acta?",
+            text: "Revisar datos antes de confirmar",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            cancelButtonText: "Cancelar",
+            confirmButtonText: "Si, modificar Acta!"
+        })
+        .then(function(result){
+                
+            if (result.value) {
+            
+                document.getElementById('form-acta').submit()
+                        
+            }
+
+        })
+
+    }
+
+})
+
+}
+
 
 // BTN CARGAR RENSPA ACTAS
 const btnCargarActa = document.getElementById('btnCargarActa');
@@ -185,8 +341,8 @@ btnCargarActa.addEventListener('click',(e)=>{
                               
                             if(result.value){
 
-                                // ENVIAR A MODIFICAR ACTA}
-
+                                window.location = `index.php?ruta=aftosa/modificarActa&renspa=${renspa}`
+                                
                             }
 
                           })
@@ -208,6 +364,8 @@ btnCargarActa.addEventListener('click',(e)=>{
   
 
 });
+
+
 
 /*=============================================
 ACTAS POR PRODUCTOR
