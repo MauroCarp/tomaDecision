@@ -60,6 +60,7 @@ $btnValido = (!empty($respuestaBrucelosis) OR !empty($respuestaTuberculosis)) ? 
             <th>Establecimiento</th>
             <th>Protocolo</th>
             <th>Campa&ntilde;a</th>
+            <th>Estado</th>
             <th>Fecha Cargado</th>
             <th>Fecha Muestra</th>
             
@@ -75,24 +76,35 @@ $btnValido = (!empty($respuestaBrucelosis) OR !empty($respuestaTuberculosis)) ? 
             if(!empty($respuestaBrucelosis)){
              
               for ($i=0; $i < sizeof($respuestaBrucelosis) ; $i++) { 
-              
-                echo "            
-                <tr>
-    
-                  <td>".$respuestaBrucelosis[$i]['renspa']."</td>
-                  
-                  <td>".$respuestaBrucelosis[$i]['establecimiento']."</td>
-                  
-                  <td>".$respuestaBrucelosis[$i]['protocolo']."</td>
-                  
-                  <td>Brucelosis</td>
-                  
-                  <td>".formatearFecha($respuestaBrucelosis[$i]['fechaCarga'])."</td>
-                  
-                  <td>".formatearFecha($respuestaBrucelosis[$i]['fechaEstado'])."</td>
-                  
-                </tr>";
-    
+
+                $mostrarValido = TRUE;
+
+                $mostrarValido = ($respuestaBrucelosis[$i]['estado'] == 'DOES Total' AND $respuestaBrucelosis[$i]['positivo'] != 0) ? FALSE : TRUE;
+
+                if($mostrarValido){
+                
+                  echo "            
+                  <tr>
+      
+                    <td>".$respuestaBrucelosis[$i]['renspa']."</td>
+                    
+                    <td>".$respuestaBrucelosis[$i]['establecimiento']."</td>
+                    
+                    <td>".$respuestaBrucelosis[$i]['protocolo']."</td>
+                    
+                    <td>Brucelosis</td>
+
+                    <td>".$respuestaBrucelosis[$i]['estado']."</td>
+                    
+                    <td>".formatearFecha($respuestaBrucelosis[$i]['fechaCarga'])."</td>
+                    
+                    <td>".formatearFecha($respuestaBrucelosis[$i]['fechaEstado'])."</td>
+                    
+                  </tr>";
+                
+                }
+
+
               }
     
             }
@@ -111,6 +123,8 @@ $btnValido = (!empty($respuestaBrucelosis) OR !empty($respuestaTuberculosis)) ? 
                   <td>".$respuestaTuberculosis[$i]['protocolo']."</td>
                   
                   <td>Tuberculosis</td>
+
+                  <td>".$respuestaTuberculosis[$i]['estado']."</td>
                   
                   <td>".formatearFecha($respuestaTuberculosis[$i]['fechaCarga'])."</td>
                   

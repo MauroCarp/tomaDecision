@@ -175,7 +175,7 @@ function encrypt_decrypt($action, $string) {
   $output = false;
 
   $encrypt_method = "AES-128-ECB";
-  $key = 'This is my secre';
+  $key = 'remember';
 
   if ( $action == 'encrypt' ) {
       $output = openssl_encrypt($string, $encrypt_method, $key);

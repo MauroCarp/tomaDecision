@@ -351,7 +351,7 @@ class ModeloBruTur{
 
 	static public function mdlMostrarPendientes($tabla,$item,$valor){
 	
-		$stmt = Conexion::conectar()->prepare("SELECT $tabla.renspa, $tabla.fechaEstado,$tabla.protocolo,$tabla.estado,$tabla.fechaCarga, productores.establecimiento,$tabla.estadoSenasa FROM $tabla INNER JOIN productores ON $tabla.renspa = productores.renspa WHERE $item = :item AND $tabla.estado != 'S/D' AND $tabla.estado != 'En Saneamiento' AND $tabla.estado != 'Saneado'");
+		$stmt = Conexion::conectar()->prepare("SELECT $tabla.renspa, $tabla.fechaEstado,$tabla.protocolo,$tabla.estado,$tabla.fechaCarga, productores.establecimiento,$tabla.estadoSenasa, $tabla.positivo FROM $tabla INNER JOIN productores ON $tabla.renspa = productores.renspa WHERE $item = :item AND $tabla.estado != 'S/D' AND $tabla.estado != 'En Saneamiento' AND $tabla.estado != 'Saneado'");
 
 
 		$stmt->bindParam(":item", $valor, PDO::PARAM_STR);

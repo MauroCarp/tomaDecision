@@ -452,32 +452,39 @@ class ControladorBruTur{
 
 			for ($i=0; $i < sizeof($respuestaBrucelosis) ; $i++) { 
 				
-				$item = 'renspa';
+				$mostrarValido = TRUE;
 
-				$fechaMuestra = formatearFecha($respuestaBrucelosis[$i]['fechaEstado']);
+                $mostrarValido = ($respuestaBrucelosis[$i]['estado'] == 'DOES Total' AND $respuestaBrucelosis[$i]['positivo'] != 0) ? FALSE : TRUE;
+
+                if($mostrarValido){
+
+					$item = 'renspa';
+
+					$fechaMuestra = formatearFecha($respuestaBrucelosis[$i]['fechaEstado']);
+					
+					$valor = $respuestaBrucelosis[$i]['renspa'];
+
+					$respuesta = ControladorProductores::ctrMostrarProductores($item,$valor);
+
+					$propietario = $respuesta['propietario'];
+
+					$matriculaVet  = $respuesta['veterinario'];
+
+					$item = 'matricula';
+
+					$respuesta = ControladorVeterinarios::ctrMostrarVeterinarios($item,$matriculaVet);
+
+					$veterinario = $respuesta['nombre'];
+
+					echo utf8_decode("<tr> 
+					<td style='font-weight:bold; border:1px solid #eee;'>".$respuestaBrucelosis[$i]['renspa']."</td> 
+					<td style='font-weight:bold; border:1px solid #eee;'>".$propietario."</td> 
+					<td style='font-weight:bold; border:1px solid #eee;'>".$respuestaBrucelosis[$i]['estado']."</td> 
+					<td style='font-weight:bold; border:1px solid #eee;'>".$fechaMuestra."</td>	
+					<td style='font-weight:bold; border:1px solid #eee;'>".$veterinario."</td>
+					</tr>");
+				}
 				
-				$valor = $respuestaBrucelosis[$i]['renspa'];
-
-				$respuesta = ControladorProductores::ctrMostrarProductores($item,$valor);
-
-				$propietario = $respuesta['propietario'];
-
-				$matriculaVet  = $respuesta['veterinario'];
-
-				$item = 'matricula';
-
-				$respuesta = ControladorVeterinarios::ctrMostrarVeterinarios($item,$matriculaVet);
-
-				$veterinario = $respuesta['nombre'];
-
-				echo utf8_decode("<tr> 
-				<td style='font-weight:bold; border:1px solid #eee;'>".$respuestaBrucelosis[$i]['renspa']."</td> 
-				<td style='font-weight:bold; border:1px solid #eee;'>".$propietario."</td> 
-				<td style='font-weight:bold; border:1px solid #eee;'>".$respuestaBrucelosis[$i]['estado']."</td> 
-				<td style='font-weight:bold; border:1px solid #eee;'>".$fechaMuestra."</td>	
-				<td style='font-weight:bold; border:1px solid #eee;'>".$veterinario."</td>
-				</tr>");
-
 			}
 
 		}
