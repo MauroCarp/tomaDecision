@@ -92,6 +92,76 @@ class ControladorAftosa{
             
             $respuesta = ModeloAftosa::mdlEditarDatosCampania($tabla,$datos);
 
+            $errores = array();
+            
+            $errores[] = $respuesta;
+
+            if($_FILES["existenciaAnimal"]['size'] > 0){
+
+                $error = false;
+            
+                $allowedFileType = ['application/vnd.ms-excel','text/xls','text/xlsx','application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'];
+            
+                if(in_array($_FILES["existenciaAnimal"]["type"],$allowedFileType)){
+            
+                    $ruta = "cargas/" . $_FILES['existenciaAnimal']['name'];
+            
+                    move_uploaded_file($_FILES['existenciaAnimal']['tmp_name'], $ruta);
+            
+                    $nombreArchivo = str_replace(' ', '',$_FILES['existenciaAnimal']['name']);
+            
+                    $rowNumber = 0;
+            
+                    $rowValida = FALSE;
+                    
+                    $rowValidaTemp = FALSE;
+            
+            
+                    $Reader = new SpreadsheetReader($ruta);	
+            
+                    $sheetCount = count($Reader->sheets());
+            
+                    for($i=0;$i<$sheetCount;$i++){
+            
+                        $Reader->ChangeSheet($i);
+            
+                            foreach ($Reader as $Row){
+                                
+                                $rowNumber++;
+                                
+                                
+                                if($rowValida){   
+                                    
+                                    $data = array(
+                                        'renspa' => $Row[0],
+                                        'vacas' => $Row[4],
+                                        'vaquillonas' => $Row[5],
+                                        'novillos' => $Row[6],
+                                        'novillitos' => $Row[7],
+                                        'terneras' => $Row[8],
+                                        'terneros' => $Row[9],
+                                        'toros' => $Row[10],
+                                        'toritos' => $Row[11]
+                                    );
+            
+                                    $respuesta = ControladorAnimales::ctrCargarExistencia($data);
+
+                                }
+                                
+                                if ($rowNumber == 1){
+                                    
+                                    $rowValida = TRUE;
+                                
+                                }
+            
+
+                            }		
+                    }
+            
+                }
+                                
+            }
+            
             if($respuesta == "ok"){
 
                 echo'<script>

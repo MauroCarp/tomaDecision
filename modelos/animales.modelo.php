@@ -1,6 +1,14 @@
 <?php
 
+error_reporting(E_ERROR | E_PARSE);
+
 require_once "conexion.php";
+
+require_once 'extensiones/excel/php-excel-reader/excel_reader2.php';
+
+require_once 'extensiones/excel/SpreadsheetReader.php';
+
+
 
 class ModeloAnimales{
 
@@ -25,6 +33,44 @@ class ModeloAnimales{
 
     }
 
+	/*=============================================
+	CARGAR EXISTENCIA
+	=============================================*/
+
+	static public function mdlCargarExistencia($tabla,$datos){
+    
+        $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(renspa,campania,vacas,vaquillonas,toros,toritos,terneros,terneras,novillos,novillitos) VALUES(:renspa, :campania, :vacas, :vaquillonas,	:toros,	:toritos,	:terneros, :terneras,	:novillos, :novillitos)");
+
+        $stmt -> bindParam(":renspa", $datos['renspa'], PDO::PARAM_STR);
+        $stmt -> bindParam(":campania", $datos['campania'], PDO::PARAM_STR);
+        $stmt -> bindParam(":vacas", $datos['vacas'], PDO::PARAM_STR);
+        $stmt -> bindParam(":vaquillonas", $datos['vaquillonas'], PDO::PARAM_STR);
+        $stmt -> bindParam(":toros", $datos['toros'], PDO::PARAM_STR);
+        $stmt -> bindParam(":toritos", $datos['toritos'], PDO::PARAM_STR);
+        $stmt -> bindParam(":terneros", $datos['terneros'], PDO::PARAM_STR);
+        $stmt -> bindParam(":terneras", $datos['terneras'], PDO::PARAM_STR);
+        $stmt -> bindParam(":novillos", $datos['novillos'], PDO::PARAM_STR);
+        $stmt -> bindParam(":novillitos", $datos['novillitos'], PDO::PARAM_STR);
+
+      	if($stmt->execute()){
+
+          return "ok";
+    
+        }else{
+    
+          return $stmt->errorInfo();
+          // return "error";
+        
+        }
+        
+        $stmt->close();
+        $stmt = null;
+    
+    
+
+    
+
+}
 	/*=============================================
 	ACTUALIZAR EXISTENCIA
 	=============================================*/

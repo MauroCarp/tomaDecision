@@ -27,7 +27,7 @@
                 
                       <div class='box-header'>
                           
-                          <form  method="post">
+                          <form  method="post" enctype="multipart/form-data">
                           
                             <div class="row">
 
@@ -194,6 +194,28 @@
                                           <span class="input-group-addon"><i class="fa fa-dollar"></i></span> 
 
                                           <input type="number" step="0.01" class="form-control input-lg" name="precioVeterinarioCarb" id="precioVeterinarioCarb" required>
+
+                                      </div>
+
+                                  </div>
+
+                              </div>
+
+                            </div>
+
+                            <div class="row">
+
+                              <div class="col-md-8">
+
+                                  <div class="form-group">
+
+                                  <label>Existencia Animal</label>
+
+                                      <div class="input-group">
+                                      
+                                          <span class="input-group-addon"><i class="icon-COW"></i></span> 
+
+                                          <input type="file" class="form-control" name="existenciaAnimal" id="existenciaAnimal">
 
                                       </div>
 

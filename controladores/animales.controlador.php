@@ -16,6 +16,23 @@ class ControladorAnimales{
 		return $respuesta;
     
     }
+
+    /*=============================================
+    ACTUALIZAR EXISTENCIA
+	=============================================*/
+
+	static public function ctrCargarExistencia($datos){
+    
+        $tabla = "animales";
+
+        $datos['campania'] = $_COOKIE['campania'];
+
+        $respuesta = ModeloAnimales::mdlCargarExistencia($tabla, $datos);
+
+		return $respuesta;
+    
+    }
+    
     /*=============================================
     ACTUALIZAR EXISTENCIA
 	=============================================*/
