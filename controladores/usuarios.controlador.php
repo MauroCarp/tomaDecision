@@ -36,7 +36,7 @@ class ControladorUsuarios{
 						if( isset($_POST['rememberme']) ){
 														
 							// Set cookie variables
-							$value = encryptCookie($respuesta["id"]);
+							$value =  encrypt_decrypt('encrypt', $respuesta["id"]);
 			
 							echo '<script>	
 

@@ -171,29 +171,22 @@ CUERPO DOCUMENTO
  
   <?php
 
-function encryptCookie( $userid ) {
-   
-  $key = hex2bin(random_bytes(4));
-  $cipher = "aes-256-cbc";
-  $ivlen = openssl_cipher_iv_length($cipher);
-  $iv = openssl_random_pseudo_bytes($ivlen);
+function encrypt_decrypt($action, $string) {
+  $output = false;
 
-  $ciphertext = openssl_encrypt($userid, $cipher, $key, 0, $iv);
-  
+  $encrypt_method = "AES-128-ECB";
+  $key = 'This is my secre';
 
-  return( base64_encode($ciphertext . '::' . $iv.'::'.$key) );
+  if ( $action == 'encrypt' ) {
+      $output = openssl_encrypt($string, $encrypt_method, $key);
+      $output;
+  } else if( $action == 'decrypt' ) {
+      $output = openssl_decrypt($string, $encrypt_method, $key);
+  }
+
+  return $output;
 }
 
-// Decrypt cookie
-function decryptCookie( $ciphertext ) {
-  
-  $cipher = "aes-256-cbc";
-
-  list($encrypted_data, $iv,$key) = explode('::', base64_decode($ciphertext));
-  
-  return openssl_decrypt($encrypted_data, $cipher, $key, 0, $iv);
-
-}
 
   if(isset($_SESSION["iniciarSesion"]) && $_SESSION["iniciarSesion"] == "ok"){
 
@@ -203,7 +196,7 @@ function decryptCookie( $ciphertext ) {
   }else if( isset($_COOKIE['rememberme']  )){
    
     // Decrypt cookie variable value
-    $userid = decryptCookie($_COOKIE['rememberme']);
+    $userid = encrypt_decrypt('decrypt',$_COOKIE['rememberme']);
                
     $item = 'id';
 
