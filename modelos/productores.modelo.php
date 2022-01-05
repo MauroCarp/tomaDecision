@@ -37,6 +37,7 @@ class ModeloProductores{
 
 		}else{
 
+			return $stmt->errorInfo();
 			return "error";
 		
 		}

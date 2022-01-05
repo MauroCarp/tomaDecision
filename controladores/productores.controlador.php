@@ -103,6 +103,46 @@ class ControladorProductores{
 	}
 
 	/*=============================================
+	CREAR PRODUCTOR EXISTENCIA
+	=============================================*/
+
+	static public function ctrCrearProductorExistencia($renspa,$propietario){
+
+		$datos = array("renspa"=>$renspa,
+		"propietario"=>$propietario,
+		"establecimiento"=>NULL,
+		"explotacion"=>NULL,
+		"regimen"=>NULL,
+		"tipoDoc"=>NULL,
+		"numDoc"=>NULL,
+		"iva"=>NULL,
+		"telefono"=>NULL,
+		"mail"=>NULL,
+		"domicilio"=>NULL,
+		"localidad"=>NULL,
+		"provincia"=>NULL,
+		"departamento"=>NULL,
+		"veterinario"=>NULL,
+		"distrito"=>NULL);
+
+		$tabla = "productores";
+
+		$respuesta = ModeloProductores::mdlIngresarProductor($tabla, $datos);
+
+		$tabla = "brucelosis";
+		
+		$datos = array("renspa"=>$renspa);
+		
+		$respuesta = ModeloBrucelosis::mdlIngresarRegistro($tabla, $datos);
+		
+		$tabla = "tuberculosis";
+		
+		$respuesta = ModeloTuberculosis::mdlIngresarRegistro($tabla, $datos);
+				
+
+	}
+
+	/*=============================================
 	MOSTRAR PRODUCTORES
 	=============================================*/
 

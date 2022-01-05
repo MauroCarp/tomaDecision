@@ -96,7 +96,18 @@ class ControladorAftosa{
             
             $errores[] = $respuesta;
 
+
             if($_FILES["existenciaAnimal"]['size'] > 0){
+                
+                $productores = ControladorProductores::ctrMostrarProductores(null,null);
+
+                $renspasExistentes = array();
+    
+                foreach ($productores as $key => $value) {
+                    
+                    $renspasExistentes[] = $value['renspa'];
+
+                }
 
                 $error = false;
             
@@ -115,8 +126,7 @@ class ControladorAftosa{
                     $rowValida = FALSE;
                     
                     $rowValidaTemp = FALSE;
-            
-            
+                                
                     $Reader = new SpreadsheetReader($ruta);	
             
                     $sheetCount = count($Reader->sheets());
@@ -132,6 +142,12 @@ class ControladorAftosa{
                                 
                                 if($rowValida){   
                                     
+                                    if(!in_array($Row[0], $renspasExistentes)) {
+                        
+                                        $respuesta = ControladorProductores::ctrCrearProductorExistencia($Row[0],$Row[2]);
+                                    
+                                    }
+
                                     $data = array(
                                         'renspa' => $Row[0],
                                         'vacas' => $Row[4],
@@ -159,9 +175,9 @@ class ControladorAftosa{
                     }
             
                 }
-                                
+
             }
-            
+
             if($respuesta == "ok"){
 
                 echo'<script>
