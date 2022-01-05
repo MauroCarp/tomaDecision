@@ -74,14 +74,9 @@ $('#actualizarStatus').on('click',function(e){
 
     let renspa = $('#renspa').val()
 
-    if (renspa != '') {
-        
-        window.location = `index.php?ruta=brutur/actualizarStatus&renspa=${renspa}`;
+    let ruta = `index.php?ruta=brutur/actualizarStatus&renspa=${renspa}`;
 
-    }else{
-
-        alert('El campo RENSPA no puede ir vacio')
-    }
+    validarRenspa(renspa,ruta,false)  
 
 });
 

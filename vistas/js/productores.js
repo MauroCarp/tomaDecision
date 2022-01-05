@@ -78,12 +78,15 @@ const productorExistente = (renspa,ruta,redirect)=>{
                 window.open(ruta ,'_blank')
                 else window.location = ruta
             
-              }else{   swal({
+              }else{  
+
+                 swal({
                 type: "error",
                 title: "R.E.N.S.P.A Inexistente",
                 showConfirmButton: true,
                 confirmButtonText: "Cerrar"
                 })
+
               }
   })
 
@@ -324,26 +327,9 @@ console.log(e);
 
   let renspa = document.getElementById('renspaSituacionProductor').value
 
-  renspa.trim()
+  let ruta = `extensiones/fpdf/generarPdf.php?renspa=${renspa}&accion=situacionProductor`
 
-  if(renspa.length == 17){
-
-      let ruta = `extensiones/fpdf/generarPdf.php?renspa=${renspa}&accion=situacionProductor`
-
-      productorExistente(renspa, ruta,true)
-      
-  }else{
-      
-      swal({
-          type: "error",
-          title: "R.E.N.S.P.A Incorrecto",
-          showConfirmButton: true,
-          confirmButtonText: "Cerrar"
-          })
-          
-  }
-    
-  
+  validarRenspa(renspa,ruta,true)  
 })
 
 /*=============================================

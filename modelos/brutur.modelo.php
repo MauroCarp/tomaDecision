@@ -279,7 +279,6 @@ class ModeloBruTur{
 			
 		}else{
 
-			return($stmt->errorInfo());
 			return 'error';
 
 		};

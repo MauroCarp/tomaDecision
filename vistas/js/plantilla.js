@@ -284,6 +284,7 @@ if(getCookie('campania')){
 /*=============================================
 GENERAR SELECT
 =============================================*/	
+
 const cargarSelect = (params)=>{
 
 	let url = `ajax/${params.ajax}.ajax.php`
@@ -317,3 +318,36 @@ const cargarSelect = (params)=>{
 	.catch(er => console.log(er))
 }
 
+/*=============================================
+VALIDAR CAMPO RENSPA
+=============================================*/	
+
+const validarRenspa = (renspa,ruta,redirect)=>{
+
+	renspa.trim()
+
+  if(renspa.length == 0 ){
+  
+      swal({
+        type: "error",
+        title: "El campo R.E.N.S.P.A no puede estar Vacio",
+        showConfirmButton: true,
+        confirmButtonText: "Cerrar"
+        })
+    
+  }else if(renspa.length == 17 ){
+   
+    productorExistente(renspa, ruta,redirect)
+
+  }else{
+    
+    swal({
+        type: "error",
+        title: "R.E.N.S.P.A Incorrecto",
+        showConfirmButton: true,
+        confirmButtonText: "Cerrar"
+        })
+        
+  }
+
+}
