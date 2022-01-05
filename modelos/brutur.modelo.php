@@ -208,8 +208,6 @@ class ModeloBruTur{
 	=============================================*/
     static public function mdlActualizarBruTur($tabla,$item,$datos){
 
-		$fechaHoy = Date('Y-m-d');
-
 		$saneamiento = ',saneamientoNumero = :saneamientoNumero,positivo = :positivo,negativo = :negativo,sospechoso = :sospechoso';
 
 		if($tabla == 'tuberculosis'){
@@ -255,7 +253,7 @@ class ModeloBruTur{
 		
 		}
 
-		$stmt->bindParam(":fechaCarga", $fechaHoy, PDO::PARAM_STR);
+		$stmt->bindParam(":fechaCarga", $datos['fechaCarga'], PDO::PARAM_STR);
 		$stmt->bindParam(":protocolo", $datos['protocolo'], PDO::PARAM_STR);
 		$stmt->bindParam(":vacas", $datos['vacas'], PDO::PARAM_STR);
 		$stmt->bindParam(":vaquillonas", $datos['vaquillonas'], PDO::PARAM_STR);
