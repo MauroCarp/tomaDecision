@@ -207,7 +207,7 @@ class ModeloBruTur{
 	ACTUALIZAR STATUS BRUTUR
 	=============================================*/
     static public function mdlActualizarBruTur($tabla,$item,$datos){
-
+		$queryFechaCarga = (isset($datos['fechaCarga'])) ? ',fechaCarga = :fechaCarga' : '';
 		$saneamiento = ',saneamientoNumero = :saneamientoNumero,positivo = :positivo,negativo = :negativo,sospechoso = :sospechoso';
 
 		if($tabla == 'tuberculosis'){
@@ -220,7 +220,6 @@ class ModeloBruTur{
 			}	
 
 			$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET 
-			fechaCarga = :fechaCarga,
 			protocolo = :protocolo,
 			notificado = 0,
 			vacas = :vacas,
@@ -230,7 +229,7 @@ class ModeloBruTur{
 			novillos = :novillos,
 			novillitos = :novillitos,
 			toros = :toros,
-			fechaEstado = :fechaEstado $saneamiento	
+			fechaEstado = :fechaEstado $queryFechaCarga $saneamiento	
 			WHERE $item = :item");
 
 			$stmt->bindParam(":terneros", $datos['terneros'], PDO::PARAM_STR);
@@ -242,18 +241,22 @@ class ModeloBruTur{
 		}else{
 
 			$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET 
-			fechaCarga = :fechaCarga,
 			protocolo = :protocolo,
 			notificado = 0,
 			vacas = :vacas,
 			vaquillonas = :vaquillonas,
 			toros = :toros,
-			fechaEstado = :fechaEstado $saneamiento	
+			fechaEstado = :fechaEstado $queryFechaCarga $saneamiento	
 			WHERE $item = :item");
 		
 		}
 
-		$stmt->bindParam(":fechaCarga", $datos['fechaCarga'], PDO::PARAM_STR);
+		if(isset($datos['fechaCarga'])){
+
+			$stmt->bindParam(":fechaCarga", $datos['fechaCarga'], PDO::PARAM_STR);
+		
+		}
+		
 		$stmt->bindParam(":protocolo", $datos['protocolo'], PDO::PARAM_STR);
 		$stmt->bindParam(":vacas", $datos['vacas'], PDO::PARAM_STR);
 		$stmt->bindParam(":vaquillonas", $datos['vaquillonas'], PDO::PARAM_STR);

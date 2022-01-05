@@ -196,7 +196,6 @@ class ControladorBruTur{
 				'protocolo'=>$_POST['protocoloBruceAct'],
 				'estado'=>$_POST['estadoBruceAct'],
 				'estadoSenasa'=> 'Pendiente',
-				'fechaCarga'=> null,
 				'fechaEstado'=>$_POST['fechaMuestraBruceAct'],
 				'saneamientoNum' => $saneamientoNumBruce,
 				'positivo' => $_POST['positivoBruceAct'],
@@ -223,7 +222,6 @@ class ControladorBruTur{
 				'protocolo'=>$_POST['protocoloTuberAct'],
 				'estado'=>$_POST['estadoTuberAct'],
 				'estadoSenasa'=> 'Pendiente',
-				'fechaCarga'=> null,
 				'fechaEstado'=>$_POST['fechaMuestraTuberAct']);
 			
 			if($datosTuberculosis['estado'] == 'En Saneamiento'){
