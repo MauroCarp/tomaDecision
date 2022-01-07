@@ -217,6 +217,45 @@ if(seccionURL == 'aftosa/recepcion'){
             let input = generarInputRecepcion()
             
             tbody.prepend(input)
+
+            // OTRA MARCA
+            const selectMarca = document.getElementById('marcaRecepcion')
+
+            selectMarca.addEventListener('change',(ev)=>{
+
+                console.log(ev);
+                
+                let value = ev.target.value                
+
+                if(value == 'otraMarca'){
+
+                    let selectTd = document.getElementById('tablaRecepcion').firstElementChild.childNodes[3]
+                    
+                    let inputOtro = document.createElement('INPUT')
+                    inputOtro.setAttribute('id','inputOtraMarca')
+                    inputOtro.setAttribute('name','inputOtraMarca')
+                    inputOtro.setAttribute('type','text')
+                    inputOtro.setAttribute('class','form-control')
+                    inputOtro.setAttribute('style','margin-top:5px;')
+                    
+                    selectTd.append(inputOtro)
+
+                }else{
+
+                    let inputOtro = document.getElementById('inputOtraMarca')
+
+                    if(document.body.contains(inputOtro)){
+
+                        inputOtro.parentNode.removeChild(inputOtro);
+
+                    }
+
+                }
+            })
+    
+
+
+
             
             // CARGAR RECEPCION
             document.getElementById('agregarRecepcion').addEventListener('click',()=>{
