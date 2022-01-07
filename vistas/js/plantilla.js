@@ -307,11 +307,20 @@ const cargarSelect = (params)=>{
 			
 			opt.setAttribute('value',option[params.value])
 			opt.innerText = option[params.optText]
-
+			
 			options.append(opt)
 			
 		})
-
+		
+		if(params.idSelect == 'marcaRecepcion'){
+		
+			let opt = document.createElement('OPTION')
+			opt.setAttribute('value','otraMarca')
+			opt.innerText = 'Otra'		
+			options.append(opt)
+		
+		}
+		
 		document.getElementById(params.idSelect).appendChild(options)
 
 	})

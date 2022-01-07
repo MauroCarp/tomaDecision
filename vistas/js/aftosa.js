@@ -203,6 +203,38 @@ const eliminarRegistro = (id,ruta)=>{
 
 }
 
+// INPUT OTRA MARCA
+          
+const otraMarcaOpt = (value,tabla,nodo)=>{
+
+    if(value == 'otraMarca'){
+
+        let selectTd = document.getElementById(tabla).firstElementChild.childNodes[nodo]
+        
+        let inputOtro = document.createElement('INPUT')
+        inputOtro.setAttribute('id','inputOtraMarca')
+        inputOtro.setAttribute('name','inputOtraMarca')
+        inputOtro.setAttribute('type','text')
+        inputOtro.setAttribute('class','form-control')
+        inputOtro.setAttribute('style','margin-top:5px;')
+        
+        selectTd.append(inputOtro)
+
+    }else{
+
+        let inputOtro = document.getElementById('inputOtraMarca')
+
+        if(document.body.contains(inputOtro)){
+
+            inputOtro.parentNode.removeChild(inputOtro);
+
+        }
+
+    }
+
+}
+
+
 if(seccionURL == 'aftosa/recepcion'){
 
     // MOSTRAR INPUT RECEPCION
@@ -222,35 +254,13 @@ if(seccionURL == 'aftosa/recepcion'){
             const selectMarca = document.getElementById('marcaRecepcion')
 
             selectMarca.addEventListener('change',(ev)=>{
-
-                console.log(ev);
                 
                 let value = ev.target.value                
+                
+                let tabla = 'tablaRecepcion'
 
-                if(value == 'otraMarca'){
+                otraMarcaOpt(value,tabla,3)
 
-                    let selectTd = document.getElementById('tablaRecepcion').firstElementChild.childNodes[3]
-                    
-                    let inputOtro = document.createElement('INPUT')
-                    inputOtro.setAttribute('id','inputOtraMarca')
-                    inputOtro.setAttribute('name','inputOtraMarca')
-                    inputOtro.setAttribute('type','text')
-                    inputOtro.setAttribute('class','form-control')
-                    inputOtro.setAttribute('style','margin-top:5px;')
-                    
-                    selectTd.append(inputOtro)
-
-                }else{
-
-                    let inputOtro = document.getElementById('inputOtraMarca')
-
-                    if(document.body.contains(inputOtro)){
-
-                        inputOtro.parentNode.removeChild(inputOtro);
-
-                    }
-
-                }
             })
     
             // CARGAR RECEPCION
@@ -453,10 +463,13 @@ if(isInPage(btnCargarDistribuciones)){
     document.getElementById('btnAgregarDistribucion').removeAttribute('disabled')
     
     let matricula = document.getElementById('vacunadorDistri').value
+
     if(matricula != '')
+
         cargarDistribuciones(matricula,'tablaDistribucion')
    
     })
+
 
 }
 
@@ -565,10 +578,9 @@ if(isInPage(btnAgregarDistribucion)){
         let input = generarInputDistribucion()
         
         tbody.prepend(input)
-        
+
         // CARGAR DISTRIBUCION
         document.getElementById('agregarDistribucion').addEventListener('click',()=>{
-            console.log('hola');
             
             let matricula = document.querySelector('input[name="matriculaDistribucion"]').value
             let uel = document.querySelector('input[name="uelDistribucion"]').value
