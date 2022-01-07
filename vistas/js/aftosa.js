@@ -253,10 +253,6 @@ if(seccionURL == 'aftosa/recepcion'){
                 }
             })
     
-
-
-
-            
             // CARGAR RECEPCION
             document.getElementById('agregarRecepcion').addEventListener('click',()=>{
             
@@ -276,6 +272,10 @@ if(seccionURL == 'aftosa/recepcion'){
                     let campania = getCookie('campania') 
 
                     console.log(campania);
+                   
+                    marcaVacuna = (marca == 'otraMarca') ? document.getElementById('inputOtraMarca').value : marca
+                    
+                    console.log(marcaVacuna);
                     
                     let  formData = new FormData()
                     
@@ -284,7 +284,7 @@ if(seccionURL == 'aftosa/recepcion'){
                     formData.append('fechaIng',fechaIng)
                     formData.append('uel',uel)
                     formData.append('cantidad',cantidad)
-                    formData.append('marca',marca)
+                    formData.append('marca',marcaVacuna)
                     formData.append('serie',serie)
                     formData.append('fechaVenc',fechaVenc)
 
