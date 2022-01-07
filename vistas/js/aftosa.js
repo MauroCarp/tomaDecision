@@ -331,7 +331,7 @@ DISTRIBUCION
 const cargarDistribuciones = (matricula,idTBody)=>{
 
     localStorage.setItem('matricula',matricula)
-
+    
     let url = 'ajax/aftosa.ajax.php'
 
     let data = new FormData()
@@ -344,6 +344,7 @@ const cargarDistribuciones = (matricula,idTBody)=>{
     })
     .then(resp => resp.json())
     .then(respuesta =>{
+        console.log(respuesta);
         
         if(respuesta.length > 0){
             let tbody = document.getElementById(idTBody)
@@ -399,8 +400,9 @@ const cargarDistribuciones = (matricula,idTBody)=>{
             document.getElementById('btnAgregarDistribucion').style.display = 'block'
             
         }else{
+            console.log('hola');
             
-            document.getElementById('btnAgregarDistribucion').style.display = 'none'
+            document.getElementById('btnAgregarDistribucion').style.display = 'block'
             
             let tr = document.createElement('TR')
             tr.setAttribute('class','odd')
@@ -451,8 +453,8 @@ if(isInPage(btnCargarDistribuciones)){
     document.getElementById('btnAgregarDistribucion').removeAttribute('disabled')
     
     let matricula = document.getElementById('vacunadorDistri').value
-
-    cargarDistribuciones(matricula,'tablaDistribucion')
+    if(matricula != '')
+        cargarDistribuciones(matricula,'tablaDistribucion')
    
     })
 

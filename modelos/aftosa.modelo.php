@@ -123,7 +123,7 @@ class ModeloAftosa{
 			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla ORDER BY $orden DESC");
 
 			$stmt -> execute();
-
+			
             return $stmt -> fetchAll();
 
 		}
@@ -177,13 +177,13 @@ class ModeloAftosa{
 	static public function mdlCargarRecepcion($tabla,$datos){
     
 	
-		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(campania,marca,uel,fechaIngreso,fechaVencimiento,serie,cantidad)
-		VALUES (:campania, :marca, :uel, :fechaIngreso, :fechaVencimiento, :serie, :cantidad)");
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(campania,marca,uel,fechaEntrega,fechaVencimiento,serie,cantidad)
+		VALUES (:campania, :marca, :uel, :fechaEntrega, :fechaVencimiento, :serie, :cantidad)");
 
 		$stmt->bindParam(":campania", $datos["campania"], PDO::PARAM_STR);
 		$stmt->bindParam(":marca", $datos["marca"], PDO::PARAM_STR);
 		$stmt->bindParam(":uel", $datos["uel"], PDO::PARAM_STR);
-		$stmt->bindParam(":fechaIngreso", $datos["fechaIng"], PDO::PARAM_STR);
+		$stmt->bindParam(":fechaEntrega", $datos["fechaIng"], PDO::PARAM_STR);
 		$stmt->bindParam(":fechaVencimiento", $datos["fechaVenc"], PDO::PARAM_STR);
 		$stmt->bindParam(":serie", $datos["serie"], PDO::PARAM_STR);
 		$stmt->bindParam(":cantidad", $datos["cantidad"], PDO::PARAM_STR);
