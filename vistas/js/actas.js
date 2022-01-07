@@ -30,13 +30,13 @@ const cargarAnimalesActa = (renspa,campania)=>{
     data.append('accion','cargarAnimales')
     data.append('renspa',renspa)
     data.append('campania',campania)
-
+    
     fetch(url,{
         method:'post',
         body:data
     }).then(resp => resp.json())
     .then(respuesta=> {
-
+        
         document.querySelector('input[name=vacas]').value = respuesta.vacas
         document.querySelector('input[name=toros]').value = respuesta.toros
         document.querySelector('input[name=toritos]').value = respuesta.toritos
@@ -59,7 +59,7 @@ const cargarAnimalesActa = (renspa,campania)=>{
         document.getElementById('campoTotal').value = sumaParcialTotal('sumTotal')
         document.getElementById('campoParcial').value = sumaParcialTotal('sumParcial')
 
-    })
+    }).catch(er=>console.log(er))
     
 }
 
@@ -179,7 +179,7 @@ if(seccionURL == 'aftosa/modificarActa'){
 
     // CARGAR ANIMALES EN EXISTENCIA
 
-    cargarAnimalesActa(renspa,campania)
+   cargarAnimalesActa(renspa,campania)
 
     // SUMAR TOTALES Y PARCIALES
 

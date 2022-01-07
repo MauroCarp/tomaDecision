@@ -37,6 +37,7 @@ if(isset($_GET["ruta"])){
      $_GET["ruta"] == "aftosa/distribucion" ||
      $_GET["ruta"] == "aftosa/noVacunados" ||
      $_GET["ruta"] == "aftosa/actasProductor" ||
+     $_GET["ruta"] == "aftosa/informes" ||
      $_GET["ruta"] == "usuarios" ||
      $_GET["ruta"] == "productos" ||
      $_GET["ruta"] == "clientes" ||

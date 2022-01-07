@@ -42,11 +42,14 @@ class ControladorActas{
 	static public function ctrCargarActa(){
        
         if(!empty($_POST)){
+            
+            
 
             $campania = $_COOKIE['campania'];
 
             if($_POST['fechaVacunacion'] != '' AND $_POST['fechaRecepcion'] != ''  AND $_POST['actaNumero'] != '' ){
 
+         
                 $pago = (isset($_POST['pago']))? 1 : 0;
 
                 $vacunoBrucelosis = (isset($_POST['vacunoBrucelosis']))? 1 : 0;
@@ -203,7 +206,7 @@ class ControladorActas{
 	static public function ctrActualizarActa(){
        
         if(!empty($_POST)){
-var_dump($_POST);
+
             $campania = $_COOKIE['campania'];
 
             if($_POST['fechaVacunacion'] != '' AND $_POST['fechaRecepcion'] != ''  AND $_POST['actaNumero'] != '' ){

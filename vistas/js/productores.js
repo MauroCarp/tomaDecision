@@ -330,6 +330,7 @@ console.log(e);
   let ruta = `extensiones/fpdf/generarPdf.php?renspa=${renspa}&accion=situacionProductor`
 
   validarRenspa(renspa,ruta,true)  
+  
 })
 
 /*=============================================

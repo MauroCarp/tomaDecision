@@ -45,48 +45,7 @@ class ModeloActas{
 	=============================================*/
 	static public function mdlCargarActa($tabla,$datos){
     
-		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(
-		renspa,
-		campania,
-		fechaVacunacion,
-		acta,
-		matricula,
-		cantidadPar,
-		fechaRecepcion,
-		vacunoCar,
-		cantidadCar,
-		vacunoBruce,
-		cantidadBruce,
-		pago,
-		admAf,
-		vacunadorAf,
-		vacunaAf,
-		admCar,
-		vacunadorCar,
-		vacunaCar,
-		redondeoAf,
-		redondeoCar)
-		VALUES (
-		:renspa,
-		:campania,
-		:fechaVacunacion,
-		:acta,
-		:matricula,
-		:cantidadPar,
-		:fechaRecepcion,
-		:vacunoCar,
-		:cantidadCar,
-		:vacunoBruce,
-		:cantidadBruce,
-		:pago,
-		:admAf,
-		:vacunadorAf,
-		:vacunaAf,
-		:admCar,
-		:vacunadorCar,
-		:vacunaCar,
-		:redondeoAf,
-		:redondeoCar)");
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(renspa,campania,fechaVacunacion,acta,matricula,cantidadPar,fechaRecepcion,vacunoCar,cantidadCar,vacunoBruce,cantidadBruce,pago,admAf,vacunadorAf,vacunaAf,admCar,vacunadorCar,vacunaCar,redondeoAf,redondeoCar) VALUES (:renspa,:campania,:fechaVacunacion,:acta,:matricula,:cantidadPar,:fechaRecepcion,:vacunoCar,:cantidadCar,:vacunoBruce,:cantidadBruce,:pago,:admAf,:vacunadorAf,:vacunaAf,:admCar,:vacunadorCar,:vacunaCar,:redondeoAf,:redondeoCar)");
 
 		$stmt->bindParam(":renspa", $datos["renspa"], PDO::PARAM_STR);
 		$stmt->bindParam(":campania", $datos["campania"], PDO::PARAM_STR);
@@ -115,7 +74,7 @@ class ModeloActas{
 
 		}else{
 
-			// return $stmt->errorInfo();
+			return $stmt->errorInfo();
 			return "error";
 		
 		}

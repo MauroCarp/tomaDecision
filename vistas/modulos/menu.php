@@ -246,7 +246,7 @@
 
 					<li>
 
-						<a href="aftosa/informes">
+						<a href="index.php?ruta=aftosa/informes">
 							
 							<i class="fa fa-file-text"></i>
 							<span>Informes</span>

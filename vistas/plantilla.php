@@ -27,6 +27,28 @@ $uel = "F.I.S.S.A";
 
 $logo = 'fissa';
 
+// INFORMES
+
+$informes = array();
+$informes[] = 'Animales Totales vacunados por vacunador';
+$informes[] = 'Total de Bovinos Vacunados por localidad y total departamental';
+$informes[] = 'Detalle Animales Vacunados por Vacunador';
+$informes[] = 'Entrega de vacunas por vacunador';
+$informes[] = 'Relacion Dosis entregada y Vacuna suministrada';
+$informes[] = 'Cant. de Establecimientos por distrito con detalle de categor&iacute;as';
+$informes[] = 'Nomina de Vacunadores ordenada alfabeticamente';
+$informes[] = 'Otras Especies';
+$informes[] = 'Evoluci&oacute;n semanal de la campa&ntilde;a';
+$informes[] = 'Informe de Montos';
+$informes[] = 'Informe Carbunclo y Brucelosis Vacunados';
+$informes[] = 'Informe Carbunclo y Brucelosis NO Vacunados';
+$informes[] = 'Cantidad de Establecimientos segun Sistema Productivo';
+$informes[] = 'Cantidad de Animales segun Sistema Productivo';
+$informes[] = 'Cronograma por Veterinario';
+$informes[] = 'Cronograma Actual por Veterinario';
+$informes[] = 'Exportar Base de Datos';
+
+
 function formatearFecha($fecha){
 
   $fechaExplode = explode('-',$fecha);
@@ -48,6 +70,40 @@ function distrito($departamento,$distrito,$conexion){
 	$nombre = $fila['nombre'];
 
 	return $distrito;
+
+}
+
+
+function encrypt_decrypt($action, $string){
+
+  $output = false;
+
+  $encrypt_method = "AES-256-CBC";
+
+  $secret_key = 'WS-SERVICE-KEY';
+
+  $secret_iv = 'WS-SERVICE-VALUE';
+  // hash
+  $key = hash('sha256', $secret_key);
+  // iv - encrypt method AES-256-CBC expects 16 bytes - else you will get a warning
+
+  $iv = substr(hash('sha256', $secret_iv), 0, 16);
+
+  if ($action == 'encrypt') {
+
+      $output = base64_encode(openssl_encrypt($string, $encrypt_method, $key, 0, $iv));
+
+  } else {
+
+      if ($action == 'decrypt') {
+
+          $output = openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
+
+      }
+
+  }
+
+  return $output;
 
 }
 
@@ -170,39 +226,6 @@ CUERPO DOCUMENTO
 <body class="hold-transition skin-blue sidebar-mini login-page">
  
   <?php
-
-function encrypt_decrypt($action, $string){
-
-    $output = false;
-
-    $encrypt_method = "AES-256-CBC";
-
-    $secret_key = 'WS-SERVICE-KEY';
-
-    $secret_iv = 'WS-SERVICE-VALUE';
-    // hash
-    $key = hash('sha256', $secret_key);
-    // iv - encrypt method AES-256-CBC expects 16 bytes - else you will get a warning
-
-    $iv = substr(hash('sha256', $secret_iv), 0, 16);
-
-    if ($action == 'encrypt') {
-
-        $output = base64_encode(openssl_encrypt($string, $encrypt_method, $key, 0, $iv));
-
-    } else {
-
-        if ($action == 'decrypt') {
-
-            $output = openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
-
-        }
-
-    }
-
-    return $output;
-
-}
 
   if(isset($_SESSION["iniciarSesion"]) && $_SESSION["iniciarSesion"] == "ok"){
 

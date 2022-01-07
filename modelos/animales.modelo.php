@@ -4,12 +4,6 @@ error_reporting(E_ERROR | E_PARSE);
 
 require_once "conexion.php";
 
-require_once 'extensiones/excel/php-excel-reader/excel_reader2.php';
-
-require_once 'extensiones/excel/SpreadsheetReader.php';
-
-
-
 class ModeloAnimales{
 
 	/*=============================================
@@ -27,11 +21,11 @@ class ModeloAnimales{
 
         return $stmt -> fetch();
 
-		$stmt -> close();
+        $stmt -> close();
 
-		$stmt = null;
+        $stmt = null;
 
-    }
+  }
 
 	/*=============================================
 	CARGAR EXISTENCIA
@@ -127,6 +121,6 @@ class ModeloAnimales{
     
     
 
-    }
+  }
 
 }
