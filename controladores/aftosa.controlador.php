@@ -98,6 +98,10 @@ class ControladorAftosa{
 
 
             if($_FILES["existenciaAnimal"]['size'] > 0){
+
+                require_once 'extensiones/excel/php-excel-reader/excel_reader2.php';
+
+                require_once 'extensiones/excel/SpreadsheetReader.php';
                 
                 $productores = ControladorProductores::ctrMostrarProductores(null,null);
 
@@ -144,20 +148,20 @@ class ControladorAftosa{
                                     
                                     if(!in_array($Row[0], $renspasExistentes)) {
                         
-                                        $respuesta = ControladorProductores::ctrCrearProductorExistencia($Row[0],$Row[2]);
+                                        $respuesta = ControladorProductores::ctrCrearProductorExistencia($Row[0],$Row[1]);
                                     
                                     }
 
                                     $data = array(
                                         'renspa' => $Row[0],
-                                        'vacas' => $Row[4],
-                                        'vaquillonas' => $Row[5],
-                                        'novillos' => $Row[6],
-                                        'novillitos' => $Row[7],
-                                        'terneras' => $Row[8],
-                                        'terneros' => $Row[9],
-                                        'toros' => $Row[10],
-                                        'toritos' => $Row[11]
+                                        'vacas' => $Row[3],
+                                        'vaquillonas' => $Row[4],
+                                        'novillos' => $Row[5],
+                                        'novillitos' => $Row[6],
+                                        'terneras' => $Row[7],
+                                        'terneros' => $Row[8],
+                                        'toros' => $Row[9],
+                                        'toritos' => $Row[10]
                                     );
             
                                     $respuesta = ControladorAnimales::ctrCargarExistencia($data);

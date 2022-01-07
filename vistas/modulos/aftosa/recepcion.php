@@ -88,7 +88,7 @@ if($_SESSION["perfil"] == "Especial"){
         
         $valor = $_COOKIE['campania'];
         
-        $orden = 'fechaIngreso';
+        $orden = 'fechaEntrega';
 
         $recepciones = ControladorAftosa::ctrMostrarDatos($tabla, $item, $valor,$orden);
 
@@ -96,7 +96,7 @@ if($_SESSION["perfil"] == "Especial"){
 
               echo '<tr>
 
-                    <td>'.formatearFecha($value["fechaIngreso"]).'</td>
+                    <td>'.formatearFecha($value["fechaEntrega"]).'</td>
 
                     <td>'.$uel.'</td>
 
