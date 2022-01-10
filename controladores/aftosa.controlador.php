@@ -30,7 +30,13 @@ class ControladorAftosa{
                       }).then(function(result){
                                 if (result.value) {
 
-                                document.cookie = "campania='.$valor.'"
+                                let date = new Date()
+
+                                date.setTime(date.getTime()+(30*24*60*60*1000))
+    
+                                let expires = date.toGMTString()
+                                
+                                document.cookie = `campania = '.$valor.'";path=/sanidadAnimal;Expires=${expires}`
 
                                 window.location = "inicio";
 

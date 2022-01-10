@@ -250,6 +250,14 @@ $('#asignarCampania').click(()=>{
 	let campania = $('#campaniaNum').val();
 
 	document.cookie = `campania=${campania}`
+	
+	let date = new Date()
+
+	date.setTime(date.getTime()+(30*24*60*60*1000))
+
+	let expires = date.toGMTString()
+	
+	document.cookie = `campania = ${campania};path=/sanidadAnimal;Expires=${expires}`
 
 	$('#ventanaModalCampania').modal('toggle');
 
