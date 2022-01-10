@@ -210,15 +210,15 @@ window.addEventListener("keydown", function (event) {
 	
 	
 	if(functionKey == 'F9'){
-	
-		let campania = getCookie('campania');
-	
-		comprobarCampania(campania);
-		
+
+		if(getCookie('campania') != null)
+			$('#ventanaModalRenspaActa').modal('toggle');
+		else	
+			$('#ventanaModalCampania').modal('show');
+
 	}
        
- 
-	},false);
+},false);
 
 /*=============================================
 COMPROBAR CAMPANIA
@@ -237,7 +237,7 @@ $('#menuAftosa').on('click',()=>{
 	
 	
 	validarCampania()
-
+	
 });
 
 
@@ -266,7 +266,7 @@ const validarCampania = ()=>{
 	let campania = getCookie('campania');
 	
 	if(campania == null)  
-	$('#ventanaModalCampania').modal('toggle');
+	$('#ventanaModalCampania').modal('show');
 	
 }
 
