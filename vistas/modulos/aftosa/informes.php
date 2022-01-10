@@ -58,7 +58,7 @@ if($_SESSION["perfil"] == "Especial"){
 
                   $tipo = ($value == 'Cronograma por Veterinario' OR $value == 'Cronograma Actual por Veterinario') ? 'cronograma' : 'informe';
 
-                  echo "$tipo>".($key+1)."- ".$value."</a>";
+                  echo "$tipo".($key+1)."'>".($key+1)."-  ".$value."</a>";
 
                 }
 
