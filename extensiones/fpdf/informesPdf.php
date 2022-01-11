@@ -96,7 +96,7 @@ class informePDF{
 
         // ---------------------------------------------------------
 
-        $titulo = 'Animales Totales Vacunados por Vacunador';
+        $titulo = 'Total Bovinos Vacunados por localidad y total departamental';
 
         $cabezera = "Sistema integrado de Vacunación Anti-Aftosa \n Total Bovinos Vacunados por localidad y total departamental";
 
@@ -223,7 +223,7 @@ class informePDF{
         $pdf->SetFont('helvetica','',10);
         $pdf->Cell(40,7,$totales['parcial'],0,1,'L',0);
     
-        // $pdf->Output();
+        $pdf->Output();
         
     }
 
@@ -235,7 +235,7 @@ class informePDF{
 
         // ---------------------------------------------------------
 
-        $titulo = 'Animales Totales Vacunados por Vacunador';
+        $titulo = 'Detalle de Animales Vacunados por Vacunador con Bufalos/as';
 
         $cabezera = "Sistema integrado de Vacunación Anti-Aftosa \n Detalle de Animales Vacunados por Vacunador con Bufalos/as";
 
@@ -316,6 +316,22 @@ class informePDF{
         $pdf->Cell(40,7,$totalAnimalesVacunados,0,1,'L',0);	
 
         $pdf->Output();
+
+    }
+
+    public function informe4(){
+
+        //REQUERIMOS LA CLASE TCPDF
+
+        include('fpdf.php');
+
+        // ---------------------------------------------------------
+
+        $titulo = 'Detalle de Animales Vacunados por Vacunador con Bufalos/as';
+
+        $cabezera = "Sistema integrado de Vacunación Anti-Aftosa \n Detalle de Animales Vacunados por Vacunador con Bufalos/as";
+
+        include 'cabezeraLand.php';
 
     }
 
