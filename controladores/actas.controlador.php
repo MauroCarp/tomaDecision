@@ -360,6 +360,24 @@ class ControladorActas{
     
     }
 
+    
+    /*=============================================
+    CONTAR ACTAS
+	=============================================*/
+
+	static public function ctrContarActas($item,$valor){
+    
+        $tabla = "actas";
+
+        $item2 = 'campania';
+
+        $valor2 = $_COOKIE['campania'];
+
+        $respuesta = ModeloActas::mdlContarActa($tabla, $item, $valor,$item2,$valor2);
+
+		return $respuesta;
+    
+    }
 
 
 

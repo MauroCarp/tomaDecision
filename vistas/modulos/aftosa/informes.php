@@ -49,7 +49,7 @@ if($_SESSION["perfil"] == "Especial"){
                 
                 if ($value != 'Detalle Animales Vacunados por Vacunador' AND $value != 'Cronograma por Veterinario' AND $value != 'Cronograma Actual por Veterinario'){
                  
-                  echo  "<a href='extensiones/fpdf/informesPdf.php?informe=informe".($key+1).".php' class='list-group-item list-group-item-action' target='_blank'>".($key+1)."- ".$value."</a>";
+                  echo  "<a href='extensiones/fpdf/informesPdf.php?informe=informe".($key+1)."' class='list-group-item list-group-item-action' target='_blank'>".($key+1)."- ".$value."</a>";
 
                   
                 }else{
