@@ -156,6 +156,16 @@ class ControladorProductores{
 
 	}
 
+	static public function ctrMostrarProductoresDistinct($item, $valor,$distinct){
+
+		$tabla = "productores";
+
+		$respuesta = ModeloProductores::mdlMostrarProductoresDistinct($tabla, $item, $valor,$distinct);
+
+		return $respuesta;
+
+	}
+
 	/*=============================================
 	EDITAR CLIENTE
 	=============================================*/
@@ -318,6 +328,7 @@ class ControladorProductores{
 	static public function ctrMostrarLocation($item, $valor,$item2,$valor2){
 		
 		$tabla = 'tabgeo';
+		
 		return $respuesta = ModeloProductores::ctrMostrarLocation($tabla,$item, $valor,$item2,$valor2); 
 
 	}

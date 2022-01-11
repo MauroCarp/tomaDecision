@@ -81,6 +81,39 @@ class ModeloProductores{
 	}
 
 	/*=============================================
+	MOSTRAR PRDUCTORES DISTINCT
+	=============================================*/
+
+	static public function mdlMostrarProductoresDistinct($tabla, $item, $valor,$distinct){
+
+		if($item != null){
+
+			$stmt = Conexion::conectar()->prepare("SELECT DISTINCT($distinct) FROM $tabla WHERE $item = :$item");
+
+			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+
+			$stmt -> execute();
+			// var_dump($stmt->errorInfo());
+			return $stmt -> fetch();
+			
+		}else{
+			
+			$stmt = Conexion::conectar()->prepare("SELECT DISTINCT($distinct) FROM $tabla");
+			
+			$stmt -> execute();
+			
+			// return $stmt->errorInfo();
+			return $stmt -> fetchAll();
+
+		}
+
+		$stmt -> close();
+
+		$stmt = null;
+
+	}
+
+	/*=============================================
 	EDITAR CLIENTE
 	=============================================*/
 

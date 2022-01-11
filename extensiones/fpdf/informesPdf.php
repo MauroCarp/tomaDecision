@@ -98,67 +98,146 @@ class informePDF{
 
         $titulo = 'Animales Totales Vacunados por Vacunador';
 
-        $cabezera = 'Anaimales Totales Vacunados por Vacunador';
+        $cabezera = "Sistema integrado de Vacunación Anti-Aftosa \n Total Bovinos Vacunados por localidad y total departamental";
 
         include 'cabezera.php';
 
-        $pdf->Ln(18);
-        $pdf->SetFont('Times','B',14);
-        $pdf->SetX(40);
-        $pdf->Cell(190,10,'(Incluyendo establecimientos de distintos Distritos)',0,1,'L',0);
-        $pdf->SetX(40);
-        $pdf->Cell(65,8,'VACUNADOR',1,0,'C',0);
-        $pdf->Cell(45,8,'TOTAL',1,1,'C',0);
-        $pdf->SetFont('Times','',12);
-        
-        $total = 0;
+        $pdf->Ln(10);
+        $pdf->SetFont('Times','B',12);
+        $pdf->SetX(10);
+        $pdf->Cell(50,7,'IRIONDO',0,0,'L',0);
+        $pdf->Cell(60,7,'DISTRITO',0,0,'L',0);
+        $pdf->Cell(40,7,'TOTAL animales',0,0,'L',0);
+        $pdf->Cell(50,7,'Cant. Establ.',0,1,'L',0);
+        $pdf->Cell(185,.5,'',0,1,'L',1);
+        $pdf->SetFont('Times','',10);
+        $pdf->SetFillColor(0,0,0);
+    
+        $distinct = 'distrito';
 
-        $veterinarios = ControladorVeterinarios::ctrMostrarVeterinarios(null,null);
+        $distritos = ControladorProductores::ctrMostrarProductoresDistinct(null,null,$distinct);
 
-        foreach ($veterinarios as $key => $value) {
-         
-            $item = 'matricula';
+        $renspasPorDistrito = array();
 
-            $totalVacunados = ControladorActas::ctrContarActas($item,$value['matricula']);
+        $totalEstablecimientosGral = 0;
 
-            $pdf->SetX(40);
+        $totalVacunadoGral = 0;
+
+        $totalParcialGral = 0;
+
+        $totales = array('establecimientos'=>0,'vacunados'=>0,'parcial'=>0,'animales'=>0);
+
+        foreach ($distritos as $key => $value) {
             
-            $pdf->Cell(85,8,utf8_decode($value['nombre']),0,0,'L',0);
+            if($value[0] != null){      
 
-            if ($totalVacunados[0] != null) {
-            
-                $pdf->Cell(45,8,number_format($totalVacunados[0],0,'','.'),0,1,'L',0);
+                $item = 'distrito';
                 
-                $total .= $totalVacunados;
+                $tabla = 'productores';
                 
-            }else{
+                $orden = 'propietario';
                 
-                $pdf->Cell(45,8,number_format(0,0,'','.'),0,1,'L',0);
+                $renspaDistrito = ControladorAftosa::ctrMostrarDatos($tabla,$item,$value[0],$orden);
+
+                $totalAnimales = 0;
+
+                $totalVacunados = 0;
+                
+                $totalParcial = 0;
+
+                $totalEstablecimientos = sizeof($renspaDistrito);
+
+                $totales['establecimientos'] += $totalEstablecimientos;
+
+                $item = 'renspa';
+
+                $item2 = 'campania';
+
+                $valor2 = $_COOKIE['campania'];
+                
+                for ($i=0; $i < $totalEstablecimientos ; $i++) { 
+
+                    $animales = ControladorAnimales::ctrMostrarAnimales($item,$renspaDistrito[$i]['renspa'],$item2,$valor2);
+                    
+                    $parcial =  ($animales['vaquillonas']  + $animales['toritos'] + $animales['terneros'] + $animales['terneras'] + $animales['novillos'] + $animales['novillitos']);
+
+                    $totalParcial += $parcial;
+
+                    $totales['parcial'] += $parcial;
+
+                    $totalAnimales += ($animales['vacas'] + $animales['toros'] + $parcial);
+                    
+                    $totales['animales'] += ($animales['vacas'] + $animales['toros'] + $parcial);
+
+                    $vacunados = ControladorActas::ctrMostrarActa($item,$renspaDistrito[$i]['renspa']);
+
+                    $vacunados = ($vacunados) ? $vacunados['cantidadPar'] : 0;
+
+                    $totalVacunados += $vacunados;
+
+                    $totales['vacunados'] += $vacunados;
+
+                }
+
+                $nombreDistrito = ControladorProductores::ctrMostrarLocation('departamento',8,'localidad',$value[0]);
+
+                $pdf->Cell(50,7,'',0,0,'L',0);
+                $pdf->Cell(40,7,utf8_decode($nombreDistrito[0]['nombre']),0,0,'L',0);
+                $pdf->Cell(30,7,'Total Vacunado',0,0,'L',0);
+                $pdf->Cell(40,7,$totalVacunados,0,0,'L',0);
+                $pdf->Cell(50,7,$totalEstablecimientos,0,1,'L',0);
+                $pdf->Cell(90,7,'',0,0,'L',0);
+                $pdf->Cell(30,7,'Total Animales',0,0,'L',0);
+                $pdf->Cell(40,7,$totalAnimales,0,1,'L',0);
+                $pdf->Cell(90,7,'',0,0,'L',0);
+                $pdf->SetFont('Times','b',10);
+                $pdf->Cell(30,7,'Parcial:',0,0,'L',0);
+                $pdf->SetFont('Times','',10);
+                $pdf->Cell(40,7,$totalParcial,0,1,'L',0);
+                $pdf->SetX(60);
+                $pdf->Cell(120,.1,'',0,1,'L',1);
 
             }
-        
 
         }
     
-        $pdf->SetX(40);
-        $pdf->SetFont('times','B',11);
-        $pdf->Cell(85,8,'Total',0,0,'L',0);
-        $pdf->Cell(45,8,number_format($total,0,'','.'),0,1,'L',0);
+        
+        $pdf->SetTextColor(0,4,162);
+        $pdf->SetFont('helvetica','',10);
+        $pdf->Cell(40,7,'Promedio de Animales:',0,0,'L',0);
+        
+        $promedio = number_format(($totales['vacunados'] / $totales['establecimientos']),2,',','.');
+        
+        $pdf->Cell(45,7,$promedio,0,0,'L',0);
+        $pdf->Cell(35,7,'Total Vacunado:',0,0,'L',0);
+        $pdf->Cell(40,7,$totales['vacunados'],0,0,'L',0);
+        $pdf->Cell(40,7,$totales['establecimientos'],0,1,'L',0);
+        $pdf->Cell(90,7,'',0,0,'L',0);
+        $pdf->SetFont('helvetica','b',10);
+        $pdf->Cell(30,7,'Total Animales:',0,0,'L',0);
+        $pdf->SetFont('helvetica','',10);
+        $pdf->Cell(40,7,$totales['animales'],0,1,'L',0);
+        $pdf->SetFont('helvetica','b',10);
+        $pdf->Cell(90,7,'',0,0,'L',0);
+        $pdf->Cell(30,7,'Parcial:',0,0,'L',0);
+        $pdf->SetFont('helvetica','',10);
+        $pdf->Cell(40,7,$totales['parcial'],0,1,'L',0);
     
         $pdf->Output();
         
-
     }
 
 }
 
 
-if($informe == 'informe1'){
+if($informe){
 
     $informeGeneral = new informePDF();
-    $informeGeneral -> informe1();
+
+    $informeGeneral -> $informe();
 
 }
+
 
 
 ?>

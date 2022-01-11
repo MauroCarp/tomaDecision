@@ -35,6 +35,7 @@ class ModeloActas{
 
 			$stmt -> execute();
 
+			// return $stmt;
 			return $stmt -> fetch();
 
 
