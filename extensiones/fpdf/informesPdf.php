@@ -40,7 +40,7 @@ class informePDF{
 
         include 'cabezera.php';
 
-        $pdf->Ln(10);
+        $pdf->Ln(5);
         $pdf->SetFont('Times','B',14);
         $pdf->SetX(40);
         $pdf->Cell(190,10,'(Incluyendo establecimientos de distintos Distritos)',0,1,'L',0);
@@ -67,7 +67,7 @@ class informePDF{
             
                 $pdf->Cell(45,8,number_format($totalVacunados[0],0,'','.'),0,1,'L',0);
                 
-                $total .= $totalVacunados;
+                $total += $totalVacunados[0];
                 
             }else{
                 
@@ -223,7 +223,7 @@ class informePDF{
         $pdf->SetFont('helvetica','',10);
         $pdf->Cell(40,7,$totales['parcial'],0,1,'L',0);
     
-        $pdf->Output();
+        // $pdf->Output();
         
     }
 
@@ -239,7 +239,7 @@ class informePDF{
 
         $cabezera = "Sistema integrado de Vacunación Anti-Aftosa \n Detalle de Animales Vacunados por Vacunador con Bufalos/as";
 
-        include 'cabezera.php';
+        include 'cabezeraLand.php';
 
         $matricula = $this->matricula;
 
@@ -268,43 +268,54 @@ class informePDF{
 
         $dataPorVacunador = ControladorActas::ctrMostrarActa($item,$matricula);
 
-        var_dump($dataPorVacunador);
+        $dataCampania = ControladorAftosa::ctrMostrarDatosCampania('numero',$_COOKIE['campania']);
 
-        // $total = 0;
-        // while ($fila = mysqli_fetch_array($query)) {
+        $totalAnimalesVacunados = 0;
+
+        foreach ($dataPorVacunador as $key => $dataProductor) {
+
+            $item = 'renspa';
+
+            $productor = ControladorProductores::ctrMostrarProductores($item,$dataProductor['renspa']);
+
+            $pdf->Cell(15,7,$dataProductor['acta'],0,0,'L',0);
+            $pdf->Cell(25,7,formatearFecha($dataProductor['fechaVacunacion']),0,0,'L',0);
+            $pdf->Cell(70,7,$productor['propietario'],0,0,'L',0);
+            $pdf->Cell(65,7,$productor['establecimiento'],0,0,'L',0);
+            $pdf->Cell(40,7,$dataProductor['renspa'],0,0,'L',0);
+            $pdf->Cell(25,7,$dataProductor['cantidadPar'],0,0,'L',0);
+
+            $totalAnimalesVacunados += $dataProductor['cantidadPar'];
             
-        //     $pdf->Cell(15,7,$fila['acta'],0,0,'L',0);
-        //     $pdf->Cell(25,7,formatearFecha($fila['fechaVacunacion']),0,0,'L',0);
-        //     $pdf->Cell(70,7,$fila['propietario'],0,0,'L',0);
-        //     $pdf->Cell(65,7,$fila['establecimiento'],0,0,'L',0);
-        //     $pdf->Cell(40,7,$fila['renspa'],0,0,'L',0);
-        //     $pdf->Cell(25,7,$fila['cantidadPar'],0,0,'L',0);
-    
-        //     if ($fila['pago']) {
-        //         $pdf->SetTextColor(0,175,12);
-        //         $pdf->SetFont('helvetica','B',9);
-        //         $pdf->Cell(20,7,utf8_decode("Pagó"),0,1,'L',0);
-        //         $pdf->SetFont('times','',11);
-        //         $pdf->SetTextColor(0,0,0);
-        //     }else{
-        //         $pdf->SetTextColor(255,0,0);
-        //         $pdf->SetFont('helvetica','B',9);
-        //         $pdf->Cell(20,7,utf8_decode("NO Pagó"),0,0,'L',0);
-        //         $debe = ($fila['cantidadPar'] * $vacunadorA);
-        //         $pdf->SetTextColor(0,0,0);
-        //         $pdf->SetFont('times','',11);
-        //         $pdf->Cell(40,7,"$ ".number_format($debe, 2, ",", "."),0,1,'L',0);
-        //     }
-        //     $total += $fila['cantidadPar'];
+            $pdf->SetFont('helvetica','B',9);
+
+            if($dataProductor['pago']){
+
+                $pdf->SetTextColor(0,175,12);
+                $pdf->Cell(20,7,utf8_decode("Pagó"),0,1,'L',0);
+                $pdf->SetFont('times','',11);
+                $pdf->SetTextColor(0,0,0);
             
-        // }
+            }else{
+
+                $pdf->SetTextColor(255,0,0);
+                $pdf->Cell(20,7,utf8_decode("NO Pagó"),0,0,'L',0);
+                $debe = ($dataProductor['cantidadPar'] * $dataCampania['vacunadorA']);
+                $pdf->SetTextColor(0,0,0);
+                $pdf->SetFont('times','',11);
+                $pdf->Cell(40,7,"$ ".number_format($debe, 2, ",", "."),0,1,'L',0);
+
+            }
+        }
+        
     
         $pdf->SetFont('times','B',11);
         $pdf->Cell(215,7,'',0,0,'L',0);
         $pdf->Cell(20,.5,'',0,1,'L',1);
         $pdf->Cell(215,7,'',0,0,'L',0);
-        $pdf->Cell(40,7,$total,0,1,'L',0);	
+        $pdf->Cell(40,7,$totalAnimalesVacunados,0,1,'L',0);	
 
+        $pdf->Output();
 
     }
 
