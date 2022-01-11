@@ -54,7 +54,7 @@ if($_SESSION["perfil"] == "Especial"){
                   
                 }else{
 
-                  echo "<a href='#' class='list-group-item list-group-item-action' data-toggle='modal' data-target='.matricula-";
+                  echo "<a href='#' class='list-group-item list-group-item-action' data-toggle='modal' data-target='#matricula-";
 
                   $tipo = ($value == 'Cronograma por Veterinario' OR $value == 'Cronograma Actual por Veterinario') ? 'cronograma' : 'informe';
 
@@ -79,3 +79,17 @@ if($_SESSION["perfil"] == "Especial"){
   </section>
 
 </div>
+
+<?php
+
+$idModal = 'matricula-informe3';
+
+$informeNum = 3;
+
+include "vistas/modulos/modales/veterinarios/modalMatricula.php";
+
+// $idModal = '';
+
+// include "/modales/veterinarios/modalMatricula.php";
+
+?>

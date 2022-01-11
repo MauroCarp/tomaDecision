@@ -274,6 +274,7 @@ CUERPO DOCUMENTO
 <script src="vistas/js/actas.js"></script>
 <script src="vistas/js/usuarios.js"></script>
 <script src="vistas/js/reportes.js"></script>
+<script src="vistas/js/informes.js"></script>
 
 </body>
 </html>

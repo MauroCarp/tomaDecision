@@ -35,7 +35,13 @@ class ModeloActas{
 
 			$stmt -> execute();
 
-			// return $stmt;
+			// return $valor;
+			if($item == 'matricula'){
+
+				return $stmt -> fetchAll();
+				
+			}
+
 			return $stmt -> fetch();
 
 

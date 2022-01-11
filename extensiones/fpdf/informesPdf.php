@@ -227,12 +227,96 @@ class informePDF{
         
     }
 
+    public function informe3(){
+        
+        //REQUERIMOS LA CLASE TCPDF
+
+        include('fpdf.php');
+
+        // ---------------------------------------------------------
+
+        $titulo = 'Animales Totales Vacunados por Vacunador';
+
+        $cabezera = "Sistema integrado de Vacunación Anti-Aftosa \n Detalle de Animales Vacunados por Vacunador con Bufalos/as";
+
+        include 'cabezera.php';
+
+        $matricula = $this->matricula;
+
+        $item = 'matricula';
+
+        $veterinario = ControladorVeterinarios::ctrMostrarVeterinarios($item, $matricula);
+
+        $nombreVeterinario = $veterinario['nombre'];
+
+        $pdf->Cell(40,7,'Vacunador:',0,0,'L',0);
+        $pdf->Cell(40,7,$nombreVeterinario,0,1,'L',0);
+        $pdf->Ln(3);
+        $pdf->SetFont('Times','B',11);
+        $pdf->SetX(10);
+        $pdf->Cell(15,7,'Acta',0,0,'L',0);
+        $pdf->Cell(25,7,'Fecha Vac.',0,0,'L',0);
+        $pdf->Cell(70,7,'Propietario',0,0,'L',0);
+        $pdf->Cell(65,7,'Establecimiento',0,0,'L',0);
+        $pdf->Cell(40,7,'Renspa',0,0,'L',0);
+        $pdf->Cell(25,7,'Cantidad',0,0,'L',0);
+        $pdf->Cell(20,7,'Estado',0,0,'L',0);
+        $pdf->Cell(40,7,'Debe',0,1,'L',0);
+        $pdf->Cell(278,.5,'',0,1,'L',1);
+        $pdf->SetFont('Times','',11);
+
+
+        $dataPorVacunador = ControladorActas::ctrMostrarActa($item,$matricula);
+
+        var_dump($dataPorVacunador);
+
+        // $total = 0;
+        // while ($fila = mysqli_fetch_array($query)) {
+            
+        //     $pdf->Cell(15,7,$fila['acta'],0,0,'L',0);
+        //     $pdf->Cell(25,7,formatearFecha($fila['fechaVacunacion']),0,0,'L',0);
+        //     $pdf->Cell(70,7,$fila['propietario'],0,0,'L',0);
+        //     $pdf->Cell(65,7,$fila['establecimiento'],0,0,'L',0);
+        //     $pdf->Cell(40,7,$fila['renspa'],0,0,'L',0);
+        //     $pdf->Cell(25,7,$fila['cantidadPar'],0,0,'L',0);
+    
+        //     if ($fila['pago']) {
+        //         $pdf->SetTextColor(0,175,12);
+        //         $pdf->SetFont('helvetica','B',9);
+        //         $pdf->Cell(20,7,utf8_decode("Pagó"),0,1,'L',0);
+        //         $pdf->SetFont('times','',11);
+        //         $pdf->SetTextColor(0,0,0);
+        //     }else{
+        //         $pdf->SetTextColor(255,0,0);
+        //         $pdf->SetFont('helvetica','B',9);
+        //         $pdf->Cell(20,7,utf8_decode("NO Pagó"),0,0,'L',0);
+        //         $debe = ($fila['cantidadPar'] * $vacunadorA);
+        //         $pdf->SetTextColor(0,0,0);
+        //         $pdf->SetFont('times','',11);
+        //         $pdf->Cell(40,7,"$ ".number_format($debe, 2, ",", "."),0,1,'L',0);
+        //     }
+        //     $total += $fila['cantidadPar'];
+            
+        // }
+    
+        $pdf->SetFont('times','B',11);
+        $pdf->Cell(215,7,'',0,0,'L',0);
+        $pdf->Cell(20,.5,'',0,1,'L',1);
+        $pdf->Cell(215,7,'',0,0,'L',0);
+        $pdf->Cell(40,7,$total,0,1,'L',0);	
+
+
+    }
+
 }
 
 
 if($informe){
 
     $informeGeneral = new informePDF();
+
+    if($informe == 'informe3')
+        $informeGeneral->matricula = $_GET['matricula'];
 
     $informeGeneral -> $informe();
 
