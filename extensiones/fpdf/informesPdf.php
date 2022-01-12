@@ -362,7 +362,7 @@ class informePDF{
             if(!empty($distribuciones)){
 
                 $pdf->Cell(40,7,utf8_decode($value['nombre']),0,0,'L',0);
-                $pdf->Cell(40,7,$fila['matricula'],0,0,'L',0);
+                $pdf->Cell(40,7,$value['matricula'],0,0,'L',0);
                 $pdf->Cell(40,7,'F.I.S.S.A Iriondo Sur',0,0,'L',0);
 
 
@@ -415,6 +415,128 @@ class informePDF{
 	    $pdf->Output();
 
     }
+
+    public function informe5(){
+
+        //REQUERIMOS LA CLASE TCPDF
+
+        include('fpdf.php');
+
+        // ---------------------------------------------------------
+
+        $titulo = 'Relacion Dosis entregadas y Vacuna Aplicada';
+        
+        $cabezera = "Sistema integrado de Vacunación Anti-Aftosa \n Relación Dosis entregadas y Vacuna Aplicada";
+
+        include 'cabezeraLand.php';
+
+        $pdf->SetFont('helvetica','B',10);
+        $pdf->SetTextColor(0,4,162);
+        $pdf->SetFillColor(0,4,162);
+        $pdf->SetX(160);
+        $pdf->Cell(100,7,utf8_decode('Totales'),0,1,'C',0);
+        $pdf->SetTextColor(0,0,0);
+        $pdf->SetFont('Times','B',12);
+        $pdf->Cell(140,.2,'',0,0,'L',0);
+        $pdf->Cell(110,.2,'',0,1,'L',1);
+        $pdf->Ln(5);
+        $pdf->SetFont('Times','B',12);
+        $pdf->SetX(10);
+        $pdf->Cell(40,7,'Veterinario',0,0,'L',0);
+        $pdf->Cell(35,7,utf8_decode('Matrícula'),0,0,'L',0);
+        $pdf->Cell(40,7,'Entrega',0,0,'L',0);
+        $pdf->Cell(30,7,'Dosis',0,0,'L',0);
+        $pdf->Cell(35,7,'Entregadas',0,0,'L',0);
+        $pdf->Cell(35,7,'Aplicadas',0,0,'L',0);
+        $pdf->Cell(35,7,'Sin Aplicar',0,1,'L',0);
+        $pdf->Cell(250,.5,'',0,1,'L',1);
+        $pdf->SetFont('Times','',11);
+        $pdf->SetFillColor(0,0,0);
+
+        $veterinarios = ControladorVeterinarios::ctrMostrarVeterinarios(null,null);
+
+        $item = 'matricula';
+
+        $item2 = 'campania';
+
+        $campania = $_COOKIE['campania'];
+
+        $totales = array('totalDosis'=>0,'totalVacunado'=>0);
+
+        foreach ($veterinarios as $key => $value) {
+
+            $distribuciones = ControladorAftosa::ctrMostrarDistribucion($item,$value['matricula'],$item2,$campania);
+            
+            if(!empty($distribuciones)){
+
+                $pdf->Cell(40,7,utf8_decode($value['nombre']),0,0,'L',0);
+                $pdf->Cell(35,7,$value['matricula'],0,0,'L',0);
+
+                $first = true;
+                
+                $totalDosis = 0;
+
+                foreach ($distribuciones as $key => $distribucion) {
+                    
+                    if($first){
+
+                        $first = false;
+
+                    }else{
+
+                        $pdf->Cell(75,7,'',0,0,'L',0);
+
+                    }
+                    
+                    $pdf->Cell(40,7,formatearFecha($distribucion['fechaEntrega']),0,0,'L',0);
+                    $pdf->Cell(40,7,$distribucion['cantidad'],0,1,'L',0);
+                
+                    $totalDosis += $distribucion['cantidad'];
+
+                    $totales['totalDosis'] += $distribucion['cantidad'];
+                    
+                };
+                
+                $pdf->Cell(145,7,'',0,0,'L',0);
+                $pdf->SetFont('Times','B',11);
+                $pdf->Cell(40,7,$totalDosis,0,0,'L',0);
+
+                $tabla = 'actas';
+
+                $campo = 'cantidadPar';
+
+                $item = 'matricula';
+
+                $totalVacunado = ControladorAftosa::ctrSumarDatos($tabla,$campo,$item,$value['matricula'],$item2,$campania);
+
+                $totalVacunado = ($totalVacunado[0] != NULL) ? $totalVacunado[0] : 0;
+
+                $totales['totalVacunado'] += $totalVacunado;
+
+                $pdf->Cell(40,7,$totalVacunado,0,0,'L',0);
+                $pdf->Cell(40,7,($totalDosis - $totalVacunado),0,1,'L',0);
+                $pdf->Cell(250,.5,'',0,1,'L',1);
+                $pdf->SetFont('Times','',11);
+                $pdf->Ln(1);
+
+            }
+
+        }
+
+        $pdf->Ln(15);
+        $pdf->SetFont('times','B',11);
+        $pdf->Cell(80,7,'',0,0,'L',0);
+        $pdf->SetTextColor(0,4,162);
+        $pdf->Cell(65,7,'Datos Finales de la relacion:',0,0,'L',0);
+        $pdf->Cell(40,7,$totales['totalDosis'],0,0,'L',0);
+        $pdf->Cell(40,7,$totales['totalVacunado'],0,0,'L',0);
+        $pdf->Cell(40,7,($totales['totalDosis'] - $totales['totalVacunado']),0,0,'L',0);  
+    
+        $pdf->Output();
+
+    }
+
+
 
 }
 

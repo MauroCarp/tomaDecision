@@ -255,6 +255,16 @@ class ControladorAftosa{
     }
 
     /*=============================================
+    SUMAR DATOS
+    =============================================*/
+
+	static public function ctrSumarDatos($tabla,$campo,$item,$valor,$item2,$valor2){
+    
+       return $respuesta = ModeloAftosa::mdlSumarDatos($tabla,$campo,$item,$valor,$item2,$valor2);
+
+    }
+
+    /*=============================================
     ELIMINAR DATOS
     =============================================*/
 

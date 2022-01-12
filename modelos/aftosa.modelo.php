@@ -131,6 +131,44 @@ class ModeloAftosa{
 
     }
 	
+
+	/*=============================================
+	SUMAR DATOS
+	=============================================*/
+
+	static public function mdlSumarDatos($tabla,$campo,$item,$valor,$item2,$valor2){
+    
+		if($item != null){
+
+			$stmt = Conexion::conectar()->prepare("SELECT SUM($campo) as total FROM $tabla WHERE $item = :$item");
+			
+			
+			if($item2 != null){
+				
+				$stmt = Conexion::conectar()->prepare("SELECT SUM($campo) as total FROM $tabla WHERE $item = :$item AND $item2 = :$item2");
+				
+				$stmt -> bindParam(":".$item2, $valor2, PDO::PARAM_STR);
+				
+			}
+			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+
+			$stmt -> execute();
+
+			return $stmt -> fetch();
+
+		}else{
+
+			$stmt = Conexion::conectar()->prepare("SELECT SUM($campo) as total FROM $tabla");
+
+			$stmt -> execute();
+			
+            return $stmt -> fetchAll();
+
+		}
+        
+
+    }
+	
 	/*=============================================
 	MOSTRAR MARCAS
 	=============================================*/
