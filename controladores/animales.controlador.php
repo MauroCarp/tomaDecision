@@ -18,6 +18,22 @@ class ControladorAnimales{
     }
 
     /*=============================================
+    MOSTRAR ANIMALES SEGUN CAMPO PRODUCTOR
+	=============================================*/
+
+	static public function ctrMostrarAnimalesCampo($campo,$item,$valor,$item2,$valor2){
+    
+        $tabla = "animales";
+
+        $tabla2 = 'productores';
+
+        $respuesta = ModeloAnimales::mdlMostrarAnimalesCampo($tabla,$tabla2,$campo,$item,$valor,$item2,$valor2);
+
+		return $respuesta;
+    
+    }
+
+    /*=============================================
     ACTUALIZAR EXISTENCIA
 	=============================================*/
 
@@ -46,6 +62,22 @@ class ControladorAnimales{
 		return $respuesta;
     
     }
+    
+    /*=============================================
+    SUMAR ANIMALES INNER JOIN PRODUCTOR
+	=============================================*/
+
+	static public function ctrSumarAnimalesInnerProductor($item,$valor,$item2,$valor2,$campo){
+    
+        $tabla = "animales";
+
+        $tabla2 = 'productores';
+
+        return $respuesta = ModeloAnimales::mdlSumarAnimalesInnerProductor($tabla,$tabla2,$item,$valor,$item2,$valor2,$campo);
+    
+    }
+
+
 
 
 }

@@ -27,6 +27,27 @@ class ModeloAnimales{
 
   }
 
+  /*=============================================
+	MOSTRAR ANIMALES SEGUN CAMPO PRODUCTOR
+	=============================================*/
+
+	static public function mdlMostrarAnimalesCampo($tabla,$tabla2,$campo,$item,$valor,$item2,$valor2){
+    
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla INNER JOIN $tabla2 ON $tabla.$campo = $tabla2.$campo WHERE $tabla.$item = :$item AND $tabla2.$item2 = :$item2");
+
+        $stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+        $stmt -> bindParam(":".$item2, $valor2, PDO::PARAM_STR);
+
+        $stmt -> execute();
+
+        return $stmt -> fetchAll();
+
+        $stmt -> close();
+
+        $stmt = null;
+
+  }
+
 	/*=============================================
 	CARGAR EXISTENCIA
 	=============================================*/
@@ -119,8 +140,28 @@ class ModeloAnimales{
         $stmt->close();
         $stmt = null;
     
-    
-
   }
+
+  /*=============================================
+    SUMAR ANIMALES INNER PRODUCTORES
+  =============================================*/
+
+	static public function mdlSumarAnimalesInnerProductor($tabla,$tabla2,$item,$valor,$item2,$valor2,$campo){
+    
+    $stmt = Conexion::conectar()->prepare("SELECT SUM(vacas) as vacas,SUM(vaquillonas) as vaquillonas,SUM(toros) as toros,SUM(toritos) as toritos,SUM(terneros) as terneros, SUM(terneras) as terneras,SUM(novillos) as novillos,SUM(novillitos) as novillitos,COUNT(*) as establecimientos FROM $tabla INNER JOIN $tabla2 ON $tabla.$campo = $tabla2.$campo WHERE $tabla2.$item = :$item AND $tabla.$item2 = :$item2");
+
+    $stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+    $stmt -> bindParam(":".$item2, $valor2, PDO::PARAM_STR);
+
+    $stmt -> execute();
+
+    return $stmt -> fetch();
+
+    $stmt -> close();
+
+    $stmt = null;
+
+}
+
 
 }

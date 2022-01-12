@@ -536,6 +536,152 @@ class informePDF{
 
     }
 
+    public function informe6(){
+
+        //REQUERIMOS LA CLASE TCPDF
+
+        include('fpdf.php');
+
+        // ---------------------------------------------------------
+
+        $titulo = 'Cant. de Establecimientos por distrito con detalle de categorías';
+        
+        $cabezera = "Sistema integrado de Vacunación Anti-Aftosa \n Cant. de Establecimientos por distrito con detalle de categorías del rodeo y total de hacienda";
+
+        include 'cabezeraLand.php';
+
+        $pdf->SetTextColor(0,0,0);
+        $pdf->SetFont('Times','B',11);
+        $pdf->SetX(10);
+        $pdf->Cell(40,7,'Localidad',0,0,'L',0);
+        $pdf->Cell(30,7,'Cant. Estable.',0,0,'L',0);
+        $pdf->Cell(15,7,'Vacas',0,0,'L',0);
+        $pdf->Cell(25,7,'Vaquillonas',0,0,'L',0);
+        $pdf->Cell(20,7,'Terneros',0,0,'L',0);
+        $pdf->Cell(20,7,'Terneras',0,0,'L',0);
+        $pdf->Cell(20,7,'Novillos',0,0,'L',0);
+        $pdf->Cell(25,7,'Novillitos',0,0,'L',0);
+        $pdf->Cell(20,7,'Toros',0,0,'L',0);
+        $pdf->Cell(25,7,'Toritos',0,0,'L',0);
+        $pdf->Cell(20,7,'TOTAL',0,1,'L',0);
+        $pdf->Cell(260,.5,'',0,1,'L',1);
+        $pdf->SetFont('Times','',11);
+        
+        $distritos = ControladorProductores::ctrMostrarProductoresDistinct(null,null,'distrito');
+
+        $item = 'distrito';
+
+        $item2 = 'campania';
+
+        $campania = $_COOKIE['campania'];
+
+        $campo = 'renspa';
+
+        $totales = array('establecimientos'=>0,'vacas'=>0,'vaquillonas'=>0,'toros'=>0,'toritos'=>0,'novillos'=>0,'novillitos'=>0,'terneros'=>0,'terneras'=>0);
+
+
+        foreach ($distritos as $key => $value) {
+
+            if($value[0] != NULL){
+
+                $data = ControladorAnimales::ctrSumarAnimalesInnerProductor($item,$value[0],$item2,$campania,$campo);
+
+                $nombreDistrito = ControladorProductores::ctrMostrarLocation('departamento',8,'localidad',$value[0]);
+
+                $pdf->Cell(40,7,utf8_decode($nombreDistrito[0]['nombre']),0,0,'L',0);
+                $pdf->Cell(30,7,$data['establecimientos'],0,0,'L',0);
+                $pdf->Cell(15,7,$data['vacas'],0,0,'L',0);
+                $pdf->Cell(25,7,$data['vaquillonas'],0,0,'L',0);
+                $pdf->Cell(20,7,$data['terneros'],0,0,'L',0);
+                $pdf->Cell(20,7,$data['terneras'],0,0,'L',0);
+                $pdf->Cell(20,7,$data['novillos'],0,0,'L',0);
+                $pdf->Cell(25,7,$data['novillitos'],0,0,'L',0);
+                $pdf->Cell(20,7,$data['toros'],0,0,'L',0);
+                $pdf->Cell(25,7,$data['toritos'],0,0,'L',0);
+                $pdf->Cell(20,7,($data['vacas'] + $data['vaquillonas'] + $data['terneros'] + $data['terneras'] + $data['novillo'] + $data['novillitos'] + $data['toros'] + $data['toritos']),0,1,'L',0);
+                $pdf->Cell(255,.2,'',0,1,'L',1);
+
+                $totales['establecimientos'] += $data['establecimientos'];
+                $totales['vacas'] += $data['vacas'];
+                $totales['vaquillonas'] += $data['vaquillonas'];
+                $totales['terneros'] += $data['terneros'];
+                $totales['terneras'] += $data['terneras'];
+                $totales['novillos'] += $data['novillos'];
+                $totales['novillitos'] += $data['novillitos'];
+                $totales['toros'] += $data['toros'];
+                $totales['toritos'] += $data['toritos'];
+
+            }
+
+        }
+
+     
+
+
+
+        
+        $pdf->SetFont('helvetica','B',10);
+        $pdf->SetTextColor(0,4,162);
+        $pdf->Cell(40,7,'TOTALES',0,0,'L',0);
+        $pdf->SetFont('Times','B',11);
+        $pdf->Cell(30,7,$totales['establecimientos'],0,0,'L',0);
+        $pdf->Cell(15,7,$totales['vacas'],0,0,'L',0);
+        $pdf->Cell(25,7,$totales['vaquillonas'],0,0,'L',0);
+        $pdf->Cell(20,7,$totales['terneros'],0,0,'L',0);
+        $pdf->Cell(20,7,$totales['terneras'],0,0,'L',0);
+        $pdf->Cell(20,7,$totales['novillos'],0,0,'L',0);
+        $pdf->Cell(25,7,$totales['novillitos'],0,0,'L',0);
+        $pdf->Cell(20,7,$totales['toros'],0,0,'L',0);
+        $pdf->Cell(25,7,$totales['toritos'],0,0,'L',0);
+
+        $totalAnimales = ($totales['vacas']+$totales['vaquillonas']+$totales['terneros']+$totales['terneras']+$totales['novillos']+$totales['novillitos']+$totales['toros']+$totales['toritos']);
+
+        $pdf->Cell(25,7,$totalAnimales,0,1,'L',0);
+
+    	$pdf->Output();
+
+
+    }
+
+    public function informe7(){
+
+        //REQUERIMOS LA CLASE TCPDF
+
+        include('fpdf.php');
+
+        // ---------------------------------------------------------
+
+        $titulo = 'Nómina de Vacunadores ordenada Alfabéticamente';
+        
+        $cabezera = "Sistema integrado de Vacunación Anti-Aftosa \n Nómina de Vacunadores ordenada Alfabéticamente";
+
+        include 'cabezera.php';
+        
+        $pdf->SetFont('Times','B',12);
+        $pdf->SetX(10);
+        $pdf->Cell(60,7,'Nombre',0,0,'L',0);
+        $pdf->Cell(25,7,'Matricula',0,0,'L',0);
+        $pdf->Cell(20,7,'Tipo',0,0,'L',0);
+        $pdf->Cell(50,7,'Domicilio',0,0,'L',0);
+        $pdf->Cell(30,7,'Telefono',0,1,'L',0);
+        $pdf->Cell(185,.5,'',0,1,'L',1);
+        $pdf->SetFont('Times','',10);
+        $pdf->SetFillColor(0,0,0);
+
+        $veterinarios = ControladorVeterinarios::ctrMostrarVeterinarios(null,null);
+        
+        while ($fila = mysqli_fetch_array($query)) {
+        $pdf->Cell(60,7,utf8_decode($fila['nombre']),0,0,'L',0);
+        $pdf->Cell(25,7,$fila['matricula'],0,0,'L',0);
+        $pdf->Cell(20,7,$fila['tipo'],0,0,'L',0);
+        $pdf->Cell(50,7,$fila['domicilio'],0,0,'L',0);
+        $pdf->Cell(30,7,$fila['telefono'],0,1,'L',0);	
+        }
+
+        $pdf->Output();
+
+    
+    }
 
 
 }
