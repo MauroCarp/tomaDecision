@@ -327,11 +327,92 @@ class informePDF{
 
         // ---------------------------------------------------------
 
-        $titulo = 'Detalle de Animales Vacunados por Vacunador con Bufalos/as';
-
-        $cabezera = "Sistema integrado de Vacunación Anti-Aftosa \n Detalle de Animales Vacunados por Vacunador con Bufalos/as";
+        $titulo = 'Entrega de vacunas por Vacunador';
+        
+        $cabezera = "Sistema integrado de Vacunación Anti-Aftosa \n Entrega de Vacunas por Productor incluida la de Búfalos/as";
 
         include 'cabezeraLand.php';
+
+        $pdf->SetFont('Times','B',14);
+        $pdf->SetFillColor(0,4,162);
+        $pdf->SetX(10);
+        $pdf->Cell(40,7,'Vacunador',0,0,'L',0);
+        $pdf->Cell(40,7,utf8_decode('Matrícula'),0,0,'L',0);
+        $pdf->Cell(40,7,'UEL',0,0,'L',0);
+        $pdf->Cell(40,7,'Marca',0,0,'L',0);
+        $pdf->Cell(50,7,'Fecha Entrega',0,0,'L',0);
+        $pdf->Cell(40,7,'Dosis',0,1,'L',0);
+        $pdf->Cell(250,.5,'',0,1,'L',1);
+        $pdf->SetFont('Times','',11);
+
+        $veterinarios = ControladorVeterinarios::ctrMostrarVeterinarios(null,null);
+
+        $item = 'matricula';
+
+        $item2 = 'campania';
+
+        $campania = $_COOKIE['campania'];
+
+        $total = 0;
+
+        foreach ($veterinarios as $key => $value) {
+            
+            $distribuciones = ControladorAftosa::ctrMostrarDistribucion($item,$value['matricula'],$item2,$campania);
+            
+            if(!empty($distribuciones)){
+
+                $pdf->Cell(40,7,utf8_decode($value['nombre']),0,0,'L',0);
+                $pdf->Cell(40,7,$fila['matricula'],0,0,'L',0);
+                $pdf->Cell(40,7,'F.I.S.S.A Iriondo Sur',0,0,'L',0);
+
+
+                $first = true;
+                
+                $totalDosis = 0;
+
+                foreach ($distribuciones as $key => $distribucion) {
+                    
+                    if($first){
+
+                        $first = false;
+
+                    }else{
+
+                        $pdf->Cell(120,7,'',0,0,'L',0);
+
+                    }
+                    
+                    $pdf->Cell(40,7,$distribucion['marca'],0,0,'L',0);
+                    $pdf->Cell(40,7,formatearFecha($distribucion['fechaEntrega']),0,0,'L',0);
+                    $pdf->Cell(40,7,$distribucion['cantidad'],0,1,'L',0);
+                
+                    $totalDosis += $distribucion['cantidad'];
+                    $total += $distribucion['cantidad'];
+                    
+                };
+
+                $pdf->Cell(200,7,'',0,0,'L',0);
+                $pdf->Cell(40,.5,'',0,1,'L',1);
+                $pdf->Cell(200,7,'',0,0,'L',0);
+                $pdf->SetFont('Times','B',11);
+                $pdf->Cell(40,7,$totalDosis,0,1,'L',0);
+                $pdf->SetFont('Times','',11);
+                $pdf->Ln(1);
+
+
+
+            }
+
+        }
+
+        $pdf->Ln(15);
+        $pdf->SetFont('times','B',11);
+        $pdf->Cell(80,7,'',0,0,'L',0);
+        $pdf->SetTextColor(0,4,162);
+        $pdf->Cell(75,7,'Total Dosis Entregadas:',0,0,'L',0);
+        $pdf->Cell(100,7,$total,0,0,'L',0);
+
+	    $pdf->Output();
 
     }
 
