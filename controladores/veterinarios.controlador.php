@@ -121,7 +121,7 @@ class ControladorVeterinarios{
 			
 			$datos = $_GET["idVeterinario"];
 
-			$respuesta = ModeloVeterinarios::mdlEliminarVeterinario($tabla, $datos);
+			$respuesta = ModeloVeterinarios::mdlEliminarVeterinario($tabla,$datos);
 
 			if($respuesta == "ok"){
 

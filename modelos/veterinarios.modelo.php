@@ -121,7 +121,7 @@ class ModeloVeterinarios{
 
 		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE vacunador_id = :id");
 
-		$stmt -> bindParam(":id", $datos['id'], PDO::PARAM_INT);
+		$stmt -> bindParam(":id", $datos, PDO::PARAM_INT);
 
 		if($stmt -> execute()){
 
@@ -130,7 +130,7 @@ class ModeloVeterinarios{
 		}else{
 
 			return "error";	
-
+			
 		}
 
 		$stmt -> close();
