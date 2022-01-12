@@ -651,7 +651,7 @@ class informePDF{
 
         // ---------------------------------------------------------
 
-        $titulo = 'Nómina de Vacunadores ordenada Alfabéticamente';
+        $titulo = 'Nomina de Vacunadores ordenada Alfabéticamente';
         
         $cabezera = "Sistema integrado de Vacunación Anti-Aftosa \n Nómina de Vacunadores ordenada Alfabéticamente";
 
@@ -669,13 +669,15 @@ class informePDF{
         $pdf->SetFillColor(0,0,0);
 
         $veterinarios = ControladorVeterinarios::ctrMostrarVeterinarios(null,null);
-        
-        while ($fila = mysqli_fetch_array($query)) {
-        $pdf->Cell(60,7,utf8_decode($fila['nombre']),0,0,'L',0);
-        $pdf->Cell(25,7,$fila['matricula'],0,0,'L',0);
-        $pdf->Cell(20,7,$fila['tipo'],0,0,'L',0);
-        $pdf->Cell(50,7,$fila['domicilio'],0,0,'L',0);
-        $pdf->Cell(30,7,$fila['telefono'],0,1,'L',0);	
+
+        foreach ($veterinarios as $key => $veterinario) {
+
+            $pdf->Cell(60,7,utf8_decode($veterinario['nombre']),0,0,'L',0);
+            $pdf->Cell(25,7,$veterinario['matricula'],0,0,'L',0);
+            $pdf->Cell(20,7,$veterinario['tipo'],0,0,'L',0);
+            $pdf->Cell(50,7,utf8_decode($veterinario['domicilio']),0,0,'L',0);
+            $pdf->Cell(30,7,$veterinario['telefono'],0,1,'L',0);	
+
         }
 
         $pdf->Output();
