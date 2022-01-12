@@ -77,6 +77,18 @@ class ControladorAnimales{
     
     }
 
+    /*=============================================
+    CONTAR PRODUCTORES SEGUN ANIMALES
+	=============================================*/
+
+	static public function ctrContarProductorSegunAnimales($item,$valor,$item2,$valor2){
+    
+        $tabla = "animales";
+
+        return $respuesta = ModeloAnimales::mdlContarProductorSegunAnimales($tabla,$item,$valor,$item2,$valor2);
+    
+    }
+
 
 
 

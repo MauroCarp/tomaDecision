@@ -651,7 +651,7 @@ class informePDF{
 
         // ---------------------------------------------------------
 
-        $titulo = 'Nomina de Vacunadores ordenada Alfabéticamente';
+        $titulo = 'Nomina de Vacunadores ordenada Alfabeticamente';
         
         $cabezera = "Sistema integrado de Vacunación Anti-Aftosa \n Nómina de Vacunadores ordenada Alfabéticamente";
 
@@ -682,6 +682,190 @@ class informePDF{
 
         $pdf->Output();
 
+    
+    }
+
+    public function informe8(){
+
+        //REQUERIMOS LA CLASE TCPDF
+
+        include('fpdf.php');
+
+        // ---------------------------------------------------------
+
+        $titulo = 'Detalle por Distrito de los Propietarios y Categorizacion de su Rodeo-Otras Especies';
+        
+        $cabezera = "Sistema integrado de Vacunación Anti-Aftosa \n Detalle por Distrito de los Propietarios y Categorización de su Rodeo-Otras Especies";
+
+        include 'cabezeraLand.php';
+        
+        $pdf->SetFont('Times','B',12);
+        $pdf->SetX(10);
+        $pdf->Cell(40,7,'Distrito',0,0,'L',0);
+        $pdf->Cell(60,7,'Propietario',0,0,'L',0);
+        $pdf->Cell(65,7,'Establecimiento',0,0,'L',0);
+        $pdf->Cell(30,7,'Explo.',0,0,'L',0);
+        $pdf->Cell(20,7,'Caprinos',0,0,'L',0);
+        $pdf->Cell(20,7,'Ovinos',0,0,'L',0);
+        $pdf->Cell(20,7,'Porcinos',0,0,'L',0);
+        $pdf->Cell(20,7,'Equinos',0,1,'L',0);
+        $pdf->Cell(275,.5,'',0,1,'L',1);
+        $pdf->SetFont('Times','',10);
+        $pdf->SetFillColor(0,0,0);
+
+        $distritos = ControladorProductores::ctrMostrarProductoresDistinct(null,null,'distrito');
+
+        $item = 'distrito';
+
+        $item2 = 'campania';
+
+        $campania = $_COOKIE['campania'];
+
+        $campo = 'renspa';
+
+        $totalesFinal = array('establecimientos'=>0,'caprinos'=>0,'ovinos'=>0,'porcinos'=>0,'equinos'=>0);
+        
+        foreach ($distritos as $key => $value) {
+            
+            $totales = array('establecimientos'=>0,'caprinos'=>0,'ovinos'=>0,'porcinos'=>0,'equinos'=>0);
+            
+            if($value[0] != NULL){
+                
+                $nombreDistrito = ControladorProductores::ctrMostrarLocation('departamento',8,'localidad',$value[0]);
+ 
+                $productoresPorDistrito = ControladorProductores::ctrMostrarProductores('distrito',$value[0]);
+
+                $first = true;
+
+                foreach ($productoresPorDistrito as $key => $productor) {
+                    
+                    $item = 'renspa';
+
+                    $valor = $productor['renspa'];
+
+                    $animales = ControladorAnimales::ctrMostrarAnimales($item,$valor,$item2,$campania);
+
+                    $datosValidos = ($animales['caprinos'] != 0 OR $animales['ovinos'] != 0 OR $animales['porcinos'] != 0 OR $animales['equinos']) ? true : false;
+
+                    if(!empty($animales)){
+                        
+                        if($datosValidos){
+
+                            if($first){
+                                               
+                                $pdf->Cell(275,.2,'',0,1,'L',1);	
+                                $pdf->Cell(40,7,utf8_decode($nombreDistrito[0]['nombre']),0,0,'L',0);
+
+                                $first = false;
+
+                            }else{
+
+                                $pdf->Cell(40,7,'',0,0,'L',0);
+
+                            }
+                            
+                            $pdf->Cell(60,7,utf8_decode($productor['propietario']),0,0,'L', 0);
+                            $pdf->Cell(65,7,$productor['establecimiento'],0,0,'L',0);
+                            $pdf->Cell(30,7,utf8_decode($productor['explotacion']),0,0,'L',0);
+                            $pdf->Cell(20,7,$animales['caprinos'],0,0,'C',0);
+                            $pdf->Cell(20,7,$animales['ovinos'],0,0,'C',0);
+                            $pdf->Cell(20,7,$animales['porcinos'],0,0,'C',0);
+                            $pdf->Cell(20,7,$animales['equinos'],0,1,'C',0);
+                            $pdf->Cell(40,7,'',0,0,'L',0);
+                            $pdf->Cell(20,7,$productor['renspa'],0,1,'L',0);
+
+                            $totales['caprinos'] += $animales['caprinos'];
+                            $totales['ovinos'] += $animales['ovinos']; 
+                            $totales['porcinos'] += $animales['porcinos'];
+                            $totales['equinos'] += $animales['equinos'];
+                            $totales['establecimientos']++;
+                        
+                        }
+                    
+                    }
+                    
+    
+                    if($datosValidos){
+                        
+                        $pdf->Cell(100,7,'',0,0,'L',0);
+                        $pdf->SetFillColor(0,4,162);
+                        $pdf->Cell(175  ,.2,'',0,1,'L',1);	
+                        $pdf->SetFillColor(0,0,0);
+                        $pdf->Cell(100,7,'',0,0,'L',0);	
+                        $pdf->SetFont('Times','b',10);
+                        $pdf->SetTextColor(0,4,162);
+                        $pdf->Cell(65,7,'Total por Localidad:',0,0,'L',0);
+                        $pdf->Cell(30,7,'Cant. Est.: '.$totales['establecimientos'],0,0,'L',0);
+                        $pdf->Cell(20,7,$totales['caprinos'],0,0,'C',0);
+                        $pdf->Cell(20,7,$totales['ovinos'],0,0,'C',0);
+                        $pdf->Cell(20,7,$totales['porcinos'],0,0,'C',0);
+                        $pdf->Cell(20,7,$totales['equinos'],0,1,'C',0);
+                        $pdf->SetTextColor(0,0,0);
+                        $pdf->SetFont('Times','',10);
+                        $pdf->SetFillColor(0,0,0);
+                        $pdf->Ln(5);
+    
+                        $totalesFinal['establecimientos'] += $totales['establecimientos'];
+                        $totalesFinal['caprinos'] += $totales['caprinos'];
+                        $totalesFinal['ovinos'] += $totales['ovinos'];
+                        $totalesFinal['porcinos'] += $totales['porcinos'];
+                        $totalesFinal['equinos'] += $totales['equinos'];
+    
+                    }
+
+                }
+
+            }
+
+        }
+
+        $pdf->Ln(2);
+        $pdf->SetFillColor(0,0,0);
+        $pdf->Cell(275,.2,'',0,1,'L',1);	
+        $pdf->Ln(2);
+        $pdf->SetFillColor(0,4,162);
+        $pdf->Cell(100,7,'',0,0,'L',0);	
+        $pdf->Cell(175,.2,'',0,1,'L',1);	
+        $pdf->SetFillColor(0,0,0);
+        $pdf->Cell(100,7,'',0,0,'L',0);	
+        $pdf->SetFont('Times','b',10);
+        $pdf->SetTextColor(0,4,162);
+        $pdf->Cell(65,7,'Total por Departamento:',0,0,'L',0);
+        $pdf->Cell(30,7,'Cant. Est.: '.$totalesFinal['establecimientos'],0,0,'L',0);
+        $pdf->Cell(20,7,$totalesFinal['caprinos'],0,0,'C',0);
+        $pdf->Cell(20,7,$totalesFinal['ovinos'],0,0,'C',0);
+        $pdf->Cell(20,7,$totalesFinal['porcinos'],0,0,'C',0);
+        $pdf->Cell(20,7,$totalesFinal['equinos'],0,1,'C',0);	
+        $pdf->Ln(5);
+
+        $pdf->Cell(128,7,'',0,0,'L',0);	
+        $pdf->Cell(58,7,'Cantidad de Establecimientos:',0,0,'R',0);
+        $pdf->Cell(9,7,'',0,0,'R',0);
+
+        $item = 'caprinos';
+        
+        $valor = 0;
+        
+        $establecimientosCaprinos = ControladorAnimales::ctrContarProductorSegunAnimales($item,$valor,$item2,$campania);
+        
+        $item = 'ovinos';
+        
+        $establecimientosOvinos = ControladorAnimales::ctrContarProductorSegunAnimales($item,$valor,$item2,$campania);
+        
+        $item = 'porcinos';
+        
+        $establecimientosPorcinos = ControladorAnimales::ctrContarProductorSegunAnimales($item,$valor,$item2,$campania);
+        
+        $item = 'equinos';
+        
+        $establecimientosEquinos = ControladorAnimales::ctrContarProductorSegunAnimales($item,$valor,$item2,$campania);
+
+        $pdf->Cell(20,7,$establecimientosCaprinos['total'],0,0,'C',0);
+        $pdf->Cell(20,7,$establecimientosOvinos['total'],0,0,'C',0);
+        $pdf->Cell(20,7,$establecimientosPorcinos['total'],0,0,'C',0);
+        $pdf->Cell(20,7,$establecimientosEquinos['total'],0,1,'C',0);
+
+        $pdf->Output();
     
     }
 

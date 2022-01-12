@@ -60,7 +60,10 @@ class ModeloProductores{
 			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
 
 			$stmt -> execute();
-			// var_dump($stmt->errorInfo());
+
+			if($item == 'distrito')
+				return $stmt -> fetchAll();
+
 			return $stmt -> fetch();
 			
 		}else{
@@ -68,7 +71,7 @@ class ModeloProductores{
 			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla");
 			
 			$stmt -> execute();
-			// var_dump($stmt->errorInfo());
+			var_dump($stmt->errorInfo());
 
 			return $stmt -> fetchAll();
 
