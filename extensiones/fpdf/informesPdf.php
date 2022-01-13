@@ -1018,6 +1018,104 @@ class informePDF{
 
     }
 
+    public function informe11(){
+
+        //REQUERIMOS LA CLASE TCPDF
+
+        include('fpdf.php');
+
+        // ---------------------------------------------------------
+
+        $campania = $_COOKIE['campania'];
+
+        $titulo = utf8_decode("Cantidad de Animales y establecimientos Vacunados");                
+
+        $cabezera = "Sistema integrado de Vacunación Anti-Aftosa \n Cantidad de Animales y establecimientos Vacunados";
+
+        include 'cabezera.php';
+      
+        $pdf->SetFont('Times','B',14);
+        $pdf->SetX(10);
+        $pdf->Cell(40,7,'Vacunador',0,0,'L',0);
+        $pdf->Cell(40,7,'Renspa',0,0,'L',0);
+        $pdf->Cell(55,7,'Cant. Animales Carbunclo',0,0,'L',0);
+        $pdf->Cell(50,7,'Cant. Animales Bruce.',0,1,'L',0);
+        $pdf->Cell(190,.5,'',0,1,'L',1);
+        $pdf->SetFont('Times','',11);
+
+        
+        $veterinarios = ControladorVeterinarios::ctrMostrarVeterinarios(null,null);
+
+        $item = 'matricula';
+
+        $totales = array('carbunclo'=>0,'brucelosis'=>0,'establecimientosCar'=>0,'establecimientosBruce');
+        foreach ($veterinarios as $key => $veterinario) {
+
+            $actasPorVet = ControladorActas::ctrMostrarActa($item,$veterinario['matricula']);
+
+            $registroValido = (!empty($actasPorVet)) ? true : false;
+
+            if($registroValido){
+
+                $pdf->SetFillColor(0,0,0);
+				$pdf->Cell(190,.1,'',0,1,'L',1);
+				$pdf->SetFillColor(0,4,162);
+				$pdf->Cell(40,7,utf8_decode($veterinario['nombre']),0,0,'L',0);
+
+                $first = true;
+
+                foreach ($actasPorVet as $key => $acta) {
+
+                    if($first){
+
+                        $first = false;
+
+                    }else{
+
+                        $pdf->Cell(40,7,'',0,0,'L',0);
+
+                    }
+                            
+                    $pdf->Cell(40,7,$acta['renspa'],0,0,'L',0);
+                    $pdf->Cell(55,7,$acta['cantidadCar'],0,0,'C',0);
+                    $pdf->Cell(50,7,$acta['cantidadBruce'],0,1,'C',0);
+
+                    if($acta['cantidadCar'] != 0){
+
+                        $totales['carbunclo'] += $acta['cantidadCar'];
+                        $totales['establecimientosCar']++;
+                        
+                    }
+                    
+                    if($acta['cantidadBruce'] != 0){
+                        
+                        $totales['brucelosis'] += $acta['cantidadBruce'];
+                        $totales['establecimientosBruce']++;
+
+                    }
+
+                }
+
+            }
+
+        }
+
+        $pdf->Cell(190,.5,'',0,1,'L',1);
+        $pdf->Cell(60,7,'',0,0,'L',0);
+        $pdf->Cell(20,7,'Totales:',0,0,'L',0);
+        $pdf->Cell(55,7,$totales['carbunclo'],0,0,'C',0);
+        $pdf->Cell(50,7,$totales['brucelosis'],0,1,'C',0);
+        $pdf->Ln(5);
+        $pdf->SetTextColor(0,4,162);
+        $pdf->Cell(75,7,'Total Establecimientos Vacunados Carbunclo:',0,0,'L',0);
+        $pdf->Cell(100,7,$totales['establecimientosCar'],0,1,'L',0);
+        $pdf->Cell(75,7,'Total Establecimientos Vacunados Brucelosis:',0,0,'L',0);
+        $pdf->Cell(100,7,$totales['establecimientosBruce'],0,1,'L',0);
+
+        $pdf->Output();
+
+    }
+
 
 
 }
