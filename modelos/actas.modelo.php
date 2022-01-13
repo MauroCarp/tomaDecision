@@ -185,5 +185,22 @@ class ModeloActas{
 		return $stmt -> fetch();
 
 
-}
+	}
+	
+	/*=============================================
+	MOSTRAR ACTA
+	=============================================*/
+
+	static public function mdlSumarMontos($tabla,$item,$valor){
+    
+		$stmt = Conexion::conectar()->prepare("SELECT SUM(admAf) AS admAf, SUM(vacunadorAf) AS vacunadorAf, SUM(vacunaAf) AS vacunaAf, SUM(admCar) AS admCar, SUM(vacunadorCar) AS vacunadorCar, SUM(vacunaCar) AS vacunaCar, SUM(redondeoAf) AS redondeoAf, SUM(redondeoCar) AS redondeoCar FROM $tabla WHERE $item = :$item");
+
+		$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+
+		$stmt -> execute();
+
+		return $stmt -> fetch();
+
+	}
+
 }

@@ -897,7 +897,7 @@ class informePDF{
         $titulo = utf8_decode('Evolucion semanal de la Campaña de Vacunacion Anti-Aftosa');
                 
         $campania = $_COOKIE['campania'];
-        
+
         $cabezera = "Sistema integrado de Vacunación Anti-Aftosa \n Evolución semanal de la Campaña de Vacunación Anti-Aftosa - Campaña N° $campania";
 
         include 'cabezera.php';
@@ -965,6 +965,61 @@ class informePDF{
 
     }
 
+    public function informe10(){
+
+        //REQUERIMOS LA CLASE TCPDF
+
+        include('fpdf.php');
+
+        // ---------------------------------------------------------
+
+        $campania = $_COOKIE['campania'];
+
+        $titulo = utf8_decode("Montos de Campaña N° $campania");                
+
+        $cabezera = "Sistema integrado de Vacunación Anti-Aftosa \n Montos de Campaña N° $campania";
+
+        include 'cabezera.php';
+       
+        $pdf->SetFont('Times','B',12);
+        $pdf->SetX(10);
+        $pdf->Cell(190,.5,'',0,1,'L',1);
+        $pdf->SetFont('helvetica','',11);
+        $pdf->SetFillColor(0,0,0);
+        $pdf->Ln(1);
+
+        $item = 'campania';
+        
+        $dataMontos = ControladorActas::ctrSumarMontos($item,$campania);
+        
+        $item = 'numero';
+
+        $montosCampania = ControladorAftosa::ctrMostrarDatosCampania($item,$campania);
+
+        $pdf->Cell(65,7,utf8_decode('Administración F.I.S.S.A Aftosa:'),0,0,'R',0);
+        $pdf->Cell(25,7,"$ ".number_format($dataMontos['admAf'], 2, ",", ".")	,0,1,'L',0);
+        $pdf->Cell(65,7,'Vacunadores Aftosa:',0,0,'R',0);
+        $pdf->Cell(20,7,"$ ".number_format($dataMontos['vacunadorAf'], 2, ",", ".")	,0,1,'L',0);
+        $pdf->Cell(65,7,'Vacunas Aftosa:',0,0,'R',0);
+        $pdf->Cell(50,7,"$ ".number_format($dataMontos['vacunaAf'], 2, ",", ".")	,0,1,'L',0);
+        $pdf->Cell(65,7,'Redondeo Aftosa:',0,0,'R',0);
+        $pdf->Cell(60,7,utf8_decode("$ ".number_format(($dataMontos['redondeoAf'] * $montosCampania['vacunaA']), 2, ",", ".")),0,1,'L',0);
+        $pdf->Cell(65,7,utf8_decode('Administración F.I.S.S.A Carbunclo:'),0,0,'R',0);
+        $pdf->Cell(30,7,"$ ".number_format($dataMontos['admCar'], 2, ",", ".")	,0,1,'L',0);	
+        $pdf->Cell(65,7,'Vacunadores Carbunclo:',0,0,'R',0);
+        $pdf->Cell(30,7,"$ ".number_format($dataMontos['vacunadorCar'], 2, ",", ".")	,0,1,'L',0);
+        $pdf->Cell(65,7,'Vacunas Carbunclo:',0,0,'R',0);
+        $pdf->Cell(60,7,utf8_decode("$ ".number_format($dataMontos['vacunaCar'], 2, ",", ".")),0,1,'L',0);
+        $pdf->Cell(65,7,'Redondeo Carbunclo:',0,0,'R',0);
+        $pdf->Cell(60,7,utf8_decode("$ ".number_format(($dataMontos['redondeoCar'] * $montosCampania['vacunaC']), 2, ",", ".")),0,1,'L',0);
+
+
+        $pdf->Output();
+
+    }
+
+
+
 }
 
 
@@ -972,7 +1027,7 @@ if($informe){
 
     $informeGeneral = new informePDF();
 
-    if($informe == 'informe3')
+    if($informe == 'informe3' OR $informe == 'informe15')
         $informeGeneral->matricula = $_GET['matricula'];
 
     $informeGeneral -> $informe();

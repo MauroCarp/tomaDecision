@@ -378,6 +378,22 @@ class ControladorActas{
 		return $respuesta;
     
     }
+    
+    /*=============================================
+    SUMAR MONTOS DE ACTAS
+	=============================================*/
+
+	static public function ctrSumarMontos($item,$valor){
+    
+        $tabla = "actas";
+
+        $respuesta = ModeloActas::mdlSumarMontos($tabla, $item, $valor);
+
+		return $respuesta;
+    
+    }
+
+
 
 
 
