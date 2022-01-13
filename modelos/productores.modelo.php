@@ -61,7 +61,7 @@ class ModeloProductores{
 
 			$stmt -> execute();
 
-			if($item == 'distrito')
+			if($item == 'distrito' OR $item == 'explotacion')
 				return $stmt -> fetchAll();
 
 			return $stmt -> fetch();
@@ -71,7 +71,6 @@ class ModeloProductores{
 			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla");
 			
 			$stmt -> execute();
-			var_dump($stmt->errorInfo());
 
 			return $stmt -> fetchAll();
 

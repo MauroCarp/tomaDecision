@@ -42,7 +42,7 @@ class ModeloActas{
 				return $stmt -> fetchAll();
 				
 			}
-	
+				
 			return $stmt -> fetch();
 			
 		}else{

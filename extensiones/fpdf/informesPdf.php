@@ -1225,6 +1225,93 @@ class informePDF{
 
     }
 
+    public function informe13(){
+
+        //REQUERIMOS LA CLASE TCPDF
+
+        include('fpdf.php');
+
+        // ---------------------------------------------------------
+
+        $campania = $_COOKIE['campania'];
+
+        $titulo = utf8_decode("Cant. Est. Segun Sist. Productivo");                
+
+        $cabezera = "Cantidad de Establecimientos segun Sistema Productivo";
+
+        include 'cabezera.php';
+
+        $pdf->SetX(5);
+        $pdf->Cell(45,8,'Sist. Productivo',0,0,'C',0);
+        $pdf->Cell(98,8,'Establecimiento',0,0,'L',0);
+        $pdf->Cell(30,8,'R.E.N.S.P.A',0,0,'L',0);
+        $pdf->Cell(20,8,'Animales',0,1,'L',0);
+        $pdf->SetX(15);
+        $pdf->Cell(185,0.01,'',1,1,'C',0);
+        $pdf->SetFont('Times','',10);
+      
+        $tiposExplotacion = ControladorProductores::ctrMostrarProductoresDistinct(null,null,'explotacion');
+
+        foreach ($tiposExplotacion as $key => $value) {
+            
+            if($value[0] != null OR $value[0] != ''){
+
+                $cantEstablecimientos = 0;
+
+                $item = 'explotacion';
+
+                $productoresPorExplotacion = ControladorProductores::ctrMostrarProductores($item,$value[0]);
+                
+                $pdf->SetFont('helvetica','B',12);
+                $pdf->SetX(15);
+                $pdf->Cell(185,.1,'',1,1,'L',0);
+                $pdf->SetX(15);
+                $pdf->Cell(35,8,utf8_decode($value[0]),0,0,'L',0);
+                $pdf->SetFont('helvetica','B',8);
+                
+                $first = true;
+                
+                foreach ($productoresPorExplotacion as $index => $productor) {
+                    
+                    if($first){
+                        
+                        $first = false;
+                        
+                    }else{
+                        
+                        $pdf->Cell(40,8,'',0,0,'L',0);
+
+                    }
+
+                    $pdf->Cell(98,6,$productor['establecimiento']." de ".$productor['propietario'],0,0,'L',0);
+                    $pdf->Cell(30,6,$productor['renspa'],0,0,'L',0);
+                    
+                    $item = 'renspa';
+
+                    $actaProductor = ControladorActas::ctrMostrarActa($item,$productor['renspa']);
+                    
+                    $animales = (!empty($actaProductor)) ? $actaProductor['cantidadPar'] : 0 ;
+
+                    $pdf->Cell(20,6,$animales,0,1,'C',0);
+
+                    $cantEstablecimientos++;
+
+                }
+
+                $pdf->SetFont('helvetica','B',10);
+                $pdf->SetX(15);
+                $pdf->Cell(40,8,'Total Establecimientos: ',0,0,'L',0);
+                $pdf->SetFont('helvetica','B',9);
+                $pdf->Cell(40,8,$cantEstablecimientos,0,1,'L',0);
+
+            }
+
+        }
+
+        $pdf->Output();
+
+    }
+
 
 
 
