@@ -28,22 +28,34 @@ class ModeloActas{
 
 	static public function mdlMostrarActa($tabla,$item,$valor,$item2,$valor2){
     
+		if($item != null){
+			
 			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item AND $item2 = :$item2");
-
+			
 			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
-			$stmt -> bindParam(":".$item2, $valor2, PDO::PARAM_STR);
-
+			
 			$stmt -> execute();
-
-			// return $valor;
+	
 			if($item == 'matricula'){
-
+	
 				return $stmt -> fetchAll();
 				
 			}
-
+	
 			return $stmt -> fetch();
+			
+		}else{
+			
+			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item2 = :$item2");
+			
+			$stmt -> bindParam(":".$item2, $valor2, PDO::PARAM_STR);
+			
+			$stmt -> execute();
 
+			return $stmt -> fetchAll();
+
+		}	
+		
 
     }
 

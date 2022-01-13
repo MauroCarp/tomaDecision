@@ -869,6 +869,101 @@ class informePDF{
     
     }
 
+    public function informe9(){
+
+                
+        function numberOfWeek ($date) {
+
+            $timestamp = strtotime($date); 
+
+            $newDate = date("Y-n-j", $timestamp );
+
+            $fechaExplode = explode('-',$newDate);
+
+            $fecha = mktime ($hora, $min, $seg, $fechaExplode[1], 1, $fechaExplode[0]);
+
+            $numberOfWeek = ceil ((($fechaExplode[2] + (date («w», $fecha)))) / 7);
+
+            return $numberOfWeek;
+
+        }
+
+        //REQUERIMOS LA CLASE TCPDF
+
+        include('fpdf.php');
+
+        // ---------------------------------------------------------
+
+        $titulo = utf8_decode('Evolucion semanal de la Campaña de Vacunacion Anti-Aftosa');
+                
+        $campania = $_COOKIE['campania'];
+        
+        $cabezera = "Sistema integrado de Vacunación Anti-Aftosa \n Evolución semanal de la Campaña de Vacunación Anti-Aftosa - Campaña N° $campania";
+
+        include 'cabezera.php';
+       
+        $pdf->SetFont('Times','B',12);
+        $pdf->SetX(10);
+        $pdf->Cell(30,7,'Mes',0,0,'L',0);
+        $pdf->Cell(30,7,'Semana',0,0,'L',0);
+        $pdf->Cell(45,7,"Cant. de Actas de Vac.",0,0,'L',0);
+        $pdf->Cell(50,7,'Animales Vacunados',0,1,'L',0);
+        $pdf->Cell(185,.5,'',0,1,'L',1);
+        $pdf->SetFont('Times','',10);
+        $pdf->SetFillColor(0,0,0);
+
+        $dataActas = ControladorActas::ctrMostrarActa(null,null);
+
+        $dataMensualSemanal = array();
+
+        $totales = array('actas'=> 0 ,'animales'=> 0);
+
+        foreach ($dataActas as $key => $acta) {
+            
+            $date = $acta['fechaVacunacion'];
+
+            $weekNumber = numberOfWeek($date);
+
+            setlocale(LC_TIME, "spanish");
+
+            $month = ucfirst(strftime("%B", strtotime($date)));
+
+            $dataMensualSemanal[$month][$weekNumber]['actas'] += 1;
+            $dataMensualSemanal[$month][$weekNumber]['animales'] += $acta['cantidadPar'];
+
+        }
+
+        
+        foreach($dataMensualSemanal as $mes => $value){
+            
+            $pdf->Cell(35,7,$mes,0,0,'L',0);
+            
+            foreach ($value as $semana => $data) {
+                    
+				$pdf->Cell(40,7,$semana,0,0,'L',0);		
+                $pdf->Cell(45,7,$data['actas'],0,0,'L',0);
+                $pdf->Cell(50,7,$data['animales'],0,1,'L',0);
+
+                $totales['actas'] += $data['actas'];
+                $totales['animales'] += $data['animales'];
+
+
+            }
+
+        }
+
+        $pdf->SetFillColor(0,4,162);
+        $pdf->SetTextColor(0,4,162);
+        $pdf->SetFont('helvetica','B',11);
+        $pdf->Cell(185,.5,'',0,1,'L',1);
+        $pdf->Cell(35,7,"TOTALES",0,0,'L',0);
+        $pdf->Cell(40,7,"",0,0,'L',0);		
+        $pdf->Cell(45,7,$totales['actas'],0,0,'L',0);
+        $pdf->Cell(50,7,$totales['animales'],0,1,'L',0);
+
+        $pdf->Output();
+
+    }
 
 }
 
