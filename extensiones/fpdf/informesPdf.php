@@ -1116,6 +1116,116 @@ class informePDF{
 
     }
 
+    public function informe12(){
+
+        //REQUERIMOS LA CLASE TCPDF
+
+        include('fpdf.php');
+
+        // ---------------------------------------------------------
+
+        $campania = $_COOKIE['campania'];
+
+        $titulo = utf8_decode("Establecimientos NO Vacunados");                
+
+        $cabezera = "Sistema integrado de Vacunación Anti-Aftosa \n Establecimientos NO Vacunados";
+
+        include 'cabezera.php';
+      
+        $pdf->SetFont('Times','B',14);
+        $pdf->SetX(10);
+        $pdf->Cell(35,7,'Vacunador',0,0,'L',0);
+        $pdf->Cell(40,7,'Renspa',0,0,'L',0);
+        $pdf->Cell(50,7,'Establecimiento',0,0,'L',0);
+        $pdf->Cell(30,7,'Carbunclo',0,0,'L',0);
+        $pdf->Cell(30,7,'Brucelosis',0,1,'L',0);
+        $pdf->Cell(190,.5,'',0,1,'L',1);
+        $pdf->SetFont('Times','',11);
+        
+        $veterinarios = ControladorVeterinarios::ctrMostrarVeterinarios(null,null);
+
+        $item = 'matricula';
+
+        $totales = array('carbunclo'=>0,'brucelosis'=>0);
+
+        foreach ($veterinarios as $key => $veterinario) {
+
+            $actasPorVet = ControladorActas::ctrMostrarActa($item,$veterinario['matricula']);
+
+            $registroValido = (!empty($actasPorVet)) ? true : false;
+
+            if($registroValido){
+
+                $pdf->SetFillColor(0,0,0);
+				$pdf->Cell(190,.1,'',0,1,'L',1);
+				$pdf->SetFillColor(0,4,162);
+				$pdf->Cell(35,7,utf8_decode($veterinario['nombre']),0,0,'L',0);
+
+                $first = true;
+
+                foreach ($actasPorVet as $key => $acta) {
+
+                    if($first){
+
+                        $first = false;
+
+                    }else{
+
+                        $pdf->Cell(35,7,'',0,0,'L',0);
+
+                    }
+                    $pdf->Cell(40,7,$acta['renspa'],0,0,'L',0);
+
+                    $item = 'renspa';
+
+                    $dataProducto = ControladorProductores::ctrMostrarProductores($item,$acta['renspa']);
+
+                    $pdf->Cell(45,7,$dataProducto['establecimiento'],0,0,'L',0);
+                    
+                    if($acta['cantidadCar'] == 0){
+
+                        $pdf->Cell(30,7,'NO',0,0,'C',0);
+                        
+                        $totales['carbunclo'] ++;
+                        
+                    }else{
+                        
+                        $pdf->Cell(30,7,'SI',0,0,'C',0);
+
+                    }
+                    
+                    if($acta['cantidadBruce'] == 0){
+
+                        $pdf->Cell(35,7,'NO',0,1,'C',0);
+                        
+                        $totales['brucelosis'] ++;
+                        
+                    }else{
+                        
+                        $pdf->Cell(35,7,'SI',0,1,'C',0);
+
+                    }
+
+                }
+
+            }
+
+        }
+
+        $pdf->Cell(190,.5,'',0,1,'L',1);
+        $pdf->Ln(5);
+        $pdf->SetTextColor(0,4,162);
+        $pdf->Cell(85,7,'Total Establecimientos NO Vacunados Carbunclo:',0,0,'L',0);
+        $pdf->Cell(100,7,$totales['carbunclo'],0,1,'L',0);
+        $pdf->Cell(85,7,'Total Establecimientos NO Vacunados Brucelosis:',0,0,'L',0);
+        $pdf->Cell(100,7,$totales['brucelosis'],0,1,'L',0);
+        $pdf->SetTextColor(0,0,0);
+
+        $pdf->Output();
+
+    }
+
+
 
 
 }
