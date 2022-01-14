@@ -73,14 +73,20 @@ if($_SESSION["perfil"] == "Especial"){
             $noVacunados = ControladorProductores::ctrMostrarEstNoVac($item, $valor,$orden);
 
             for ($i=0; $i < sizeof($noVacunados) ; $i++) { 
+              
+              $departamento = ControladorProductores::ctrMostrarLocation('departamento',$noVacunados[$i]["departamento"],null,null);
+              
+              $distrito =  ($noVacunados[$i]["distrito"]) ? ControladorProductores::ctrMostrarLocation('departamento',$noVacunados[$i]["departamento"],'localidad',$noVacunados[$i]["distrito"]) : array('nombreDpto'=>'-','nombre'=>'-');
+              
               echo "<tr>
                 <td>".$noVacunados[$i]["propietario"]."</td>
                 <td>".$noVacunados[$i]["renspa"]."</td>
                 <td>".$noVacunados[$i]["establecimiento"]."</td>
-                <td>".$noVacunados[$i]["departamento"]."</td>
-                <td>".$noVacunados[$i]["distrito"]."</td>
+                <td>".$departamento['nombreDpto']."</td>
+                <td>".$distrito['nombre']."</td>
                 <td>".$noVacunados[$i]["explotacion"]."</td>
               </tr>";
+
 
             }
             

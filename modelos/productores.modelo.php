@@ -302,14 +302,21 @@ class ModeloProductores{
 	=============================================*/
 	static public function ctrMostrarLocation($tabla,$item, $valor,$item2,$valor2){
 
-		$stmt = Conexion::conectar()->prepare("SELECT nombre,nombreDpto FROM $tabla WHERE $item = :$item AND $item2 = :$item2");
+		$stmt = Conexion::conectar()->prepare("SELECT nombre,nombreDpto FROM $tabla WHERE $item = :$item");
+		
+		if($item2 != null){
+			
+			$stmt = Conexion::conectar()->prepare("SELECT nombre,nombreDpto FROM $tabla WHERE $item = :$item AND $item2 = :$item2");
 
+			$stmt -> bindParam(":".$item2, $valor2, PDO::PARAM_STR);
+			
+		}
+		
 		$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
-		$stmt -> bindParam(":".$item2, $valor2, PDO::PARAM_STR);
 
 		$stmt -> execute();
 
-		return $stmt -> fetchAll();
+		return $stmt -> fetch();
 
 		$stmt -> close();
 
