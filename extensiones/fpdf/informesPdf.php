@@ -1237,7 +1237,7 @@ class informePDF{
 
         $titulo = utf8_decode("Cant. Est. Segun Sist. Productivo");                
 
-        $cabezera = "Cantidad de Establecimientos segun Sistema Productivo";
+        $cabezera = "Sistema integrado de Vacunación Anti-Aftosa \n Cantidad de Establecimientos segun Sistema Productivo";
 
         include 'cabezera.php';
 
@@ -1308,6 +1308,61 @@ class informePDF{
 
         }
 
+        $pdf->Output();
+
+    }
+
+    public function informe14(){
+
+        //REQUERIMOS LA CLASE TCPDF
+
+        include('fpdf.php');
+
+        // ---------------------------------------------------------
+
+        $campania = $_COOKIE['campania'];
+
+        $titulo = utf8_decode("Cant. Animales Segun Sist. Productivo");                
+
+        $cabezera = "Sistema integrado de Vacunación Anti-Aftosa \n Cantidad de Animales segun Sistema Productivo";
+
+        include 'cabezera.php';
+
+        $pdf->SetFont('Times','B',14);
+        $pdf->Ln(3);
+        $pdf->SetX(40);
+        $pdf->Cell(45,8,'Sist. Productivo',1,0,'C',0);
+        $pdf->Cell(65,8,'Cant. Animales',1,1,'C',0);
+        $pdf->SetFont('Times','',10);
+      
+        $tiposExplotacion = ControladorProductores::ctrMostrarProductoresDistinct(null,null,'explotacion');
+
+        foreach ($tiposExplotacion as $key => $value) {
+            
+            if($value[0] != null OR $value[0] != ''){
+
+                $campo = 'renspa';
+        
+                $item = 'explotacion';
+
+                $valor = $value[0];
+        
+                $item2 = 'campania';
+        
+                $campania = $_COOKIE['campania'];
+        
+                $animales = ControladorAnimales::ctrSumarAnimalesInnerProductor($item,$valor,$item2,$campania,$campo);
+
+                $totalAnimales = (array_sum($animales) - ($animales['establecimientos'] * 2));
+            
+                $pdf->SetX(50);
+                $pdf->Cell(40,8,utf8_decode($value[0]),0,0,'L',0);
+                $pdf->Cell(65,8,$totalAnimales,0,1,'C',0);
+
+            }
+
+        }
+        
         $pdf->Output();
 
     }
