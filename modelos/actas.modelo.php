@@ -189,7 +189,7 @@ class ModeloActas{
 	}
 	
 	/*=============================================
-	MOSTRAR ACTA
+	SUMAR MONTOS
 	=============================================*/
 
 	static public function mdlSumarMontos($tabla,$item,$valor){
@@ -197,6 +197,23 @@ class ModeloActas{
 		$stmt = Conexion::conectar()->prepare("SELECT SUM(admAf) AS admAf, SUM(vacunadorAf) AS vacunadorAf, SUM(vacunaAf) AS vacunaAf, SUM(admCar) AS admCar, SUM(vacunadorCar) AS vacunadorCar, SUM(vacunaCar) AS vacunaCar, SUM(redondeoAf) AS redondeoAf, SUM(redondeoCar) AS redondeoCar FROM $tabla WHERE $item = :$item");
 
 		$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+
+		$stmt -> execute();
+
+		return $stmt -> fetch();
+
+	}
+	
+	/*=============================================
+	MOSTRAR ACTA Y ANIMALES (INNERJOIN)
+	=============================================*/
+
+	static public function mdlMostrarActasAnimales($tabla,$tabla2,$item,$valor,$item2,$valor2){
+    
+		$stmt = Conexion::conectar()->prepare("SELECT *  FROM $tabla INNER JOIN $tabla2 ON $tabla.renspa = $tabla2.renspa WHERE $tabla.$item = :$item AND $tabla.$item2 = :$item2");
+
+		$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+		$stmt -> bindParam(":".$item2, $valor2, PDO::PARAM_STR);
 
 		$stmt -> execute();
 

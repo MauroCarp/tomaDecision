@@ -37,7 +37,7 @@
                                 
                                 </div>
 
-                                <form id="form-matricula">
+                                <form id="form-matricula<?php echo $informeNum;?>" class="formBuscarMatricula">
 
                                     <div class="row">
                                         
@@ -63,7 +63,7 @@
 
             <div class="modal-footer">
 
-                <button type="submit" class="btn btn-primary buscarMatricula" form="form-matricula" informe="<?php echo $informeNum;?>">Informe</button>
+                <button type="submit" class="btn btn-primary buscarMatricula" form="form-matricula<?php echo $informeNum;?>" informe="<?php echo $informeNum;?>">Informe</button>
 
             </div>
 

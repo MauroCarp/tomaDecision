@@ -61,7 +61,7 @@ class ModeloProductores{
 
 			$stmt -> execute();
 
-			if($item == 'distrito' OR $item == 'explotacion')
+			if($item == 'distrito' OR $item == 'explotacion' OR $item == 'veterinario' )
 				return $stmt -> fetchAll();
 
 			return $stmt -> fetch();

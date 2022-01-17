@@ -88,8 +88,16 @@ $informeNum = 3;
 
 include "vistas/modulos/modales/veterinarios/modalMatricula.php";
 
-// $idModal = '';
+$idModal = 'matricula-cronograma15';
 
-// include "/modales/veterinarios/modalMatricula.php";
+$informeNum = 15;
+
+include "vistas/modulos/modales/veterinarios/modalMatricula.php";
+
+$idModal = 'matricula-cronograma16';
+
+$informeNum = 16;
+
+include "vistas/modulos/modales/veterinarios/modalMatricula.php";
 
 ?>

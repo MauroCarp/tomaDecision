@@ -1,25 +1,31 @@
-const btnBuscarMatricula = document.getElementsByClassName('buscarMatricula')
+const formsBuscarMatricula = document.getElementsByClassName('formBuscarMatricula')
 
-if(btnBuscarMatricula.length > 0){
+if(formsBuscarMatricula.length > 0){
 
-    for (const btn of btnBuscarMatricula) {
-
-        btn.addEventListener('click',(e)=>{
+    for (const btn of formsBuscarMatricula) {
+        
+        btn.addEventListener('submit',(e)=>{
 
             e.preventDefault()
             
-            let informeNum = e.target.attributes[3].nodeValue
-
-            let matricula = document.getElementById(`matriculaInforme${informeNum}`).value
-
+            let informeId = e.target[0].id
+            
+            let informeNum = informeId.replace('matriculaInforme','')
+            
+            let matricula = document.getElementById(informeId).value
+                        
             if(matricula != ''){
 
                 let matriculaValida = (matricula.match(/[0-9][-]...([\d{4}])/) && matricula.length == 6)
 
                 if(matriculaValida){
-
-                    window.open(`extensiones/fpdf/informesPdf.php?informe=informe${informeNum}&matricula=${matricula}`)
-
+            
+                    if(informeNum == 3)
+                        window.open(`extensiones/fpdf/informesPdf.php?informe=informe${informeNum}&matricula=${matricula}`)
+                    else
+                        window.location = `index.php?ruta=aftosa/informes/informe${informeNum}&matricula=${matricula}`
+                        
+                    
                 }else{
 
                     swal({

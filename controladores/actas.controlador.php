@@ -381,17 +381,39 @@ class ControladorActas{
     
     /*=============================================
     SUMAR MONTOS DE ACTAS
-	=============================================*/
+    =============================================*/
 
-	static public function ctrSumarMontos($item,$valor){
-    
+    static public function ctrSumarMontos($item,$valor){
+
         $tabla = "actas";
 
         $respuesta = ModeloActas::mdlSumarMontos($tabla, $item, $valor);
 
-		return $respuesta;
-    
+        return $respuesta;
+
     }
+    
+    /*=============================================
+    ACTAS INNER JOIN ANIMALES
+    =============================================*/
+
+    static public function ctrMostrarActasAnimales($item,$valor){
+
+        $tabla = "actas";
+
+        $tabla2 = 'animales';
+
+        $item2 = 'campania';
+
+        $valor2 = $_COOKIE['campania'];
+
+        $respuesta = ModeloActas::mdlMostrarActasAnimales($tabla,$tabla2,$item,$valor,$item2,$valor2);
+
+        return $respuesta;
+
+    }
+
+
 
 
 
