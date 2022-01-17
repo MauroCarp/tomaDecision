@@ -1377,9 +1377,9 @@ class informePDF{
 
         $campania = $_COOKIE['campania'];
 
-        $titulo = utf8_decode("Cronograma Actual por Veterinario");                
+        $titulo = utf8_decode("Cronograma por Veterinario");                
 
-        $cabezera = "Sistema integrado de Vacunación Anti-Aftosa \n Cronograma Actual por Veterinario";
+        $cabezera = "Sistema integrado de Vacunación Anti-Aftosa \n Cronograma por Veterinario";
 
         include 'cabezeraLand.php';
         
@@ -1452,6 +1452,82 @@ class informePDF{
 
     }
 
+    public function informe16(){
+
+        //REQUERIMOS LA CLASE TCPDF
+
+        include('fpdf.php');
+
+        // ---------------------------------------------------------
+
+        $campania = $_COOKIE['campania'];
+
+        $titulo = utf8_decode("Cronograma Actual por Veterinario");                
+
+        $cabezera = "Sistema integrado de Vacunación Anti-Aftosa \n Cronograma Actual por Veterinario";
+
+        include 'cabezeraLand.php';
+        
+        $matricula = $this->matricula;
+
+        $item = 'matricula';
+
+        $veterinario = ControladorVeterinarios::ctrMostrarVeterinarios($item,$matricula);
+
+        $pdf->Ln(3);
+        $pdf->Cell(40,7,'Vacunador:',0,0,'L',0);
+        $pdf->Cell(40,7,utf8_decode($veterinario['nombre']),0,1,'L',0);
+        $pdf->Ln(3);
+        $pdf->SetFont('Times','B',11);
+        $pdf->SetX(10);
+        $pdf->Cell(40,7,'Renspa',0,0,'L',0);
+        $pdf->Cell(80,7,'Nombre/Apellido',0,0,'L',0);
+        $pdf->Cell(25,7,'Parcial',0,0,'L',0);
+        $pdf->Cell(25,7,'Total',0,1,'L',0);
+        $pdf->Cell(278,.5,'',0,1,'L',1);
+        $pdf->SetFont('Times','',11);
+
+        $item = 'veterinario';
+
+        $productoresSegunVet = ControladorProductores::ctrMostrarProductores($item,$matricula);
+
+        $totales = array('total'=>0,'parcial'=>0);
+
+        foreach ($productoresSegunVet as $key => $productor) {
+        
+            $item = 'renspa';
+
+            $item2 = 'campania';
+
+            $campania = $_COOKIE['campania'];
+
+            $animales = ControladorAnimales::ctrMostrarAnimales($item,$productor['renspa'],$item2,$campania);
+                
+            $parcial = $animales['terneros'] + $animales['terneras'] + $animales['novillos'] + $animales['novillitos'] + $animales['toritos'] + $animales['vaquillonas'];
+
+            $totalAnimales = $parcial + $animales['vacas'] + $animales['toros'];
+
+            $pdf->Cell(40,7,$productor['renspa'],0,0,'L',0);
+            $pdf->Cell(80,7,$productor['propietario'],0,0,'L',0);
+            $pdf->Cell(25,7,$parcial,0,0,'L',0);
+            $pdf->Cell(25,7,$totalAnimales,0,1,'L',0);
+
+            $totales['total'] += $totalAnimales;
+            $totales['parcial'] += $parcial;
+
+        }
+
+        $pdf->SetFillColor(100,100,255);
+        $pdf->Cell(278,.01,'',0,1,'',1);
+        $pdf->Cell(40);
+        $pdf->Cell(80,7,'Totales:',0,0,'R',0);
+        $pdf->Cell(25,7,$totales['parcial'],0,0,'L',0);
+        $pdf->Cell(25,7,$totales['total'] ,0,0,'L',0);
+        $pdf->Cell(25);
+
+        $pdf->Output();
+
+    }
 
 
 
@@ -1463,7 +1539,7 @@ if($informe){
 
     $informeGeneral = new informePDF();
 
-    if($informe == 'informe3' OR $informe == 'informe15')
+    if($informe == 'informe3' OR $informe == 'informe15' OR $informe == 'informe16')
         $informeGeneral->matricula = $_GET['matricula'];
 
     $informeGeneral -> $informe();

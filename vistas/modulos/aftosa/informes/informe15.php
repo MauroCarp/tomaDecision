@@ -20,7 +20,7 @@ if($_SESSION["perfil"] == "Especial"){
     
     <h1>
        
-        Cronograma Actual por Vacunador
+        Cronograma por Veterinario
         
     </h1>
 
@@ -28,7 +28,7 @@ if($_SESSION["perfil"] == "Especial"){
       
     <li><a href="informes"><i class="fa fa-dashboard"></i>Informes</a></li>
       
-      <li class="active">Cronograma Actual por Vacunador</li>
+      <li class="active">Cronograma por Veterinario</li>
       
     </ol>
     <?php 

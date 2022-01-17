@@ -16,13 +16,21 @@ if($_SESSION["perfil"] == "Especial"){
 
 <div class="content-wrapper">
 
-  <section class="content-header">
+<section class="content-header">
     
     <h1>
        
         Cronograma Actual por Vacunador
         
     </h1>
+
+    <ol class="breadcrumb">
+      
+      <li><a href="informes"><i class="fa fa-dashboard"></i>Informes</a></li>
+      
+      <li class="active">Cronograma Actual por Vacunador</li>
+      
+    </ol>
 
     <?php 
 
@@ -33,43 +41,46 @@ if($_SESSION["perfil"] == "Especial"){
         $veterinario = ControladorVeterinarios::ctrMostrarVeterinarios($item,$matricula);
 
     ?>
-    <h3>
+
+    <div class="row">
+
+      <div class="col-lg-6">
         
-        Vacunador: <?php echo $veterinario['nombre'];?>
-    
-    </h3>
-
-    <ol class="breadcrumb">
-      
-    <li><a href="informes"><i class="fa fa-dashboard"></i>Informes</a></li>
-      
-      <li class="active">Cronograma Actual por Vacunador</li>
-      
-    </ol>
-
-    <div class="box-header with-border">
-
-      <div class="box-tools pull-right">
+        <h3>
+            
+            Vacunador:<b> <?php echo $veterinario['nombre'];?></b>
         
-        <a href="extensiones/fpdf/informesPdf.php?informe=informe16&matricula=<?php echo $matricula;?>">
-        
-          <button class="btn btn-success" style="margin-top:5px"><b>Imprimir Cronograma</b></button>
-
-        </a>
-
-        <a href="vistas/modulos/excelVeterinarios.php">
-        
-          <button class="btn btn-success" style="margin-top:5px"><b>Enviar por E-mail</b></button>
-
-        </a>
+        </h3>
 
       </div>
-        
+
+      <div class="col-lg-6">
+
+        <div class="box-header with-border">
+    
+          <div class="box-tools pull-right">
+            
+            <a href="extensiones/fpdf/informesPdf.php?informe=informe16&matricula=<?php echo $matricula;?>" target="_blank">
+            
+              <button class="btn btn-success" style="margin-top:5px"><b>Imprimir Cronograma</b></button>
+    
+            </a>
+    
+            <a href="vistas/modulos/excelVeterinarios.php">
+            
+              <button class="btn btn-success" style="margin-top:5px"><b>Enviar por E-mail</b></button>
+    
+            </a>
+    
+          </div>
+            
+        </div>
+
+      </div>
+
     </div>
 
-  </section>
-
-  <br>
+</section>
 
   <section class="content">
 
@@ -99,29 +110,31 @@ if($_SESSION["perfil"] == "Especial"){
 
             <?php
 
-              // MOSTRAR LOS LOS ANIMALES A VACUNAR
+            // MOSTRAR LOS LOS ANIMALES A VACUNAR
 
-              
+            
+            $item = 'veterinario';
+
+            $productoresSegunVet = ControladorProductores::ctrMostrarProductores($item,$matricula);
+
+            $item = 'renspa';
+
             $item2 =  'campania';
-		
+    
             $valor2 = $_COOKIE['campania'];
-                    
-            $animalesCronograma = ControladorAnimales::ctrMostrarAnimales(null,null,$item2,$valor2);
+            
+            foreach ($productoresSegunVet as $key => $productor) {
+                      
+              $animalesCronograma = ControladorAnimales::ctrMostrarAnimales($item,$productor['renspa'],$item2,$valor2);
 
-            foreach ($animalesCronograma as $key => $value) {
+              $parcial = $animalesCronograma['terneros'] + $animalesCronograma['terneras'] + $animalesCronograma['novillos'] + $animalesCronograma['novillitos'] + $animalesCronograma['toritos'] + $animalesCronograma['vaquillonas'];
 
-                $parcial = $value['terneros'] + $value['terneras'] + $value['novillos'] + $value['novillitos'] + $value['toritos'] + $value['vaquillonas'];
-
-                $totalAnimales = $parcial + $value['vacas'] + $value['toros'];
-
-                $item = 'renspa';
-
-                $propietario = ControladorProductores::ctrMostrarProductores($item,$value['renspa']);
+              $totalAnimales = $parcial + $animalesCronograma['vacas'] + $animalesCronograma['toros'];
 
                 echo "
                 <tr>
-                <td>".$value['renspa']."</td>
-                <td>".$propietario['propietario']."</td>
+                <td>".$productor['renspa']."</td>
+                <td>".$productor['propietario']."</td>
                 <td>".$parcial."</td>
                 <td>".$totalAnimales."</td>
                 </tr>
