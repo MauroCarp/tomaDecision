@@ -210,15 +210,28 @@ class ModeloActas{
 
 	static public function mdlMostrarActasAnimales($tabla,$tabla2,$item,$valor,$item2,$valor2){
     
-		$stmt = Conexion::conectar()->prepare("SELECT *  FROM $tabla INNER JOIN $tabla2 ON $tabla.renspa = $tabla2.renspa WHERE $tabla.$item = :$item AND $tabla.$item2 = :$item2");
+		if($valor != null){
 
-		$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
-		$stmt -> bindParam(":".$item2, $valor2, PDO::PARAM_STR);
+			$stmt = Conexion::conectar()->prepare("SELECT *  FROM $tabla INNER JOIN $tabla2 ON $tabla.renspa = $tabla2.renspa WHERE $tabla.$item = :$item AND $tabla.$item2 = :$item2");
+			
+			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+			$stmt -> bindParam(":".$item2, $valor2, PDO::PARAM_STR);
+			
+			$stmt -> execute();
+			
+			return $stmt -> fetch();
+			
+		}else{
+			
+			$stmt = Conexion::conectar()->prepare("SELECT *  FROM actas INNER JOIN animales ON $tabla.renspa = $tabla2.renspa WHERE $tabla.$item2 = :$item2 AND $tabla2.$item2 = :$item2");
 
-		$stmt -> execute();
+			$stmt -> bindParam(":".$item2, $valor2, PDO::PARAM_STR);
+			
+			$stmt -> execute();
 
-		return $stmt -> fetch();
-
+			return $stmt -> fetchAll();
+			
+		}
 	}
 
 }

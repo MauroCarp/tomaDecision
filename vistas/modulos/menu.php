@@ -288,7 +288,7 @@
 								
 								<li>
 			
-									<a href="aftosa/diferencia">
+									<a href="index.php?ruta=aftosa/diferencia">
 										
 										<i class="fa fa-circle-o"></i>
 										<span>Busqueda Diferencia</span>
@@ -299,7 +299,7 @@
 								
 								<li>
 			
-									<a href="aftosa/diferenciaParcial">
+									<a href="index.php?ruta=aftosa/diferenciaParcial">
 										
 										<i class="fa fa-circle-o"></i>
 										<span>Busqueda Diferencia Parcial</span>

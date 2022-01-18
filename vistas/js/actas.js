@@ -447,3 +447,55 @@ if(seccionURL == 'aftosa/actasProductor'){
     })
 
 }
+
+
+/*=============================================
+BUSQUEDA DE DIFERENCIA
+=============================================*/
+
+let btnsDiferencias = document.getElementsByClassName('btnModificarActa')
+
+if(btnsDiferencias.length  > 0){
+    
+    for (const btn of btnsDiferencias) {
+        
+        btn.addEventListener('click',(e)=>{
+
+            let renspa
+
+            if(e.target.attributes.length > 1){
+            
+                renspa =  e.target.attributes.renspa.value 
+                
+            }else{
+                
+                renspa =  e.path[1].attributes.renspa.value 
+            
+            }
+
+            swal({
+                title: `¿Modificar Acta?`,
+                text: "¡Si no puede cancelar la acción!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                cancelButtonText: "Cancelar",
+                confirmButtonText: "Si, modificar"
+                })
+            .then(function(result){
+                    
+                if (result.value) {
+                        
+                    window.location = `index.php?ruta=aftosa/modificarActa&renspa=${renspa}`
+                            
+                }
+        
+            })
+
+
+        })
+
+    }
+
+}
