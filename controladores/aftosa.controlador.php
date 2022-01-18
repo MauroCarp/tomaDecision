@@ -359,5 +359,48 @@ class ControladorAftosa{
 
     }
 
+    /*=============================================
+    ENVIAR CRONOGRAMA
+    =============================================*/
+
+	static public function ctrEnviarMail($veterinario,$email){
+    
+        $rutaCronograma = $_SERVER['DOCUMENT_ROOT'].'/sanidadAnimal/vistas/modulos/aftosa/informes/cronograma.pdf';
+
+        include($rutaCronograma);
+
+        $rutaSend =  $_SERVER['DOCUMENT_ROOT'].'/sanidadAnimal/vistas/modulos/brutur/sendmail.php';
+
+        include($rutaSend);//Mando a llamar la funcion que se encarga de enviar el correo electronico
+
+        //Configuracion de variables para enviar el correo
+        define('MAIL','pruebafissa@gmail.com');
+        define('PASS','mauro425336');
+        $mail_username = MAIL;//Correo electronico saliente ejemplo: tucorreo@gmail.com
+        $mail_userpassword = PASS;//Tu contraseña de gmail
+        $mail_addAddress = $email;//correo electronico que recibira el mensaje
+        $template = "email_template.html";//Ruta de la plantilla HTML para enviar nuestro mensaje
+
+        //Inicio captura de datos enviados por $_POST para enviar el correo 
+
+
+        $mail_setFromEmail= "fundacioniriondosur@gmail.com";
+        $mail_setFromName= "F.I.S.S.A";
+        $txt_message="<h2>Cronograma del Vacunador ".$veterinario."</h2>
+        <h4>Se adjunta Cronograma</h4>
+        <br>
+        <p align='center'>No responder este a e-mail<br>
+        Consultas al e-mail fundacioniriondosur@gmail.com</p>";
+            
+
+
+        $mail_subject="Cronograma del Vacunador";
+        
+        sendemail($mail_username,$mail_userpassword,$mail_setFromEmail,$mail_setFromName,$mail_addAddress,$txt_message,$mail_subject,$template);
+
+        unlink($rutaCronograma);	
+
+    }
+
 }
 

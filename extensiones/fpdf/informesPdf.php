@@ -1452,7 +1452,7 @@ class informePDF{
 
         if(isset($this->mail)){
             
-            $pdf->Output('F','vistas/modulos/aftosa/informes/cronograma.pdf');
+            $pdf->Output('F', '../../vistas/modulos/aftosa/informes/cronograma.pdf');
 
         }else{
 
@@ -1537,7 +1537,7 @@ class informePDF{
 
         if(isset($this->mail)){
             
-            $pdf->Output('F', $_SERVER['DOCUMENT_ROOT'].'vistas/modulos/aftosa/informes/cronograma.pdf');
+            $pdf->Output('F', '../../vistas/modulos/aftosa/informes/cronograma.pdf');
 
         }else{
 
@@ -1578,6 +1578,8 @@ if($mail){
     $informe = $_POST['informe'];
 
     $informeGeneral -> $informe();
+
+    echo json_encode("ok");
 
 }
 

@@ -1,15 +1,10 @@
 <?php
-function sendemail($mail_username,$mail_userpassword,$mail_setFromEmail,$mail_setFromName,$mail_addAddress,$txt_message,$mail_subject, $template,$notificar){
 
-	if($notificar){
+function sendemail($mail_username,$mail_userpassword,$mail_setFromEmail,$mail_setFromName,$mail_addAddress,$txt_message,$mail_subject, $template){
 
-		require 'extensiones/PHPMailer/PHPMailerAutoload.php';
-		
-	}else{
-		
-		require '../../../extensiones/PHPMailer/PHPMailerAutoload.php';
-	
-	}
+	require 'extensiones/PHPMailer/PHPMailerAutoload.php';
+
+		// require '../../../extensiones/PHPMailer/PHPMailerAutoload.php';
 	
 	$mail = new PHPMailer;
 	
@@ -56,9 +51,7 @@ function sendemail($mail_username,$mail_userpassword,$mail_setFromEmail,$mail_se
 		echo 'Error de correo: ' . $mail->ErrorInfo."</p>";
 		
 	} else {
-		
-		$mailEnviado = FALSE;
-		
+				
 		echo '<script>
 
 		swal({
@@ -68,15 +61,7 @@ function sendemail($mail_username,$mail_userpassword,$mail_setFromEmail,$mail_se
 			showConfirmButton: true,
 			confirmButtonText: "Cerrar"
 
-		}).then(function(result){
-
-			if(result.value){
-			
-				window.location = "index.php?ruta=brutur/actualizarStatus&renspa='.$_GET['renspa'].'";
-
-			}
-
-		});
+		})
 	
 
 		</script>';

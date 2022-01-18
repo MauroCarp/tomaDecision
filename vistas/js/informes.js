@@ -67,15 +67,17 @@ for (const btn of btnEnviarMail) {
         
         let matricula
 
+        console.log(e);
+        
         if(e.path[0].attributes.length > 0){
         
             informeNum =  e.path[0].attributes.informe.value 
-            matricula =  e.path[0].attributes.informe.value 
+            matricula =  e.path[0].attributes.matricula.value 
             
         }else{
             
             informeNum = e.path[1].attributes.informe.value
-            matricula =  e.path[1].attributes.informe.value
+            matricula =  e.path[1].attributes.matricula.value
         
         }
 
@@ -93,21 +95,38 @@ for (const btn of btnEnviarMail) {
                 
             if (result.value) {
             
-                // hacer un fetch para enviar el mail
-                // pasamos por post la Matricula del vacunador
-
                 let url = 'extensiones/fpdf/informesPdf.php'
                 
                 let data = new FormData();
                 data.append('matricula',matricula)
                 data.append('informe',`informe${informeNum}`)
                 data.append('mail',true)
-
+                
                 fetch(url,{
                     method:'post',
                     body:data
-                }).then(res=>console.log(res.json()))
-                // .then(respuesta => console.log(respuesta))
+                }).then(res=>res.json())
+                    .then(respuesta => {
+                        
+                        if(respuesta == 'ok'){
+
+                            let url = 'ajax/informes.ajax.php'
+
+                            let data = new FormData()
+                            data.append('mail',true)
+                            data.append('matricula',matricula)
+
+                            fetch(url,{
+                                method:'post',
+                                body:data
+                            }).then(resp => resp.json())
+                            .then(respuesta=>console.log(respuesta))
+                            .catch(err=>console.log(err))
+
+                        }
+
+                    })
+
                 .catch(err => console.log(err))
 
             }
