@@ -65,13 +65,9 @@ if($_SESSION["perfil"] == "Especial"){
               <button class="btn btn-success" style="margin-top:5px"><b>Imprimir Cronograma</b></button>
     
             </a>
-    
-            <a href="vistas/modulos/excelVeterinarios.php">
-            
-              <button class="btn btn-success" style="margin-top:5px"><b>Enviar por E-mail</b></button>
-    
-            </a>
-    
+                
+            <button class="btn btn-success enviarMail" style="margin-top:5px" informe="16"><b>Enviar por E-mail</b></button>
+        
           </div>
             
         </div>

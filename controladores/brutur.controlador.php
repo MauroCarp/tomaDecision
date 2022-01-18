@@ -78,11 +78,11 @@ class ControladorBruTur{
 
 			   if(isset($_GET['notificar'])){
 
-               include('vistas/modulos/brutur/mailNotificacion.php');	
+               		include('vistas/modulos/brutur/mailNotificacion.php');	
 			   
 				}else{
 				
-				include('mailNotificacion.php');	
+					include('mailNotificacion.php');	
 				
 				}
 			 //  echo "<script>

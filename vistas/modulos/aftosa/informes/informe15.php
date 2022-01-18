@@ -65,11 +65,9 @@ if($_SESSION["perfil"] == "Especial"){
     
             </a>
     
-            <a href="vistas/modulos/excelVeterinarios.php">
             
-              <button class="btn btn-success" style="margin-top:5px"><b>Enviar por E-mail</b></button>
+            <button class="btn btn-success enviarMail" style="margin-top:5px" informe="15" matricula="<?php echo $matricula;?>"><b>Enviar por E-mail</b></button>
     
-            </a>
     
           </div>
             

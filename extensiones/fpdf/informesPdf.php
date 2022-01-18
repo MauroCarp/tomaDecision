@@ -20,11 +20,13 @@ function formatearFecha($fecha){
     
 }
 
-$informe = $_GET['informe'];
+$informe = (isset($_GET['informe'])) ?  $_GET['informe'] : false;
 
 class informePDF{
 
     public $matricula;
+    
+    public $mail;
 
     public function informe1(){
 
@@ -1448,7 +1450,15 @@ class informePDF{
         $pdf->Cell(25,7,$totales['total'] ,0,0,'L',0);
         $pdf->Cell(25);
 
-        $pdf->Output();
+        if(isset($this->mail)){
+            
+            $pdf->Output('F','vistas/modulos/aftosa/informes/cronograma.pdf');
+
+        }else{
+
+            $pdf->Output();
+
+        }
 
     }
 
@@ -1525,7 +1535,15 @@ class informePDF{
         $pdf->Cell(25,7,$totales['total'] ,0,0,'L',0);
         $pdf->Cell(25);
 
-        $pdf->Output();
+        if(isset($this->mail)){
+            
+            $pdf->Output('F', $_SERVER['DOCUMENT_ROOT'].'vistas/modulos/aftosa/informes/cronograma.pdf');
+
+        }else{
+
+            $pdf->Output();
+
+        }
 
     }
 
@@ -1541,6 +1559,23 @@ if($informe){
 
     if($informe == 'informe3' OR $informe == 'informe15' OR $informe == 'informe16')
         $informeGeneral->matricula = $_GET['matricula'];
+        
+    if(isset($_GET['mail']))
+            $informeGeneral->mail = $_GET['mail'];
+
+    $informeGeneral -> $informe();
+
+}
+
+$mail = (isset($_POST['mail'])) ? true : false;
+
+if($mail){
+
+    $informeGeneral = new informePDF();
+    $informeGeneral->matricula = $_POST['matricula'];
+    $informeGeneral->mail = $_POST['mail'];
+
+    $informe = $_POST['informe'];
 
     $informeGeneral -> $informe();
 
