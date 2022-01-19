@@ -66,8 +66,6 @@ for (const btn of btnEnviarMail) {
         let informeNum
         
         let matricula
-
-        console.log(e);
         
         if(e.path[0].attributes.length > 0){
         
@@ -110,6 +108,12 @@ for (const btn of btnEnviarMail) {
                         
                         if(respuesta == 'ok'){
 
+                            swal({
+                                type: "warning",
+                                title: "Enviando..",
+                                showConfirmButton: false,
+                            })
+
                             let url = 'ajax/informes.ajax.php'
 
                             let data = new FormData()
@@ -120,7 +124,29 @@ for (const btn of btnEnviarMail) {
                                 method:'post',
                                 body:data
                             }).then(resp => resp.json())
-                            .then(respuesta=>console.log(respuesta))
+                            .then(respuesta=>{
+                                
+                                if(respuesta == 'ok'){
+
+                                    swal({
+                                        type: "success",
+                                        title: "El Cronograma ha sido enviado correctamente",
+                                        showConfirmButton: true,
+                                        confirmButtonText: "Cerrar"
+                                        })
+
+                                }else{
+
+                                  swal({
+                                        type: "error",
+                                        title: "Hubo un error. El cronograma no ha sido enviado correctamente",
+                                        showConfirmButton: true,
+                                        confirmButtonText: "Cerrar"
+                                        })
+                                
+                                }
+
+                            })
                             .catch(err=>console.log(err))
 
                         }

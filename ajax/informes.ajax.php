@@ -17,8 +17,11 @@ class AjaxInformes{
 
         $veterinario = ControladorVeterinarios::ctrMostrarVeterinarios('matricula',$matricula);
 
-
 		$respuesta = ControladorAftosa::ctrEnviarMail($veterinario['nombre'],$veterinario['email']);
+
+        $rutaCronograma = $_SERVER['DOCUMENT_ROOT'].'/sanidadAnimal/vistas/modulos/aftosa/informes/cronograma.pdf';
+
+        unlink($rutaCronograma);	
 
         echo json_encode($respuesta);
       
