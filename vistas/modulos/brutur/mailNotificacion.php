@@ -58,7 +58,7 @@ function alertaTuberculosis($estado,$campania,$nombreVeterinario,$establecimient
        
         if ($estado == "Libre" OR $estado == "Recertificacion") {
     
-            $txt_message = "<h1>".ucfirst($campania)."</h1>Le comunicamos al veterinario $nombreVeterinario que el establecimiento $establecimiento, de $propietario, esta Libre de ".ucfirst($campania).".  ".$validez;
+            $txt_message = "<h1>".ucfirst($campania)."</h1>Le comunicamos al veterinario $nombreVeterinario que el establecimiento $establecimiento, de $propietario, esta Libre de ".ucfirst($campania).".";
     
         }
        
@@ -74,16 +74,22 @@ function alertaTuberculosis($estado,$campania,$nombreVeterinario,$establecimient
 
 function alertaBrucelosis($estado,$campania,$nombreVeterinario,$establecimiento,$propietario){
      
-    if ($estado == "MuVe" || $estado == "DOES") {
+    if ($estado == "MuVe" || $estado == "DOES Total" || $estado == "DOES Muestreo") {
             
         $txt_message = "<h1>".ucfirst($campania)."</h1>Le comunicamos al veterinario $nombreVeterinario que el establecimiento $establecimiento, de $propietario, esta en ".$estado;
     
         }
         
         
-        if ($estado == "CSM") {
+        if ($estado == "Tecnica PAL") {
             
-        $txt_message = "<h1>".ucfirst($campania)."</h1>Le comunicamos al veterinario $nombreVeterinario que el establecimiento $establecimiento, de $propietario, pidio CSM.";
+        $txt_message = "<h1>".ucfirst($campania)."</h1>Le comunicamos al veterinario $nombreVeterinario que el establecimiento $establecimiento, de $propietario, pidio $estado.";
+    
+        }
+        
+        if ($estado == "CSM" || $estado == "SAN") {
+            
+        $txt_message = "<h1>".ucfirst($campania)."</h1>Le comunicamos al veterinario $nombreVeterinario que el establecimiento $establecimiento, de $propietario, pidio $estado.";
     
         }
         
@@ -98,10 +104,8 @@ function alertaBrucelosis($estado,$campania,$nombreVeterinario,$establecimiento,
 }
 
 if ($alerta == "cambioStatus") {
-    
-    $estado = explode(',',$estado); 
 
-    $txt_message = '';
+    $estado = explode(',',$estado); 
 
     $txt = "La certificaci&oacute;n tiene una validez de 365 d&iacute;as.";
     
@@ -119,9 +123,9 @@ if ($alerta == "cambioStatus") {
 
     if($campania == 'bruTur'){
 
-        $txt_message = alertaBrucelosis($estado[0],$campania,$nombreVeterinario,$establecimiento,$propietario);
+        $txt_message = alertaBrucelosis($estado[0],'Brucelosis',$nombreVeterinario,$establecimiento,$propietario);
         $txt_message .= "<hr>";
-        $txt_message .= alertaTuberculosis($estado[1],$campania,$nombreVeterinario,$establecimiento,$propietario);
+        $txt_message .= alertaTuberculosis($estado[1],'Tuberculosis',$nombreVeterinario,$establecimiento,$propietario);
         
     }
     

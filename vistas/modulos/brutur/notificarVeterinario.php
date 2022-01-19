@@ -1,5 +1,4 @@
 <?php
-echo "<h3>Enviando E-Mail...";
 
 include '../../../controladores/brutur.controlador.php';
 include '../../../modelos/brutur.modelo.php';
@@ -10,16 +9,8 @@ include '../../../modelos/productores.modelo.php';
 include '../../../controladores/veterinarios.controlador.php';
 include '../../../modelos/veterinarios.modelo.php';
 
+$enviarMail = new ControladorBruTur();
 
-$descargarExcel = new ControladorBruTur();
-$descargarExcel -> ctrNotificar();
+$enviarMail -> ctrNotificar()
 
-
-echo "<script>
-
-setTimeout(function(){
-    window.close();
-},500)
-
-</script>";
 ?>

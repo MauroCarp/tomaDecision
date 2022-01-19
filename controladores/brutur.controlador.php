@@ -85,11 +85,16 @@ class ControladorBruTur{
 					include('mailNotificacion.php');	
 				
 				}
-			 //  echo "<script>
-			 //	window.location = 'index.php?ruta=brutur/actualizarStatus&renspa=".$valor."';  
-			  // </script>";
+
 		}	
 
+		echo "<script>
+
+		setTimeout(function(){
+		    window.close();
+		},1500)
+
+		</script>";
 
 	}
 
@@ -290,7 +295,7 @@ class ControladorBruTur{
 				$estadoTuberculosis= ControladorBruTur::ctrActualizarEstadoBruTur($tabla,$item,$datosTuberculosis);
 				$errores[] = $estadoTuberculosis;
 
-				($cambios != '') ? 'bruTur' : 'tuberculosis';
+				$cambios = ($cambios != '') ? 'bruTur' : 'tuberculosis';
 
 				$cargarRegistroTuberculosis = ControladorBruTur::ctrIngresarRegistroHistorial($datosTuberculosis);
 

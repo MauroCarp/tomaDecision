@@ -2,9 +2,7 @@
 
 function sendemail($mail_username,$mail_userpassword,$mail_setFromEmail,$mail_setFromName,$mail_addAddress,$txt_message,$mail_subject, $template){
 
-	require 'extensiones/PHPMailer/PHPMailerAutoload.php';
-
-		// require '../../../extensiones/PHPMailer/PHPMailerAutoload.php';
+	require  $_SERVER['DOCUMENT_ROOT'].'/sanidadAnimal/extensiones/PHPMailer/PHPMailerAutoload.php';
 	
 	$mail = new PHPMailer;
 	
@@ -44,29 +42,18 @@ function sendemail($mail_username,$mail_userpassword,$mail_setFromEmail,$mail_se
 	
 	$mailEnviado = TRUE;
 	
+	$enviado = true;
+
 	if(!$mail->send()) {
+
+		echo "<h3>Hubo un error al enviar<h3>";
 		
-		echo '<p style="color:red">No se pudo enviar el mensaje..';
+	}else{
 		
-		echo 'Error de correo: ' . $mail->ErrorInfo."</p>";
-		
-	} else {
-				
-		echo '<script>
-
-		swal({
-
-			type: "success",
-			title: "¡El Mail ha sido enviado correctamente!",
-			showConfirmButton: true,
-			confirmButtonText: "Cerrar"
-
-		})
-	
-
-		</script>';
+		echo "<h3>Notificacion enviada correctamente<h3>";
 	
 	}
+		
 }
 
        
