@@ -79,7 +79,7 @@ function sendemailAttach($mail_username,$mail_userpassword,$mail_setFromEmail,$m
 	
 	$mail->Subject = $mail_subject;
 	$archivo = $rutaAttach;
-	$mail->AddAttachment($archivo,$archivo);
+	$mail->AddAttachment($archivo,'Cronograma');
 	$mail->msgHTML($message);
 	if(!$mail->send()) {
 		return $mail->ErrorInfo;

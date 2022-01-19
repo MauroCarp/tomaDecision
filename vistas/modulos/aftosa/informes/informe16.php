@@ -66,7 +66,7 @@ if($_SESSION["perfil"] == "Especial"){
     
             </a>
                 
-            <button class="btn btn-success enviarMail" style="margin-top:5px" informe="16"><b>Enviar por E-mail</b></button>
+            <button class="btn btn-success enviarMail" style="margin-top:5px" informe="16" matricula="<?php echo $matricula;?>"><b>Enviar por E-mail</b></button>
         
           </div>
             

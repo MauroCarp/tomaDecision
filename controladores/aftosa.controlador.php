@@ -378,9 +378,6 @@ class ControladorAftosa{
         $mail_username = MAIL;//Correo electronico saliente ejemplo: tucorreo@gmail.com
         $mail_userpassword = PASS;//Tu contraseña de gmail
         $mail_addAddress = $email;//correo electronico que recibira el mensaje
-        
-        return $email;
-
         $mail_setFromEmail= "fundacioniriondosur@gmail.com";
         $mail_setFromName= "F.I.S.S.A";
         $txt_message="<h2>Cronograma del Vacunador ".$veterinario."</h2>

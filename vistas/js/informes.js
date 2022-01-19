@@ -125,27 +125,26 @@ for (const btn of btnEnviarMail) {
                                 body:data
                             }).then(resp => resp.json())
                             .then(respuesta=>{
-                                console.log(respuesta);
                                 
-                                // if(respuesta == 'ok'){
+                                if(respuesta == 'ok'){
 
-                                //     swal({
-                                //         type: "success",
-                                //         title: "El Cronograma ha sido enviado correctamente",
-                                //         showConfirmButton: true,
-                                //         confirmButtonText: "Cerrar"
-                                //         })
+                                    swal({
+                                        type: "success",
+                                        title: "El Cronograma ha sido enviado correctamente",
+                                        showConfirmButton: true,
+                                        confirmButtonText: "Cerrar"
+                                        })
 
-                                // }else{
+                                }else{
 
-                                //   swal({
-                                //         type: "error",
-                                //         title: "Hubo un error. El cronograma no ha sido enviado correctamente",
-                                //         showConfirmButton: true,
-                                //         confirmButtonText: "Cerrar"
-                                //         })
+                                  swal({
+                                        type: "error",
+                                        title: "Hubo un error. El cronograma no ha sido enviado correctamente",
+                                        showConfirmButton: true,
+                                        confirmButtonText: "Cerrar"
+                                        })
                                 
-                                // }
+                                }
 
                             })
                             .catch(err=>console.log(err))
