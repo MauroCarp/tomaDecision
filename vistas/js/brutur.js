@@ -571,8 +571,6 @@ const aprobarEstado = (props)=>{
         url,
         data,
         success:(response)=>{
-
-            console.log(response);
             
            if(response == 'ok'){
             

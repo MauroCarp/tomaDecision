@@ -21,9 +21,7 @@ $(".tablas").on("click", ".btnEditarVeterinario", function(){
       processData: false,
       dataType:"json",
       success:function(respuesta){
-
-        console.log(respuesta);
-        
+          
       	$("#idEdit").val(respuesta.vacunador_id);
       	
         $("#nombreEdit").val(respuesta.nombre);

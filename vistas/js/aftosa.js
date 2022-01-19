@@ -17,7 +17,6 @@ btnMenuCampania.addEventListener('click',()=>{
         body:data
     }).then(resp => resp.json())
     .then(respuesta => {
-        console.log(respuesta);
         
         document.getElementById('campaniaNumero').value = respuesta.numero 
         document.getElementById('fechaInicio').value = respuesta.inicio 
@@ -280,13 +279,9 @@ if(seccionURL == 'aftosa/recepcion'){
                     let accion = 'cargarRecepcion'
 
                     let campania = getCookie('campania') 
-
-                    console.log(campania);
                    
                     marcaVacuna = (marca == 'otraMarca') ? document.getElementById('inputOtraMarca').value : marca
-                    
-                    console.log(marcaVacuna);
-                    
+                                        
                     let  formData = new FormData()
                     
                     formData.append('accion',accion)
@@ -296,10 +291,7 @@ if(seccionURL == 'aftosa/recepcion'){
                     formData.append('cantidad',cantidad)
                     formData.append('marca',marcaVacuna)
                     formData.append('serie',serie)
-                    formData.append('fechaVenc',fechaVenc)
-
-                    console.log(formData.get('accion'));
-                    
+                    formData.append('fechaVenc',fechaVenc)  
 
                     fetch(url, {
                         method: 'POST', 
@@ -354,7 +346,6 @@ const cargarDistribuciones = (matricula,idTBody)=>{
     })
     .then(resp => resp.json())
     .then(respuesta =>{
-        console.log(respuesta);
         
         if(respuesta.length > 0){
             let tbody = document.getElementById(idTBody)
@@ -410,7 +401,6 @@ const cargarDistribuciones = (matricula,idTBody)=>{
             document.getElementById('btnAgregarDistribucion').style.display = 'block'
             
         }else{
-            console.log('hola');
             
             document.getElementById('btnAgregarDistribucion').style.display = 'block'
             
