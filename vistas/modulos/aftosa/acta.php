@@ -279,42 +279,42 @@
         <div class="col-md-1">
 
           <h4 style="line-height:35px;"><b>B&uacute;f. May.:</b></h4>
-          <input type="number" min="0" class="form-control sumTotal" name="bufaloMay" value="0">
+          <input type="number" min="0" class="form-control" name="bufaloMay" value="0">
         
         </div>
         
         <div class="col-md-1">
           
           <h4 style="line-height:35px;"><b>B&uacute;f. Men.:</b></h4>
-          <input type="number" min="0" class="form-control sumTotal" name="bufaloMen" value="0">
+          <input type="number" min="0" class="form-control" name="bufaloMen" value="0">
         
         </div>
         
         <div class="col-md-1">
         
           <h4 style="line-height:35px;"><b>Caprinos</b>:</h4>
-          <input type="number" min="0" class="form-control sumTotal" name="caprinos" value="0">
+          <input type="number" min="0" class="form-control" name="caprinos" value="0">
         
         </div>
         
         <div class="col-md-1">
         
           <h4 style="line-height:35px;"><b>Ovinos</b></h4>
-          <input type="number" min="0" class="form-control sumTotal" name="ovinos" value="0">
+          <input type="number" min="0" class="form-control" name="ovinos" value="0">
         
         </div>
         
         <div class="col-md-1">
         
           <h4 style="line-height:35px;"><b>Porcinos</b></h4>
-          <input type="number" min="0" class="form-control sumTotal" name="porcinos" value="0">
+          <input type="number" min="0" class="form-control" name="porcinos" value="0">
         
         </div>
         
         <div class="col-md-1">
         
           <h4 style="line-height:35px;"><b>Equinos</b></h4>
-          <input type="number" min="0" class="form-control sumTotal" name="equinos" value="0">
+          <input type="number" min="0" class="form-control" name="equinos" value="0">
         
         </div>
       
