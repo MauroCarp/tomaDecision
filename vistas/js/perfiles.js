@@ -3,6 +3,12 @@
 const btnNuevoPerfil = document.getElementById('btnNuevoPerfil')
 
 btnNuevoPerfil.addEventListener('click',()=>{
+    
+    // OCULTAR EDITAR
+    
+    document.getElementById('editarPerfil').style.display = 'none'
+
+    // MOSTRAR NUEVO
 
     let ventana = document.getElementById('nuevoPerfil')
 
@@ -22,9 +28,11 @@ for (const btn of btnsEditar) {
         
         let idPerfil = (e.path[0].attributes.length > 1) ? e.path[0].attributes.idperfil.nodeValue : e.path[1].attributes.idperfil.nodeValue
         
-        let ventanaNuevoPerfil = document.getElementById('nuevoPerfil')
+        // OCULTAR NUEVO
 
-        ventanaNuevoPerfil.style.display = 'none'
+        document.getElementById('nuevoPerfil').style.display = 'none'
+
+        // MOSTRAR EDITAR
 
         let ventanaEditarPerfil = document.getElementById('editarPerfil')
 
