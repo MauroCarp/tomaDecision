@@ -21,9 +21,9 @@
 			
 			<li>
 
-				<a href="carpetas">
+				<a href="#" data-toggle="modal" data-target="#ventanaModalCarpetas" id="menuCarpetas">
 
-					<i class="icon-tractor" style="font-size:1.2em;padding-right:5px;"></i>
+					<i class="fa fa-files-o" style="font-size:1.2em;padding-right:5px;"></i>
 					<span>Carpetas </span>
 
 				</a>
@@ -32,10 +32,10 @@
 
 			<li>
 
-				<a href="Perfiles">
+				<a href="#" data-toggle="modal" data-target="#ventanaModalPerfiles" id="menuPerfiles">
 
-					<i class="icon-jeringa" style="font-size:1.8em;"></i>
-					<span>Perfiles</span>
+					<i class="fa fa-sliders" style="font-size:1.8em;"></i>
+					<span>&nbsp;Perfiles</span>
 
 				</a>
 
@@ -61,3 +61,9 @@
 	 </section>
 
 </aside>
+
+<?php
+
+include 'modales/perfiles.php';
+
+?>

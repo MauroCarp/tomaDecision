@@ -158,15 +158,8 @@ function encrypt_decrypt($action, $string){
 
   <!-- ChartJS http://www.chartjs.org/-->
   <script src="vistas/bower_components/chartjs/dist/chart.min.js"></script>
-  <!-- <script src="vistas/bower_components/chartjs/dist/chartjs-plugin-datalabels.js"></script> -->
+  <script src="vistas/bower_components/chartjs/dist/chartjs-plugin-datalabels.js"></script>
 
-  <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.0/dist/chart.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
- -->
-
-
- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
- <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.0.0/chartjs-plugin-datalabels.min.js" integrity="sha512-R/QOHLpV1Ggq22vfDAWYOaMd5RopHrJNMxi8/lJu8Oihwi4Ho4BRFeiMiCefn9rasajKjnx9/fTQ/xkWnkDACg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 
 <!--=====================================
@@ -216,6 +209,7 @@ CUERPO DOCUMENTO
 
 <script src="vistas/js/plantilla.js"></script>
 <script src="vistas/js/inicio.js"></script>
+<script src="vistas/js/perfiles.js"></script>
 <script src="vistas/js/usuarios.js"></script>
 
 </body>
