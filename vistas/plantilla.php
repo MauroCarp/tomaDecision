@@ -6,48 +6,7 @@ ini_set('display_startup_errors', 1);
 
 error_reporting(E_ALL);
 
-
-// $departamento = 'BELGRANO';
-
-$departamento = 'IRIONDO';
-
-// $distritos = array('BELGRANO','ARMSTRONG','BOUQUET','ITURRASPE','LA CALIFORNIA','LAS PAREJAS','LAS ROSAS','MONTES DE OCA','TORTUGAS','TORTUGAS AG ACA');
-
-$distritos = array('IRIONDO','ANDINO','BERRETTA','BUSTINZA','CA&ntilde;ADA DE GOMEZ','CLARKE','CLASSON','CORREA','LARGUIA','LUCIO V LOPEZ','OLIVEROS','SALTO GRANDE','SAN ESTANISLAO','SAN RICARDO','SERODINO','TOTORAS','VILLA ELOISA','CARRIZALES');
-
-// $preRenspa = '20.001.0.';
-
-$preRenspa = '20.008.0.';
-
-// $uel = "A.B.S.A";
-
-$uel = "F.I.S.S.A";
-
-// $logo = 'absa';
-
 $logo = 'fissa';
-
-// INFORMES
-
-$informes = array();
-$informes[] = 'Animales Totales vacunados por vacunador';
-$informes[] = 'Total de Bovinos Vacunados por localidad y total departamental';
-$informes[] = 'Detalle Animales Vacunados por Vacunador';
-$informes[] = 'Entrega de vacunas por vacunador';
-$informes[] = 'Relacion Dosis entregada y Vacuna suministrada';
-$informes[] = 'Cant. de Establecimientos por distrito con detalle de categor&iacute;as';
-$informes[] = 'Nomina de Vacunadores ordenada alfabeticamente';
-$informes[] = 'Otras Especies';
-$informes[] = 'Evoluci&oacute;n semanal de la campa&ntilde;a';
-$informes[] = 'Informe de Montos';
-$informes[] = 'Informe Carbunclo y Brucelosis Vacunados';
-$informes[] = 'Informe Carbunclo y Brucelosis NO Vacunados';
-$informes[] = 'Cantidad de Establecimientos segun Sistema Productivo';
-$informes[] = 'Cantidad de Animales segun Sistema Productivo';
-$informes[] = 'Cronograma por Veterinario';
-$informes[] = 'Cronograma Actual por Veterinario';
-$informes[] = 'Exportar Base de Datos';
-
 
 function formatearFecha($fecha){
 
@@ -56,20 +15,6 @@ function formatearFecha($fecha){
   $fechaFormateada = $fechaExplode[2]."-".$fechaExplode[1]."-".$fechaExplode[0];
 
   return $fechaFormateada;
-
-}
-
-function distrito($departamento,$distrito,$conexion){
-
-  $item = 'departamento';
-
-  $item2 = 'localidad';
-
-  $distrito = ControladorProductores::ctrMostrarDatos($item,$departamento,$item2,$distrito);
-
-	$nombre = $fila['nombre'];
-
-	return $distrito;
 
 }
 
@@ -115,7 +60,7 @@ function encrypt_decrypt($action, $string){
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  <title>Gestión Sanidad Animal</title>
+  <title>Toma de Decision Animal</title>
 
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -212,11 +157,16 @@ function encrypt_decrypt($action, $string){
   <script src="vistas/bower_components/morris.js/morris.min.js"></script>
 
   <!-- ChartJS http://www.chartjs.org/-->
-  <script src="vistas/bower_components/Chart.js/Chart.js"></script>
+  <script src="vistas/bower_components/chartjs/dist/chart.min.js"></script>
+  <!-- <script src="vistas/bower_components/chartjs/dist/chartjs-plugin-datalabels.js"></script> -->
+
+  <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.0/dist/chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+ -->
 
 
-
-
+ <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.0.0/chartjs-plugin-datalabels.min.js" integrity="sha512-R/QOHLpV1Ggq22vfDAWYOaMd5RopHrJNMxi8/lJu8Oihwi4Ho4BRFeiMiCefn9rasajKjnx9/fTQ/xkWnkDACg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 
 <!--=====================================
@@ -265,16 +215,8 @@ CUERPO DOCUMENTO
 
 
 <script src="vistas/js/plantilla.js"></script>
-<script src="vistas/js/productores.js"></script>
-<script src="vistas/js/veterinarios.js"></script>
-<script src="vistas/js/brutur.js"></script>
-<script src="vistas/js/actualizarStatus.js"></script>
-<script src="vistas/js/pendientes.js"></script>
-<script src="vistas/js/aftosa.js"></script>
-<script src="vistas/js/actas.js"></script>
+<script src="vistas/js/inicio.js"></script>
 <script src="vistas/js/usuarios.js"></script>
-<script src="vistas/js/reportes.js"></script>
-<script src="vistas/js/informes.js"></script>
 
 </body>
 </html>

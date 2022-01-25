@@ -56,7 +56,10 @@ Data Table
 =============================================*/
 
 $(".tablas").DataTable({
-
+	"ordering": false,
+	"searching": false,
+	"lengthChange": false,
+	"pageLength" : 5,
 	"language": {
 
 		"sProcessing":     "Procesando...",
@@ -76,14 +79,10 @@ $(".tablas").DataTable({
 		"sLast":     "Último",
 		"sNext":     "Siguiente",
 		"sPrevious": "Anterior"
-		},
-		"ordering":"false",
-		// "oAria": {
-		// 	"sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
-		// 	"sSortDescending": ": Activar para ordenar la columna de manera descendente"
-		// }
+		}
 
 	}
+
 
 });
 
@@ -126,17 +125,6 @@ const redireccionarMenu = (seccion)=>{
 	window.location =  `index.php?ruta=${seccion}`;
 
 }
-
-const btnAlertas = document.getElementById('alertas');
-btnAlertas.addEventListener("click",()=>{redireccionarMenu('brutur/alertas')});
-
-const btnStatusVeterinario = document.getElementById('statusVeterinario');
-btnStatusVeterinario.addEventListener("click",()=>{
-	window.open(`extensiones/fpdf/generarPdf.php?accion=statusVeterinario`, '_blank');
-});
-
-const btnNotificados = document.getElementById('notificados');
-btnNotificados.addEventListener("click",()=>{redireccionarMenu('brutur/notificados')});
 
 const getQueryVariable = variable => {
 
@@ -195,101 +183,6 @@ RUTA
 const seccionURL = getQueryVariable('ruta');
 
 /*=============================================
-ACCESOS DIRECTOS ACTUALIZAR STATUS BRUTUR Y CARGAR/MODIFICAR ACTA AFTOSA
-=============================================*/
-
-window.addEventListener("keydown", function (event) {
-	
-	let functionKey = event.key;
-	
-	if(functionKey == 'F8'){
-		
-		$('#ventanaModalModificarStatus').modal('toggle');
-	
-	}
-	
-	
-	if(functionKey == 'F9'){
-
-		if(getCookie('campania') != null)
-			$('#ventanaModalRenspaActa').modal('toggle');
-		else	
-			$('#ventanaModalCampania').modal('show');
-
-	}
-       
-},false);
-
-/*=============================================
-COMPROBAR CAMPANIA
-=============================================*/	
-
-$('#menuAftosa').on('click',()=>{
-
-	let campania = getCookie('campania');
-
-	setTimeout(()=>{
-
-		if(campania == null)
-			document.getElementById('desplegableAftosa').style.display = 'none'
-	
-		},500)
-	
-	
-	validarCampania()
-	
-});
-
-
-/*=============================================
-ASIGNAR CAMPAÑA
-=============================================*/	
-
-$('#asignarCampania').click(()=>{
-
-	let campania = $('#campaniaNum').val();
-
-	document.cookie = `campania=${campania}`
-	
-	let date = new Date()
-
-	date.setTime(date.getTime()+(30*24*60*60*1000))
-
-	let expires = date.toGMTString()
-	
-	document.cookie = `campania = ${campania};path=/sanidadAnimal;Expires=${expires}`
-
-	$('#ventanaModalCampania').modal('toggle');
-
-	document.getElementById('campaniaNumeroInfo').innerText = `N° ${getCookie('campania')}`
-
-});
-
-/*=============================================
-VALIDAR CAMPAÑA
-=============================================*/	
-
-const validarCampania = ()=>{
-	
-	let campania = getCookie('campania');
-	
-	if(campania == null)  
-	$('#ventanaModalCampania').modal('show');
-	
-}
-
-/*=============================================
-MOSTRAR CAMPAÑA
-=============================================*/	
-
-if(getCookie('campania')){
-
-	document.getElementById('campaniaNumeroInfo').innerText = `N° ${getCookie('campania')}`
-	
-}
-
-
-/*=============================================
 GENERAR SELECT
 =============================================*/	
 
@@ -333,38 +226,4 @@ const cargarSelect = (params)=>{
 
 	})
 	.catch(er => console.log(er))
-}
-
-/*=============================================
-VALIDAR CAMPO RENSPA
-=============================================*/	
-
-const validarRenspa = (renspa,ruta,redirect)=>{
-
-	renspa.trim()
-
-  if(renspa.length == 0 ){
-  
-      swal({
-        type: "error",
-        title: "El campo R.E.N.S.P.A no puede estar Vacio",
-        showConfirmButton: true,
-        confirmButtonText: "Cerrar"
-        })
-    
-  }else if(renspa.length == 17 ){
-   
-    productorExistente(renspa, ruta,redirect)
-
-  }else{
-    
-    swal({
-        type: "error",
-        title: "R.E.N.S.P.A Incorrecto",
-        showConfirmButton: true,
-        confirmButtonText: "Cerrar"
-        })
-        
-  }
-
 }

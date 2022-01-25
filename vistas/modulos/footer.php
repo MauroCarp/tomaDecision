@@ -1,8 +1,7 @@
 <footer class="main-footer">
 	
-	<strong>Copyright &copy; 2021 Sanidad Animal <?php echo $uel;?></strong>
+	<strong>Copyright &copy; 2022 Toma de Decision</strong>
 
-	Todos los derechos reservados.
-
+	Todos los derechos reservados
 
 </footer>
