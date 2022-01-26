@@ -116,7 +116,6 @@
                     
                   <div class="box">
                       
-                    
                     <div class="box-header with-border">
 
                       <h3 class="box-title"><i class="ion-stats-bars"></i> Clasificaci&oacute;n - <b>Total animales: 6 </b></h3>
@@ -176,6 +175,27 @@
             </div>
 
             <div class="col-md-2 col-xs-12">
+
+              <div class="box">
+                
+                <div class="box-header with-border">
+
+                  <h3 class="box-title"><i class="fa fa-sliders"></i> Configuraci&oacute;n</h3>
+              
+                </div>
+                
+                <div class="box-body">
+                
+                  <?php
+                    
+                    include "inicio/sliders.php";
+                  
+                  ?>
+
+                </div>
+
+              </div>
+  
             </div>
           
           </div>
