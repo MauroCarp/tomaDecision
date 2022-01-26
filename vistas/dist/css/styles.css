@@ -21,6 +21,34 @@
     height: 100%!important;
 }
 
+/* BTN ELIMINAR */
+
+.btnEliminar{
+
+  -ms-transform: scale(0.6); /* IE 9 */
+  -webkit-transform: scale(0.6); /* Chrome, Safari, Opera */
+  transform: scale(0.6);
+
+}
+
+.tablaIngresos tbody tr td:last-child{
+  
+  padding: 0px;
+
+}
+
+
+/* RADIO INPUT */
+
+input[type="radio"] {
+    -ms-transform: scale(1.5); /* IE 9 */
+    -webkit-transform: scale(1.5); /* Chrome, Safari, Opera */
+    transform: scale(1.5);
+}
+
+
+/* RANGE INPUT */
+
 input[type="range"] {
     -webkit-appearance: none;
     height: 7px;
