@@ -106,6 +106,9 @@ function encrypt_decrypt($action, $string){
   <!-- Morris chart -->
   <link rel="stylesheet" href="vistas/bower_components/morris.js/morris.css">
 
+  <!-- Sweet ALert 2 -->
+  <link rel="stylesheet" href="vistas/plugins/sweetalert2/sweetalert2.min.css">
+
 
   <!-- ESTILOS PROPIOS -->
   <link rel="stylesheet" href="vistas/dist/css/styles.css">
@@ -133,7 +136,9 @@ function encrypt_decrypt($action, $string){
   <script src="vistas/bower_components/datatables.net-bs/js/responsive.bootstrap.min.js"></script>
 
   <!-- SweetAlert 2 -->
+  <script src="vistas/plugins/sweetalert2/sweetalert2.js"></script>
   <script src="vistas/plugins/sweetalert2/sweetalert2.all.js"></script>
+
    <!-- By default SweetAlert2 doesn't support IE. To enable IE 11 support, include Promise polyfill:-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
 
@@ -209,6 +214,7 @@ CUERPO DOCUMENTO
 
 <script src="vistas/js/plantilla.js"></script>
 <script src="vistas/js/inicio.js"></script>
+<script src="vistas/js/animales.js"></script>
 <script src="vistas/js/perfiles.js"></script>
 <script src="vistas/js/usuarios.js"></script>
 

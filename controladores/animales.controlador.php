@@ -1,96 +1,50 @@
 <?php
 
 class ControladorAnimales{
-    
 
-    /*=============================================
-    MOSTRAR ANIMALES
+	/*=============================================
+	CREAR PRODUCTORES
 	=============================================*/
 
-	static public function ctrMostrarAnimales($item,$valor,$item2,$valor2){
-    
-        $tabla = "animales";
+	static public function ctrNuevoAnimal($data){
 
-        $respuesta = ModeloAnimales::mdlMostrarAnimales($tabla, $item, $valor,$item2,$valor2);
+		$tabla = "animales";
+
+		$datos = array("rfid"=>$_POST["rfid"],
+						"mmGrasa"=>$_POST["mmGrasa"],
+						"peso"=>$_POST["peso"],
+						"sexo"=>$_POST["sexo"],
+						"refEco"=>$_POST["refEco"]);
+
+		$tas1 = ($datos['mmGrasa'] * 100) / $datos['peso'];
+
+		$tas2 = $datos['peso'] / $tas1;
+
+		$tas3 = ($datos['sexo'] == 'm') ? $tas2 : $tas2 - 12;
+
+		$datos['tas1'] = $tas1;
+		
+		$datos['tas2'] = $tas2;
+		
+		$datos['tas3'] = $tas3;
+
+		return 	$respuesta = ModeloAnimales::mdlNuevoAnimal($tabla, $datos);
+
+	}
+
+	/*=============================================
+	MOSTRAR ANIMALES
+	=============================================*/
+
+	static public function ctrMostrarAnimales($item, $valor){
+
+		$tabla = "animales";
+
+		$respuesta = ModeloAnimales::mdlMostrarAnimales($tabla, $item, $valor);
 
 		return $respuesta;
-    
-    }
 
-    /*=============================================
-    MOSTRAR ANIMALES SEGUN CAMPO PRODUCTOR
-	=============================================*/
-
-	static public function ctrMostrarAnimalesCampo($campo,$item,$valor,$item2,$valor2){
-    
-        $tabla = "animales";
-
-        $tabla2 = 'productores';
-
-        $respuesta = ModeloAnimales::mdlMostrarAnimalesCampo($tabla,$tabla2,$campo,$item,$valor,$item2,$valor2);
-
-		return $respuesta;
-    
-    }
-
-    /*=============================================
-    ACTUALIZAR EXISTENCIA
-	=============================================*/
-
-	static public function ctrCargarExistencia($datos){
-    
-        $tabla = "animales";
-
-        $datos['campania'] = $_COOKIE['campania'];
-
-        $respuesta = ModeloAnimales::mdlCargarExistencia($tabla, $datos);
-
-		return $respuesta;
-    
-    }
-    
-    /*=============================================
-    ACTUALIZAR EXISTENCIA
-	=============================================*/
-
-	static public function ctrActualizarExistencia($datos){
-    
-        $tabla = "animales";
-
-        $respuesta = ModeloAnimales::mdlActualizarExistencia($tabla, $datos);
-
-		return $respuesta;
-    
-    }
-    
-    /*=============================================
-    SUMAR ANIMALES INNER JOIN PRODUCTOR
-	=============================================*/
-
-	static public function ctrSumarAnimalesInnerProductor($item,$valor,$item2,$valor2,$campo){
-    
-        $tabla = "animales";
-
-        $tabla2 = 'productores';
-
-        return $respuesta = ModeloAnimales::mdlSumarAnimalesInnerProductor($tabla,$tabla2,$item,$valor,$item2,$valor2,$campo);
-    
-    }
-
-    /*=============================================
-    CONTAR PRODUCTORES SEGUN ANIMALES
-	=============================================*/
-
-	static public function ctrContarProductorSegunAnimales($item,$valor,$item2,$valor2){
-    
-        $tabla = "animales";
-
-        return $respuesta = ModeloAnimales::mdlContarProductorSegunAnimales($tabla,$item,$valor,$item2,$valor2);
-    
-    }
-
-
-
+	}
 
 }
 
