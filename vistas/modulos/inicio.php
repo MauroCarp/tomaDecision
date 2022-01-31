@@ -127,7 +127,7 @@
 
                 </div>
                 
-                <div class="col-md-5 col-xs-12">
+                <!-- <div class="col-md-5 col-xs-12">
                     
                   <div class="box">
                       
@@ -152,7 +152,7 @@
                     
                   </div>
 
-                </div>
+                </div> -->
 
               </div>  
 

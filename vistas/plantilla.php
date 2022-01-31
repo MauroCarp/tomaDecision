@@ -6,7 +6,7 @@ ini_set('display_startup_errors', 1);
 
 error_reporting(E_ALL);
 
-$logo = 'fissa';
+$logo = 'tomaDecision';
 
 function formatearFecha($fecha){
 
