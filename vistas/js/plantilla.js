@@ -110,11 +110,11 @@ $('[data-mask]').inputmask()
 CORRECCIÓN BOTONERAS OCULTAS BACKEND	
 =============================================*/
 
-if(window.matchMedia("(max-width:767px)").matches){
+// if(window.matchMedia("(max-width:767px)").matches){
 	
-	$("body").removeClass('sidebar-collapse');
+	// $("body").removeClass('sidebar-collapse');
 
-}
+// }
 
 /*=============================================
 MENU ENLACE DIRECTOS A ARCHIVOS EN CARPETAS	

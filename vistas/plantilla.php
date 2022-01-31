@@ -171,7 +171,7 @@ function encrypt_decrypt($action, $string){
 CUERPO DOCUMENTO
 ======================================-->
 
-<body class="hold-transition skin-blue sidebar-mini login-page">
+<body class="hold-transition skin-blue sidebar-mini login-page sidebar-collapse">
  
   <?php
 

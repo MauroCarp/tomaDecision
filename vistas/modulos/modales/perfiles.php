@@ -48,7 +48,7 @@
                             
                                     <td>1.</td>
                                 
-                                    <td>Update software</td>
+                                    <td>Perfil 1</td>
                                 
                                     <td>                                       
                                         
@@ -68,7 +68,7 @@
                                 
                                     <td>2.</td>
                                 
-                                    <td>Clean database</td>
+                                    <td>Perfil 2</td>
                                 
                                     <td>          
                                         
@@ -88,7 +88,7 @@
                             
                                     <td>3.</td>
                                 
-                                    <td>Cron job running</td>
+                                    <td>Perfil 3</td>
                                 
                                     <td>
                                         
@@ -108,7 +108,7 @@
                                 
                                     <td>4.</td>
                                 
-                                    <td>Fix and squish bugs</td>
+                                    <td>Perfil 4</td>
                                 
                                     <td>
                                         
