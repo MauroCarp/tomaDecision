@@ -111,3 +111,29 @@ input[type="range"].ligth-greenSlider {
 .sliderBox .form-group{
   margin-bottom:0px;
 }
+
+/* PERFILES */
+
+.modalPerfil{
+  width:400px;
+  display:flex;
+}
+
+.hideElement{
+
+  display:none;
+
+}
+
+.showPerfilModal{
+  
+  width: 50%;
+  display:block;
+  margin-left: 20px;
+
+
+}
+
+.perfilesList{
+  width: 100%;
+}

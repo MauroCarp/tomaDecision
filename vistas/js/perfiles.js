@@ -1,20 +1,50 @@
+// MOSTRAR MODAL
+
+const showPerfilModal = (idShow,idHide)=>{
+
+    let modalHide = document.getElementById(idHide)
+
+    modalHide.classList.remove('showPerfilModal')
+    
+    modalHide.classList.add('hideElement')
+
+    let modalShow = document.getElementById(idShow)
+
+    modalShow.classList.remove('hideElement')
+
+    modalShow.classList.add('showPerfilModal')
+
+    document.getElementById('modalPerfil').style.width = '800px'
+
+    document.getElementById('perfilesList').style.width = '50%'
+}
+
+// TOGGLE FUNCTION
+const toggleModal = (idShow,idHide)=>{
+
+    let modalPerfil = document.getElementById(idShow)
+    
+
+    if(modalPerfil.classList[1] == 'showPerfilModal' && idShow != 'modalEditarPerfil'){
+        
+        modalPerfil.classList.add('hideElement')
+        modalPerfil.classList.remove('showPerfilModal')
+        
+    }else{
+        
+        showPerfilModal(idShow,idHide)
+
+    }
+
+}
+
 // BTN NUEVO PERFIL
 
 const btnNuevoPerfil = document.getElementById('btnNuevoPerfil')
 
 btnNuevoPerfil.addEventListener('click',()=>{
-    
-    // OCULTAR EDITAR
-    
-    document.getElementById('editarPerfil').style.display = 'none'
 
-    // MOSTRAR NUEVO
-
-    let ventana = document.getElementById('nuevoPerfil')
-
-    let display = (ventana.style.display == 'none') ? 'block' : 'none'
-
-    ventana.style.display = display
+    toggleModal('modalNuevoPerfil','modalEditarPerfil')
 
 })
 
@@ -26,24 +56,17 @@ for (const btn of btnsEditar) {
     
     btn.addEventListener('click',(e)=>{
         
-        let idPerfil = (e.path[0].attributes.length > 1) ? e.path[0].attributes.idperfil.nodeValue : e.path[1].attributes.idperfil.nodeValue
+    //     let idPerfil = (e.path[0].attributes.length > 1) ? e.path[0].attributes.idperfil.nodeValue : e.path[1].attributes.idperfil.nodeValue
+        let modal = document.getElementById('modalEditarPerfil')
+        // console.log(modal.classList);
         
-        // OCULTAR NUEVO
+        if(modal.classList[1] != 'showPerfilModal')
+            showPerfilModal('modalEditarPerfil','modalNuevoPerfil')
 
-        document.getElementById('nuevoPerfil').style.display = 'none'
-
-        // MOSTRAR EDITAR
-
-        let ventanaEditarPerfil = document.getElementById('editarPerfil')
-
-        let toggle = (ventanaEditarPerfil.style.display == 'none') ? 'block' : 'none'
-
-        ventanaEditarPerfil.style.display = toggle
-    
     })
 
-}
 
+}
 
 // BTNS + - SLIDERS CONFIGURACION 
 
