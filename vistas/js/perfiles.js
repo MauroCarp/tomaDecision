@@ -43,3 +43,43 @@ for (const btn of btnsEditar) {
     })
 
 }
+
+
+// BTNS + - SLIDERS CONFIGURACION 
+
+const btnsMinus = document.getElementsByClassName('btn-slider-minus')
+
+for (const btnMinus of btnsMinus) {
+    
+    let inputValue = btnMinus.parentNode.nextElementSibling
+    
+    
+    btnMinus.addEventListener('click',()=>{
+        
+        let min = Number(inputValue.min)
+
+        inputValue.value = (inputValue.value == min)  ? 0 : inputValue.value - 1
+
+        inputValue.oninput()
+        
+    })
+    
+}
+
+const btnsPlus = document.getElementsByClassName('btn-slider-plus')
+
+for (const btnPlus of btnsPlus) {
+    
+    let inputValue = btnPlus.parentNode.previousElementSibling
+    
+    btnPlus.addEventListener('click',()=>{
+
+        let max = Number(inputValue.max)
+
+        inputValue.value = (inputValue.value == max) ? max : Number(inputValue.value) + 1
+
+        inputValue.oninput()
+        
+    })
+
+}

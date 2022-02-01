@@ -99,3 +99,15 @@ input[type="range"].ligth-greenSlider {
   background-image: linear-gradient(rgb(137 221 113), rgb(137 221 113));
   
 }
+
+.sliderIcon, .sliderIcon button{
+  
+  border:none;
+  background-color: transparent;
+  height: auto;
+
+}
+
+.sliderBox .form-group{
+  margin-bottom:0px;
+}

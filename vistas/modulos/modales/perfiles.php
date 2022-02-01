@@ -140,14 +140,40 @@
         NUEVO PERFIL
         ======================================-->
 
-        <div class="modal-body" id="nuevoPerfil" style="display:none">
+        <div class="modal-body" id="nuevoPerfil" style="display:none;padding-top:0;">
                 
                 <div class="box-body">
 
                     <div class="box">
                         
                         <div class="box-body no-padding">
-                        <h1>Nuevo Perfil</h1>
+                            <h4>Nuevo Perfil</h4>
+                            <div class="form-group">
+                                
+                                <label for="nombrePerfil">Perfil</label>
+                            
+                                <input type="text" class="form-control" id="nombrePerfil" name="nombrePerfil" placeholder="Nuevo perfil">
+                            
+                            </div>
+
+                            <?php
+
+                            $flacas = 'flacasConf';
+                    
+                            $buenas = 'buenasConf';
+                            
+                            $buenasPlus = 'buenasPlusConf';
+                            
+                            $muyBuenas = 'muyBuenasConf';
+                            
+                            $apenasGordas = 'apenasGordasConf';
+                            
+                            $gordas = 'gordasConf';
+
+                            include "vistas/modulos/inicio/sliders.php";
+                            
+                            ?>
+
                         </div>
 
                     </div>
@@ -167,7 +193,35 @@
                     <div class="box">
                         
                         <div class="box-body no-padding">
-                        <h1>Editar Perfil</h1>
+                            
+                            <h4>Editar Perfil</h4>
+
+                            <div class="form-group">
+                                
+                                <label for="nombrePerfil">Perfil</label>
+                            
+                                <input type="text" class="form-control" id="nombrePerfilEdit" value="Nombre Perfil a Editar" readOnly>
+                            
+                            </div>
+
+                            <?php
+
+                            $flacas = 'flacasConfEdit';
+                    
+                            $buenas = 'buenasConfEdit';
+                            
+                            $buenasPlus = 'buenasPlusConfEdit';
+                            
+                            $muyBuenas = 'muyBuenasConfEdit';
+                            
+                            $apenasGordas = 'apenasGordasConfEdit';
+                            
+                            $gordas = 'gordasConfEdit';
+
+                            include "vistas/modulos/inicio/sliders.php";
+                            
+                            ?>
+
                         </div>
 
                     </div>
