@@ -20,11 +20,11 @@
                     <td>Flacas</td>
             
                     <td>
-            
-                    <div class="progress progress-xs progress-striped active">
-            
-                      <div class="progress-bar progress-bar-red" style="width: 49%"></div>
-            
+              
+                      <div class="progress progress-xs progress-striped active">
+              
+                        <div class="progress-bar progress-bar-red" style="width: 49%"></div>
+              
                       </div>
             
                     </td>

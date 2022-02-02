@@ -215,6 +215,7 @@ CUERPO DOCUMENTO
 <script src="vistas/js/plantilla.js"></script>
 <script src="vistas/js/inicio.js"></script>
 <script src="vistas/js/animales.js"></script>
+<script src="vistas/js/carpetas.js"></script>
 <script src="vistas/js/perfiles.js"></script>
 <script src="vistas/js/usuarios.js"></script>
 

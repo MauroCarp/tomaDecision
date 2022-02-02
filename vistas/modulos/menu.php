@@ -66,4 +66,6 @@
 
 include 'modales/perfiles.php';
 
+include 'modales/carpetas.php';
+
 ?>
