@@ -13,32 +13,36 @@
       <ul class="products-list product-list-in-box">
 
         <li class="item">
+          
+          <a href="">
+          
+            <div class="info-box bg-green">
 
-          <div class="info-box bg-green">
+              <span class="info-box-icon">10</span>
 
-            <span class="info-box-icon">10</span>
+              <div class="info-box-content">
 
-            <div class="info-box-content">
+                <span class="info-box-text">Barlovento</span>
 
-              <span class="info-box-text">Barlovento</span>
+                <span class="info-box-number">  B - B+  - MB</span>
 
-              <span class="info-box-number">  B - B+  - MB</span>
+                <div class="progress">
 
-              <div class="progress">
+                  <div class="progress-bar" style="width: 100%"></div>
 
-                <div class="progress-bar" style="width: 100%"></div>
+                </div>
+
+                <span class="progress-description">
+
+                  Completo
+
+                </span>
 
               </div>
 
-              <span class="progress-description">
-
-                Completo
-
-              </span>
-
             </div>
-
-          </div>
+          
+          </a>
 
         </li>
 
