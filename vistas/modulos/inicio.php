@@ -28,7 +28,7 @@
         <div class="col-lg-12 col-xs-12">
         
           <div class="row">
-  
+            <!-- INGRESO ANIMALES -->
             <div class="col-md-7 col-xs-12" id="sectionAnimales">
               
               <div class="box">
@@ -76,7 +76,7 @@
             
             <div class="col-md-3 col-xs-12">
             </div>
-  
+            <!-- CARPETAS ACTIVAS -->
             <div class="col-md-2 col-xs-12">
 
               <?php 
@@ -94,21 +94,34 @@
         <div class="col-lg-12 col-xs-12">
 
           <div class="row">
-  
+            <!-- CLASIFICACION -->
             <div class="col-md-7 col-xs-12">
 
               <div class="box">
                   
                 <div class="box-header with-border">
+                  
+                  <div class="row">
+                    
+                    <div class="col-md-6" style="font-size:1.3em">
+                      
+                      <i class="ion-stats-bars"></i> Clasificaci&oacute;n - <b>Total animales: <span id="totalAnimales">6</span></b>
+                    
+                    </div>
 
-                  <h3 class="box-title"><i class="ion-stats-bars"></i> Clasificaci&oacute;n - <b>Total animales: 6 </b></h3>
-                  <select class="form-control">
-                    <option>Perfil 1</option>
-                    <option>Perfil 2</option>
-                    <option>Perfil 3</option>
-                    <option>Perfil 4</option>
-                    <option>Perfil 5</option>
-                  </select>
+                    <div class="col-md-6">
+                      
+                      <select class="form-control">
+                        <option>Perfil 1</option>
+                        <option>Perfil 2</option>
+                        <option>Perfil 3</option>
+                        <option>Perfil 4</option>
+                        <option>Perfil 5</option>
+                      </select>
+
+                    </div>
+
+                  </div>
 
                 </div>
                 
@@ -129,7 +142,7 @@
             <div class="col-md-3 col-xs-12">
             </div>
 
-
+            <!-- CONFIGURACION EN VIVO -->
             <div class="col-md-2 col-xs-12">
 
               <div class="box">
