@@ -1,4 +1,4 @@
-<div class="box box-primary"  style="height:510px!important;">
+<div class="box box-primary" id="seccionCarpetaAct">
 
   <div class="box-header with-border">
 

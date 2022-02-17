@@ -1,67 +1,3 @@
-// GRAFICO PORCENTAJE CLASIFICACION
-
-  // let data = {
-  //   labels: ['Flacas', 'Buenas', 'Buenas+', 'Muy Buenas', 'Apenas Gordas', 'Gordas'],
-  //   datasets: [
-  //     {
-  //       label: 'Dataset 1',
-  //       data: [49,6,14,25,3,2],
-  //       backgroundColor:[
-  //         '#dd4b39',
-  //         'rgb(137 221 113)',
-  //         '#00a65a',
-  //         '#00a65a',
-  //         '#f39c12 ',
-  //         '#dd4b39'
-
-  //       ],
-  //     }
-  //   ]
-  // };
-
-  // const config = {
-
-  //     type: 'pie',
-  // 	plugins:[ChartDataLabels],
-  //     data: data,
-  //     options: {
-  //       plugins:{
-  //         datalabels: {
-  //                 /* anchor puede ser "start", "center" o "end" */
-  //             anchor: "center",
-  //             /* Podemos modificar el texto a mostrar */
-  //             formatter: (dato) => dato + "%",
-  //             /* Color del texto */
-  //             color: "black",
-  //             /* Formato de la fuente */
-  //             font: {
-  //             family: '"Calibri", sans-serif',
-  //             size: "18",
-  //             weight: "bold",
-  //             },
-            
-  //         },
-  //         layout:{
-  //           padding:{
-  //             top:0
-  //           }
-  //         },
-  //         legend: {
-  //           display: true,
-  //           position:'top'
-  //        },
-  //        tooltips: {
-  //           enabled: false
-  //        }
-
-  //       },
-
-  //     },
-
-  // }
-  // const ctx = document.getElementById('chart-area').getContext('2d');
-
-  // let myChart = new Chart(ctx, config);
 
 // CAMBIAR ESTILO ULTIMA COLUMNA TABLA CLASIFICACION
 
@@ -72,3 +8,25 @@ for (const row of rows) {
      row.lastElementChild.style.textAlign = 'center'
 
 }
+
+// ALTO SECCION CARPETAS ACTIVAS
+let altoSeccionClasificacion = document.getElementById('seccionClasificacion').clientHeight
+
+document.getElementById('seccionCarpetaAct').style.height = `${altoSeccionClasificacion}px`
+
+// ALTO SECCION CONFIGURACION
+
+setTimeout(() => {
+     
+     let altoSeccionIngresos = document.getElementById('ingresoAnimal').offsetHeight
+     let altoSeccionTablaIng = document.getElementById('tablaIngresos').offsetHeight
+     
+     document.getElementById('seccionConfiguracion').style.height = `${altoSeccionIngresos + altoSeccionTablaIng + 20}px`
+
+     for (const iterator of document.getElementsByClassName('sliders')) {
+          
+          iterator.style.height = '15%'
+          
+     }
+     
+}, 500);

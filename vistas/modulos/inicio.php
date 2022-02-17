@@ -29,9 +29,9 @@
         
           <div class="row">
             <!-- INGRESO ANIMALES -->
-            <div class="col-md-7 col-xs-12" id="sectionAnimales">
+            <div class="col-md-9 col-xs-12">
               
-              <div class="box">
+              <div class="box" id="ingresoAnimal">
                   
                   <div class="box-header with-border">
                   
@@ -52,7 +52,7 @@
               </div>
 
                               
-              <div class="box">
+              <div class="box" id="tablaIngresos">
                   
                   <div class="box-header with-border">
                   
@@ -73,17 +73,44 @@
               </div>
 
             </div>
-            
+<!--             
             <div class="col-md-3 col-xs-12">
-            </div>
-            <!-- CARPETAS ACTIVAS -->
-            <div class="col-md-2 col-xs-12">
+            </div> -->
 
-              <?php 
+            <!-- CONFIGURACION EN VIVO -->
+            <div class="col-md-3 col-xs-12">
 
-                include 'vistas/modulos/inicio/carpetasActivas.php';
+              <div class="box" id="seccionConfiguracion">
+                
+                <div class="box-header with-border">
 
-              ?>
+                  <h3 class="box-title"><i class="fa fa-sliders"></i> Configuraci&oacute;n</h3>
+
+                </div>
+                
+                <div class="box-body sliderBox">
+                
+                  <?php
+
+                    $flacas = 'flacas';
+                    
+                    $buenas = 'buenas';
+                    
+                    $buenasPlus = 'buenasPlus';
+                    
+                    $muyBuenas = 'muyBuenas';
+                    
+                    $apenasGordas = 'apenasGordas';
+                    
+                    $gordas = 'gordas';
+
+                    include "inicio/sliders.php";
+                  
+                  ?>
+
+                </div>
+
+              </div>
 
             </div>
 
@@ -95,9 +122,9 @@
 
           <div class="row">
             <!-- CLASIFICACION -->
-            <div class="col-md-7 col-xs-12">
+            <div class="col-md-9 col-xs-12">
 
-              <div class="box">
+              <div class="box"  id="seccionClasificacion">
                   
                 <div class="box-header with-border">
                   
@@ -139,44 +166,18 @@
 
             </div>
             
+            <!-- <div class="col-md-3 col-xs-12">
+            </div> -->
+
+            <!-- CARPETAS ACTIVAS -->
             <div class="col-md-3 col-xs-12">
-            </div>
 
-            <!-- CONFIGURACION EN VIVO -->
-            <div class="col-md-2 col-xs-12">
+              <?php 
 
-              <div class="box">
-                
-                <div class="box-header with-border">
+                include 'vistas/modulos/inicio/carpetasActivas.php';
 
-                  <h3 class="box-title"><i class="fa fa-sliders"></i> Configuraci&oacute;n</h3>
-              
-                </div>
-                
-                <div class="box-body sliderBox">
-                
-                  <?php
+              ?>
 
-                    $flacas = 'flacas';
-                    
-                    $buenas = 'buenas';
-                    
-                    $buenasPlus = 'buenasPlus';
-                    
-                    $muyBuenas = 'muyBuenas';
-                    
-                    $apenasGordas = 'apenasGordas';
-                    
-                    $gordas = 'gordas';
-
-                    include "inicio/sliders.php";
-                  
-                  ?>
-
-                </div>
-
-              </div>
-  
             </div>
           
           </div>

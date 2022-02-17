@@ -1,4 +1,4 @@
-<div class="form-group">
+<div class="form-group sliders">
 
     <label for="<?php echo $flacas;?>InputId">
         
@@ -37,7 +37,7 @@
     
 </div>
 
-<div class="form-group">
+<div class="form-group sliders">
 
     <label for="<?php echo $buenas;?>InputId">
         
@@ -72,7 +72,7 @@
     
 </div>
 
-<div class="form-group">
+<div class="form-group sliders">
 
     <label for="<?php echo $buenasPlus;?>InputId">
         
@@ -107,7 +107,7 @@
     
 </div>
 
-<div class="form-group">
+<div class="form-group sliders">
 
     <label for="<?php echo $muyBuenas;?>InputId">
         
@@ -142,7 +142,7 @@
     
 </div>
 
-<div class="form-group">
+<div class="form-group sliders">
 
     <label for="<?php echo $apenasGordas;?>InputId">
         
@@ -177,7 +177,7 @@
     
 </div>  
 
-<div class="form-group">
+<div class="form-group sliders">
 
     <label for="<?php echo $gordas;?>InputId">
         
