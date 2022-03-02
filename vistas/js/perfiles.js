@@ -46,6 +46,23 @@ btnNuevoPerfil.addEventListener('click',()=>{
 
     toggleModal('modalNuevoPerfil','modalEditarPerfil')
 
+    let value = document.getElementById('flacasConfInputId').value
+    document.getElementById('flacasConfOutputId').innerHTML = value    
+    
+    value = document.getElementById('buenasConfInputId').value
+    document.getElementById('buenasConfOutputId').innerHTML = value    
+    
+    value = document.getElementById('buenasPlusConfInputId').value
+    document.getElementById('buenasPlusConfOutputId').innerHTML = value    
+    
+    value = document.getElementById('muyBuenasConfInputId').value
+    document.getElementById('muyBuenasConfOutputId').innerHTML = value    
+    
+    value = document.getElementById('apenasGordasConfInputId').value
+    document.getElementById('apenasGordasConfIutputId').innerHTML = value    
+    
+
+
 })
 
 // BTN EDITAR PERFIL
@@ -58,7 +75,6 @@ for (const btn of btnsEditar) {
         
     //     let idPerfil = (e.path[0].attributes.length > 1) ? e.path[0].attributes.idperfil.nodeValue : e.path[1].attributes.idperfil.nodeValue
         let modal = document.getElementById('modalEditarPerfil')
-        // console.log(modal.classList);
         
         if(modal.classList[1] != 'showPerfilModal')
             showPerfilModal('modalEditarPerfil','modalNuevoPerfil')
@@ -68,41 +84,37 @@ for (const btn of btnsEditar) {
 
 }
 
-// BTNS + - SLIDERS CONFIGURACION 
 
-const btnsMinus = document.getElementsByClassName('btn-slider-minus')
+// ELIMINAR PERFILES
+const btnsEliminar = document.getElementsByClassName('btnEliminarPerfil')
 
-for (const btnMinus of btnsMinus) {
+for (const btn of btnsEliminar) {
     
-    let inputValue = btnMinus.parentNode.nextElementSibling
-    
-    
-    btnMinus.addEventListener('click',()=>{
+    btn.addEventListener('click',(e)=>{
         
-        let min = Number(inputValue.min)
+        e.preventDefault()
 
-        inputValue.value = (inputValue.value == min)  ? 0 : inputValue.value - 1
+        let id = (e.path[0].attributes.length > 1) ? e.path[0].attributes.idPerfil.value : e.path[1].attributes.idPerfil.value 
 
-        inputValue.oninput()
+        new swal({
+            title: '¿Eliminar Perfil?',
+            text: "¡Si no lo está puede cancelar la accíón!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              cancelButtonText: 'Cancelar',
+              confirmButtonText: 'Si, eliminar perfil!'
+          }).then(function(result){
         
+            if(result.value){
+        
+            
+                window.location = `index.php?ruta=inicio&idPerfil=${id}`
+
+            }
+
+        });
+
     })
-    
-}
-
-const btnsPlus = document.getElementsByClassName('btn-slider-plus')
-
-for (const btnPlus of btnsPlus) {
-    
-    let inputValue = btnPlus.parentNode.previousElementSibling
-    
-    btnPlus.addEventListener('click',()=>{
-
-        let max = Number(inputValue.max)
-
-        inputValue.value = (inputValue.value == max) ? max : Number(inputValue.value) + 1
-
-        inputValue.oninput()
-        
-    })
-
 }

@@ -48,85 +48,38 @@
 
                                 <tbody>
 
-                                    <tr>
-                                
-                                        <td>1.</td>
-                                    
-                                        <td>Perfil 1</td>
-                                    
-                                        <td>                                       
-                                            
-                                            <div class="btn-group">
-                                                
-                                                <button class="btn btn-warning btnEditarPerfil" idPerfil=""><i class="fa fa-pencil"></i></button>
-                        
-                                                <button class="btn btn-danger btnEliminarPerfil" idPerfil=""><i class="fa fa-times"></i></button>
-                                    
-                                            </div>
-                                        
-                                        </td>
-                                    
-                                    </tr>
-                                
-                                    <tr>
-                                    
-                                        <td>2.</td>
-                                    
-                                        <td>Perfil 2</td>
-                                    
-                                        <td>          
-                                            
-                                            <div class="btn-group">
-                                                
-                                                <button class="btn btn-warning btnEditarPerfil" idPerfil=""><i class="fa fa-pencil"></i></button>
-                        
-                                                <button class="btn btn-danger btnEliminarPerfil" idPerfil=""><i class="fa fa-times"></i></button>
-                                    
-                                            </div>
-                                        
-                                        </td>
-                                    
-                                    </tr>
-                                
-                                    <tr>
-                                
-                                        <td>3.</td>
-                                    
-                                        <td>Perfil 3</td>
-                                    
-                                        <td>
-                                            
-                                            <div class="btn-group">
-                                                
-                                                <button class="btn btn-warning btnEditarPerfil" idPerfil=""><i class="fa fa-pencil"></i></button>
-                        
-                                                <button class="btn btn-danger btnEliminarPerfil" idPerfil=""><i class="fa fa-times"></i></button>
-                                    
-                                            </div>
-                                        
-                                        </td>
-                                    
-                                    </tr>
-                                
-                                    <tr>
-                                    
-                                        <td>4.</td>
-                                    
-                                        <td>Perfil 4</td>
-                                    
-                                        <td>
-                                            
-                                            <div class="btn-group">
-                                                
-                                                <button class="btn btn-warning btnEditarPerfil" idPerfil=""><i class="fa fa-pencil"></i></button>
-                        
-                                                <button class="btn btn-danger btnEliminarPerfil" idPerfil=""><i class="fa fa-times"></i></button>
-                                    
-                                            </div>
+                                <?php
 
-                                        </td>
-                                    
-                                    </tr>
+                                    $item = null;
+                                    $valor = null;
+
+                                    $perfiles = ControladorPerfiles::ctrMostrarPerfiles($item,$valor);
+                                
+                                    for ($i=0; $i < sizeof($perfiles) ; $i++) { 
+                                       echo " 
+                                        <tr>
+                                
+                                            <td>".($i+1)."</td>
+                                        
+                                            <td>".$perfiles[$i]['nombre']."</td>
+                                        
+                                            <td>                                       
+                                                
+                                                <div class='btn-group'>
+                                                    
+                                                    <button class='btn btn-warning btnEditarPerfil' idPerfil='".$perfiles[$i]['id']."'><i class='fa fa-pencil'></i></button>
+                            
+                                                    <button class='btn btn-danger btnEliminarPerfil' idPerfil='".$perfiles[$i]['id']."'><i class='fa fa-times'></i></button>
+                                        
+                                                </div>
+                                            
+                                            </td>
+                                        
+                                        </tr>";
+
+                                    }
+
+                                ?>
                                 
                                 </tbody>
                             
@@ -184,14 +137,12 @@
                             $muyBuenas = 'muyBuenasConf';
                             
                             $apenasGordas = 'apenasGordasConf';
-                            
-                            $gordas = 'gordasConf';
-
+   
                             include "vistas/modulos/inicio/sliders.php";
                             
                         ?>
 
-                        <button type="submit" form="newPerfilForm" class="btn btn-block btn-success" id="btnCargarPerfil">Cargar Perfil</button>
+                        <button type="submit" form="newPerfilForm" class="btn btn-block btn-success" id="btnCargarPerfil" name="btnCargarPerfil">Cargar Perfil</button>
                         
                     </form>
 
@@ -254,51 +205,15 @@
 </div>
 
 
+<?php
 
-        <!--=====================================
-        EDITAR PERFIL
-        ======================================-->
-<!-- 
-        <div class="modal-body" id="editarPerfil" style="display:none;">
-                
-                <div class="box-body">
+$cargarPerfil = new ControladorPerfiles();
+$cargarPerfil -> ctrNuevoPerfil();
 
-                    <div class="box">
-                        
-                        <div class="box-body no-padding">
-                            
-                            <h4>Editar Perfil</h4>
+$editarPerfil = new ControladorPerfiles();
+// $editarPerfil -> ctrEditarPerfil();
 
-                            <div class="form-group">
-                                
-                                <label for="nombrePerfil">Perfil</label>
-                            
-                                <input type="text" class="form-control" id="nombrePerfilEdit" value="Nombre Perfil a Editar" readOnly>
-                            
-                            </div>
+$eliminarPerfil = new ControladorPerfiles();
+$eliminarPerfil -> ctrEliminarPerfil();
 
-                            <?php
-
-                            $flacas = 'flacasConfEdit';
-                    
-                            $buenas = 'buenasConfEdit';
-                            
-                            $buenasPlus = 'buenasPlusConfEdit';
-                            
-                            $muyBuenas = 'muyBuenasConfEdit';
-                            
-                            $apenasGordas = 'apenasGordasConfEdit';
-                            
-                            $gordas = 'gordasConfEdit';
-
-                            include "vistas/modulos/inicio/sliders.php";
-                            
-                            ?>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-        </div> -->
+?>

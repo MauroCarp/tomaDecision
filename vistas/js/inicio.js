@@ -30,3 +30,18 @@ setTimeout(() => {
      }
      
 }, 500);
+
+let value = document.getElementById('flacasInputId').value
+document.getElementById('flacasOutputId').innerHTML = value    
+
+value = document.getElementById('buenasInputId').value
+document.getElementById('buenasOutputId').innerHTML = value    
+
+value = document.getElementById('buenasPlusInputId').value
+document.getElementById('buenasPlusOutputId').innerHTML = value    
+
+value = document.getElementById('muyBuenasInputId').value
+document.getElementById('muyBuenasOutputId').innerHTML = value    
+
+value = document.getElementById('apenasGordasInputId').value
+document.getElementById('apenasGordasIutputId').innerHTML = value    

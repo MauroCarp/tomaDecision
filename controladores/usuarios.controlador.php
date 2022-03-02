@@ -193,9 +193,6 @@ class ControladorUsuarios{
 
 				$respuesta = ModeloUsuarios::mdlIngresarUsuario($tabla, $datos);
 
-				var_dump($respuesta);
-				die();
-
 				if($respuesta == "ok"){
 
 					echo '<script>
