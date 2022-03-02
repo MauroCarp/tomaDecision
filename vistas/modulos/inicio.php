@@ -73,9 +73,6 @@
               </div>
 
             </div>
-<!--             
-            <div class="col-md-3 col-xs-12">
-            </div> -->
 
             <!-- CONFIGURACION EN VIVO -->
             <div class="col-md-3 col-xs-12">
@@ -165,9 +162,6 @@
               </div>
 
             </div>
-            
-            <!-- <div class="col-md-3 col-xs-12">
-            </div> -->
 
             <!-- CARPETAS ACTIVAS -->
             <div class="col-md-3 col-xs-12">

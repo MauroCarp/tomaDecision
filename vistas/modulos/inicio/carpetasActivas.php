@@ -9,225 +9,327 @@
   <div class="box-body" id="carpetasScroll">
 
     <div style="height:80%!important;display:flex;overflow-y:scroll">
-
+    
       <ul class="products-list product-list-in-box">
 
-        <li class="item">
-          
-          <a href="">
-          
-            <div class="info-box bg-green">
+        <div class="row">
 
-              <span class="info-box-icon">10</span>
-
-              <div class="info-box-content">
-
-                <span class="info-box-text">Barlovento</span>
-
-                <span class="info-box-number">  B - B+  - MB</span>
-
-                <div class="progress">
-
-                  <div class="progress-bar" style="width: 100%"></div>
-
+          <div class="col-lg-6">
+            
+            <li class="item">
+              
+              <a href="">
+              
+                <div class="info-box bg-green">
+    
+                  <span class="info-box-icon">10</span>
+    
+                  <div class="info-box-content">
+    
+                    <span class="info-box-text">Barlovento</span>
+    
+                    <span class="info-box-number">  B - B+  - MB</span>
+    
+                    <div class="progress">
+    
+                      <div class="progress-bar" style="width: 100%"></div>
+    
+                    </div>
+    
+                    <span class="progress-description">
+    
+                      Completo
+    
+                    </span>
+    
+                  </div>
+    
                 </div>
+              
+              </a>
+    
+            </li>           
+          </div>
 
-                <span class="progress-description">
+          <div class="col-lg-6">
+            
+            <li class="item">
+              
+              <a href="">
+              
+                <div class="info-box bg-green">
+    
+                  <span class="info-box-icon">10</span>
+    
+                  <div class="info-box-content">
+    
+                    <span class="info-box-text">Barlovento</span>
+    
+                    <span class="info-box-number">  B - B+  - MB</span>
+    
+                    <div class="progress">
+    
+                      <div class="progress-bar" style="width: 100%"></div>
+    
+                    </div>
+    
+                    <span class="progress-description">
+    
+                      Completo
+    
+                    </span>
+    
+                  </div>
+    
+                </div>
+              
+              </a>
+    
+            </li>
+                      
+          </div>
 
-                  Completo
+        </div>
+        
+        <div class="row">
 
-                </span>
+          <div class="col-lg-6">
+            
+            <li class="item">
+              
+              <a href="">
+              
+                <div class="info-box bg-green">
+    
+                  <span class="info-box-icon">10</span>
+    
+                  <div class="info-box-content">
+    
+                    <span class="info-box-text">Barlovento</span>
+    
+                    <span class="info-box-number">  B - B+  - MB</span>
+    
+                    <div class="progress">
+    
+                      <div class="progress-bar" style="width: 100%"></div>
+    
+                    </div>
+    
+                    <span class="progress-description">
+    
+                      Completo
+    
+                    </span>
+    
+                  </div>
+    
+                </div>
+              
+              </a>
+    
+            </li>           
+          </div>
 
-              </div>
-
-            </div>
-          
-          </a>
-
-        </li>
-
-        <li class="item">
-
-          <div class="info-box bg-yellow">
-          
-            <span class="info-box-icon">5</span>
-
-            <div class="info-box-content">
-
-              <span class="info-box-text">Barlovento 2</span>
-
-              <span class="info-box-number">B+ - MB - AP</span>
-
-              <div class="progress">
-
-                <div class="progress-bar" style="width: 50%"></div>
-
-              </div>
-
-              <span class="progress-description">
-
-                5 de 10 Animales
-
-              </span>
-
-            </div>
+          <div class="col-lg-6">
+            
+            <li class="item">
+              
+              <a href="">
+              
+                <div class="info-box bg-green">
+    
+                  <span class="info-box-icon">10</span>
+    
+                  <div class="info-box-content">
+    
+                    <span class="info-box-text">Barlovento</span>
+    
+                    <span class="info-box-number">  B - B+  - MB</span>
+    
+                    <div class="progress">
+    
+                      <div class="progress-bar" style="width: 100%"></div>
+    
+                    </div>
+    
+                    <span class="progress-description">
+    
+                      Completo
+    
+                    </span>
+    
+                  </div>
+    
+                </div>
+              
+              </a>
+    
+            </li>
 
           </div>
 
-        </li>
+        </div>
 
-        <li class="item">
+        <div class="row">
 
-          <div class="info-box bg-green">
+          <div class="col-lg-6">
+            
+            <li class="item">
+              
+              <a href="">
+              
+                <div class="info-box bg-green">
+    
+                  <span class="info-box-icon">10</span>
+    
+                  <div class="info-box-content">
+    
+                    <span class="info-box-text">Barlovento</span>
+    
+                    <span class="info-box-number">  B - B+  - MB</span>
+    
+                    <div class="progress">
+    
+                      <div class="progress-bar" style="width: 100%"></div>
+    
+                    </div>
+    
+                    <span class="progress-description">
+    
+                      Completo
+    
+                    </span>
+    
+                  </div>
+    
+                </div>
+              
+              </a>
+    
+            </li>           
+          </div>
 
-            <span class="info-box-icon">10</span>
-
-            <div class="info-box-content">
-
-              <span class="info-box-text">Barlovento</span>
-
-              <span class="info-box-number">  B - B+  - MB</span>
-
-              <div class="progress">
-
-                <div class="progress-bar" style="width: 100%"></div>
-
-              </div>
-
-              <span class="progress-description">
-
-                Completo
-
-              </span>
-
-            </div>
+          <div class="col-lg-6">
+            
+            <li class="item">
+              
+              <a href="">
+              
+                <div class="info-box bg-green">
+    
+                  <span class="info-box-icon">10</span>
+    
+                  <div class="info-box-content">
+    
+                    <span class="info-box-text">Barlovento</span>
+    
+                    <span class="info-box-number">  B - B+  - MB</span>
+    
+                    <div class="progress">
+    
+                      <div class="progress-bar" style="width: 100%"></div>
+    
+                    </div>
+    
+                    <span class="progress-description">
+    
+                      Completo
+    
+                    </span>
+    
+                  </div>
+    
+                </div>
+              
+              </a>
+    
+            </li>
 
           </div>
 
-        </li>
+        </div>
 
-        <li class="item">
+        <div class="row">
 
-          <div class="info-box bg-yellow">
-          
-            <span class="info-box-icon">5</span>
+          <div class="col-lg-6">
+            
+            <li class="item">
+              
+              <a href="">
+              
+                <div class="info-box bg-green">
+    
+                  <span class="info-box-icon">10</span>
+    
+                  <div class="info-box-content">
+    
+                    <span class="info-box-text">Barlovento</span>
+    
+                    <span class="info-box-number">  B - B+  - MB</span>
+    
+                    <div class="progress">
+    
+                      <div class="progress-bar" style="width: 100%"></div>
+    
+                    </div>
+    
+                    <span class="progress-description">
+    
+                      Completo
+    
+                    </span>
+    
+                  </div>
+    
+                </div>
+              
+              </a>
+    
+            </li>           
+          </div>
 
-            <div class="info-box-content">
-
-              <span class="info-box-text">Barlovento 2</span>
-
-              <span class="info-box-number">B+ - MB - AP</span>
-
-              <div class="progress">
-
-                <div class="progress-bar" style="width: 50%"></div>
-
-              </div>
-
-              <span class="progress-description">
-
-                5 de 10 Animales
-
-              </span>
-
-            </div>
+          <div class="col-lg-6">
+            
+            <li class="item">
+              
+              <a href="">
+              
+                <div class="info-box bg-green">
+    
+                  <span class="info-box-icon">10</span>
+    
+                  <div class="info-box-content">
+    
+                    <span class="info-box-text">Barlovento</span>
+    
+                    <span class="info-box-number">  B - B+  - MB</span>
+    
+                    <div class="progress">
+    
+                      <div class="progress-bar" style="width: 100%"></div>
+    
+                    </div>
+    
+                    <span class="progress-description">
+    
+                      Completo
+    
+                    </span>
+    
+                  </div>
+    
+                </div>
+              
+              </a>
+    
+            </li>
 
           </div>
 
-        </li>
-
-        <li class="item">
-
-          <div class="info-box bg-yellow">
-          
-            <span class="info-box-icon">5</span>
-
-            <div class="info-box-content">
-
-              <span class="info-box-text">Barlovento 2</span>
-
-              <span class="info-box-number">B+ - MB - AP</span>
-
-              <div class="progress">
-
-                <div class="progress-bar" style="width: 50%"></div>
-
-              </div>
-
-              <span class="progress-description">
-
-                5 de 10 Animales
-
-              </span>
-
-            </div>
-
-          </div>
-
-        </li>
-
-        <li class="item">
-
-          <div class="info-box bg-yellow">
-          
-            <span class="info-box-icon">5</span>
-
-            <div class="info-box-content">
-
-              <span class="info-box-text">Barlovento 2</span>
-
-              <span class="info-box-number">B+ - MB - AP</span>
-
-              <div class="progress">
-
-                <div class="progress-bar" style="width: 50%"></div>
-
-              </div>
-
-              <span class="progress-description">
-
-                5 de 10 Animales
-
-              </span>
-
-            </div>
-
-          </div>
-
-        </li>
-
-        <li class="item">
-
-          <div class="info-box bg-yellow">
-          
-            <span class="info-box-icon">5</span>
-
-            <div class="info-box-content">
-
-              <span class="info-box-text">Barlovento 2</span>
-
-              <span class="info-box-number">B+ - MB - AP</span>
-
-              <div class="progress">
-
-                <div class="progress-bar" style="width: 50%"></div>
-
-              </div>
-
-              <span class="progress-description">
-
-                5 de 10 Animales
-
-              </span>
-
-            </div>
-
-          </div>
-
-        </li>
+        </div>
 
       </ul>
-
+      
     </div>
 
     <div class="box-footer text-center">
