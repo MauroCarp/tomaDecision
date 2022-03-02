@@ -142,7 +142,7 @@
 
             
         <!--=====================================
-         NUEVO PERFIL
+         NUEVA CARPETA
         ======================================-->
 
         <div class="modal-content hideElement" id="modalNuevaCarpeta">
@@ -172,8 +172,7 @@
                                     <label for="perfilCarpeta">Perfil</label>
                                 
                                     <select class="form-control" id="perfilCarpeta" name="perfilCarpeta">
-                                        
-                                        <option value=""></option>    
+                                         
                                     
                                     </select>
                                 
@@ -191,7 +190,7 @@
                                         
                                     <label for="animalesCarpeta">Cant. Animales</label>
                                 
-                                    <input type="number" class="form-control" name="animalesCarpeta" id="animalesCarpeta">          
+                                    <input type="number" class="form-control" name="animalesCarpeta" id="animalesCarpeta" value="0">          
 
                                 </div>
 
@@ -203,7 +202,7 @@
                                         
                                         <label for="pesoMin">Peso Minimo</label>
                                     
-                                        <input type="number" class="form-control" name="pesoMin" id="pesoMin">          
+                                        <input type="number" class="form-control" name="pesoMin" id="pesoMin"  value="0">          
         
                                 </div>
                                 
@@ -215,7 +214,7 @@
                                         
                                         <label for="pesoMin">Peso Maximo</label>
                                     
-                                        <input type="number" class="form-control" name="pesoMin" id="pesoMin">          
+                                        <input type="number" class="form-control" name="pesoMax" id="pesoMax"  value="0">          
         
                                 </div>
 
@@ -246,39 +245,39 @@
                                     <label>
                                         <b>F</b>
                                     </label>
-                                    <input type="checkbox" class="minimal" value="" style="position: absolute; opacity: 0!important;">
+                                    <input type="checkbox" name="clasificacionCarpeta[]" class="minimal" value="F" style="position: absolute; opacity: 0!important;">
                                     &nbsp;
                                     <label>
                                         <b>B</b>
                                     </label>
-                                    <input type="checkbox" class="minimal" value="" style="position: absolute; opacity: 0!important;">
+                                    <input type="checkbox" name="clasificacionCarpeta[]" class="minimal" value="B" style="position: absolute; opacity: 0!important;">
                                     &nbsp;
                                     <label>
                                         <b>B+</b>
                                     </label>
-                                    <input type="checkbox" class="minimal" value="" style="position: absolute; opacity: 0!important;">
+                                    <input type="checkbox" name="clasificacionCarpeta[]" class="minimal" value="B+" style="position: absolute; opacity: 0!important;">
                                     &nbsp;
                                     <label>
                                         <b>MB</b>
                                     </label>
-                                    <input type="checkbox" class="minimal" value="" style="position: absolute; opacity: 0!important;">
+                                    <input type="checkbox" name="clasificacionCarpeta[]" class="minimal" value="MB" style="position: absolute; opacity: 0!important;">
                                     &nbsp;
                                     <label>
                                         <b>AP</b>
                                     </label>
-                                    <input type="checkbox" class="minimal" value="" style="position: absolute; opacity: 0!important;">
+                                    <input type="checkbox" name="clasificacionCarpeta[]" class="minimal" value="AP" style="position: absolute; opacity: 0!important;">
                                     &nbsp;
                                     <label>
                                         <b>G</b>
                                     </label>
-                                    <input type="checkbox" class="minimal" value="" style="position: absolute; opacity: 0!important;">
+                                    <input type="checkbox" name="clasificacionCarpeta[]" class="minimal" value="G" style="position: absolute; opacity: 0!important;">
                                     
                                 </div>
 
                             </div>
                         </div>
 
-                        <button type="submit" form="nuevaCarpetaForm" class="btn btn-block btn-success" id="btnCargarCarpeta">Cargar Carpeta</button>
+                        <button type="submit" form="nuevaCarpetaForm" class="btn btn-block btn-success" id="btnCargarCarpeta" name="btnCargarCarpeta">Cargar Carpeta</button>
                         
                     </form>
 
@@ -291,3 +290,10 @@
     </div>
                 
 </div>
+
+<?php
+
+$cargarCarpeta = new ControladorCarpetas();
+$cargarCarpeta -> ctrNuevaCarpeta();
+
+?>

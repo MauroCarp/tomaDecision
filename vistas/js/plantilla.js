@@ -188,7 +188,7 @@ GENERAR SELECT
 
 const cargarSelect = (params)=>{
 
-	let url = `ajax/${params.ajax}.ajax.php`
+	let url = `fetch/${params.fetchUrl}.fetch.php`
 
 	let formData = new FormData()
 
@@ -199,11 +199,11 @@ const cargarSelect = (params)=>{
 		body:formData
 	}).then(resp=>resp.json())
 	.then(respuesta=>{
-		
+
 		options = document.createDocumentFragment()
 
 		respuesta.map(option=>{		
-
+			
 			let opt = document.createElement('OPTION')
 			
 			opt.setAttribute('value',option[params.value])
@@ -212,18 +212,10 @@ const cargarSelect = (params)=>{
 			options.append(opt)
 			
 		})
-		
-		if(params.idSelect == 'marcaRecepcion'){
-		
-			let opt = document.createElement('OPTION')
-			opt.setAttribute('value','otraMarca')
-			opt.innerText = 'Otra'		
-			options.append(opt)
-		
-		}
-		
+				
 		document.getElementById(params.idSelect).appendChild(options)
 
 	})
 	.catch(er => console.log(er))
+	
 }
