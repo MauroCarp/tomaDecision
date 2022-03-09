@@ -39,7 +39,7 @@ class ModeloCarpetas{
 	MOSTRAR CARPETAS
 	=============================================*/
 
-	static public function mdlMostrarPerfiles($tabla,$item,$valor){
+	static public function mdlMostrarCarpetas($tabla,$item,$valor){
 
       if($item != null){
 
@@ -49,7 +49,7 @@ class ModeloCarpetas{
           
         $stmt -> execute();
   
-        return $stmt -> fetch();
+        return $stmt -> fetchAll();
         
       }else{
         

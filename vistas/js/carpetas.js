@@ -45,3 +45,8 @@ btnNuevaCarpeta.addEventListener('click',()=>{
     
 })
 
+
+const generarCarpeta = (props)=>{
+
+    
+}

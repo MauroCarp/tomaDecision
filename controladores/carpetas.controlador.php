@@ -88,9 +88,9 @@ class ControladorCarpetas{
 
 	static public function ctrMostrarCarpetas($item, $valor){
 
-		$tabla = "perfiles";
+		$tabla = "carpetas";
 
-		$respuesta = ModeloPerfiles::mdlMostrarPerfiles($tabla, $item, $valor);
+		$respuesta = ModeloCarpetas::mdlMostrarCarpetas($tabla, $item, $valor);
 
 		return $respuesta;
 
