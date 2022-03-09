@@ -90,8 +90,12 @@ btnNuevaCarpeta.addEventListener('click',()=>{
         infoDiv.appendChild(infoContentDiv)
 
         let link = document.createElement('A')
-        link.setAttribute('href','')
-
+        if(props.color == 'green'){
+            link.setAttribute('href',`extensiones/fpdf/informesPdf.php?informe=carpeta&idCarpeta=${props.idCarpeta}`)
+        }else{    
+            link.setAttribute('href','')
+            link.setAttribute('style','pointer-events: none;cursor:not-allow;')
+        }
         link.appendChild(infoDiv)
 
         let li = document.createElement('LI')
@@ -148,7 +152,8 @@ btnNuevaCarpeta.addEventListener('click',()=>{
                     clasification:reg.clasificacion,
                     destino:reg.destino,
                     animales:reg.animales,
-                    color
+                    color,
+                    idCarpeta:reg.idCarpeta
                 }
 
                 docFragment.appendChild(generarCarpeta(props))
