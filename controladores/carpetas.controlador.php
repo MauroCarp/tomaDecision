@@ -130,16 +130,16 @@ class ControladorCarpetas{
 
 	static public function ctrEliminarCarpeta(){
 
-        if(isset($_GET['idPerfil'])){
+        if(isset($_GET['idCarpeta'])){
 
-            $tabla = "perfiles";
+            $tabla = "carpetas";
 
-            $item = 'id';
+            $item = 'idCarpeta';
 
-            $valor = $_GET['idPerfil'];
+            $valor = $_GET['idCarpeta'];
 
-            $respuesta = ModeloPerfiles::mdlEliminarPerfil($tabla, $item, $valor);
-
+            $respuesta = ModeloCarpetas::mdlEliminarCarpeta($tabla, $item, $valor);
+            // var_dump($respuesta);
             if($respuesta == "ok"){
 
                 echo '<script>
@@ -147,7 +147,7 @@ class ControladorCarpetas{
                 new swal({
 
                     icon: "success",
-                    title: "¡El perfil ha sido eliminado correctamente!",
+                    title: "¡La carpeta ha sido eliminada correctamente!",
                     showConfirmButton: true,
                     confirmButtonText: "Cerrar"
 
@@ -172,7 +172,7 @@ class ControladorCarpetas{
                 new     swal({
 
                     icon: "error",
-                    title: "Hubo un error al eliminar el perfil",
+                    title: "Hubo un error al eliminar la carpeta",
                     showConfirmButton: true,
                     confirmButtonText: "Cerrar"
 

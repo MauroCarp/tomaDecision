@@ -90,7 +90,7 @@ class ModeloCarpetas{
 	ELIMINAR CARPETA
 	=============================================*/
 
-	static public function mdlEliminarPerfil($tabla, $item, $valor){
+	static public function mdlEliminarCarpeta($tabla, $item, $valor){
 
 		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE $item = :$item");
 

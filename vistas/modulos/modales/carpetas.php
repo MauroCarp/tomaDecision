@@ -286,4 +286,7 @@
 $cargarCarpeta = new ControladorCarpetas();
 $cargarCarpeta -> ctrNuevaCarpeta();
 
+$eliminarCarpeta = new ControladorCarpetas();
+$eliminarCarpeta -> ctrEliminarCarpeta();
+
 ?>
