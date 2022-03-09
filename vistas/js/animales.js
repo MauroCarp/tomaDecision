@@ -23,7 +23,7 @@ $('.tablaIngresos').DataTable( {
   "info":     false,
   "bLengthChange": false,
   "pageLength": 5,
-
+  
   "language": {
 
       "sProcessing":     "Procesando...",

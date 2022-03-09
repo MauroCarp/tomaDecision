@@ -26,7 +26,7 @@ class TablaIngresos{
 		
 		$deleteBtn = "<div class='btn-group'><button class='btn btn-danger btnEliminar btnEliminarAnimal' idAnimal=''><i class='fa fa-times'></i></button></div>";
 
-		$label = "<span class='label label-danger' style='width: 90%'>Flaca</span>";
+		$label = "<span class='label label-danger' style='width: 100%'>Flaca</span>";
 
 		$datosJson = '{
 			"data": [';
