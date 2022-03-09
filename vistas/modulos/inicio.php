@@ -125,26 +125,29 @@
                   
                 <div class="box-header with-border">
                   
-                  <div class="row">
+                  <div class="row"  style="font-size:1.3em">
                     
-                    <div class="col-md-6" style="font-size:1.3em">
+                    <div class="col-md-3">
                       
                       <i class="ion-stats-bars"></i> Clasificaci&oacute;n - <b>Total animales: <span id="totalAnimales">6</span></b>
+                      
+                    </div>
+                    
+                    <div class="col-md-1">
+                      
+                    <b> |  </b><i class="ion-stats-bars"></i><b> Perfil: </b>
+                      
+                    </div>
+                    
+                    <div class="col-md-3">
+                      
+                      <select class="form-control" id="perfilesClasificacion">
+                        
+                        </select>
+                        
                     
                     </div>
-
-                    <div class="col-md-6">
-                      
-                      <select class="form-control">
-                        <option>Perfil 1</option>
-                        <option>Perfil 2</option>
-                        <option>Perfil 3</option>
-                        <option>Perfil 4</option>
-                        <option>Perfil 5</option>
-                      </select>
-
-                    </div>
-
+                  
                   </div>
 
                 </div>
