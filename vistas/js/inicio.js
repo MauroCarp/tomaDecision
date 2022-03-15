@@ -14,9 +14,7 @@ let altoSeccionClasificacion = document.getElementById('seccionClasificacion').c
 
 document.getElementById('seccionCarpetaAct').style.height = `${altoSeccionClasificacion}px`
 
-// ALTO SECCION CONFIGURACION
-
-setTimeout(() => {
+document.addEventListener('DOMContentLoaded', function () {
      
      let altoSeccionIngresos = document.getElementById('ingresoAnimal').offsetHeight
      let altoSeccionTablaIng = document.getElementById('tablaIngresos').offsetHeight
@@ -28,8 +26,10 @@ setTimeout(() => {
           iterator.style.height = '15%'
           
      }
-     
-}, 500);
+
+ });
+
+
 
 let value = document.getElementById('flacasInputId').value
 document.getElementById('flacasOutputId').innerHTML = value    

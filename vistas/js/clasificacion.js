@@ -26,8 +26,7 @@ const actualizarSliders = (idPerfil)=>{
     })
     .then(resp=>resp.json())
     .then(respuesta=>{
-        console.log(respuesta);
-        
+
         document.getElementById('flacasInputId').value = respuesta.flacas
         document.getElementById('buenasInputId').value = respuesta.buenas
         document.getElementById('buenasPlusInputId').value = respuesta.buenasMas
@@ -39,14 +38,6 @@ const actualizarSliders = (idPerfil)=>{
 
 }
 
-setTimeout(() => {
-    
-    let idPerfilClas = document.getElementById('perfilesClasificacion').value
-
-    actualizarSliders(idPerfilClas)
-
-}, 500);
-
 document.getElementById('perfilesClasificacion').addEventListener('change',(e)=>{
 
     let idPerfil = e.target.value
@@ -55,4 +46,38 @@ document.getElementById('perfilesClasificacion').addEventListener('change',(e)=>
 
 })
 
+// ACTUALIZAR CLASIFICACION
+
+const actualizarClasificacion = (idPerfilClas)=>{
+
+    let url = 'fetch/animales.fetch.php'
+
+    let formData = new FormData()
+    formData.append('accion','actualizarClasificacion')
+    formData.append('idPerfil',idPerfilClas)
+    
+    fetch(url,{
+        method:'post',
+        body:formData
+    })
+    .then(resp=>resp.json())
+    .then(respuesta=>{
+
+        
+
+
+    })
+    .catch(err=>console.log(err))
+
+}
+
+setTimeout(() => {
+    
+        let idPerfilClas = document.getElementById('perfilesClasificacion').value
+
+        actualizarSliders(idPerfilClas)
+            
+        actualizarClasificacion(idPerfilClas)
+
+}, 300);    
 

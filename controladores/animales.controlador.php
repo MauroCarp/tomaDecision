@@ -46,5 +46,37 @@ class ControladorAnimales{
 
 	}
 
+	/*=============================================
+	CONTAR ANIMALES
+	=============================================*/
+
+	static public function ctrContarAnimales($item, $valor){
+
+		$tabla = "animales";
+
+		$respuesta = ModeloAnimales::mdlContarAnimales($tabla, $item, $valor);
+
+		return $respuesta;
+
+	}
+
+
+	/*=============================================
+	MOSTRAR ANIMALES SEGUN CLASF
+	=============================================*/
+
+	static public function ctrContarAnimalesClasificacion($item, $valor, $clas){
+
+		$tabla = "animales";
+
+		$respuesta = ModeloAnimales::mdlContarAnimalesClasificacion($tabla, $item, $valor, $clas);
+
+		return $respuesta;
+
+	}
+
+
+
+
 }
 

@@ -70,6 +70,81 @@ class ModeloAnimales{
 
   }
 
+  
+	/*=============================================
+	CONTAR ANIMALES SEGUN CLASF
+	=============================================*/
+
+	static public function mdlContarAnimalesClasificacion($tabla,$item,$valor,$clas){
+
+
+    $operador = '>';
+
+    if($clas == 'flacas'){
+
+      $operador =  '>=';
+
+    }else if($clas == 'gordas'){
+      
+      $operador = '<=';
+
+    }
+
+    $stmt = Conexion::conectar()->prepare("SELECT COUNT(*) as total FROM $tabla WHERE $item $operador :$item");
+    
+    $stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+      
+    $stmt -> execute();
+
+    return $stmt -> fetch();
+
+    $stmt -> close();
+
+    $stmt = null;
+
+}
+
+
+	/*=============================================
+	CONTAR ANIMALES
+	=============================================*/
+
+	static public function mdlContarAnimales($tabla,$item,$valor,$valor2){
+
+      if($item != null){
+
+        $stmt = Conexion::conectar()->prepare("SELECT COUNT(*) as total FROM $tabla WHERE $item = :$item");
+        
+        if($valor2 != null){
+          
+          $stmt = Conexion::conectar()->prepare("SELECT COUNT(*) as total FROM $tabla WHERE $item = :$item");
+
+          $stmt -> bindParam(":".$item, $valor2, PDO::PARAM_STR);
+
+        }
+        $stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+          
+        $stmt -> execute();
+  
+        return $stmt -> fetch();
+        
+      }else{
+        
+        $stmt = Conexion::conectar()->prepare("SELECT COUNT(*) FROM $tabla ORDER BY date");
+          
+        $stmt -> execute();
+  
+        return $stmt -> fetch();
+      
+      }
+      
+
+      $stmt -> close();
+
+      $stmt = null;
+
+  }
+
 
 
 
