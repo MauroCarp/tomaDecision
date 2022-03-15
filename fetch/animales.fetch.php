@@ -49,7 +49,7 @@ class FetchAnimales{
                 
         $valor = $buenas;
         
-        $valor2 = $buenasMas;
+        $valor2 = $flacas;
 
         $clas = 'buenas';
 
@@ -61,7 +61,7 @@ class FetchAnimales{
         
         $valor = $buenasMas;
         
-        $valor2 = $muyBuenas;
+        $valor2 = $buenas;
 
         $clas = 'buenasMas';
 
@@ -73,7 +73,7 @@ class FetchAnimales{
         
         $valor = $muyBuenas;
         
-        $valor2 = $apenasGordas;
+        $valor2 = $buenasMas;
 
         $clas = 'muyBuenas';
 
@@ -85,7 +85,7 @@ class FetchAnimales{
         
         $valor = $apenasGordas;
         
-        $valor2 = $apenasGordas;
+        $valor2 = $muyBuenas;
 
         $clas = 'apenasGordas';
 
@@ -97,7 +97,7 @@ class FetchAnimales{
 
         $clas = 'gordas';
 
-        $cantGordas = ControladorAnimales::ctrContarAnimalesClasificacion($item,$valor,$valor2,$clas);
+        $cantGordas = ControladorAnimales::ctrContarAnimalesClasificacion($item,$valor,null,$clas);
         
         $data['gordas'] = $cantGordas['total'];
 

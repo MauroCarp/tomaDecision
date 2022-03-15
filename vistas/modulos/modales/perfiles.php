@@ -122,7 +122,7 @@
                             
                             <label for="nombrePerfil">Perfil</label>
                         
-                            <input type="text" class="form-control" id="nombrePerfil" name="nombrePerfil" placeholder="Nuevo perfil">
+                            <input type="text" class="form-control" id="nombrePerfil" name="nombrePerfil" placeholder="Nuevo perfil" required>
                         
                         </div>
 

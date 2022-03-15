@@ -15,6 +15,25 @@ class ControladorPerfiles{
 
             $valor = $_POST['nombrePerfil'];
 
+            if($_POST['nombrePerfil'] == ''){
+
+                echo '<script>
+
+                new swal({
+
+                    icon: "error",
+                    title: "¡Debe completar el campo Nombre!",
+                    showConfirmButton: true,
+                    confirmButtonText: "Cerrar"
+
+                })           
+
+                </script>';
+
+                die();
+                
+            }
+
             $nombreValido = ControladorPerfiles::ctrMostrarPerfiles($item,$valor);
             
             if(!$nombreValido){

@@ -64,6 +64,8 @@ const actualizarClasificacion = (idPerfilClas)=>{
     .then(resp=>resp.json())
     .then(respuesta=>{
 
+        console.log(respuesta);
+        
         document.getElementById('cantGeneralFlacas').innerText = respuesta.flacas
         document.getElementById('cantGeneralBuenas').innerText = respuesta.buenas
         document.getElementById('cantGeneralBuenasMas').innerText = respuesta.buenasMas
@@ -71,12 +73,12 @@ const actualizarClasificacion = (idPerfilClas)=>{
         document.getElementById('cantGeneralAP').innerText = respuesta.apenasGordas
         document.getElementById('cantGeneralGordas').innerText = respuesta.gordas
 
-        let barGeneralFlacas = (respuesta.flacas*100) / respuesta.total 
-        let barGeneralBuenas = (respuesta.buenas*100) / respuesta.total 
-        let barGeneralBuenasMas = (respuesta.buenasMas*100) / respuesta.total 
-        let barGeneralMuyBuenas = (respuesta.muyBuenas*100) / respuesta.total 
-        let barGeneralAP = (respuesta.apenasGordas*100) / respuesta.total 
-        let barGeneralGordas = (respuesta.gordas*100) / respuesta.total 
+        let barGeneralFlacas = Math.round((respuesta.flacas*100) / respuesta.total) 
+        let barGeneralBuenas = Math.round((respuesta.buenas*100) / respuesta.total) 
+        let barGeneralBuenasMas = Math.round((respuesta.buenasMas*100) / respuesta.total) 
+        let barGeneralMuyBuenas = Math.round((respuesta.muyBuenas*100) / respuesta.total) 
+        let barGeneralAP = Math.round((respuesta.apenasGordas*100) / respuesta.total) 
+        let barGeneralGordas = Math.round((respuesta.gordas*100) / respuesta.total) 
 
         document.getElementById('barGeneralFlacas').style.width = `${barGeneralFlacas}%`
         document.getElementById('barGeneralBuenas').style.width = `${barGeneralBuenas}%`
@@ -85,12 +87,12 @@ const actualizarClasificacion = (idPerfilClas)=>{
         document.getElementById('barGeneralAP').style.width = `${barGeneralAP}%`
         document.getElementById('barGeneralGordas').style.width = `${barGeneralGordas}%`
         
-        document.getElementById('porcGeneralFlacas').innerText = (respuesta.flacas != 0) ? `${barGeneralFlacas.toFixed(2)}%` : '0%'
-        document.getElementById('porcGeneralBuenas').innerText = (respuesta.buenas != 0) ?  `${barGeneralBuenas.toFixed(2)}%`  : '0%'
-        document.getElementById('porcGeneralBuenasMas').innerText = (respuesta.buenasMas != 0) ?  `${barGeneralBuenasMas.toFixed(2)}%` : '0%'
-        document.getElementById('porcGeneralMuyBuenas').innerText = (respuesta.muyBuenas != 0) ?  `${barGeneralMuyBuenas.toFixed(2)}%` : '0%'
-        document.getElementById('porcGeneralAP').innerText = (respuesta.apenasGordas != 0) ?  `${barGeneralAP.toFixed(2)}%` : '0%'
-        document.getElementById('porcGeneralGordas').innerText = (respuesta.gordas != 0) ?  `${barGeneralGordas.toFixed(2)}%` : '0%'
+        document.getElementById('porcGeneralFlacas').innerText = (respuesta.flacas != 0) ? `${barGeneralFlacas}%` : '0%'
+        document.getElementById('porcGeneralBuenas').innerText = (respuesta.buenas != 0) ?  `${barGeneralBuenas}%`  : '0%'
+        document.getElementById('porcGeneralBuenasMas').innerText = (respuesta.buenasMas != 0) ?  `${barGeneralBuenasMas}%` : '0%'
+        document.getElementById('porcGeneralMuyBuenas').innerText = (respuesta.muyBuenas != 0) ?  `${barGeneralMuyBuenas}%` : '0%'
+        document.getElementById('porcGeneralAP').innerText = (respuesta.apenasGordas != 0) ?  `${barGeneralAP}%` : '0%'
+        document.getElementById('porcGeneralGordas').innerText = (respuesta.gordas != 0) ?  `${barGeneralGordas}%` : '0%'
 
     })
     .catch(err=>console.log(err))

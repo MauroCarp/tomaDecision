@@ -78,15 +78,11 @@ class ModeloAnimales{
 	static public function mdlContarAnimalesClasificacion($tabla,$item,$valor,$valor2,$clas){
 
 
-    $operador = '>';
+    $operador = '>=';
 
-    if($clas == 'flacas'){
-
-      $operador =  '>=';
-
-    }else if($clas == 'gordas'){
+    if($clas == 'gordas'){
       
-      $operador = '<=';
+      $operador = '<';
 
     }
     
@@ -105,6 +101,7 @@ class ModeloAnimales{
       
     $stmt -> execute();
 
+    // return $stmt;
     return $stmt -> fetch();
 
     $stmt -> close();
