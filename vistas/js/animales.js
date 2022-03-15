@@ -110,9 +110,6 @@ $('.tablaIngresos').DataTable( {
             timer: 3000
             });
 
-            console.log(respuesta);
-            
-            return
             if(respuesta == 'ok'){
 
                   Toast.fire({
@@ -130,8 +127,10 @@ $('.tablaIngresos').DataTable( {
                 document.getElementById('peso').value = ''
                 document.getElementById('refEco').value = ''
 
-
-
+                let idPerfil = document.getElementById('perfilesClasificacion').value
+            
+                actualizarClasificacion(idPerfil)
+              
             }else{            
                 
                   Toast.fire({
