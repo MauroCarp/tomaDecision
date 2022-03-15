@@ -45,11 +45,11 @@ class ModeloCarpetas{
 
         if($valor == null){
           
-          $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item IS NULL ORDER BY $orden ASC");
+          $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item IS NULL ORDER BY $orden DESC");
           
         }else{
           
-          $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item ORDER BY $orden ASC");
+          $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item ORDER BY $orden DESC");
           $stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
         
         }
@@ -60,7 +60,7 @@ class ModeloCarpetas{
         
       }else{
         
-        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla ORDER BY $orden ASC");
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla ORDER BY $orden DESC");
           
         $stmt -> execute();
   

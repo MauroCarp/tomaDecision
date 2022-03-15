@@ -29,7 +29,7 @@
 
       </td>
 
-      <td><span class="badge bg-red" id="porcGeneralFlacas">49%</span></td>
+      <td><span class="badge bg-red" id="porcGeneralFlacas">%</span></td>
 
       <td><span class="badge bg-red" id="cantGeneralFlacas"></span></td>
 
@@ -49,7 +49,7 @@
 
       </td>
 
-      <td><span class="badge" style="background-color: rgb(137 221 113);" id="porcGeneralBuenas">6%</span></td>
+      <td><span class="badge" style="background-color: rgb(137 221 113);" id="porcGeneralBuenas">%</span></td>
       
       <td><span class="badge"  id="cantGeneralBuenas" style="background-color: rgb(137 221 113);"></span></td>
 
@@ -69,7 +69,7 @@
 
       </td>
 
-      <td><span class="badge bg-green" id="porcGeneralBuenasMas">14%</span></td>
+      <td><span class="badge bg-green" id="porcGeneralBuenasMas">%</span></td>
 
       <td><span class="badge bg-green" id="cantGeneralBuenasMas"></span></td>
 
@@ -90,7 +90,7 @@
 
       </td>
 
-      <td><span class="badge bg-green" id="porcGeneralMuyBuenas">25%</span></td>
+      <td><span class="badge bg-green" id="porcGeneralMuyBuenas">%</span></td>
       
       <td><span class="badge bg-green" id="cantGeneralMuyBuenas"></span></td>
 
@@ -110,7 +110,7 @@
 
       </td>
 
-      <td><span class="badge bg-yellow" id="porcGeneralAP">3%</span></td>
+      <td><span class="badge bg-yellow" id="porcGeneralAP">%</span></td>
 
       <td><span class="badge bg-yellow" id="cantGeneralAP"></span></td>
 
@@ -130,7 +130,7 @@
 
       </td>
 
-      <td><span class="badge bg-red" id="porcGeneralGordas">2%</span></td>
+      <td><span class="badge bg-red" id="porcGeneralGordas">%</span></td>
       
       <td><span class="badge bg-red" id="cantGeneralGordas"></span></td>
 

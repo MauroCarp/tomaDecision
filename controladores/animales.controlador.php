@@ -38,11 +38,12 @@ class ControladorAnimales{
 
 			$carpetas = ControladorCarpetas::ctrMostrarCarpetas($item,$valor,'prioridad');
 
-			foreach ($carpetas as $key => $carpeta) {
+			for ($i=0; $i < sizeof($carpetas) ; $i++) { 
+				// } ($carpetas as $key => $carpeta) {
 				
-				$clasificacion = explode('/',$carpeta['clasificacion']);
+				$clasificacion = explode('/',$carpetas[$i]['clasificacion']);
 				
-				$destino = $carpeta['destino'];
+				$destino = $carpetas[$i]['destino'];
 
 				$item = 'nombre';
 
@@ -80,21 +81,20 @@ class ControladorAnimales{
 
 				}
 				
+				if(in_array($clasificacionAnimal,$clasificacion) AND $datos['peso'] >= $carpetas[$i]['pesoMin'] AND $datos['peso'] <= $carpetas[$i]['pesoMax']){
 
-				if(in_array($clasificacionAnimal,$clasificacion) AND $datos['peso'] >= $carpeta['pesoMin'] AND $datos['peso'] <= $carpeta['pesoMax']){
-					
 					$item = 'idAnimal';
 
 					$valor = ControladorAnimales::ctrMostrarUltimoReg() ;
 
-					$datos = array('idCarpeta'=>$carpeta['idCarpeta'],'clasificacion'=>$clasificacionAnimal);
+					$datos = array('idCarpeta'=>$carpetas[$i]['idCarpeta'],'clasificacion'=>$clasificacionAnimal);
 
 					$errors['editarAnimal'] =  ControladorAnimales::ctrEditarAnimal($item,$valor[0],$datos);
 					
 					$item = 'idCarpeta';
 
-					// $errors['editarCarpeta'] =  ControladorCarpetas::ctrSumarAnimal($item,$carpeta['idCarpeta']);
-					return $respuesta = ControladorCarpetas::ctrSumarAnimal($item,$carpeta['idCarpeta']);
+					$errors['editarCarpeta'] =  ControladorCarpetas::ctrSumarAnimal($item,$carpetas[$i]['idCarpeta']);
+					// return $respuesta = ControladorCarpetas::ctrSumarAnimal($item,$carpeta[$i]['idCarpeta']);
 
 					
 					if(in_array('ok',$errors)){
@@ -105,6 +105,15 @@ class ControladorAnimales{
 
 						return 'error';
 
+					}
+
+				}else{
+
+					
+					if(($i + 1) == sizeof($carpetas)){
+
+						return 'ok';
+					
 					}
 
 				}
