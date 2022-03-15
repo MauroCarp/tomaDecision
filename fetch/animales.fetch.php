@@ -1,5 +1,8 @@
 <?php
 
+require_once "../controladores/carpetas.controlador.php";
+require_once "../modelos/carpetas.modelo.php";
+
 require_once "../controladores/animales.controlador.php";
 require_once "../modelos/animales.modelo.php";
 

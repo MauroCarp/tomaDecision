@@ -63,9 +63,7 @@ const actualizarClasificacion = (idPerfilClas)=>{
     })
     .then(resp=>resp.json())
     .then(respuesta=>{
-
-        console.log(respuesta);
-        
+                
         document.getElementById('totalAnimales').innerText = respuesta.total
         document.getElementById('cantGeneralFlacas').innerText = respuesta.flacas
         document.getElementById('cantGeneralBuenas').innerText = respuesta.buenas

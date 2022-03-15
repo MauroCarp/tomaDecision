@@ -28,7 +28,74 @@ class ControladorAnimales{
 		
 		$datos['tas3'] = $tas3;
 
-		return 	$respuesta = ModeloAnimales::mdlNuevoAnimal($tabla, $datos);
+		$respuesta = ModeloAnimales::mdlNuevoAnimal($tabla, $datos);
+
+		if($respuesta == 'ok'){
+			
+			$item = 'completa';
+
+			$valor = null;
+
+			$carpetas = ControladorCarpetas::ctrMostrarCarpetas($item,$valor,'prioridad');
+
+			foreach ($carpetas as $key => $carpeta) {
+				
+				$clasificacion = explode('/',$carpeta['clasificacion']);
+				
+				$destino = $carpeta['destino'];
+
+				$item = 'nombre';
+
+				$perfil = ControladorPerfiles::ctrMostrarPerfiles($item,$destino);
+
+				$clasificacionAnimal = null;
+
+				if($tas3 >= $perfil['flacas']){
+					
+					$clasificacionAnimal = 'F';
+
+				}else if($tas3 > $perfil['buenas'] AND $tas3 < $perfil['flacas']){
+
+					$clasificacionAnimal = 'B';
+
+				}
+				else if($tas3 >= $perfil['buenasMas'] AND $tas3 < $perfil['buenas']){
+
+					$clasificacionAnimal = 'B+';
+
+				}
+				else if($tas3 >= $perfil['muyBuenas'] AND $tas3 < $perfil['buenasMas']){
+
+					$clasificacionAnimal = 'MB';
+
+				}
+				else if($tas3 >= $perfil['apenasGordas'] AND $tas3 < $perfil['muyBuenas']){
+
+					$clasificacionAnimal = 'AP';
+
+				}
+				else if($tas3 < $perfil['apenasGordas']){
+
+					$clasificacionAnimal = 'G';
+
+				}
+
+				
+				if(in_array($clasificacionAnimal,$clasificacion)){
+					
+					$item = 'idAnimal';
+
+					$valor = ControladorAnimales::ctrMostrarUltimoReg() ;
+
+					$datos = array('idCarpeta'=>$carpeta['idCarpeta'],'clasificacion'=>$clasificacionAnimal);
+
+					return $respuesta = ControladorAnimales::ctrEditarAnimal($item,$valor[0],$datos);
+
+				}
+
+			}
+		
+		}
 
 	}
 
@@ -70,6 +137,34 @@ class ControladorAnimales{
 		$tabla = "animales";
 
 		$respuesta = ModeloAnimales::mdlContarAnimalesClasificacion($tabla, $item, $valor, $valor2,$clas);
+
+		return $respuesta;
+
+	}
+
+	/*=============================================
+	EDITAR ANIMALES 
+	=============================================*/
+
+	static public function ctrEditarAnimal($item, $valor, $datos){
+
+		$tabla = "animales";
+
+		$respuesta = ModeloAnimales::mdlEditarAnimal($tabla, $item, $valor,$datos);
+
+		return $respuesta;
+
+	}
+
+	/*=============================================
+	MOSTRAR ULTIMO REGISTRO 
+	=============================================*/
+
+	static public function ctrMostrarUltimoReg(){
+
+		$tabla = "animales";
+
+		$respuesta = ModeloAnimales::mdlMostrarUltimoReg($tabla);
 
 		return $respuesta;
 

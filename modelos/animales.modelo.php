@@ -108,7 +108,7 @@ class ModeloAnimales{
 
     $stmt = null;
 
-}
+  }
 
 
 	/*=============================================
@@ -150,6 +150,53 @@ class ModeloAnimales{
       $stmt = null;
 
   }
+
+  /*=============================================
+	EDITAR ANIMAL
+	=============================================*/
+
+	static public function mdlEditarAnimal($tabla,$item,$valor,$datos){
+	
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET clasificacion = :clasificacion, idCarpeta = :idCarpeta WHERE $item = :$item");
+
+		$stmt -> bindParam(":clasificacion", $datos["clasificacion"], PDO::PARAM_STR);
+		$stmt -> bindParam(":idCarpeta", $datos["idCarpeta"], PDO::PARAM_STR);
+		$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+
+		if($stmt -> execute()){
+
+			return "ok";
+		
+		}else{
+
+      return $stmt->errorInfo();
+			return "error";	
+
+		}
+
+		$stmt -> close();
+
+		$stmt = null;
+
+	}
+
+  	/*=============================================
+	MOSTRAR ULTIMO REGISTRO
+	=============================================*/
+
+	static public function mdlMostrarUltimoReg($tabla){
+
+      $stmt = Conexion::conectar()->prepare("SELECT MAX(idAnimal) FROM $tabla");
+              
+      $stmt -> execute();
+
+      return $stmt -> fetch();
+      
+    $stmt -> close();
+
+    $stmt = null;
+
+}
 
 
 

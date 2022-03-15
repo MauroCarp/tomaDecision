@@ -12,7 +12,9 @@ class FetchCarpetas{
         
         $valor = 1;
 
-		$respuesta = ControladorCarpetas::ctrMostrarCarpetas($item,$valor);
+        $orden = 'fecha';
+        
+		$respuesta = ControladorCarpetas::ctrMostrarCarpetas($item,$valor,$orden);
 
         echo json_encode($respuesta);
       

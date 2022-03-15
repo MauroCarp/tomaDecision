@@ -60,7 +60,7 @@
 
                                     $valor = null;
 
-                                    $carpetas = ControladorCarpetas::ctrMostrarCarpetas($item,$valor);
+                                    $carpetas = ControladorCarpetas::ctrMostrarCarpetas($item,$valor,'fecha');
 
                                     for ($i=0; $i < sizeof($carpetas); $i++) { 
                                     

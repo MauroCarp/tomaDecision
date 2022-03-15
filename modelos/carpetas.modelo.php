@@ -39,21 +39,28 @@ class ModeloCarpetas{
 	MOSTRAR CARPETAS
 	=============================================*/
 
-	static public function mdlMostrarCarpetas($tabla,$item,$valor){
+	static public function mdlMostrarCarpetas($tabla,$item,$valor,$orden){
 
       if($item != null){
 
-        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item ORDER BY fecha");
+        if($valor == null){
+          
+          $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item IS NULL ORDER BY $orden ASC");
+          
+        }else{
+          
+          $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item ORDER BY $orden ASC");
+          $stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
         
-        $stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+        }
           
         $stmt -> execute();
-        
+
         return $stmt -> fetchAll();
         
       }else{
         
-        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla ORDER BY fecha");
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla ORDER BY $orden ASC");
           
         $stmt -> execute();
   

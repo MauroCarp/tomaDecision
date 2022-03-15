@@ -86,11 +86,11 @@ class ControladorCarpetas{
 	MOSTRAR CARPETA
 	=============================================*/
 
-	static public function ctrMostrarCarpetas($item, $valor){
+	static public function ctrMostrarCarpetas($item, $valor,$orden){
 
 		$tabla = "carpetas";
 
-		$respuesta = ModeloCarpetas::mdlMostrarCarpetas($tabla, $item, $valor);
+		$respuesta = ModeloCarpetas::mdlMostrarCarpetas($tabla, $item, $valor,$orden);
 
 		return $respuesta;
 

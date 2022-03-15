@@ -110,6 +110,9 @@ $('.tablaIngresos').DataTable( {
             timer: 3000
             });
 
+            console.log(respuesta);
+            
+            return
             if(respuesta == 'ok'){
 
                   Toast.fire({
