@@ -112,62 +112,68 @@ btnNuevaCarpeta.addEventListener('click',()=>{
 
     }
 
-    let url = 'fetch/carpetas.fetch.php'
+    const mostrarCarpetasActivas = ()=>{
+    
+        let url = 'fetch/carpetas.fetch.php'
 
-    let data = 'accion=mostrarActivas'
+        let data = 'accion=mostrarActivas'
 
-    $.ajax({
-        method:'post',
-        url,
-        data,
-        success:(res)=>{
+        $.ajax({
+            method:'post',
+            url,
+            data,
+            success:(res)=>{
 
-            let data = JSON.parse(res)
+                let data = JSON.parse(res)
 
-            let docFragment = new DocumentFragment()
+                let docFragment = new DocumentFragment()
 
-            let row = document.createElement('DIV')
-            row.setAttribute('class','row')
-            row.setAttribute('style','width:100%')
+                let row = document.createElement('DIV')
+                row.setAttribute('class','row')
+                row.setAttribute('style','width:100%')
 
-            data.map(reg=>{
+                data.map(reg=>{
 
-                let description = `${reg.animales}/${reg.cantidad}`
-                
-                let color = 'yellow'
+                    let description = `${reg.animales}/${reg.cantidad}`
+                    
+                    let color = 'yellow'
 
-                if(reg.completa){
+                    if(reg.completa){
 
-                    description = 'Completo'
+                        description = 'Completo'
 
-                    color = 'green'
+                        color = 'green'
 
-                } 
+                    } 
 
-                let percentage = `${(reg.animales * 100) / reg.cantidad}%`
-                
-                let props = {
-                    description,
-                    percentage,
-                    clasification:reg.clasificacion,
-                    destino:reg.destino,
-                    animales:reg.animales,
-                    color,
-                    idCarpeta:reg.idCarpeta
-                }
+                    let percentage = `${(reg.animales * 100) / reg.cantidad}%`
+                    
+                    let props = {
+                        description,
+                        percentage,
+                        clasification:reg.clasificacion,
+                        destino:reg.destino,
+                        animales:reg.animales,
+                        color,
+                        idCarpeta:reg.idCarpeta
+                    }
 
-                docFragment.appendChild(generarCarpeta(props))
+                    docFragment.appendChild(generarCarpeta(props))
 
-            })
+                })
 
-            row.appendChild(docFragment)
+                row.appendChild(docFragment)
 
-            document.getElementById('carpetasScroll').firstElementChild.firstElementChild.appendChild(row)
+                document.getElementById('carpetasScroll').firstElementChild.firstElementChild.appendChild(row)
 
-        }
+            }
 
-    })
+        })
 
+    }
+
+    mostrarCarpetasActivas()
+    
 // ELIMINAR CARPETA
 
 let btnsEliminarCarpetas = document.getElementsByClassName('btnEliminarCarpeta')

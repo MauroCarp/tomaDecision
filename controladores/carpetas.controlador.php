@@ -114,11 +114,11 @@ class ControladorCarpetas{
 	EDITAR CARPETA
 	=============================================*/
 
-	static public function ctrEditarCarpeta($item, $valor){
+	static public function ctrEditarCarpeta($item, $valor,$datos){
 
 		$tabla = "animales";
 
-		$respuesta = ModeloAnimales::mdlMostrarAnimales($tabla, $item, $valor);
+		$respuesta = ModeloAnimales::mdlMostrarAnimales($tabla, $item, $valor,$datos);
 
 		return $respuesta;
 
@@ -194,9 +194,6 @@ class ControladorCarpetas{
         }
 	}
 
-
-    
-
 	/*=============================================
 	PRIORIZAR
 	=============================================*/
@@ -207,6 +204,37 @@ class ControladorCarpetas{
 
             return $respuesta = ModeloCarpetas::mdlPriorizar($tabla, $prioridadSeleccionada);
             
+	}
+
+	/*=============================================
+	SUMAR ANIMAL
+	=============================================*/
+
+	static public function ctrSumarAnimal($item,$valor){
+
+            $tabla = "carpetas";
+
+            $errors['sumar'] =  $respuesta = ModeloCarpetas::mdlSumarAnimal($tabla,$item,$valor);
+            
+            $carpeta = ModeloCarpetas::mdlMostrarCarpetas($tabla,$item,$valor,'fecha');
+
+            if($carpeta[0]['cantidad'] == $carpeta[0]['animales']){
+
+                $errors['completa'] = ControladorCarpetas::ctrEditarCarpeta($item, $valor);
+
+            }
+
+            if(in_array('ok',$errors)){
+                
+                return 'ok';
+
+            }else{
+                
+                return 'error';
+
+            }
+
+
 	}
 
 }

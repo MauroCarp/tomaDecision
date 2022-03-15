@@ -8,7 +8,7 @@
                 
                 <label for="rfid">RFID</label>
             
-                <input type="text" class="form-control" id="rfid" name="rfid">
+                <input type="text" class="form-control" id="rfid" name="rfid" maxlength="10">
             
             </div>
         

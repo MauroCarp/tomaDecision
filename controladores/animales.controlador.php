@@ -79,9 +79,9 @@ class ControladorAnimales{
 					$clasificacionAnimal = 'G';
 
 				}
-
 				
-				if(in_array($clasificacionAnimal,$clasificacion)){
+
+				if(in_array($clasificacionAnimal,$clasificacion) AND $datos['peso'] >= $carpeta['pesoMin'] AND $datos['peso'] <= $carpeta['pesoMax']){
 					
 					$item = 'idAnimal';
 
@@ -89,7 +89,23 @@ class ControladorAnimales{
 
 					$datos = array('idCarpeta'=>$carpeta['idCarpeta'],'clasificacion'=>$clasificacionAnimal);
 
-					return $respuesta = ControladorAnimales::ctrEditarAnimal($item,$valor[0],$datos);
+					$errors['editarAnimal'] =  ControladorAnimales::ctrEditarAnimal($item,$valor[0],$datos);
+					
+					$item = 'idCarpeta';
+
+					// $errors['editarCarpeta'] =  ControladorCarpetas::ctrSumarAnimal($item,$carpeta['idCarpeta']);
+					return $respuesta = ControladorCarpetas::ctrSumarAnimal($item,$carpeta['idCarpeta']);
+
+					
+					if(in_array('ok',$errors)){
+
+						return 'ok';
+
+					}else{
+
+						return 'error';
+
+					}
 
 				}
 

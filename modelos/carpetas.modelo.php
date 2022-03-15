@@ -73,7 +73,7 @@ class ModeloCarpetas{
 
       $stmt = null;
 
-    }
+  }
 
 	/*=============================================
 	PRIORIDAD CARPETAS
@@ -122,7 +122,7 @@ class ModeloCarpetas{
 
 
   /*=============================================
-	ELIMINAR CARPETA
+	PRIORIZAR CARPETA
 	=============================================*/
 
 	static public function mdlPriorizar($tabla, $prioridadSeleccionada){
@@ -148,7 +148,64 @@ class ModeloCarpetas{
 
 	}
 
+  /*=============================================
+	SUMAR ANIMAL
+	=============================================*/
 
+	static public function mdlSumarAnimal($tabla,$item,$valor){
+
+    $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET animales = animales + 1 WHERE $item = :$item");
+
+    $stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+              
+		if($stmt -> execute()){
+
+			return "ok";
+		
+		}else{
+
+      return $stmt->errorInfo();
+			return "error";	
+
+		}
+
+    $stmt -> close();
+
+    $stmt = null;
+
+  }
+
+
+  /*=============================================
+	EDITAR CARPETA
+	=============================================*/
+
+	static public function ctrEditarCarpeta($tabla,$item,$valor,$datos){
+
+    if($datos == 'completa'){
+
+      $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET completa = 1 WHERE $item = :$item");
+  
+      $stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+    
+    }
+              
+		if($stmt -> execute()){
+
+			return "ok";
+		
+		}else{
+
+      return $stmt->errorInfo();
+			return "error";	
+
+		}
+
+    $stmt -> close();
+
+    $stmt = null;
+
+  }
 
 
 
