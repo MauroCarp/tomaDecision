@@ -66,6 +66,7 @@ const actualizarClasificacion = (idPerfilClas)=>{
 
         console.log(respuesta);
         
+        document.getElementById('totalAnimales').innerText = respuesta.total
         document.getElementById('cantGeneralFlacas').innerText = respuesta.flacas
         document.getElementById('cantGeneralBuenas').innerText = respuesta.buenas
         document.getElementById('cantGeneralBuenasMas').innerText = respuesta.buenasMas
@@ -93,6 +94,7 @@ const actualizarClasificacion = (idPerfilClas)=>{
         document.getElementById('porcGeneralMuyBuenas').innerText = (respuesta.muyBuenas != 0) ?  `${barGeneralMuyBuenas}%` : '0%'
         document.getElementById('porcGeneralAP').innerText = (respuesta.apenasGordas != 0) ?  `${barGeneralAP}%` : '0%'
         document.getElementById('porcGeneralGordas').innerText = (respuesta.gordas != 0) ?  `${barGeneralGordas}%` : '0%'
+
 
     })
     .catch(err=>console.log(err))

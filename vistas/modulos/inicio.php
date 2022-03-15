@@ -129,7 +129,7 @@
                     
                     <div class="col-md-3">
                       
-                      <i class="ion-stats-bars"></i> Clasificaci&oacute;n - <b>Total animales: <span id="totalAnimales">6</span></b>
+                      <i class="ion-stats-bars"></i> Clasificaci&oacute;n - <b>Total animales: <span id="totalAnimales"></span></b>
                       
                     </div>
                     
@@ -139,9 +139,9 @@
                       
                     </div>
                     
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                       
-                      <select class="form-control" id="perfilesClasificacion">
+                      <select class="form-control input-md" id="perfilesClasificacion">
                         
                         </select>
                         
