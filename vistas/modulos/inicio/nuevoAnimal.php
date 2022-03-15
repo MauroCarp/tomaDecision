@@ -20,7 +20,7 @@
                 
                 <label for="mmGrasa">MM Grasa</label>
             
-                <input type="number" class="form-control" id="mmGrasa" name="mmGrasa">
+                <input type="number" step="0.10" class="form-control" id="mmGrasa" name="mmGrasa">
             
             </div>
         

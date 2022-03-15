@@ -121,6 +121,13 @@ $('.tablaIngresos').DataTable( {
 
                 $('.tablaIngresos').DataTable().ajax.reload();
 
+                document.getElementById('rfid').value = ''
+                $('#rfid').focus()
+                document.getElementById('mmGrasa').value = ''
+                document.getElementById('peso').value = ''
+                document.getElementById('refEco').value = ''
+
+
 
             }else{            
                 

@@ -20,7 +20,7 @@ class ControladorAnimales{
 
 		$tas2 = $datos['peso'] / $tas1;
 
-		$tas3 = ($datos['sexo'] == 'm') ? $tas2 : $tas2 - 12;
+		$tas3 = ($datos['sexo'] == 'M') ? $tas2 : $tas2 - 12;
 
 		$datos['tas1'] = $tas1;
 		
