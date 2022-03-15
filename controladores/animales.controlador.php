@@ -65,11 +65,11 @@ class ControladorAnimales{
 	MOSTRAR ANIMALES SEGUN CLASF
 	=============================================*/
 
-	static public function ctrContarAnimalesClasificacion($item, $valor, $clas){
+	static public function ctrContarAnimalesClasificacion($item, $valor, $valor2 ,$clas){
 
 		$tabla = "animales";
 
-		$respuesta = ModeloAnimales::mdlContarAnimalesClasificacion($tabla, $item, $valor, $clas);
+		$respuesta = ModeloAnimales::mdlContarAnimalesClasificacion($tabla, $item, $valor, $valor2,$clas);
 
 		return $respuesta;
 

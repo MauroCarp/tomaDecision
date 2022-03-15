@@ -38,50 +38,58 @@ class FetchAnimales{
         $item = 'tas3';
         
         $valor = $flacas;
-
+        
         $clas = 'flacas';
 
-        $cantFlacas = ControladorAnimales::ctrContarAnimalesClasificacion($item,$valor,$clas);
+        $cantFlacas = ControladorAnimales::ctrContarAnimalesClasificacion($item,$valor,null,$clas);
 
         $data['flacas'] = $cantFlacas['total'];
 
         // TOTAL BUENAS
                 
         $valor = $buenas;
+        
+        $valor2 = $buenasMas;
 
         $clas = 'buenas';
 
-        $cantBuenas = ControladorAnimales::ctrContarAnimalesClasificacion($item,$valor,$clas);
+        $cantBuenas = ControladorAnimales::ctrContarAnimalesClasificacion($item,$valor,$valor2,$clas);
 
         $data['buenas'] = $cantBuenas['total'];
 
         // TOTAL BUENAS+
         
         $valor = $buenasMas;
+        
+        $valor2 = $muyBuenas;
 
         $clas = 'buenasMas';
 
-        $cantBuenasMas = ControladorAnimales::ctrContarAnimalesClasificacion($item,$valor,$clas);
+        $cantBuenasMas = ControladorAnimales::ctrContarAnimalesClasificacion($item,$valor,$valor2,$clas);
 
         $data['buenasMas'] = $cantBuenasMas['total'];
 
         // TOTAL MUY BUENAS
         
         $valor = $muyBuenas;
+        
+        $valor2 = $apenasGordas;
 
         $clas = 'muyBuenas';
 
-        $cantMuyBuenas = ControladorAnimales::ctrContarAnimalesClasificacion($item,$valor,$clas);
+        $cantMuyBuenas = ControladorAnimales::ctrContarAnimalesClasificacion($item,$valor,$valor2,$clas);
 
         $data['muyBuenas'] = $cantMuyBuenas['total'];
 
         // TOTAL AP
         
         $valor = $apenasGordas;
+        
+        $valor2 = $apenasGordas;
 
         $clas = 'apenasGordas';
 
-        $cantApenasGordas = ControladorAnimales::ctrContarAnimalesClasificacion($item,$valor,$clas);
+        $cantApenasGordas = ControladorAnimales::ctrContarAnimalesClasificacion($item,$valor,$valor2,$clas);
         
         $data['apenasGordas'] = $cantApenasGordas['total'];
 
@@ -89,7 +97,7 @@ class FetchAnimales{
 
         $clas = 'gordas';
 
-        $cantGordas = ControladorAnimales::ctrContarAnimalesClasificacion($item,$valor,$clas);
+        $cantGordas = ControladorAnimales::ctrContarAnimalesClasificacion($item,$valor,$valor2,$clas);
         
         $data['gordas'] = $cantGordas['total'];
 

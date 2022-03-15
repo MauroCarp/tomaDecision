@@ -75,7 +75,7 @@ class ModeloAnimales{
 	CONTAR ANIMALES SEGUN CLASF
 	=============================================*/
 
-	static public function mdlContarAnimalesClasificacion($tabla,$item,$valor,$clas){
+	static public function mdlContarAnimalesClasificacion($tabla,$item,$valor,$valor2,$clas){
 
 
     $operador = '>';
@@ -89,8 +89,17 @@ class ModeloAnimales{
       $operador = '<=';
 
     }
-
-    $stmt = Conexion::conectar()->prepare("SELECT COUNT(*) as total FROM $tabla WHERE $item $operador :$item");
+    
+    
+    if($clas == 'gordas' OR $clas == 'flacas'){
+      
+      $stmt = Conexion::conectar()->prepare("SELECT COUNT(*) as total FROM $tabla WHERE $item $operador :$item");
+      
+    }else{
+      $stmt = Conexion::conectar()->prepare("SELECT COUNT(*) as total FROM $tabla WHERE $item $operador :$item AND $item < :valor2");
+      $stmt -> bindParam(":valor2", $valor2, PDO::PARAM_STR);
+      
+    }
     
     $stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
       
