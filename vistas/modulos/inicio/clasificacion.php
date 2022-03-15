@@ -23,15 +23,15 @@
 
         <div class="progress progress-xs progress-striped active">
 
-          <div class="progress-bar progress-bar-red" style="width: 49%"></div>
+          <div class="progress-bar progress-bar-red" id="barGeneralFlacas"></div>
 
         </div>
 
       </td>
 
-      <td><span class="badge bg-red">49%</span></td>
+      <td><span class="badge bg-red" id="porcGeneralFlacas">49%</span></td>
 
-      <td><span class="badge bg-red">31</span></td>
+      <td><span class="badge bg-red" id="cantGeneralFlacas"></span></td>
 
     </tr>
   
@@ -43,15 +43,15 @@
 
       <div class="progress progress-xs progress-striped active">
 
-      <div class="progress-bar progress-bar-green" style="width: 6%;background-color: rgb(137 221 113);"></div>
+      <div class="progress-bar progress-bar-green" id="barGeneralBuenas" style="background-color: rgb(137 221 113);"></div>
 
         </div>
 
       </td>
 
-      <td><span class="badge" style="background-color: rgb(137 221 113);">6%</span></td>
+      <td><span class="badge" style="background-color: rgb(137 221 113);" id="porcGeneralBuenas">6%</span></td>
       
-      <td><span class="badge" style="background-color: rgb(137 221 113);">4</span></td>
+      <td><span class="badge"  id="cantGeneralBuenas" style="background-color: rgb(137 221 113);"></span></td>
 
     </tr>
   
@@ -63,15 +63,15 @@
 
       <div class="progress progress-xs progress-striped active">
 
-        <div class="progress-bar progress-bar-green" style="width: 14%"></div>
+        <div class="progress-bar progress-bar-green" id="barGeneralBuenasMas"></div>
 
         </div>
 
       </td>
 
-      <td><span class="badge bg-green">14%</span></td>
+      <td><span class="badge bg-green" id="porcGeneralBuenasMas">14%</span></td>
 
-      <td><span class="badge bg-green">9</span></td>
+      <td><span class="badge bg-green" id="cantGeneralBuenasMas"></span></td>
 
 
     </tr>
@@ -84,15 +84,15 @@
 
       <div class="progress progress-xs progress-striped active">
 
-        <div class="progress-bar progress-bar-green" style="width: 25%"></div>
+        <div class="progress-bar progress-bar-green" id="barGeneralMuyBuenas"></div>
 
         </div>
 
       </td>
 
-      <td><span class="badge bg-green">25%</span></td>
+      <td><span class="badge bg-green" id="porcGeneralMuyBuenas">25%</span></td>
       
-      <td><span class="badge bg-green">16</span></td>
+      <td><span class="badge bg-green" id="cantGeneralMuyBuenas"></span></td>
 
     </tr>
   
@@ -104,15 +104,15 @@
 
       <div class="progress progress-xs progress-striped active">
 
-        <div class="progress-bar progress-bar-yellow" style="width: 3%"></div>
+        <div class="progress-bar progress-bar-yellow" id="barGeneralAP"></div>
 
         </div>
 
       </td>
 
-      <td><span class="badge bg-yellow">3%</span></td>
+      <td><span class="badge bg-yellow" id="porcGeneralAP">3%</span></td>
 
-      <td><span class="badge bg-yellow">2</span></td>
+      <td><span class="badge bg-yellow" id="cantGeneralAP"></span></td>
 
     </tr>
   
@@ -124,15 +124,15 @@
 
       <div class="progress progress-xs progress-striped active">
 
-        <div class="progress-bar progress-bar-red" style="width: 2%"></div>
+        <div class="progress-bar progress-bar-red" id="barGeneralGordas"></div>
 
         </div>
 
       </td>
 
-      <td><span class="badge bg-red">2%</span></td>
+      <td><span class="badge bg-red" id="porcGeneralGordas">2%</span></td>
       
-      <td><span class="badge bg-red">1</span></td>
+      <td><span class="badge bg-red" id="cantGeneralGordas"></span></td>
 
     </tr>
 

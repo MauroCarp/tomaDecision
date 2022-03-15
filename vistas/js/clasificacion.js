@@ -44,6 +44,7 @@ document.getElementById('perfilesClasificacion').addEventListener('change',(e)=>
 
     actualizarSliders(idPerfil)
 
+    actualizarClasificacion(idPerfil)
 })
 
 // ACTUALIZAR CLASIFICACION
@@ -63,7 +64,28 @@ const actualizarClasificacion = (idPerfilClas)=>{
     .then(resp=>resp.json())
     .then(respuesta=>{
 
+        document.getElementById('cantGeneralFlacas').innerText = respuesta.flacas
+        document.getElementById('cantGeneralBuenas').innerText = respuesta.buenas
+        document.getElementById('cantGeneralBuenasMas').innerText = respuesta.buenasMas
+        document.getElementById('cantGeneralMuyBuenas').innerText = respuesta.muyBuenas
+        document.getElementById('cantGeneralAP').innerText = respuesta.apenasGordas
+        document.getElementById('cantGeneralGordas').innerText = respuesta.gordas
+
+        document.getElementById('barGeneralFlacas').style.width = `${(respuesta.flacas*100) / respuesta.total}%`
+        document.getElementById('barGeneralBuenas').style.width = `${(respuesta.buenas*100) / respuesta.total}%`
+        document.getElementById('barGeneralBuenasMas').style.width = `${(respuesta.buenasMas*100) / respuesta.total}%`
+        document.getElementById('barGeneralMuyBuenas').style.width = `${(respuesta.muyBuenas*100) / respuesta.total}%`
+        document.getElementById('barGeneralAP').style.width = `${(respuesta.apenasGordas*100) / respuesta.total}%`
+        document.getElementById('barGeneralGordas').style.width = `${(respuesta.gordas*100) / respuesta.total}%`
         
+        document.getElementById('porcGeneralFlacas').innerText = (respuesta.flacas != 0) ? `${(respuesta.flacas*100) / respuesta.total}%` : '0%'
+        document.getElementById('porcGeneralBuenas').innerText = (respuesta.buenas != 0) ?  `${(respuesta.buenas*100) / respuesta.total}%`  : '0%'
+        document.getElementById('porcGeneralBuenasMas').innerText = (respuesta.buenasMas != 0) ?  `${(respuesta.buenasMas*100) / respuesta.total}%` : '0%'
+        document.getElementById('porcGeneralMuyBuenas').innerText = (respuesta.muyBuenas != 0) ?  `${(respuesta.muyBuenas*100) / respuesta.total}%` : '0%'
+        document.getElementById('porcGeneralAP').innerText = (respuesta.apenasGordas != 0) ?  `${(respuesta.apenasGordas*100) / respuesta.total}%` : '0%'
+        document.getElementById('porcGeneralGordas').innerText = (respuesta.gordas != 0) ?  `${(respuesta.gordas*100) / respuesta.total}%` : '0%'
+
+
 
 
     })
