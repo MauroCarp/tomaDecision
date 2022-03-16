@@ -151,3 +151,125 @@ for (const btn of btnsEliminar) {
 
     })
 }
+
+// DESCATIVAR ACTIVAR PERFILES
+
+const btnsActDesac = document.getElementsByClassName('btnActDesacPerfil')
+
+for (const btn of btnsActDesac) {
+    
+    btn.addEventListener('click',(e)=>{
+        
+        e.preventDefault()
+
+        let id = (e.path[0].attributes.length > 1) ? e.path[0].attributes.idPerfil.value : e.path[1].attributes.idPerfil.value 
+
+        new swal({
+            title: '¿Cambiar estado de Perfil?',
+            text: "¡Si no lo está puede cancelar la accíón!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              cancelButtonText: 'Cancelar',
+              confirmButtonText: 'Si, cambiar estado!'
+          }).then(function(result){
+        
+            if(result.value){
+        
+            
+                let url = 'fetch/perfiles.fetch.php'
+
+                let formData = new FormData()
+                formData.append('accion','cambiarEstado')
+                formData.append('idPerfil',id)
+
+                fetch(url,{
+                    method:'post',
+                    body:formData
+                })
+                .then(resp=>resp.json())
+                .then(respuesta=>{
+
+                    let Toast =  swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000
+                        });
+                    
+                        console.log(respuesta);
+                        
+                    if(respuesta.state == 'carpetaActiva'){                        
+                        
+                        Toast.fire({
+    
+                            icon: 'error',
+                            title:'El perfil esta asignado en una carpeta ACTIVA'
+
+                        })
+                        
+                        return 
+
+                    }
+
+                    if(respuesta.state == 'ok'){
+                                            
+                        let btn = e.path[1]
+                        
+                        let icon = e.path[0]
+
+                        if(e.path[0].attributes.length > 1){
+                            
+                            btn = e.path[0]
+                            
+                            icon = btn.firstElementChild
+
+                        }
+
+                        let title = 'Desactivado'
+                        
+                        console.log(respuesta.activo);
+                        
+                        if(respuesta.activo == 1){
+                                
+                            title = 'Activado'
+                                                        
+                            btn.classList.replace('btn-danger','btn-success')
+                            icon.classList.replace('fa-ban','fa-check')
+                            
+                        }else{
+                            
+                            btn.classList.replace('btn-success','btn-danger')
+                            icon.classList.replace('fa-check','fa-ban')
+                            
+                        }
+
+                        Toast.fire({
+    
+                            icon: 'success',
+                            title
+
+                        })
+                                
+                    }else{
+
+                        Toast.fire({
+    
+                            icon: 'error',
+                            title: 'Error'
+        
+                        })
+
+                    }
+
+                })
+                .catch(err=>console.log('Error:' + err))
+
+
+            }
+
+        });
+
+    })
+}

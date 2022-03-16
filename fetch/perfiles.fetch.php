@@ -1,5 +1,8 @@
 <?php
 
+require_once "../controladores/carpetas.controlador.php";
+require_once "../modelos/carpetas.modelo.php";
+
 require_once "../controladores/perfiles.controlador.php";
 require_once "../modelos/perfiles.modelo.php";
 
@@ -20,6 +23,18 @@ class FetchPerfiles{
       
     }
 
+    public function fetchCambiarEstado(){
+
+        $item = 'id';
+        
+        $valor = $this->idPerfil;
+
+		$respuesta = ControladorPerfiles::ctrActivarDesactivarPerfil($item,$valor);
+
+        echo json_encode($respuesta);
+      
+    }
+
 }
 
 if(isset($_POST["accion"])){
@@ -31,6 +46,14 @@ if(isset($_POST["accion"])){
         $mostrarPerfil = new FetchPerfiles();
         $mostrarPerfil->idPerfil = $_POST['idPerfil'];
 		$mostrarPerfil -> fetchMostrarPerfil();
+
+    }
+
+    if($accion == 'cambiarEstado'){
+
+        $mostrarPerfil = new FetchPerfiles();
+        $mostrarPerfil->idPerfil = $_POST['idPerfil'];
+		$mostrarPerfil -> fetchCambiarEstado();
 
     }
 

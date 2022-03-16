@@ -56,6 +56,9 @@
                                     $perfiles = ControladorPerfiles::ctrMostrarPerfiles($item,$valor);
                                 
                                     for ($i=0; $i < sizeof($perfiles) ; $i++) { 
+                                    
+                                        $confgActivo = ($perfiles[$i]['activo'] == 1) ? $activo = array('icon'=>'check','btn'=>'success') : $activo = array('icon'=>'ban','btn'=>'danger');
+
                                        echo " 
                                         <tr>
                                 
@@ -65,10 +68,12 @@
                                         
                                             <td>                                       
                                                 
-                                                <div class='btn-group'>
+                                                <div class='btn-group' style='float:right;'>
                                                     
                                                     <button class='btn btn-warning btnEditarPerfil' idPerfil='".$perfiles[$i]['id']."'><i class='fa fa-pencil'></i></button>
                             
+                                                    <button class='btn btn-".$confgActivo['btn']." btnActDesacPerfil' idPerfil='".$perfiles[$i]['id']."'><i class='fa fa-".$confgActivo['icon']."'></i></button>
+                                                    
                                                     <button class='btn btn-danger btnEliminarPerfil' idPerfil='".$perfiles[$i]['id']."'><i class='fa fa-times'></i></button>
                                         
                                                 </div>

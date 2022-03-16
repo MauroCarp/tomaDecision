@@ -43,7 +43,7 @@ class ModeloPerfiles{
 
       if($item != null){
 
-        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item ORDER BY fecha");
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item ORDER BY activo DESC, fecha DESC");
         
         $stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
           
@@ -53,7 +53,7 @@ class ModeloPerfiles{
         
       }else{
         
-        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla ORDER BY fecha");
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla ORDER BY activo DESC, fecha DESC");
           
         $stmt -> execute();
   
@@ -132,6 +132,34 @@ class ModeloPerfiles{
 
 		$stmt = null;
 
+
+	}
+
+  /*=============================================
+	CAMBIAR ESTADO PERFIL
+	=============================================*/
+
+	static public function mdlActivarDesactivarPerfil($tabla, $item,$valor){
+	
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET 
+    activo = !activo
+    WHERE $item = :$item");
+
+		$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+
+		if($stmt -> execute()){
+
+			return "ok";
+		
+		}else{
+
+			return "error";	
+
+		}
+
+		$stmt -> close();
+
+		$stmt = null;
 
 	}
 

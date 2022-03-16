@@ -263,46 +263,84 @@ class ControladorPerfiles{
         if(isset($_GET['idPerfil'])){
 
             $tabla = "perfiles";
-
+            
             $item = 'id';
 
             $valor = $_GET['idPerfil'];
-
-            $respuesta = ModeloPerfiles::mdlEliminarPerfil($tabla, $item, $valor);
-
-            if($respuesta == "ok"){
-
-                echo '<script>
-
-                new swal({
-
-                    icon: "success",
-                    title: "¡El perfil ha sido eliminado correctamente!",
-                    showConfirmButton: true,
-                    confirmButtonText: "Cerrar"
-
-                }).then(function(result){
-
-                    if(result.value){
-                    
-                        window.location = "inicio";
-
-                    }
-
-                });
             
+            $perfil = ControladorPerfiles::ctrMostrarPerfiles($item,$valor);
 
-                </script>';
+            $nombrePerfil = $perfil['nombre'];
 
+            $item = 'completa';
+
+            $item2 = 'destino';
+
+            $carpetaValida = ControladorCarpetas::ctrCarpetaCompleta($item,$item2,$nombrePerfil);
+            
+            if($carpetaValida[0] == 0){
+    
+                $respuesta = ModeloPerfiles::mdlEliminarPerfil($tabla, $item, $valor);
+
+                if($respuesta == "ok"){
+
+                    echo '<script>
+    
+                    new swal({
+    
+                        icon: "success",
+                        title: "¡El Perfil ha sido eliminado correctamente!",
+                        showConfirmButton: true,
+                        confirmButtonText: "Cerrar"
+    
+                    }).then(function(result){
+    
+                        if(result.value){
+                        
+                            window.location = "inicio";
+    
+                        }
+    
+                    });
+                
+    
+                    </script>';
+    
+    
+                }else{
+    
+                    echo '<script>
+    
+                    new swal({
+    
+                        icon: "error",
+                        title: "Hubo un error al eliminar el perfil",
+                        showConfirmButton: true,
+                        confirmButtonText: "Cerrar"
+    
+                    }).then(function(result){
+    
+                        if(result.value){
+                        
+                            window.location = "inicio";
+    
+                        }
+    
+                    });
+                
+    
+                    </script>';
+    
+                }
 
             }else{
-
+                
                 echo '<script>
-
+                    
                 new swal({
-
+    
                     icon: "error",
-                    title: "Hubo un error al eliminar el perfil",
+                    title: "El perfil esta asociado a una carpeta ACTIVA.",
                     showConfirmButton: true,
                     confirmButtonText: "Cerrar"
 
@@ -319,10 +357,52 @@ class ControladorPerfiles{
 
                 </script>';
 
+
             }
-            
+
         }
 	}
 
+
+	/*=============================================
+	ACTIVAR/DESCATIVAR PERFIL
+	=============================================*/
+
+	static public function ctrActivarDesactivarPerfil($item, $valor){
+
+            $tabla = "perfiles";
+
+            $perfil = ControladorPerfiles::ctrMostrarPerfiles($item,$valor);
+
+            $nombrePerfil = $perfil['nombre'];
+
+            $item = 'completa';
+
+            $item2 = 'destino';
+
+            $carpetaValida = ControladorCarpetas::ctrCarpetaCompleta($item,$item2,$nombrePerfil);
+            
+            if($carpetaValida[0] == 0){
+    
+                $item = 'id';
+
+                $data['state'] = ModeloPerfiles::mdlActivarDesactivarPerfil($tabla, $item, $valor);
+
+                $activo = ModeloPerfiles::mdlMostrarPerfiles($tabla,$item,$valor);
+
+                $data['activo'] = $activo['activo'];
+
+                return $data;
+
+            }else{
+                
+                $data['state'] = 'carpetaActiva';
+
+                return $data;
+
+            }
+
+        }
 }
+
 
