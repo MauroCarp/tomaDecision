@@ -78,7 +78,7 @@ class ControladorPerfiles{
 
                     echo '<script>
 
-                    new     swal({
+                    new swal({
 
                         icon: "error",
                         title: "Hubo un error al cargar el perfil",
@@ -141,13 +141,116 @@ class ControladorPerfiles{
 	EDITAR PERFIL
 	=============================================*/
 
-	static public function ctrEditarPerfil($item, $valor){
+	static public function ctrEditarPerfil(){
 
-		$tabla = "animales";
+        if(isset($_POST['editarPerfil'])){
 
-		$respuesta = ModeloAnimales::mdlMostrarAnimales($tabla, $item, $valor);
+            $idPerfil = $_POST['idPerfilEdit'];
 
-		return $respuesta;
+            $item = 'id';
+
+            $perfil = ControladorPerfiles::ctrMostrarPerfiles($item,$idPerfil);
+
+            $nombrePerfil = $perfil['nombre'];
+
+            $item = 'completa';
+
+            $item2 = 'destino';
+
+            $carpetaValida = ControladorCarpetas::ctrCarpetaCompleta($item,$item2,$nombrePerfil);
+
+            if($carpetaValida[0] == 0){
+    
+                $tabla = "perfiles";
+                
+                $datos = array('idPerfil'=>$_POST['idPerfilEdit'],
+                'flacas'=>$_POST['flacasConfEditInput'],
+                'buenas'=>$_POST['buenasConfEditInput'],
+                'buenasMas'=>$_POST['buenasPlusConfEditInput'],
+                'muyBuenas'=>$_POST['muyBuenasConfEditInput'],
+                'apenasGordas'=>$_POST['apenasGordasConfEditInput']);
+
+                $respuesta = ModeloPerfiles::mdlEditarPerfil($tabla, $datos);
+
+                if($respuesta == "ok"){
+
+                    echo '<script>
+    
+                    new swal({
+    
+                        icon: "success",
+                        title: "¡El Perfil ha sido editado correctamente!",
+                        showConfirmButton: true,
+                        confirmButtonText: "Cerrar"
+    
+                    }).then(function(result){
+    
+                        if(result.value){
+                        
+                            window.location = "inicio";
+    
+                        }
+    
+                    });
+                
+    
+                    </script>';
+    
+    
+                }else{
+    
+                    echo '<script>
+    
+                    new swal({
+    
+                        icon: "error",
+                        title: "Hubo un error al editar el perfil",
+                        showConfirmButton: true,
+                        confirmButtonText: "Cerrar"
+    
+                    }).then(function(result){
+    
+                        if(result.value){
+                        
+                            window.location = "inicio";
+    
+                        }
+    
+                    });
+                
+    
+                    </script>';
+    
+                }
+
+            }else{
+                
+                echo '<script>
+                    
+                new swal({
+    
+                    icon: "error",
+                    title: "El perfil esta asociado a una carpeta ACTIVA.",
+                    showConfirmButton: true,
+                    confirmButtonText: "Cerrar"
+
+                }).then(function(result){
+
+                    if(result.value){
+                    
+                        window.location = "inicio";
+
+                    }
+
+                });
+            
+
+                </script>';
+
+
+            }
+        
+        }
 
 	}
 
@@ -196,7 +299,7 @@ class ControladorPerfiles{
 
                 echo '<script>
 
-                new     swal({
+                new swal({
 
                     icon: "error",
                     title: "Hubo un error al eliminar el perfil",

@@ -94,6 +94,7 @@ for (const btn of btnsEditar) {
         .then(respuesta=>{
 
             document.getElementById('nombrePerfilEdit').value = respuesta.nombre
+            document.getElementById('idPerfilEdit').value = respuesta.id
 
             document.getElementById('flacasConfEditInputId').value = respuesta.flacas
             document.getElementById('buenasConfEditInputId').value = respuesta.buenas

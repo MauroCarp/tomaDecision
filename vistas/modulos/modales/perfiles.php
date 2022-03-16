@@ -167,13 +167,15 @@
             <div class="modal-body">
                 
                 <div class="box"  style="border-top:none;">
-                        <form action="POST">
+
+                        <form method="post">
                             
                             <div class="form-group">
                                 
                                 <label for="nombrePerfil">Perfil</label>
                             
-                                <input type="text" class="form-control" id="nombrePerfilEdit" value="Nombre Perfil a Editar" readOnly>
+                                <input type="text" class="form-control" id="nombrePerfilEdit" name="nombrePerfilEdit" value="Nombre Perfil a Editar" readOnly>
+                                <input type="hidden" class="form-control" id="idPerfilEdit" name="idPerfilEdit">
                             
                             </div>
 

@@ -207,6 +207,33 @@ class ModeloCarpetas{
 
   }
 
+  
+	/*=============================================
+	CARPETA COMPLETA
+	=============================================*/
+
+	static public function mdlCarpetaCompleta($tabla,$item,$item2,$valor2){
+      
+      $stmt = Conexion::conectar()->prepare("SELECT COUNT(*) FROM $tabla WHERE $item IS NULL");
+
+    if($item2 != null){
+      
+      $stmt = Conexion::conectar()->prepare("SELECT COUNT(*) FROM $tabla WHERE $item IS NULL AND $item2 = :$item2");
+      $stmt -> bindParam(":".$item2, $valor2, PDO::PARAM_STR);
+      
+    }      
+        
+    $stmt -> execute();
+
+    return $stmt -> fetch();
+      
+    $stmt -> close();
+
+    $stmt = null;
+
+}
+
+
 
 
 }

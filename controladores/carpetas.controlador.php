@@ -56,7 +56,7 @@ class ControladorCarpetas{
 
                     echo '<script>
 
-                    new     swal({
+                    new swal({
 
                         icon: "error",
                         title: "Hubo un error al cargar la carpeta",
@@ -169,7 +169,7 @@ class ControladorCarpetas{
 
                 echo '<script>
 
-                new     swal({
+                new swal({
 
                     icon: "error",
                     title: "Hubo un error al eliminar la carpeta",
@@ -241,6 +241,18 @@ class ControladorCarpetas{
 
             }
 
+
+	}
+
+    /*=============================================
+	CARPETA COMPLETA
+	=============================================*/
+
+	static public function ctrCarpetaCompleta($item,$item2,$valor2){
+
+            $tabla = "carpetas";
+
+            return $respuesta = ModeloCarpetas::mdlCarpetaCompleta($tabla,$item,$item2,$valor2);
 
 	}
 

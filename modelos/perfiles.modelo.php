@@ -68,6 +68,45 @@ class ModeloPerfiles{
 
   }
 
+  
+	/*=============================================
+	EDITAR PERFIL
+	=============================================*/
+
+	static public function mdlEditarPerfil($tabla, $datos){
+	
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET 
+    flacas = :flacas,
+    buenas = :buenas,
+    buenasMas = :buenasMas,
+    muyBuenas = :muyBuenas,
+    apenasGordas = :apenasGordas,
+    fecha = CURDATE()
+    WHERE id = :id");
+
+		$stmt -> bindParam(":flacas", $datos["flacas"], PDO::PARAM_STR);
+		$stmt -> bindParam(":buenas", $datos["buenas"], PDO::PARAM_STR);
+		$stmt -> bindParam(":buenasMas", $datos["buenasMas"], PDO::PARAM_STR);
+		$stmt -> bindParam(":muyBuenas", $datos["muyBuenas"], PDO::PARAM_STR);
+		$stmt -> bindParam(":apenasGordas", $datos["apenasGordas"], PDO::PARAM_STR);
+		$stmt -> bindParam(":id", $datos["idPerfil"], PDO::PARAM_STR);
+
+		if($stmt -> execute()){
+
+			return "ok";
+		
+		}else{
+
+			return "error";	
+
+		}
+
+		$stmt -> close();
+
+		$stmt = null;
+
+	}
+
 
   /*=============================================
 	ELIMINAR PERFIL
