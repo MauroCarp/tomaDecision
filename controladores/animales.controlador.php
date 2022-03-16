@@ -38,86 +38,92 @@ class ControladorAnimales{
 
 			$carpetas = ControladorCarpetas::ctrMostrarCarpetas($item,$valor,'prioridad');
 
-			for ($i=0; $i < sizeof($carpetas) ; $i++) { 
-				// } ($carpetas as $key => $carpeta) {
+			if(sizeof($carpetas) > 0){
 				
-				$clasificacion = explode('/',$carpetas[$i]['clasificacion']);
-				
-				$destino = $carpetas[$i]['destino'];
-
-				$item = 'nombre';
-
-				$perfil = ControladorPerfiles::ctrMostrarPerfiles($item,$destino);
-
-				$clasificacionAnimal = null;
-
-				if($tas3 >= $perfil['flacas']){
+				for ($i=0; $i < sizeof($carpetas) ; $i++) { 
+					// } ($carpetas as $key => $carpeta) {
 					
-					$clasificacionAnimal = 'F';
-
-				}else if($tas3 > $perfil['buenas'] AND $tas3 < $perfil['flacas']){
-
-					$clasificacionAnimal = 'B';
-
-				}
-				else if($tas3 >= $perfil['buenasMas'] AND $tas3 < $perfil['buenas']){
-
-					$clasificacionAnimal = 'B+';
-
-				}
-				else if($tas3 >= $perfil['muyBuenas'] AND $tas3 < $perfil['buenasMas']){
-
-					$clasificacionAnimal = 'MB';
-
-				}
-				else if($tas3 >= $perfil['apenasGordas'] AND $tas3 < $perfil['muyBuenas']){
-
-					$clasificacionAnimal = 'AP';
-
-				}
-				else if($tas3 < $perfil['apenasGordas']){
-
-					$clasificacionAnimal = 'G';
-
-				}
-				
-				if(in_array($clasificacionAnimal,$clasificacion) AND $datos['peso'] >= $carpetas[$i]['pesoMin'] AND $datos['peso'] <= $carpetas[$i]['pesoMax']){
-
-					$item = 'idAnimal';
-
-					$valor = ControladorAnimales::ctrMostrarUltimoReg() ;
-
-					$datos = array('idCarpeta'=>$carpetas[$i]['idCarpeta'],'clasificacion'=>$clasificacionAnimal);
-
-					$errors['editarAnimal'] =  ControladorAnimales::ctrEditarAnimal($item,$valor[0],$datos);
+					$clasificacion = explode('/',$carpetas[$i]['clasificacion']);
 					
-					$item = 'idCarpeta';
+					$destino = $carpetas[$i]['destino'];
 
-					$errors['editarCarpeta'] =  ControladorCarpetas::ctrSumarAnimal($item,$carpetas[$i]['idCarpeta']);
+					$item = 'nombre';
+
+					$perfil = ControladorPerfiles::ctrMostrarPerfiles($item,$destino);
+
+					$clasificacionAnimal = null;
+
+					if($tas3 >= $perfil['flacas']){
+						
+						$clasificacionAnimal = 'F';
+
+					}else if($tas3 > $perfil['buenas'] AND $tas3 < $perfil['flacas']){
+
+						$clasificacionAnimal = 'B';
+
+					}
+					else if($tas3 >= $perfil['buenasMas'] AND $tas3 < $perfil['buenas']){
+
+						$clasificacionAnimal = 'B+';
+
+					}
+					else if($tas3 >= $perfil['muyBuenas'] AND $tas3 < $perfil['buenasMas']){
+
+						$clasificacionAnimal = 'MB';
+
+					}
+					else if($tas3 >= $perfil['apenasGordas'] AND $tas3 < $perfil['muyBuenas']){
+
+						$clasificacionAnimal = 'AP';
+
+					}
+					else if($tas3 < $perfil['apenasGordas']){
+
+						$clasificacionAnimal = 'G';
+
+					}
 					
-					if(in_array('ok',$errors)){
+					if(in_array($clasificacionAnimal,$clasificacion) AND $datos['peso'] >= $carpetas[$i]['pesoMin'] AND $datos['peso'] <= $carpetas[$i]['pesoMax']){
 
-						return 'ok';
+						$item = 'idAnimal';
+
+						$valor = ControladorAnimales::ctrMostrarUltimoReg() ;
+
+						$datos = array('idCarpeta'=>$carpetas[$i]['idCarpeta'],'clasificacion'=>$clasificacionAnimal);
+
+						$errors['editarAnimal'] =  ControladorAnimales::ctrEditarAnimal($item,$valor[0],$datos);
+						
+						$item = 'idCarpeta';
+
+						$errors['editarCarpeta'] =  ControladorCarpetas::ctrSumarAnimal($item,$carpetas[$i]['idCarpeta']);
+						
+						if(in_array('ok',$errors)){
+
+							return 'ok';
+
+						}else{
+
+							return 'error';
+
+						}
 
 					}else{
 
-						return 'error';
+						if(($i + 1) == sizeof($carpetas)){
 
-					}
+							return 'ok';
+						
+						}
 
-				}else{
-
-					
-					if(($i + 1) == sizeof($carpetas)){
-
-						return 'ok';
-					
 					}
 
 				}
 
+			}else{
+
+				return 'ok';
 			}
-		
+
 		}
 
 	}
