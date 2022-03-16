@@ -32,7 +32,14 @@ const actualizarSliders = (idPerfil)=>{
         document.getElementById('buenasPlusInputId').value = respuesta.buenasMas
         document.getElementById('muyBuenasInputId').value = respuesta.muyBuenas
         document.getElementById('apenasGordasInputId').value = respuesta.apenasGordas
-    
+
+        document.querySelector('output[name=flacasOutput]').innerHTML = respuesta.flacas
+        document.querySelector('output[name=buenasOutput]').innerHTML = respuesta.buenas
+        document.querySelector('output[name=buenasPlusOutput]').innerHTML = respuesta.buenasMas
+        document.querySelector('output[name=muyBuenasOutput]').innerHTML = respuesta.muyBuenas
+        document.querySelector('output[name=apenasGordasIutput]').innerHTML = respuesta.apenasGordas
+
+        
     })
     .catch(err=>console.log(err))
 
@@ -45,6 +52,7 @@ document.getElementById('perfilesClasificacion').addEventListener('change',(e)=>
     actualizarSliders(idPerfil)
 
     actualizarClasificacion(idPerfil)
+
 })
 
 // ACTUALIZAR CLASIFICACION
