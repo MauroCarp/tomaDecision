@@ -73,14 +73,46 @@ for (const btn of btnsEditar) {
     
     btn.addEventListener('click',(e)=>{
         
-    //     let idPerfil = (e.path[0].attributes.length > 1) ? e.path[0].attributes.idperfil.nodeValue : e.path[1].attributes.idperfil.nodeValue
+        let idPerfil = (e.path[0].attributes.length > 1) ? e.path[0].attributes.idperfil.nodeValue : e.path[1].attributes.idperfil.nodeValue
+        
         let modal = document.getElementById('modalEditarPerfil')
         
         if(modal.classList[1] != 'showPerfilModal')
             showPerfilModal('modalEditarPerfil','modalNuevoPerfil')
 
-    })
+        let url = 'fetch/perfiles.fetch.php'
+        
+        let formData = new FormData()
+        formData.append('accion','mostrarPerfil')
+        formData.append('idPerfil',idPerfil)
 
+        fetch(url,{
+            method:'post',
+            body:formData
+        })
+        .then(resp=>resp.json())
+        .then(respuesta=>{
+
+            document.getElementById('nombrePerfilEdit').value = respuesta.nombre
+
+            document.getElementById('flacasConfEditInputId').value = respuesta.flacas
+            document.getElementById('buenasConfEditInputId').value = respuesta.buenas
+            document.getElementById('buenasPlusConfEditInputId').value = respuesta.buenasMas
+            document.getElementById('muyBuenasConfEditInputId').value = respuesta.muyBuenas
+            document.getElementById('apenasGordasConfEditInputId').value = respuesta.apenasGordas
+
+            document.querySelector('output[name=flacasConfEditOutput]').innerHTML = respuesta.flacas
+            document.querySelector('output[name=buenasConfEditOutput]').innerHTML = respuesta.buenas
+            document.querySelector('output[name=buenasPlusConfEditOutput]').innerHTML = respuesta.buenasMas
+            document.querySelector('output[name=muyBuenasConfEditOutput]').innerHTML = respuesta.muyBuenas
+            document.querySelector('output[name=apenasGordasConfEditOutput]').innerHTML = respuesta.apenasGordas
+
+
+        })
+        .catch(err=>console.error(err))
+
+
+    })
 
 }
 

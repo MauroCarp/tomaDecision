@@ -44,4 +44,4 @@ value = document.getElementById('muyBuenasInputId').value
 document.getElementById('muyBuenasOutputId').innerHTML = value    
 
 value = document.getElementById('apenasGordasInputId').value
-document.getElementById('apenasGordasIutputId').innerHTML = value    
+document.getElementById('apenasGordasOutputId').innerHTML = value    

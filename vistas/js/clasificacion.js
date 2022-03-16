@@ -37,7 +37,7 @@ const actualizarSliders = (idPerfil)=>{
         document.querySelector('output[name=buenasOutput]').innerHTML = respuesta.buenas
         document.querySelector('output[name=buenasPlusOutput]').innerHTML = respuesta.buenasMas
         document.querySelector('output[name=muyBuenasOutput]').innerHTML = respuesta.muyBuenas
-        document.querySelector('output[name=apenasGordasIutput]').innerHTML = respuesta.apenasGordas
+        document.querySelector('output[name=apenasGordasOutput]').innerHTML = respuesta.apenasGordas
 
         
     })

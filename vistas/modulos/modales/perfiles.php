@@ -167,32 +167,37 @@
             <div class="modal-body">
                 
                 <div class="box"  style="border-top:none;">
-                        
-                        <div class="form-group">
+                        <form action="POST">
                             
-                            <label for="nombrePerfil">Perfil</label>
-                        
-                            <input type="text" class="form-control" id="nombrePerfilEdit" value="Nombre Perfil a Editar" readOnly>
-                        
-                        </div>
+                            <div class="form-group">
+                                
+                                <label for="nombrePerfil">Perfil</label>
+                            
+                                <input type="text" class="form-control" id="nombrePerfilEdit" value="Nombre Perfil a Editar" readOnly>
+                            
+                            </div>
 
-                        <?php
+                            <?php
 
-                        $flacas = 'flacasConfEdit';
-                
-                        $buenas = 'buenasConfEdit';
-                        
-                        $buenasPlus = 'buenasPlusConfEdit';
-                        
-                        $muyBuenas = 'muyBuenasConfEdit';
-                        
-                        $apenasGordas = 'apenasGordasConfEdit';
-                        
-                        $gordas = 'gordasConfEdit';
+                            $flacas = 'flacasConfEdit';
+                    
+                            $buenas = 'buenasConfEdit';
+                            
+                            $buenasPlus = 'buenasPlusConfEdit';
+                            
+                            $muyBuenas = 'muyBuenasConfEdit';
+                            
+                            $apenasGordas = 'apenasGordasConfEdit';
+                            
+                            $gordas = 'gordasConfEdit';
 
-                        include "vistas/modulos/inicio/sliders.php";
-                        
-                        ?>
+                            include "vistas/modulos/inicio/sliders.php";
+                            
+                            ?>
+
+                            <button type="submit" name="editarPerfil" id="editarPerfil" class="btn btn-block btn-success"><b>Editar Perfil</b></button>
+
+                        </form>
 
                 </div>
 
@@ -211,7 +216,7 @@ $cargarPerfil = new ControladorPerfiles();
 $cargarPerfil -> ctrNuevoPerfil();
 
 $editarPerfil = new ControladorPerfiles();
-// $editarPerfil -> ctrEditarPerfil();
+$editarPerfil -> ctrEditarPerfil();
 
 $eliminarPerfil = new ControladorPerfiles();
 $eliminarPerfil -> ctrEliminarPerfil();

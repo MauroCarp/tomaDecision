@@ -148,7 +148,7 @@
         
         <b>Apenas Gordas</b>
 
-        <output name="<?php echo $apenasGordas;?>Iutput" id="<?php echo $apenasGordas;?>IutputId" style="display:inline-block"></output>
+        <output name="<?php echo $apenasGordas;?>Output" id="<?php echo $apenasGordas;?>OutputId" style="display:inline-block"></output>
 
     </label>
 
