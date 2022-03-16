@@ -131,6 +131,10 @@ $('.tablaIngresos').DataTable( {
                 let idPerfil = document.getElementById('perfilesClasificacion').value
             
                 actualizarClasificacion(idPerfil)
+
+                document.getElementById('carpetasScroll').firstElementChild.firstElementChild.innerHTML = ''
+                mostrarCarpetasActivas()
+
               
             }else{            
                 

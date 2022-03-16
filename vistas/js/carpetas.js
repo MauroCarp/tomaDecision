@@ -173,6 +173,7 @@ btnNuevaCarpeta.addEventListener('click',()=>{
     }
 
     mostrarCarpetasActivas()
+
     
 // ELIMINAR CARPETA
 
