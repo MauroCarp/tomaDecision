@@ -3,6 +3,9 @@
 require_once "../controladores/animales.controlador.php";
 require_once "../modelos/animales.modelo.php";
 
+require_once "../controladores/carpetas.controlador.php";
+require_once "../modelos/carpetas.modelo.php";
+
 class TablaIngresos{
 
  	/*=============================================
@@ -23,17 +26,69 @@ class TablaIngresos{
 
 		  	return;
   		}	
-		
-		$deleteBtn = "<div class='btn-group'><button class='btn btn-danger btnEliminar btnEliminarAnimal' idAnimal=''><i class='fa fa-times'></i></button></div>";
-
-		$label = "<span class='label label-danger' style='width: 100%'>Flaca</span>";
-
+				
 		$datosJson = '{
 			"data": [';
 			
 			foreach ($animales as $key => $animal) {
 			  
+				switch ($animal['clasificacion']) {
+
+					case 'F':
+						$text = 'Flaca';
+						$color = 'danger';
+						break;
+					
+					case 'G':
+						$text = 'Gorda';
+						$color = 'danger';
+						break;
+		
+						
+					case 'B':
+						$color = 'success';
+						$text = 'Buena';
+						$style = 'background-color: rgb(137 221 113);';
+						break;
+						
+					case 'B+':
+						$color = 'success';
+						$text = 'Buena+';
+						break;
+							
+					case 'MB':
+						$color = 'success';
+						$text = 'Muy Buena';
+						break;
+		
+					case 'AP':
+						$text = 'Apenas Gorda';
+						$color = 'warning';
+						break;
+					
+					default:
+						$style='';
+						$color='default';
+						$text='No Clasificado/Sin Destino';
+						break;
+				}
+		
+				$label = "<span class='label label-$color' style='font-size:1.2em;width: 100%;$style'>$text</span>";
+
+				$deleteBtn = "<div class='btn-group'><button class='btn btn-danger btnEliminar btnEliminarAnimal' idAnimal='".$animal['idAnimal']."'><i class='fa fa-times'></i></button></div>";
+
 				$sexo = ($animal['sexo'] == 'M') ? 'Macho' : 'Hembra';
+
+				$item = 'idCarpeta';
+
+				$destino = 'Sin Destino';
+
+				if($animal['idCarpeta'] != null){
+			
+					$carpeta = ControladorCarpetas::ctrMostrarCarpetas($item,$animal['idCarpeta'],'fecha');
+				
+					$destino = $carpeta[0]['destino'];
+				}
 
 				$datosJson .='[
 					"'.$animal["RFID"].'",
@@ -42,7 +97,7 @@ class TablaIngresos{
 					"'.$sexo.'",
 					"'.$animal["ecoRef"].'",
 					"'.$label.'",
-					"-",
+					"'.$destino.'",
 					"'.$deleteBtn.'"
 					],';
 

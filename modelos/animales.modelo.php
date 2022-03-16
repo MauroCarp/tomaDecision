@@ -45,7 +45,7 @@ class ModeloAnimales{
 
       if($item != null){
 
-        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item ORDER BY date");
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item ORDER BY date DESC");
         
         $stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
           
@@ -55,7 +55,7 @@ class ModeloAnimales{
         
       }else{
         
-        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla ORDER BY date");
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla ORDER BY date DESC");
           
         $stmt -> execute();
   

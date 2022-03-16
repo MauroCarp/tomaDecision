@@ -23,6 +23,7 @@ $('.tablaIngresos').DataTable( {
   "info":     false,
   "bLengthChange": false,
   "pageLength": 5,
+  // "order": [[ 0, "desc" ]],
   
   "language": {
 
