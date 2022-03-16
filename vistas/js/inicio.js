@@ -14,21 +14,21 @@ let altoSeccionClasificacion = document.getElementById('seccionClasificacion').c
 
 document.getElementById('seccionCarpetaAct').style.height = `${altoSeccionClasificacion}px`
 
-document.addEventListener('DOMContentLoaded', function () {
-     
+
+setTimeout(()=>{
+
      let altoSeccionIngresos = document.getElementById('ingresoAnimal').offsetHeight
      let altoSeccionTablaIng = document.getElementById('tablaIngresos').offsetHeight
      
      document.getElementById('seccionConfiguracion').style.height = `${altoSeccionIngresos + altoSeccionTablaIng + 20}px`
-
+     
      for (const iterator of document.getElementsByClassName('sliders')) {
           
           iterator.style.height = '15%'
           
      }
 
- });
-
+},300)
 
 
 let value = document.getElementById('flacasInputId').value
