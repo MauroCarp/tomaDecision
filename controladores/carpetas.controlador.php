@@ -116,9 +116,9 @@ class ControladorCarpetas{
 
 	static public function ctrEditarCarpeta($item, $valor,$datos){
 
-		$tabla = "animales";
+		$tabla = "carpetas";
 
-		$respuesta = ModeloAnimales::mdlMostrarAnimales($tabla, $item, $valor,$datos);
+		$respuesta = ModeloCarpetas::mdlEditarCarpeta($tabla, $item, $valor,$datos);
 
 		return $respuesta;
 
@@ -220,8 +220,15 @@ class ControladorCarpetas{
 
             if($carpeta[0]['cantidad'] == $carpeta[0]['animales']){
 
-                $errors['completa'] = ControladorCarpetas::ctrEditarCarpeta($item, $valor);
+                $item = 'idCarpeta';
 
+                $valor = $carpeta[0]['idCarpeta'];
+
+                $datos = 'completa';
+                
+                // $errors['completa'] = ControladorCarpetas::ctrEditarCarpeta($item, $valor,$datos);
+                
+                return $resp = ControladorCarpetas::ctrEditarCarpeta($item, $valor,$datos);
             }
 
             if(in_array('ok',$errors)){

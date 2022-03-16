@@ -180,7 +180,7 @@ class ModeloCarpetas{
 	EDITAR CARPETA
 	=============================================*/
 
-	static public function ctrEditarCarpeta($tabla,$item,$valor,$datos){
+	static public function mdlEditarCarpeta($tabla,$item,$valor,$datos){
 
     if($datos == 'completa'){
 

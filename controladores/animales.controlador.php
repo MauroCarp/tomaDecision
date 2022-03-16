@@ -94,7 +94,7 @@ class ControladorAnimales{
 					$item = 'idCarpeta';
 
 					$errors['editarCarpeta'] =  ControladorCarpetas::ctrSumarAnimal($item,$carpetas[$i]['idCarpeta']);
-					// return $respuesta = ControladorCarpetas::ctrSumarAnimal($item,$carpeta[$i]['idCarpeta']);
+					// return $resp =  ControladorCarpetas::ctrSumarAnimal($item,$carpetas[$i]['idCarpeta']);
 
 					
 					if(in_array('ok',$errors)){
