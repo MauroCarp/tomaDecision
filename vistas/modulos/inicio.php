@@ -77,33 +77,71 @@
             <!-- CONFIGURACION EN VIVO -->
             <div class="col-md-3 col-xs-12">
 
-              <div class="box" id="seccionConfiguracion">
+              <div class="box" id="seccionDestino">
                 
                 <div class="box-header with-border">
 
-                  <h3 class="box-title"><i class="fa fa-sliders"></i> Configuraci&oacute;n</h3>
+                  <h3 class="box-title"><i class="fa fa-sliders"></i>Destino</h3>
 
                 </div>
                 
-                <div class="box-body sliderBox">
-                
-                  <?php
+                <div class="box-body">
 
-                    $flacas = 'flacas';
-                    
-                    $buenas = 'buenas';
-                    
-                    $buenasPlus = 'buenasPlus';
-                    
-                    $muyBuenas = 'muyBuenas';
-                    
-                    $apenasGordas = 'apenasGordas';
-                    
-                    $gordas = 'gordas';
+                  <div class="box box-widget widget-user">
 
-                    include "inicio/sliders.php";
-                  
-                  ?>
+                    <div class="widget-user-header bg-aqua-active" style="text-align:center;">                                                                         
+
+                      <h1 class="widget-user-username" id="detino" style="font-size:4em;font-weight:bolder;line-height:80%;">DESTINO</h1>
+
+                    </div>
+
+                    <div class="box-footer">
+
+                      <div class="row">
+
+                        <div class="col-sm-4 border-right">
+
+                          <div class="description-block">
+
+                            <h5 class="description-header" style="font-size:2.5em;">22656</h5>
+
+                            <span class="description-text">RFID</span>
+
+                          </div>
+
+                        </div>
+
+                        <div class="col-sm-4 border-right">
+
+                          <div class="description-block">
+
+                          <h5 class="description-header" style="font-size:2.5em;">B+</h5>
+
+                            <span class="description-text">CLAS</span>
+
+                          </div>
+
+                        </div>
+
+                        <div class="col-sm-4">
+
+                          <div class="description-block">
+
+                            <h5 class="description-header" style="font-size:2.5em;">335</h5>
+
+                            <span class="description-text">PESO</span>
+
+                          </div>
+
+
+
+                        </div>
+
+                      </div>
+
+                    </div>
+
+                  </div>
 
                 </div>
 
