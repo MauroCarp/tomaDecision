@@ -15,10 +15,13 @@ class TablaIngresos{
 	public function mostrarTablaAnimales(){
 
 
-		$item = NULL;
-		$valor = NULL;
-				
-		$animales = ControladorAnimales::ctrMostrarAnimales($item, $valor);
+		$item = 'date';
+  
+		$today = date('Y-m-d');
+
+		$tomorrow = date('Y-m-d',strtotime($today."+ 1 days"));
+
+		$animales = ControladorAnimales::ctrMostrarAnimalesBetween($item, $today,$tomorrow);
 
         if(count($animales) == 0){
 

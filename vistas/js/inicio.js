@@ -20,28 +20,22 @@ setTimeout(()=>{
      let altoSeccionIngresos = document.getElementById('ingresoAnimal').offsetHeight
      let altoSeccionTablaIng = document.getElementById('tablaIngresos').offsetHeight
      
-     document.getElementById('seccionConfiguracion').style.height = `${altoSeccionIngresos + altoSeccionTablaIng + 20}px`
+     document.getElementById('seccionDestino').style.height = `${altoSeccionIngresos + altoSeccionTablaIng + 20}px`
      
-     for (const iterator of document.getElementsByClassName('sliders')) {
-          
-          iterator.style.height = '15%'
-          
-     }
-
 },300)
 
 
-let value = document.getElementById('flacasInputId').value
-document.getElementById('flacasOutputId').innerHTML = value    
+// let value = document.getElementById('flacasInputId').value
+// document.getElementById('flacasOutputId').innerHTML = value    
 
-value = document.getElementById('buenasInputId').value
-document.getElementById('buenasOutputId').innerHTML = value    
+// value = document.getElementById('buenasInputId').value
+// document.getElementById('buenasOutputId').innerHTML = value    
 
-value = document.getElementById('buenasPlusInputId').value
-document.getElementById('buenasPlusOutputId').innerHTML = value    
+// value = document.getElementById('buenasPlusInputId').value
+// document.getElementById('buenasPlusOutputId').innerHTML = value    
 
-value = document.getElementById('muyBuenasInputId').value
-document.getElementById('muyBuenasOutputId').innerHTML = value    
+// value = document.getElementById('muyBuenasInputId').value
+// document.getElementById('muyBuenasOutputId').innerHTML = value    
 
-value = document.getElementById('apenasGordasInputId').value
-document.getElementById('apenasGordasOutputId').innerHTML = value    
+// value = document.getElementById('apenasGordasInputId').value
+// document.getElementById('apenasGordasOutputId').innerHTML = value    

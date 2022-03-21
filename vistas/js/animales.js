@@ -101,6 +101,7 @@ $('.tablaIngresos').DataTable( {
             method:'post',
             body:data
         })
+
         .then(resp=>resp.json())
         .then(respuesta=> {
             
@@ -112,7 +113,7 @@ $('.tablaIngresos').DataTable( {
             });
             console.log(respuesta);
             
-            if(respuesta == 'ok'){
+            if(respuesta.status == 'ok'){
 
                   Toast.fire({
 
@@ -121,10 +122,12 @@ $('.tablaIngresos').DataTable( {
 
                 })
 
+                
                 $('.tablaIngresos').DataTable().ajax.reload();
 
-                document.getElementById('rfid').value = ''
+
                 $('#rfid').focus()
+                document.getElementById('rfid').value = ''
                 document.getElementById('mmGrasa').value = ''
                 document.getElementById('peso').value = ''
                 document.getElementById('refEco').value = ''
@@ -134,7 +137,13 @@ $('.tablaIngresos').DataTable( {
                 actualizarClasificacion(idPerfil)
 
                 document.getElementById('carpetasScroll').firstElementChild.firstElementChild.innerHTML = ''
+                
                 mostrarCarpetasActivas()
+
+                document.getElementById('destinoAnimal').innerText = respuesta.carpeta
+                document.getElementById('clasificacionAnimal').innerText = respuesta.clasificacion
+                document.getElementById('rfidAnimal').innerText = respuesta.rfid
+                document.getElementById('pesoAnimal').innerText = respuesta.peso
 
               
             }else{            

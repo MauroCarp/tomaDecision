@@ -10,7 +10,7 @@ class ModeloAnimales{
 
 	static public function mdlNuevoAnimal($tabla,$datos){
     
-    $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(RFID,mmGrasa,peso,sexo,tas1,tas2,tas3,ecoRef) VALUES(:rfid, :mmGrasa, :peso, :sexo, :tas1, :tas2, :tas3, :ecoRef)");
+    $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(RFID,mmGrasa,peso,sexo,tas1,tas2,tas3,ecoRef,date) VALUES(:rfid, :mmGrasa, :peso, :sexo, :tas1, :tas2, :tas3, :ecoRef,CURRENT_DATE)");
 
     $stmt -> bindParam(":rfid", $datos['rfid'], PDO::PARAM_STR);
     $stmt -> bindParam(":mmGrasa", $datos['mmGrasa'], PDO::PARAM_STR);
@@ -64,6 +64,27 @@ class ModeloAnimales{
       }
       
 
+      $stmt -> close();
+
+      $stmt = null;
+
+  }
+
+	/*=============================================
+	MOSTRAR ANIMALES BETWEEN
+	=============================================*/
+
+	static public function mdlMostrarAnimalesBetween($tabla,$item,$valor,$valor2){
+
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item BETWEEN :valor AND :valor2 ORDER BY date DESC");
+        
+        $stmt -> bindParam(":valor", $valor, PDO::PARAM_STR);
+        $stmt -> bindParam(":valor2", $valor2, PDO::PARAM_STR);
+          
+        $stmt -> execute();
+
+        return $stmt -> fetchAll();
+        
       $stmt -> close();
 
       $stmt = null;

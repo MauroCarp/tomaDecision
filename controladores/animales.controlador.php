@@ -41,8 +41,7 @@ class ControladorAnimales{
 			if(sizeof($carpetas) > 0){
 				
 				for ($i=0; $i < sizeof($carpetas) ; $i++) { 
-					// } ($carpetas as $key => $carpeta) {
-					
+
 					$clasificacion = explode('/',$carpetas[$i]['clasificacion']);
 					
 					$destino = $carpetas[$i]['destino'];
@@ -99,7 +98,11 @@ class ControladorAnimales{
 						
 						if(in_array('ok',$errors)){
 
-							return 'ok';
+							$datos['status'] = 'ok';
+							$datos['carpeta'] = $carpetas[$i]['destino'];
+							$datos['rfid'] = $_POST["rfid"];
+							$datos['peso'] = $_POST["peso"];
+							return $datos;
 
 						}else{
 
@@ -111,7 +114,7 @@ class ControladorAnimales{
 
 						if(($i + 1) == sizeof($carpetas)){
 
-							return 'ok';
+							return array('status'=>'ok');
 						
 						}
 
@@ -137,6 +140,20 @@ class ControladorAnimales{
 		$tabla = "animales";
 
 		$respuesta = ModeloAnimales::mdlMostrarAnimales($tabla, $item, $valor);
+
+		return $respuesta;
+
+	}
+
+	/*=============================================
+	MOSTRAR ANIMALES BETWEEN
+	=============================================*/
+
+	static public function ctrMostrarAnimalesBetween($item, $valor,$valor2){
+
+		$tabla = "animales";
+
+		$respuesta = ModeloAnimales::mdlMostrarAnimalesBetween($tabla, $item, $valor,$valor2);
 
 		return $respuesta;
 

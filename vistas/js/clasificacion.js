@@ -49,7 +49,7 @@ document.getElementById('perfilesClasificacion').addEventListener('change',(e)=>
 
     let idPerfil = e.target.value
 
-    actualizarSliders(idPerfil)
+    // actualizarSliders(idPerfil)
 
     actualizarClasificacion(idPerfil)
 
@@ -111,7 +111,7 @@ setTimeout(() => {
     
         let idPerfilClas = document.getElementById('perfilesClasificacion').value
 
-        actualizarSliders(idPerfilClas)
+        // actualizarSliders(idPerfilClas)
             
         actualizarClasificacion(idPerfilClas)
 

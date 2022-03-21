@@ -125,7 +125,7 @@ btnNuevaCarpeta.addEventListener('click',()=>{
             success:(res)=>{
 
                 let data = JSON.parse(res)
-
+                
                 let docFragment = new DocumentFragment()
 
                 let row = document.createElement('DIV')

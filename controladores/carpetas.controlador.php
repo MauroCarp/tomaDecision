@@ -97,6 +97,20 @@ class ControladorCarpetas{
 	}
 
 	/*=============================================
+	MOSTRAR CARPETA BETWEEN
+	=============================================*/
+
+	static public function ctrMostrarCarpetasBetween($item, $valor,$fecha1,$fecha2,$orden){
+
+		$tabla = "carpetas";
+
+		$respuesta = ModeloCarpetas::mdlMostrarCarpetasBetween($tabla, $item, $valor,$fecha1,$fecha2,$orden);
+
+		return $respuesta;
+
+	}
+
+	/*=============================================
 	MOSTRAR PRIORIDAD
 	=============================================*/
 

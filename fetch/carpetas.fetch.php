@@ -13,8 +13,12 @@ class FetchCarpetas{
         $valor = 1;
 
         $orden = 'fecha';
+
+        $fecha1 = date('Y-m-d');
+
+        $fecha2 = date('Y-m-d',strtotime($fecha1."+ 1 days"));
         
-		$respuesta = ControladorCarpetas::ctrMostrarCarpetas($item,$valor,$orden);
+		$respuesta = ControladorCarpetas::ctrMostrarCarpetasBetween($item,$valor,$fecha1,$fecha2,$orden);
 
         echo json_encode($respuesta);
       

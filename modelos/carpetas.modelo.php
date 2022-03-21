@@ -10,7 +10,7 @@ class ModeloCarpetas{
 
     static public function mdlNuevaCarpeta($tabla,$datos){
         
-        $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(destino,cantidad,pesoMin,pesoMax,clasificacion,prioridad) VALUES(:destino,:cantidad,:pesoMin,:pesoMax,:clasificacion,:prioridad)");
+        $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(destino,cantidad,pesoMin,pesoMax,clasificacion,prioridad,fecha) VALUES(:destino,:cantidad,:pesoMin,:pesoMax,:clasificacion,:prioridad,CURRENT_DATE)");
 
         $stmt -> bindParam(":destino", $datos['destino'], PDO::PARAM_STR);
         $stmt -> bindParam(":cantidad", $datos['cantidad'], PDO::PARAM_STR);
@@ -61,6 +61,41 @@ class ModeloCarpetas{
       }else{
         
         $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla ORDER BY $orden DESC");
+          
+        $stmt -> execute();
+  
+        return $stmt -> fetchAll();
+      
+      }
+      
+
+      $stmt -> close();
+
+      $stmt = null;
+
+  }
+
+	/*=============================================
+	MOSTRAR CARPETAS BETWEEN
+	=============================================*/
+
+	static public function mdlMostrarCarpetasBetween($tabla, $item, $valor,$fecha1,$fecha2,$orden){
+
+      if($item != null){
+
+          $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item AND fecha BETWEEN :fecha1 AND :fecha2 ORDER BY $orden DESC");
+          
+          $stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+          $stmt -> bindParam(":fecha1", $fecha1, PDO::PARAM_STR);
+          $stmt -> bindParam(":fecha2", $fecha2, PDO::PARAM_STR);
+        // return array($fecha1,$fecha2);
+        $stmt -> execute();
+
+        return $stmt -> fetchAll();
+        
+      }else{
+        
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE fecha BETWEEN :$fecha1 AND :$fecha2 ORDER BY $orden DESC");
           
         $stmt -> execute();
   
