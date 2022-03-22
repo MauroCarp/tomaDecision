@@ -228,7 +228,10 @@ btnNuevaCarpeta.addEventListener('click',()=>{
 
     }
 
-    mostrarCarpetasActivas()
+    let url = window.location.href
+
+    if(url.includes('inicio'))
+        mostrarCarpetasActivas()
 
     
 // ELIMINAR CARPETA

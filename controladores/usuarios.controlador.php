@@ -197,9 +197,9 @@ class ControladorUsuarios{
 
 					echo '<script>
 
-					swal({
+					new swal({
 
-						type: "success",
+						icon: "success",
 						title: "¡El usuario ha sido guardado correctamente!",
 						showConfirmButton: true,
 						confirmButtonText: "Cerrar"
@@ -225,9 +225,9 @@ class ControladorUsuarios{
 
 				echo '<script>
 
-					swal({
+					new swal({
 
-						type: "error",
+						icon: "error",
 						title: "¡El usuario no puede ir vacío o llevar caracteres especiales!",
 						showConfirmButton: true,
 						confirmButtonText: "Cerrar"
@@ -367,8 +367,8 @@ class ControladorUsuarios{
 
 						echo'<script>
 
-								swal({
-									  type: "error",
+							new	swal({
+									  icon: "error",
 									  title: "¡La contraseña no puede ir vacía o llevar caracteres especiales!",
 									  showConfirmButton: true,
 									  confirmButtonText: "Cerrar"
@@ -404,8 +404,8 @@ class ControladorUsuarios{
 
 					echo'<script>
 
-					swal({
-						  type: "success",
+					new swal({
+						  icon: "success",
 						  title: "El usuario ha sido editado correctamente",
 						  showConfirmButton: true,
 						  confirmButtonText: "Cerrar"
@@ -426,8 +426,8 @@ class ControladorUsuarios{
 
 				echo'<script>
 
-					swal({
-						  type: "error",
+					new swal({
+						  icon: "error",
 						  title: "¡El nombre no puede ir vacío o llevar caracteres especiales!",
 						  showConfirmButton: true,
 						  confirmButtonText: "Cerrar"
@@ -471,8 +471,8 @@ class ControladorUsuarios{
 
 				echo'<script>
 
-				swal({
-					  type: "success",
+				new swal({
+					  icon: "success",
 					  title: "El usuario ha sido borrado correctamente",
 					  showConfirmButton: true,
 					  confirmButtonText: "Cerrar",

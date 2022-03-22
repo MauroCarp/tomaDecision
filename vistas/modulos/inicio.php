@@ -12,9 +12,8 @@
     return;
   
   }
-  
-  
-  
+
+
   $today = date('Y-m-d');
 
   $tomorrow = date('Y-m-d',strtotime($today."+ 1 days"));
@@ -73,7 +72,9 @@
                 
               </div>
 
-              
+              <?php
+              if($_SESSION['usuario'] == 'admin'){
+              ?>
               <div class="box"  id="seccionClasificacion">
                   
                 <div class="box-header with-border">
@@ -116,6 +117,17 @@
                 </div>
 
               </div>
+              <?php
+              }
+              ?>
+
+              <?php
+              if($_SESSION['usuario'] == 'operario'){
+              
+                include 'vistas/modulos/inicio/carpetasActivas.php';
+
+              }
+              ?>
 
         </div>
 
@@ -125,9 +137,9 @@
             
             include('inicio/animalCargado.php');
 
-
-
             include 'vistas/modulos/inicio/carpetasActivas.php';
+
+
 
           ?>
       

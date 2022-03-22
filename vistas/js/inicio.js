@@ -11,10 +11,13 @@ for (const row of rows) {
 
 // ALTO SECCION CARPETAS ACTIVAS
 
-let altoSeccionDestino = document.getElementById('seccionDestino').clientHeight
+let altoSeccionDestino = document.getElementById('seccionDestino')
 
-let altoPantalla = window.innerHeight
-
-document.getElementById('divCarpetas').style.height = `${altoPantalla - altoSeccionDestino - 280}px`
+if(altoSeccionDestino != null){
+     
+     let altoPantalla = window.innerHeight
+     
+     document.getElementById('divCarpetas').style.height = `${altoPantalla - altoSeccionDestino.clientHeight - 280}px`
+}
 
 

@@ -1,13 +1,3 @@
-let params = {
-    fetchUrl:'cargarSelect',
-    accion:'perfiles',
-    value:'id',
-    optText:'nombre',
-    idSelect:'perfilesClasificacion'
-}
-
-cargarSelect(params)
-
 // CARGAR CONFIG SLIDERS INICIO
 
 const actualizarSliders = (idPerfil)=>{
@@ -44,16 +34,6 @@ const actualizarSliders = (idPerfil)=>{
     .catch(err=>console.log(err))
 
 }
-
-document.getElementById('perfilesClasificacion').addEventListener('change',(e)=>{
-
-    let idPerfil = e.target.value
-
-    // actualizarSliders(idPerfil)
-
-    actualizarClasificacion(idPerfil)
-
-})
 
 // ACTUALIZAR CLASIFICACION
 
@@ -107,13 +87,35 @@ const actualizarClasificacion = (idPerfilClas)=>{
 
 }
 
-setTimeout(() => {
+if(document.getElementById('perfilesClasificacion') != null){
+
+    document.getElementById('perfilesClasificacion').addEventListener('change',(e)=>{
+
+    let idPerfil = e.target.value
+
+    // actualizarSliders(idPerfil)
+
+    actualizarClasificacion(idPerfil)
+
+    })
+    
+    setTimeout(() => {
     
         let idPerfilClas = document.getElementById('perfilesClasificacion').value
-
-        // actualizarSliders(idPerfilClas)
             
         actualizarClasificacion(idPerfilClas)
 
-}, 300);    
+    }, 300);    
+
+    let params = {
+        fetchUrl:'cargarSelect',
+        accion:'perfiles',
+        value:'id',
+        optText:'nombre',
+        idSelect:'perfilesClasificacion'
+    }
+    
+    cargarSelect(params)
+
+}
 

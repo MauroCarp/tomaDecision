@@ -74,7 +74,7 @@ class TablaIngresos{
 					default:
 						$style='';
 						$color='default';
-						$text='No Clasificado/Sin Destino';
+						$text='Sin Destino';
 						break;
 				}
 		
