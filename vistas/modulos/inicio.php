@@ -27,7 +27,7 @@
 
       <div class="row">
 
-        <div class="col-lg-10 col-xs-12">
+        <div class="col-lg-9 col-xs-12">
         
 
             <!-- INGRESO ANIMALES -->
@@ -119,7 +119,7 @@
 
         </div>
 
-        <div class="col-lg-2 col-xs-12">
+        <div class="col-lg-3 col-xs-12">
 
           <?php
             

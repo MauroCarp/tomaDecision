@@ -46,7 +46,7 @@ class TablaCarpetas{
 
                 $progressBar = "<div class='progress progress-xs progress-striped active'><div class='progress-bar progress-bar-".$color."' style='width:".$porcentaje."'></div></div>";
 
-                $button = "<button class='btn btn-primary' ".$boton.">Informe</button>";
+                $button = "<a href='extensiones/fpdf/informesPdf.php?informe=carpeta&idCarpeta=".$carpeta['idCarpeta']."' class='btn btn-primary' ".$boton." target='_blank'>Informe</a>";
 
                 $btnEliminar = "<div class='btn-group'><button class='btn btn-danger btnEliminarCarpeta' idCarpeta='".$carpeta['idCarpeta']."'><i class='fa fa-times'></i></button></div>";
 

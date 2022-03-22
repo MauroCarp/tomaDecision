@@ -231,10 +231,14 @@ btnNuevaCarpeta.addEventListener('click',()=>{
 
 let btnsEliminarCarpetas = document.getElementsByClassName('btnEliminarCarpeta')
 
+console.log(btnsEliminarCarpetas);
+
 for (const btn of btnsEliminarCarpetas) {
     
-    btn.addEventListener('click',(e)=>{
+    console.log(btn)
 
+    btn.addEventListener('click',(e)=>{
+        console.log(e)
         e.preventDefault()
         let id = (e.path[0].attributes.length > 1) ? e.path[0].attributes.idcarpeta.value : e.path[1].attributes.idcarpeta.value 
         console.log(id);
