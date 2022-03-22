@@ -8,7 +8,7 @@
 
   <div class="box-body" id="carpetasScroll">
 
-    <div style="height:80%!important;overflow-y:scroll">
+    <div id="divCarpetas" style="overflow-y:scroll">
     
       <ul class="products-list product-list-in-box">
 

@@ -2,8 +2,8 @@
 require_once "../../controladores/carpetas.controlador.php";
 require_once " ../../../../modelos/carpetas.modelo.php";
 
-require_once "../../controladores/perfiles.controlador.php";
-require_once " ../../../../modelos/perfiles.modelo.php";
+require_once "../../controladores/animales.controlador.php";
+require_once " ../../../../modelos/animales.modelo.php";
 
 function formatearFecha($fecha){
     
@@ -19,66 +19,111 @@ $informe = (isset($_GET['informe'])) ?  $_GET['informe'] : false;
 
 class informePDF{
 
-    public $matricula;
+    public $idCarpeta;
     
-    public $mail;
-
-    public function informe1(){
+    public function informeCarpeta(){
 
         //REQUERIMOS LA CLASE TCPDF
 
         include('fpdf.php');
 
         // ---------------------------------------------------------
+        $item = 'idCarpeta';
+        
+        $valor = $this->idCarpeta;
+    
+        $orden = 'fecha';
 
-        $titulo = 'Animales Totales Vacunados por Vacunador';
+        $carpeta = ControladorCarpetas::ctrMostrarCarpetas($item,$valor,$orden);
 
-        $cabezera = "Sistema integrado de Vacunacion Anti-Aftosa \n Animales Totales Vacunados por Vacunador";
+        $today = date('d/m/Y');
+
+        $destino = $carpeta[0]['destino'];
+
+        $titulo = "Informe Carpeta $destino - Fecha: $today";
+
+        $cabezera = $titulo;
 
         include 'cabezera.php';
 
+        $pdf->SetFont('helvetica','B',12);
+        
+        $pdf->Cell(35,7,'Total Animales',0,0,'L',0);
+        $pdf->Cell(40,7,utf8_decode('Clasificación'),0,0,'C',0);
+        $pdf->Cell(25,7,'Peso Min.',0,0,'L',0);
+        $pdf->Cell(20,7,'Peso Max.',0,1,'L',0);
+        
+        $pdf->SetFont('helvetica','',12);
+        $pdf->Cell(35,7,$carpeta[0]['cantidad'],0,0,'C',0);
+        $pdf->Cell(40,7,$carpeta[0]['clasificacion'],0,0,'C',0);
+        $pdf->Cell(25,7,$carpeta[0]['pesoMin'],0,0,'C',0);
+        $pdf->Cell(20,7,$carpeta[0]['pesoMax'],0,1,'C',0);
+
+        $item = 'idCarpeta';
+
+        $animales = ControladorAnimales::ctrMostrarAnimales($item, $valor);
         $pdf->Ln(5);
-        $pdf->SetFont('Times','B',14);
-        $pdf->SetX(40);
-        $pdf->Cell(190,10,'(Incluyendo establecimientos de distintos Distritos)',0,1,'L',0);
-        $pdf->SetX(40);
-        $pdf->Cell(65,8,'VACUNADOR',1,0,'C',0);
-        $pdf->Cell(45,8,'TOTAL',1,1,'C',0);
-        $pdf->SetFont('Times','',12);
+
+
+        $pdf->SetFillColor(220,220,220);
+
+        $pdf->Cell(30,7,'RFID',1,0,'L',1);
+        $pdf->Cell(30,7,'MM Grasa',1,0,'C',1);
+        $pdf->Cell(25,7,'Peso',1,0,'C',1);
+        $pdf->Cell(25,7,'Sexo',1,0,'C',1);
+        $pdf->Cell(40,7,utf8_decode('Clasificación'),1,1,'C',1);
         
-        $total = 0;
+        $valido = true;
+        $pesoTotal = 0;
+        $pesoMin = 9999;
+        $pesoMax = 0;
 
-        $veterinarios = ControladorVeterinarios::ctrMostrarVeterinarios(null,null);
+        foreach ($animales as $key => $animal) {
 
-        foreach ($veterinarios as $key => $value) {
-         
-            $item = 'matricula';
-
-            $totalVacunados = ControladorActas::ctrContarActas($item,$value['matricula']);
-
-            $pdf->SetX(40);
-            
-            $pdf->Cell(85,8,utf8_decode($value['nombre']),0,0,'L',0);
-
-            if ($totalVacunados[0] != null) {
-            
-                $pdf->Cell(45,8,number_format($totalVacunados[0],0,'','.'),0,1,'L',0);
-                
-                $total += $totalVacunados[0];
-                
+            if($valido){
+                $pdf->SetFillColor(250,250,250);
+                $valido = false;
             }else{
-                
-                $pdf->Cell(45,8,number_format(0,0,'','.'),0,1,'L',0);
-
+                $pdf->SetFillColor(240,240,240);
+                $valido = true;
             }
-        
+
+            $pdf->Cell(30,7,$animal['RFID'],0,0,'L',1);
+            $pdf->Cell(30,7,$animal['mmGrasa'],0,0,'C',1);
+            $pdf->Cell(25,7,$animal['peso'],0,0,'C',1);
+            $pdf->Cell(25,7,$animal['sexo'],0,0,'C',1);
+            $pdf->Cell(40,7,$animal['clasificacion'],0,1,'C',1);
+
+            $pesoTotal += $animal['peso'];
+
+            $pesoMin = ($animal['peso'] < $pesoMin) ? $animal['peso'] : $pesoMin;
+            $pesoMax = ($animal['peso'] > $pesoMax) ? $animal['peso'] : $pesoMax;
 
         }
-    
-        $pdf->SetX(40);
-        $pdf->SetFont('times','B',11);
-        $pdf->Cell(85,8,'Total',0,0,'L',0);
-        $pdf->Cell(45,8,number_format($total,0,'','.'),0,1,'L',0);
+
+        $pdf->Ln(8);
+
+        $pdf->SetFillColor(0,0,0);
+
+        $pdf->Cell(150,0.01,'',0,1,'C',1);
+        $pdf->Ln(3);
+
+        $pdf->Cell(30,7,'Kg TOTAL',0,0,'C',0);
+        $pdf->Cell(30,7,'Kg PROMEDIO',0,0,'C',0);
+        $pdf->Cell(25,7,'Peso Min.',0,0,'C',0);
+        $pdf->Cell(35,7,'Peso Max.',0,0,'C',0);
+        $pdf->Cell(25,7,'Desvio Estandar',0,1,'C',0);
+
+        $pesoPromedio = $pesoTotal / $carpeta[0]['cantidad'];
+
+        $pdf->Cell(30,7,$pesoTotal." Kg",0,0,'C',0);
+        $pdf->Cell(30,7,$pesoPromedio." Kg",0,0,'C',0);
+        $pdf->Cell(25,7,$pesoMin." Kg",0,0,'C',0);
+        $pdf->Cell(35,7,$pesoMax." Kg",0,0,'C',0);
+        $pdf->Cell(25,7,'Desvio Estandar',0,1,'C',0);
+
+        $pdf->Ln(5);
+        $pdf->SetFont('Times','B',14);
     
         $pdf->Output();
         
@@ -90,8 +135,9 @@ class informePDF{
 
 if($informe){
 
-    $informeGeneral = new informePDF();
-    $informeGeneral -> $informe();
+    $informeCarpeta = new informePDF();
+    $informeCarpeta -> idCarpeta = $_GET['idCarpeta'];
+    $informeCarpeta -> informeCarpeta();
 
 }
 

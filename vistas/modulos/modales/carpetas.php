@@ -34,7 +34,7 @@
                         
                         <div class="box-body no-padding">
                         
-                            <table class="table">
+                            <table class="table table-bordered table-striped tablaCarpetas dt-responsive nowrap">
                             
                                 <thead>
                                     
@@ -43,6 +43,8 @@
                                     <th>Carpeta</th>
 
                                     <th>Cantidad</th>
+                                    
+                                    <th>Fecha</th>
                                     
                                     <th>Progreso</th>
 
@@ -53,68 +55,6 @@
                                 </thead>
 
                                 <tbody>
-
-                                <?php
-                                
-                                    $item = null;
-
-                                    $valor = null;
-
-                                    $carpetas = ControladorCarpetas::ctrMostrarCarpetas($item,$valor,'fecha');
-
-                                    for ($i=0; $i < sizeof($carpetas); $i++) { 
-                                    
-                                        $color =  'yellow';
-                                        $boton =  'disabled';
-
-                                        if($carpetas[$i]['completa']){
-                                            
-                                            $color =  'green';
-                                            $boton =  '';
-
-                                        }
-
-                                        $porcentaje = (($carpetas[$i]['animales'] * 100) / $carpetas[$i]['cantidad'])."%";
-
-                                        echo "<tr>
-                                
-                                            <td>1.</td>
-                                        
-                                            <td>".$carpetas[$i]['destino']."</td>
-                                        
-                                            <td>10</td>
-                                        
-                                            <td>
-                                                
-                                                <div class='progress progress-xs progress-striped active'>
-                                                
-                                                    <div class='progress-bar progress-bar-".$color."' style='width: ".$porcentaje."'></div>
-                                        
-                                                </div>
-            
-                                            </td>
-                                        
-                                            <td>
-                                                
-                                                <button class='btn btn-primary' ".$boton.">Informe</button>
-
-                                            </td>
-                                        
-                                            <td>                                       
-                                                
-                                                <div class='btn-group'>
-                                                                            
-                                                    <button class='btn btn-danger btnEliminarCarpeta' idCarpeta='".$carpetas[$i]['idCarpeta']."'><i class='fa fa-times'></i></button>
-                                        
-                                                </div>
-                                            
-                                            </td>
-                                        
-                                        </tr>";
-
-                                    }
-
-                                ?>
 
                                 </tbody>
                             

@@ -12,7 +12,7 @@
 
                     <div class="widget-user-header bg-aqua-active" style="text-align:center;">                                                                         
 
-                      <h1 class="widget-user-username" id="destinoAnimal" style="font-size:4em;font-weight:bolder;line-height:80%;">DESTINO</h1>
+                      <h1 class="widget-user-username" id="destinoAnimal" style="font-size:4em;font-weight:bolder;line-height:1.5em;">DESTINO</h1>
 
                     </div>
 

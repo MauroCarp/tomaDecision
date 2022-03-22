@@ -111,8 +111,7 @@ $('.tablaIngresos').DataTable( {
             showConfirmButton: false,
             timer: 3000
             });
-            console.log(respuesta);
-            
+
             if(respuesta.status == 'ok'){
 
                   Toast.fire({

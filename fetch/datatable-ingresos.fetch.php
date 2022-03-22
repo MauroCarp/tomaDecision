@@ -34,7 +34,9 @@ class TablaIngresos{
 			"data": [';
 			
 			foreach ($animales as $key => $animal) {
-			  
+				
+				$style="";
+				
 				switch ($animal['clasificacion']) {
 
 					case 'F':

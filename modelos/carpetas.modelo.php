@@ -88,8 +88,8 @@ class ModeloCarpetas{
           $stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
           $stmt -> bindParam(":fecha1", $fecha1, PDO::PARAM_STR);
           $stmt -> bindParam(":fecha2", $fecha2, PDO::PARAM_STR);
-        // return array($fecha1,$fecha2);
-        $stmt -> execute();
+
+          $stmt -> execute();
 
         return $stmt -> fetchAll();
         

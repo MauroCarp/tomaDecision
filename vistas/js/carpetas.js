@@ -1,3 +1,55 @@
+/*=============================================
+	DATATABLE ANIMALES
+	=============================================*/
+//   $.ajax({
+
+// 	url: "fetch/datatable-carpetas.fetch.php",
+// 	success:function(respuesta){
+		
+// 		console.log("respuesta", respuesta);
+
+// 	}
+
+// });
+
+
+$('.tablaCarpetas').DataTable( {
+    "ajax": "fetch/datatable-carpetas.fetch.php",
+    "deferRender": true,
+    "retrieve": true,
+    "processing": true,
+      "ordering": false,
+    "searching": false,
+    "info":     false,
+    "bLengthChange": false,
+    "pageLength": 5,
+    // "order": [[ 0, "desc" ]],
+    
+    "language": {
+  
+        "sProcessing":     "Procesando...",
+        "sLengthMenu":     "Mostrar _MENU_ registros",
+        "sZeroRecords":    "No se encontraron resultados",
+        "sEmptyTable":     "Ningún dato disponible en esta tabla",
+        "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_",
+        "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0",
+        "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+        "sInfoPostFix":    "",
+        "sSearch":         "Buscar:",
+        "sUrl":            "",
+        "sInfoThousands":  ",",
+        "sLoadingRecords": "Cargando...",
+        "oPaginate": {
+        "sFirst":    "Primero",
+        "sLast":     "Último",
+        "sNext":     "Siguiente",
+        "sPrevious": "Anterior"
+        }
+  
+  }
+  
+});
+
 // BTN NUEVO PERFIL
 
 const btnNuevaCarpeta = document.getElementById('btnNuevaCarpeta')
@@ -7,7 +59,7 @@ btnNuevaCarpeta.addEventListener('click',()=>{
     document.getElementById('modalNuevaCarpeta').classList.toggle('hideElement')
     document.getElementById('modalNuevaCarpeta').classList.toggle('showPerfilModal')
 
-    document.getElementById('modalCarpeta').style.width = '800px'
+    document.getElementById('modalCarpeta').style.width = '1000px'
 
     document.getElementById('carpetasList').style.width = '50%'
 
@@ -104,7 +156,7 @@ btnNuevaCarpeta.addEventListener('click',()=>{
         li.appendChild(link)
 
         let colDiv = document.createElement('DIV')
-        colDiv.setAttribute('class','col-lg-6')
+        colDiv.setAttribute('class','col-lg-9')
 
         colDiv.appendChild(li)
 

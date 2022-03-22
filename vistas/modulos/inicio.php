@@ -27,12 +27,11 @@
 
       <div class="row">
 
-        <div class="col-lg-12 col-xs-12">
+        <div class="col-lg-10 col-xs-12">
         
-          <div class="row">
+
             <!-- INGRESO ANIMALES -->
-            <div class="col-md-9 col-xs-12">
-              
+
               <div class="box" id="ingresoAnimal">
                   
                   <div class="box-header with-border">
@@ -74,29 +73,7 @@
                 
               </div>
 
-            </div>
-
-            <!-- CONFIGURACION EN VIVO -->
-            <div class="col-md-3 col-xs-12">
-
-            <?php
               
-              include('inicio/animalCargado.php');
-
-            ?>
-
-            </div>
-
-          </div>
-
-        </div>
-
-        <div class="col-lg-12 col-xs-12">
-
-          <div class="row">
-            <!-- CLASIFICACION -->
-            <div class="col-md-9 col-xs-12">
-
               <div class="box"  id="seccionClasificacion">
                   
                 <div class="box-header with-border">
@@ -140,19 +117,20 @@
 
               </div>
 
-            </div>
+        </div>
 
-            <!-- CARPETAS ACTIVAS -->
-            <div class="col-md-3 col-xs-12">
+        <div class="col-lg-2 col-xs-12">
 
-              <?php 
+          <?php
+            
+            include('inicio/animalCargado.php');
 
-                include 'vistas/modulos/inicio/carpetasActivas.php';
 
-              ?>
 
-            </div>
-          
+            include 'vistas/modulos/inicio/carpetasActivas.php';
+
+          ?>
+      
           </div>
 
         </div>

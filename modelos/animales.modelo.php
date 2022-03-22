@@ -51,7 +51,7 @@ class ModeloAnimales{
           
         $stmt -> execute();
   
-        return $stmt -> fetch();
+        return $stmt -> fetchAll();
         
       }else{
         

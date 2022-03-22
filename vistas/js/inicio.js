@@ -10,32 +10,11 @@ for (const row of rows) {
 }
 
 // ALTO SECCION CARPETAS ACTIVAS
-let altoSeccionClasificacion = document.getElementById('seccionClasificacion').clientHeight
 
-document.getElementById('seccionCarpetaAct').style.height = `${altoSeccionClasificacion}px`
+let altoSeccionDestino = document.getElementById('seccionDestino').clientHeight
 
+let altoPantalla = window.innerHeight
 
-setTimeout(()=>{
-
-     let altoSeccionIngresos = document.getElementById('ingresoAnimal').offsetHeight
-     let altoSeccionTablaIng = document.getElementById('tablaIngresos').offsetHeight
-     
-     document.getElementById('seccionDestino').style.height = `${altoSeccionIngresos + altoSeccionTablaIng + 20}px`
-     
-},300)
+document.getElementById('divCarpetas').style.height = `${altoPantalla - altoSeccionDestino - 280}px`
 
 
-// let value = document.getElementById('flacasInputId').value
-// document.getElementById('flacasOutputId').innerHTML = value    
-
-// value = document.getElementById('buenasInputId').value
-// document.getElementById('buenasOutputId').innerHTML = value    
-
-// value = document.getElementById('buenasPlusInputId').value
-// document.getElementById('buenasPlusOutputId').innerHTML = value    
-
-// value = document.getElementById('muyBuenasInputId').value
-// document.getElementById('muyBuenasOutputId').innerHTML = value    
-
-// value = document.getElementById('apenasGordasInputId').value
-// document.getElementById('apenasGordasOutputId').innerHTML = value    
