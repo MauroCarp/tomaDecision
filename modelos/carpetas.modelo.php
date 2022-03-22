@@ -220,10 +220,16 @@ class ModeloCarpetas{
     if($datos == 'completa'){
 
       $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET completa = 1 WHERE $item = :$item");
-  
-      $stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
-    
+      
     }
+    
+    if($datos == 'desctivar'){
+      
+      $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET activa = 0 WHERE $item = :$item");
+      
+    }
+
+    $stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
               
 		if($stmt -> execute()){
 

@@ -36,6 +36,16 @@ class informePDF{
 
         $carpeta = ControladorCarpetas::ctrMostrarCarpetas($item,$valor,$orden);
 
+        if($carpeta[0]['activa']){
+            
+            $item = 'idCarpeta';
+            
+            $datos = 'desctivar';
+
+            $desactivarCarpeta = ControladorCarpetas::ctrEditarCarpeta($item, $carpeta[0]['idCarpeta'],$datos);
+            
+        }
+
         $today = date('d/m/Y');
 
         $destino = $carpeta[0]['destino'];

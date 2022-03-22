@@ -143,7 +143,11 @@ btnNuevaCarpeta.addEventListener('click',()=>{
 
         let link = document.createElement('A')
         if(props.color == 'green'){
+
             link.setAttribute('href',`extensiones/fpdf/informesPdf.php?informe=carpeta&idCarpeta=${props.idCarpeta}`)
+            link.setAttribute('target','_blank')
+            link.setAttribute('class','btnInformeCarpeta')
+
         }else{    
             link.setAttribute('href','')
             link.setAttribute('style','pointer-events: none;cursor:not-allow;')
@@ -228,44 +232,56 @@ btnNuevaCarpeta.addEventListener('click',()=>{
 
     
 // ELIMINAR CARPETA
-
-let btnsEliminarCarpetas = document.getElementsByClassName('btnEliminarCarpeta')
-
-console.log(btnsEliminarCarpetas);
-
-for (const btn of btnsEliminarCarpetas) {
+setTimeout(() => {
     
-    console.log(btn)
-
-    btn.addEventListener('click',(e)=>{
-        console.log(e)
-        e.preventDefault()
-        let id = (e.path[0].attributes.length > 1) ? e.path[0].attributes.idcarpeta.value : e.path[1].attributes.idcarpeta.value 
-        console.log(id);
-        
-
-        new swal({
-            title: '¿Eliminar Carpeta?',
-            text: "¡Si no lo está puede cancelar la accíón!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-              cancelButtonColor: '#d33',
-              cancelButtonText: 'Cancelar',
-              confirmButtonText: 'Si, eliminar carpeta!'
-          }).then(function(result){
-        
-            if(result.value){
-        
-                window.location = `index.php?ruta=inicio&idCarpeta=${id}`
-
-            }
-
-        });
-
-    })
+    let btnsEliminarCarpetas = document.getElementsByClassName('btnEliminarCarpeta')
     
-}
+    for (const btn of btnsEliminarCarpetas) {
+            
+        btn.addEventListener('click',(e)=>{
+
+            e.preventDefault()
+            let id = (e.path[0].attributes.length > 1) ? e.path[0].attributes.idcarpeta.value : e.path[1].attributes.idcarpeta.value 
+            console.log(id);
+            
+    
+            new swal({
+                title: '¿Eliminar Carpeta?',
+                text: "¡Si no lo está puede cancelar la accíón!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                  cancelButtonColor: '#d33',
+                  cancelButtonText: 'Cancelar',
+                  confirmButtonText: 'Si, eliminar carpeta!'
+              }).then(function(result){
+            
+                if(result.value){
+            
+                    window.location = `index.php?ruta=inicio&idCarpeta=${id}`
+    
+                }
+    
+            });
+    
+        })
+        
+    }
+
+    // INFORMES CARPETAS
+
+    let hrefInformes = document.getElementsByClassName('btnInformeCarpeta')
+    for (const iterator of hrefInformes) {
+        
+       iterator.addEventListener('click',()=>{
+
+           iterator.style.display = 'none'
+           
+       })
+        
+    }
+
+}, 300);
 
 
 
