@@ -73,7 +73,7 @@
               </div>
 
               <?php
-              if($_SESSION['usuario'] == 'admin'){
+              if($_SESSION['perfil'] == 'Administrador'){
               ?>
               <div class="box"  id="seccionClasificacion">
                   
@@ -122,9 +122,10 @@
               ?>
 
               <?php
-              if($_SESSION['usuario'] == 'operario'){
+
+              if($_SESSION['perfil'] == 'Operario'){
               
-                include 'vistas/modulos/inicio/carpetasActivas.php';
+                include 'vistas/modulos/inicio/carpetasActivasOperario.php';
 
               }
               ?>
@@ -137,9 +138,11 @@
             
             include('inicio/animalCargado.php');
 
+            if($_SESSION['perfil'] == 'Administrador'){
+
             include 'vistas/modulos/inicio/carpetasActivas.php';
 
-
+            }
 
           ?>
       

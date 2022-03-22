@@ -220,7 +220,15 @@ btnNuevaCarpeta.addEventListener('click',()=>{
 
                 row.appendChild(docFragment)
 
-                document.getElementById('carpetasScroll').firstElementChild.firstElementChild.appendChild(row)
+                if(document.getElementById('carpetasScroll') != null){
+
+                    document.getElementById('carpetasScroll').firstElementChild.firstElementChild.appendChild(row)
+                    
+                }else{
+                    
+                    document.getElementById('carpetasScrollOperario').firstElementChild.firstElementChild.appendChild(row)
+                
+                }
 
             }
 

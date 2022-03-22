@@ -17,7 +17,12 @@ if(altoSeccionDestino != null){
      
      let altoPantalla = window.innerHeight
      
-     document.getElementById('divCarpetas').style.height = `${altoPantalla - altoSeccionDestino.clientHeight - 280}px`
+     let divCarpetas = document.getElementById('divCarpetas')
+     if(divCarpetas != null){
+
+          divCarpetas.style.height = `${altoPantalla - altoSeccionDestino.clientHeight - 280}px`
+     
+     }
 }
 
 

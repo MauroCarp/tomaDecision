@@ -3,39 +3,40 @@
 	 <section class="sidebar">
 
 		<ul class="sidebar-menu">
-
-		<?php
-
-		if($_SESSION["perfil"] == "Administrador"){
-
-			echo '<li class="active">
-
+	
+			<li class="active">
+				
 				<a href="inicio">
-
+					
 					<i class="fa fa-home" style="font-size:1.2em;"></i>
 					<span>Inicio</span>
-
+					
 				</a>
-
+				
 			</li>
-			
-			<li>
+				
+<?php
+
+if($_SESSION["perfil"] == "Administrador"){
+	
+			echo '
+				<li>
 
 				<a href="#" data-toggle="modal" data-target="#ventanaModalCarpetas" id="menuCarpetas">
 
-					<i class="fa fa-files-o" style="font-size:1.2em;padding-right:5px;"></i>
-					<span>Carpetas </span>
+				<i class="fa fa-files-o" style="font-size:1.2em;padding-right:5px;"></i>
+				<span>Carpetas </span>
 
 				</a>
 
-			</li>
+				</li>
 
-			<li>
+				<li>
 
 				<a href="#" data-toggle="modal" data-target="#ventanaModalPerfiles" id="menuPerfiles">
 
-					<i class="fa fa-sliders" style="font-size:1.8em;"></i>
-					<span>&nbsp;Perfiles</span>
+				<i class="fa fa-sliders" style="font-size:1.8em;"></i>
+				<span>&nbsp;Perfiles</span>
 
 				</a>
 
@@ -64,8 +65,12 @@
 
 <?php
 
+if($_SESSION["perfil"] == "Administrador"){
+
 include 'modales/perfiles.php';
 
 include 'modales/carpetas.php';
+
+}
 
 ?>
