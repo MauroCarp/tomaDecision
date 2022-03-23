@@ -278,7 +278,6 @@ class ControladorPerfiles{
 
             $carpetaValida = ControladorCarpetas::ctrCarpetaCompleta($item,$item2,$nombrePerfil);
             
-
             if($carpetaValida[0] == 0){
                 
                 $item = 'id';
