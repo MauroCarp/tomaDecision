@@ -124,7 +124,16 @@ class ControladorAnimales{
 
 			}else{
 
-				return 'ok';
+				$item = 'RFID';
+
+				$valor = $_POST["rfid"];
+
+				$eliminarAnimal = ModeloAnimales::mdlEliminarAnimal($tabla,$item,$valor);
+
+				$datos['status'] = 'error';
+				$datos['motivo'] = 'noCarpeta';
+				return $datos;
+			
 			}
 
 		}
@@ -216,7 +225,50 @@ class ControladorAnimales{
 
 	}
 
+	  /*=============================================
+	ELIMINAR PERFIL
+	=============================================*/
 
+	static public function mdlEliminarAnimal($tabla, $item, $valor){
+
+		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE $item = :$item");
+
+		$stmt -> bindParam(":".$item, $valor, PDO::PARAM_INT);
+
+		if($stmt -> execute()){
+
+			return "ok";
+		
+		}else{
+
+			return "error";	
+
+		}
+
+		$stmt -> close();
+
+		$stmt = null;
+
+
+	}
+
+
+		/*=============================================
+	ELIMINAR PERFIL
+	=============================================*/
+
+	static public function ctrEliminarAnimal(){
+
+        if(isset($_GET['idAnimal'])){
+
+			$tabla = 'animales';
+
+			return $eliminarAnimal = ModeloAnimales::mdlEliminarAnimal($tabla,$item,$valor);
+
+
+		}
+
+	}
 
 
 }

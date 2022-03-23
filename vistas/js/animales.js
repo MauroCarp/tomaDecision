@@ -149,13 +149,27 @@ $('.tablaIngresos').DataTable( {
                 
               }else{            
                   
-                    Toast.fire({
+                if(respuesta?.motivo == 'noCarpeta'){
 
-                      icon: 'error',
-                      title: 'Hubo un error al cargar el animal.'
+                  new swal({
+
+                      icon: "error",
+                      title: "No hay ninguna carpeta ACTIVA",
+                      showConfirmButton: true,
+                      confirmButtonText: "Cerrar"
 
                   })
 
+                }else{
+
+                    Toast.fire({
+
+                      icon: 'error',
+                      title:'Hubo un error al cargar el animal'
+
+                  })
+
+                }
 
               }
 
