@@ -10,8 +10,11 @@ class ControladorCarpetas{
 
         if(isset($_POST['btnCargarCarpeta'])){
 
+            
+            if(isset($_POST['clasificacionCarpeta'])){
+                
                 $tabla = "carpetas";
-
+                    
                 $clasificacion = implode('/',$_POST['clasificacionCarpeta']);
 
                 $datos = array("destino"=>$_POST["perfilCarpeta"],
@@ -77,6 +80,33 @@ class ControladorCarpetas{
                     </script>';
 
                 }
+            
+            }else{
+
+                echo '<script>
+
+                    new swal({
+
+                        icon: "error",
+                        title: "Se debe elegir al menos una clasificación de animal",
+                        showConfirmButton: true,
+                        confirmButtonText: "Cerrar"
+
+                    }).then(function(result){
+
+                        if(result.value){
+                        
+                            window.location = "inicio";
+
+                        }
+
+                    });
+                
+
+                    </script>';
+
+            }
+
         }
 
     }

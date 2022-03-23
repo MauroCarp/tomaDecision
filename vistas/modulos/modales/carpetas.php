@@ -120,7 +120,7 @@
                                         
                                     <label for="animalesCarpeta">Cant. Animales</label>
                                 
-                                    <input type="number" class="form-control" name="animalesCarpeta" id="animalesCarpeta" value="0">          
+                                    <input type="number" class="form-control" name="animalesCarpeta" id="animalesCarpeta" value="1">          
 
                                 </div>
 
