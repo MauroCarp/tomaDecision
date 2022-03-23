@@ -123,6 +123,8 @@ class ModeloPerfiles{
 			return "ok";
 		
 		}else{
+			
+			return $stmt->errorInfo();
 
 			return "error";	
 
