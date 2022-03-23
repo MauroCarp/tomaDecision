@@ -107,7 +107,7 @@ if(document.getElementById('perfilesClasificacion') != null){
         
         actualizarClasificacion(idPerfilClas)
 
-    }, 300);    
+    }, 800);    
 
     let params = {
         fetchUrl:'cargarSelect',
