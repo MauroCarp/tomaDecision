@@ -21,7 +21,7 @@
         
         </div>
         
-        <input type="range" class="redSlider" step="1" name="<?php echo $flacas;?>Input" id="<?php echo $flacas;?>InputId" value="0"  min='-10' max="10" oninput="<?php echo $flacas;?>OutputId.value = <?php echo $flacas;?>InputId.value">
+        <input type="range" class="redSlider" step="5" name="<?php echo $flacas;?>Input" id="<?php echo $flacas;?>InputId" value="0"  min='-50' max="50" oninput="<?php echo $flacas;?>OutputId.value = <?php echo $flacas;?>InputId.value">
 
         <div class="input-group-addon sliderIcon">
     
@@ -58,7 +58,7 @@
         
         </div>
         
-        <input type="range" class="ligth-greenSlider" step="1" name="<?php echo $buenas;?>Input" id="<?php echo $buenas;?>InputId" value="0"  min='-10' max="10" oninput="<?php echo $buenas;?>OutputId.value = <?php echo $buenas;?>InputId.value">
+        <input type="range" class="ligth-greenSlider" step="5" name="<?php echo $buenas;?>Input" id="<?php echo $buenas;?>InputId" value="0"  min='-50' max="50" oninput="<?php echo $buenas;?>OutputId.value = <?php echo $buenas;?>InputId.value">
 
         <div class="input-group-addon sliderIcon">
     
@@ -93,7 +93,7 @@
     
         </div>
         
-        <input type="range" class="greenSlider" step="1" name="<?php echo $buenasPlus;?>Input" id="<?php echo $buenasPlus;?>InputId" value="0"  min='-10' max="10" oninput="<?php echo $buenasPlus;?>OutputId.value = <?php echo $buenasPlus;?>InputId.value">
+        <input type="range" class="greenSlider" step="5" name="<?php echo $buenasPlus;?>Input" id="<?php echo $buenasPlus;?>InputId" value="0"  min='-50' max="50" oninput="<?php echo $buenasPlus;?>OutputId.value = <?php echo $buenasPlus;?>InputId.value">
 
         <div class="input-group-addon sliderIcon">
     
@@ -128,7 +128,7 @@
         
         </div>
         
-        <input type="range" class="greenSlider" step="1" name="<?php echo $muyBuenas;?>Input" id="<?php echo $muyBuenas;?>InputId" value="0"  min='-10' max="10" oninput="<?php echo $muyBuenas;?>OutputId.value = <?php echo $muyBuenas;?>InputId.value">
+        <input type="range" class="greenSlider" step="5" name="<?php echo $muyBuenas;?>Input" id="<?php echo $muyBuenas;?>InputId" value="0"  min='-50' max="50" oninput="<?php echo $muyBuenas;?>OutputId.value = <?php echo $muyBuenas;?>InputId.value">
 
         <div class="input-group-addon sliderIcon">
     
@@ -163,7 +163,7 @@
     
         </div>
         
-        <input type="range" class="yellowSlider" step="1" name="<?php echo $apenasGordas;?>Input" id="<?php echo $apenasGordas;?>InputId" value="0"  min='-10' max="10" oninput="<?php echo $apenasGordas;?>IutputId.value = <?php echo $apenasGordas;?>InputId.value">
+        <input type="range" class="yellowSlider" step="5" name="<?php echo $apenasGordas;?>Input" id="<?php echo $apenasGordas;?>InputId" value="0"  min='-50' max="50" oninput="<?php echo $apenasGordas;?>IutputId.value = <?php echo $apenasGordas;?>InputId.value">
 
         <div class="input-group-addon sliderIcon">
     

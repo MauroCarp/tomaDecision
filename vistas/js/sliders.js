@@ -9,13 +9,13 @@ for (const btnMinus of btnsMinus) {
     
     btnMinus.addEventListener('click',()=>{
         
-        let value = inputValue.value - 1
+        let value = inputValue.value - 5
 
         inputValue.value = value
 
         inputValue.oninput()
 
-        inputValue.parentNode.parentNode.nextElementSibling.children[1].children[1].max = value - 1 
+        // inputValue.parentNode.parentNode.nextElementSibling.children[1].children[1].max = value - 1 
         
     })
     
@@ -29,13 +29,13 @@ for (const btnPlus of btnsPlus) {
     
     btnPlus.addEventListener('click',()=>{
 
-        let value = Number(inputValue.value) + 1
+        let value = Number(inputValue.value) + 5
 
         inputValue.value = value   
 
         inputValue.oninput()
 
-        inputValue.parentNode.parentNode.nextElementSibling.children[1].children[1].max = value - 1 
+        // inputValue.parentNode.parentNode.nextElementSibling.children[1].children[1].max = value - 1 
         
     })
 
