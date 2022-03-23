@@ -9,7 +9,7 @@ for (const btnMinus of btnsMinus) {
     
     btnMinus.addEventListener('click',()=>{
         
-        let value = inputValue.value - 5
+        let value = inputValue.value - 1
 
         inputValue.value = value
 
@@ -29,7 +29,7 @@ for (const btnPlus of btnsPlus) {
     
     btnPlus.addEventListener('click',()=>{
 
-        let value = Number(inputValue.value) + 5
+        let value = Number(inputValue.value) + 1
 
         inputValue.value = value   
 
