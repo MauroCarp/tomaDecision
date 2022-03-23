@@ -98,11 +98,46 @@ class informePDF{
                 $valido = true;
             }
 
+            if($animal['sexo'] == 'm')
+                $sexo = 'Macho';
+            else
+                $sexo = 'Hembra';
+            
+            switch ($animal['clasificacion']) {
+                case 'F':
+                    $clasificacion = 'Flaca';
+                    break;
+
+                case 'B':
+                    $clasificacion = 'Buena';
+                    break;
+
+                case 'B+':
+                    $clasificacion = 'Buena +';
+                    break;
+
+                case 'MB':
+                    $clasificacion = 'Muy Buena';
+                    break;
+
+                case 'AP':
+                    $clasificacion = 'Apenas Gorda';
+                    break;
+
+                case 'G':
+                    $clasificacion = 'Gorda';
+                    break;
+                
+                default:
+                    # code...
+                    break;
+            }
+            
             $pdf->Cell(30,7,$animal['RFID'],0,0,'L',1);
-            $pdf->Cell(30,7,$animal['mmGrasa'],0,0,'C',1);
+            $pdf->Cell(30,7,$animal['mmGrasa']." mm",0,0,'C',1);
             $pdf->Cell(25,7,$animal['peso'],0,0,'C',1);
-            $pdf->Cell(25,7,$animal['sexo'],0,0,'C',1);
-            $pdf->Cell(40,7,$animal['clasificacion'],0,1,'C',1);
+            $pdf->Cell(25,7,$sexo,0,0,'C',1);
+            $pdf->Cell(40,7,$clasificacion,0,1,'C',1);
 
             $pesoTotal += $animal['peso'];
 
@@ -119,18 +154,26 @@ class informePDF{
         $pdf->Ln(3);
 
         $pdf->Cell(30,7,'Kg TOTAL',0,0,'C',0);
-        $pdf->Cell(30,7,'Kg PROMEDIO',0,0,'C',0);
-        $pdf->Cell(25,7,'Peso Min.',0,0,'C',0);
-        $pdf->Cell(35,7,'Peso Max.',0,0,'C',0);
-        $pdf->Cell(25,7,'Desvio Estandar',0,1,'C',0);
-
+        $pdf->Cell(0.01,7,'',1,0,'C',0);
+        $pdf->Cell(35,7,'Kg PROMEDIO',0,0,'C',0);
+        $pdf->Cell(0.01,7,'',1,0,'C',0);
+        $pdf->Cell(30,7,'Peso Min.',0,0,'C',0);
+        $pdf->Cell(0.01,7,'',1,0,'C',0);
+        $pdf->Cell(30,7,'Peso Max.',0,0,'C',0);
+        $pdf->Cell(0.01,7,'',1,0,'C',0);
+        $pdf->Cell(30,7,'Desv. Est.',0,1,'C',0);
+        
         $pesoPromedio = $pesoTotal / $carpeta[0]['cantidad'];
-
+        
         $pdf->Cell(30,7,$pesoTotal." Kg",0,0,'C',0);
-        $pdf->Cell(30,7,$pesoPromedio." Kg",0,0,'C',0);
-        $pdf->Cell(25,7,$pesoMin." Kg",0,0,'C',0);
-        $pdf->Cell(35,7,$pesoMax." Kg",0,0,'C',0);
-        $pdf->Cell(25,7,'Desvio Estandar',0,1,'C',0);
+        $pdf->Cell(0.01,7,'',1,0,'C',0);
+        $pdf->Cell(35,7,$pesoPromedio." Kg",0,0,'C',0);
+        $pdf->Cell(0.01,7,'',1,0,'C',0);
+        $pdf->Cell(30,7,$pesoMin." Kg",0,0,'C',0);
+        $pdf->Cell(0.01,7,'',1,0,'C',0);
+        $pdf->Cell(30,7,$pesoMax." Kg",0,0,'C',0);
+        $pdf->Cell(0.01,7,'',1,0,'C',0);
+        $pdf->Cell(30,7,5,0,1,'C',0);
 
         $pdf->Ln(5);
         $pdf->SetFont('Times','B',14);

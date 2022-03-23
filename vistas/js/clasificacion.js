@@ -102,7 +102,9 @@ if(document.getElementById('perfilesClasificacion') != null){
     setTimeout(() => {
     
         let idPerfilClas = document.getElementById('perfilesClasificacion').value
-            
+
+        console.log(idPerfilClas);
+        
         actualizarClasificacion(idPerfilClas)
 
     }, 300);    
