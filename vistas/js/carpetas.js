@@ -205,7 +205,8 @@ if(btnNuevoCorral != null){
         infoDiv.appendChild(infoContentDiv)
 
         let link = document.createElement('A')
-        if(props.color == 'green'){
+
+        if(props.color == 'green' || props.description == 'Indefinido'){
 
             link.setAttribute('href',`extensiones/fpdf/informesPdf.php?informe=carpeta&idCarpeta=${props.idCarpeta}`)
             link.setAttribute('target','_blank')
@@ -253,7 +254,7 @@ if(btnNuevoCorral != null){
 
                 data.map(reg=>{
 
-                    let description = `${reg.animales}/${reg.cantidad}`
+                    let description = (reg.cantidad != 0) ? `${reg.animales}/${reg.cantidad}` : 'Indefinido'
                     
                     let color = 'yellow'
 
@@ -265,7 +266,7 @@ if(btnNuevoCorral != null){
 
                     } 
 
-                    let percentage = `${(reg.animales * 100) / reg.cantidad}%`
+                    let percentage = (reg.cantidad != 0) ? `${(reg.animales * 100) / reg.cantidad}%` : '0%'
                     
                     let clasification = (reg.clasificacion != '') ? reg.clasificacion : `${reg.minGrasa} mm / ${reg.maxGrasa} mm`
 

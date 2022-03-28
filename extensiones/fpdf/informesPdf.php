@@ -67,7 +67,10 @@ class informePDF{
         
         $pdf->SetFont('helvetica','',12);
         $pdf->Cell(35,7,$carpeta[0]['cantidad'],0,0,'C',0);
-        $pdf->Cell(40,7,$carpeta[0]['clasificacion'],0,0,'C',0);
+
+        $clasificacion = ($carpeta[0]['clasificacion'] != '') ? $carpeta[0]['clasificacion'] : $carpeta[0]['minGrasa']." mm / ".$carpeta[0]['maxGrasa']." mm"; 
+
+        $pdf->Cell(40,7,$clasificacion,0,0,'C',0);
         $pdf->Cell(25,7,$carpeta[0]['pesoMin'],0,0,'C',0);
         $pdf->Cell(20,7,$carpeta[0]['pesoMax'],0,1,'C',0);
 
@@ -87,7 +90,7 @@ class informePDF{
         
         $valido = true;
         $pesoTotal = 0;
-        $pesoMin = 9999;
+        $pesoMin = ($carpeta[0]['animales'] != 0) ? 9999 : 0;
         $pesoMax = 0;
 
         foreach ($animales as $key => $animal) {
@@ -165,7 +168,7 @@ class informePDF{
         $pdf->Cell(0.01,7,'',1,0,'C',0);
         $pdf->Cell(30,7,'Desv. Est.',0,1,'C',0);
         
-        $pesoPromedio = $pesoTotal / $carpeta[0]['cantidad'];
+        $pesoPromedio = ($carpeta[0]['cantidad'] != 0) ? $pesoTotal / $carpeta[0]['cantidad'] : 0;
         
         $pdf->Cell(30,7,$pesoTotal." Kg",0,0,'C',0);
         $pdf->Cell(0.01,7,'',1,0,'C',0);

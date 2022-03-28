@@ -42,7 +42,7 @@ class TablaCarpetas{
 
                 }
     
-                $porcentaje = (($carpeta['animales'] * 100) / $carpeta['cantidad'])."%";
+                $porcentaje = ($carpeta['cantidad'] != 0) ? (($carpeta['animales'] * 100) / $carpeta['cantidad'])."%" : '0%';
 
                 $progressBar = "<div class='progress progress-xs progress-striped active'><div class='progress-bar progress-bar-".$color."' style='width:".$porcentaje."'></div></div>";
 

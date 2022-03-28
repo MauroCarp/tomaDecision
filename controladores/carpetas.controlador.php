@@ -16,6 +16,15 @@ class ControladorCarpetas{
                     
                 $clasificacion = (isset($_POST['clasificacionCarpetaCorral'])) ? implode('/',$_POST['clasificacionCarpetaCorral']) : '';
 
+                $cantidad = $_POST["animalesCarpetaCorral"];
+
+                if($_POST["animalesCarpetaCorral"] == 0 AND $_POST["maxGrasa"] != 0){
+                    
+                    $cantidad = null;
+                
+                }
+                    
+
                 $datos = array("destino"=>$_POST["perfilCarpetaCorral"],
                                 "descripcion"=>$_POST["descripcionCarpetaCorral"],
                                 "cantidad"=>$_POST["animalesCarpetaCorral"],
@@ -25,7 +34,7 @@ class ControladorCarpetas{
                                 "clasificacion"=>$clasificacion,
                                 "minGrasa"=>$_POST["minGrasa"],
                                 "maxGrasa"=>$_POST["maxGrasa"]
-                            );
+                );
 
                 // VALIDAR PRIORIDAD
 
