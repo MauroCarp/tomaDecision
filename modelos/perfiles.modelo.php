@@ -12,12 +12,18 @@ class ModeloPerfiles{
         
         $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(nombre,flacas,buenas,buenasMas,muyBuenas,apenasGordas) VALUES(:nombre,:flacas,:buenas,:buenasMas,:muyBuenas,:apenasGordas)");
 
-        $stmt -> bindParam(":nombre", $datos['nombre'], PDO::PARAM_STR);
-        $stmt -> bindParam(":flacas", (230 + ($datos['flacas'])), PDO::PARAM_STR);
-        $stmt -> bindParam(":buenas",  (200 + ($datos['buenas'])), PDO::PARAM_STR);
-        $stmt -> bindParam(":buenasMas",  (175 + ($datos['buenasMas'])), PDO::PARAM_STR);
-        $stmt -> bindParam(":muyBuenas",  (125 + ($datos['muyBuenas'])), PDO::PARAM_STR);
-        $stmt -> bindParam(":apenasGordas",  (110 + ($datos['apenasGordas'])), PDO::PARAM_STR);
+		$flacas = (230 + ($datos['flacas']));
+		$buenas = (200 + ($datos['buenas']));
+		$buenasMas = (175 + ($datos['buenasMas']));
+		$muyBuenas = (125 + ($datos['muyBuenas']));
+		$apenasGordas = (110 + ($datos['apenasGordas']));
+        
+		$stmt -> bindParam(":nombre", $datos['nombre'], PDO::PARAM_STR);
+        $stmt -> bindParam(":flacas", $flacas, PDO::PARAM_STR);
+        $stmt -> bindParam(":buenas",  $buenas, PDO::PARAM_STR);
+        $stmt -> bindParam(":buenasMas",  $buenasMas, PDO::PARAM_STR);
+        $stmt -> bindParam(":muyBuenas",  $muyBuenas, PDO::PARAM_STR);
+        $stmt -> bindParam(":apenasGordas",  $apenasGordas, PDO::PARAM_STR);
 
         if($stmt->execute()){
 

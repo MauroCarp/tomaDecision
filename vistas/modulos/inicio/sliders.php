@@ -163,7 +163,13 @@
     
         </div>
         
-        <input type="range" class="yellowSlider" step="5" name="<?php echo $apenasGordas;?>Input" id="<?php echo $apenasGordas;?>InputId" value="0"  min='-50' max="50" oninput="<?php echo $apenasGordas;?>IutputId.value = <?php echo $apenasGordas;?>InputId.value">
+        <input type="range" class="yellowSlider" step="5"
+        name="<?php echo $apenasGordas;?>Input" 
+        id="<?php echo $apenasGordas;?>InputId" 
+        value="0"  
+        min='-50' 
+        max="50" 
+        oninput="<?php echo $apenasGordas;?>OutputId.value = <?php echo $apenasGordas;?>InputId.value">
 
         <div class="input-group-addon sliderIcon">
     

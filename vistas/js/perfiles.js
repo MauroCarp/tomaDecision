@@ -61,9 +61,7 @@ if(btnNuevoPerfil != null){
         document.getElementById('muyBuenasConfOutputId').innerHTML = value    
         
         value = document.getElementById('apenasGordasConfInputId').value
-        document.getElementById('apenasGordasConfIutputId').innerHTML = value    
-        
-
+        document.getElementById('apenasGordasConfOutputId').innerHTML = value    
 
     })
 
