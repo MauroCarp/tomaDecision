@@ -10,13 +10,16 @@ class ModeloCarpetas{
 
     static public function mdlNuevaCarpeta($tabla,$datos){
         
-        $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(destino,cantidad,pesoMin,pesoMax,clasificacion,prioridad,fecha) VALUES(:destino,:cantidad,:pesoMin,:pesoMax,:clasificacion,:prioridad,CURRENT_DATE)");
+        $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(destino,descripcion,cantidad,pesoMin,pesoMax,clasificacion,minGrasa,maxGrasa,prioridad,fecha) VALUES(:destino,:descripcion,:cantidad,:pesoMin,:pesoMax,:clasificacion,:minGrasa,:maxGrasa,:prioridad,CURRENT_DATE)");
 
         $stmt -> bindParam(":destino", $datos['destino'], PDO::PARAM_STR);
+        $stmt -> bindParam(":descripcion", $datos['descripcion'], PDO::PARAM_STR);
         $stmt -> bindParam(":cantidad", $datos['cantidad'], PDO::PARAM_STR);
         $stmt -> bindParam(":pesoMin", $datos['pesoMin'], PDO::PARAM_STR);
         $stmt -> bindParam(":pesoMax", $datos['pesoMax'], PDO::PARAM_STR);
         $stmt -> bindParam(":clasificacion", $datos['clasificacion'], PDO::PARAM_STR);
+        $stmt -> bindParam(":minGrasa", $datos['minGrasa'], PDO::PARAM_STR);
+        $stmt -> bindParam(":maxGrasa", $datos['maxGrasa'], PDO::PARAM_STR);
         $stmt -> bindParam(":prioridad", $datos['prioridad'], PDO::PARAM_STR);
 
         if($stmt->execute()){

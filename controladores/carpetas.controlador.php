@@ -8,21 +8,24 @@ class ControladorCarpetas{
 
 	static public function ctrNuevaCarpeta(){
 
-        if(isset($_POST['btnCargarCarpeta'])){
+        if(isset($_POST['btnCargarCarpetaCorral'])){
 
-            
-            if(isset($_POST['clasificacionCarpeta'])){
+            if(isset($_POST['clasificacionCarpetaCorral']) OR $_POST['maxGrasa'] != 0){
                 
                 $tabla = "carpetas";
                     
-                $clasificacion = implode('/',$_POST['clasificacionCarpeta']);
+                $clasificacion = (isset($_POST['clasificacionCarpetaCorral'])) ? implode('/',$_POST['clasificacionCarpetaCorral']) : '';
 
-                $datos = array("destino"=>$_POST["perfilCarpeta"],
-                                "cantidad"=>$_POST["animalesCarpeta"],
-                                "pesoMin"=>$_POST["pesoMin"],
-                                "pesoMax"=>$_POST["pesoMax"],
-                                "prioridad"=>$_POST["prioridad"],
-                                "clasificacion"=>$clasificacion);
+                $datos = array("destino"=>$_POST["perfilCarpetaCorral"],
+                                "descripcion"=>$_POST["descripcionCarpetaCorral"],
+                                "cantidad"=>$_POST["animalesCarpetaCorral"],
+                                "pesoMin"=>$_POST["pesoMinCarpetaCorral"],
+                                "pesoMax"=>$_POST["pesoMaxCarpetaCorral"],
+                                "prioridad"=>$_POST["prioridadCarpetaCorral"],
+                                "clasificacion"=>$clasificacion,
+                                "minGrasa"=>$_POST["minGrasa"],
+                                "maxGrasa"=>$_POST["maxGrasa"]
+                            );
 
                 // VALIDAR PRIORIDAD
 
@@ -88,7 +91,7 @@ class ControladorCarpetas{
                     new swal({
 
                         icon: "error",
-                        title: "Se debe elegir al menos una clasificación de animal",
+                        title: "Se debe elegir al menos  clasificación de animal/Rango de MM",
                         showConfirmButton: true,
                         confirmButtonText: "Cerrar"
 

@@ -94,7 +94,7 @@
                 
                 <div class="box" style="border-top:none;">
 
-                    <form method='post' id="nuevoForm">
+                    <form method='post' id="nuevaCarpetaCorralForm">
                         
                         <div class="row">
                             
@@ -120,7 +120,7 @@
                                     
                                     <label for="descripcionCarpetaCorral">Descripci&oacute;n</label>
                                 
-                                    <input type="text" class="form-control" id="descripcionCarpetaCorral" name="descripcionCarpetaCorral">
+                                    <input type="text" class="form-control" id="descripcionCarpetaCorral" name="descripcionCarpetaCorral" required>
                                 
                                 </div>
 
@@ -191,32 +191,32 @@
                                     <label>
                                         <b>F</b>
                                     </label>
-                                    <input type="checkbox" name="clasificacionCorral[]" class="minimal" value="F" style="position: absolute; opacity: 0!important;">
+                                    <input type="checkbox" name="clasificacionCarpetaCorral[]" class="minimal" value="F" style="position: absolute; opacity: 0!important;">
                                     &nbsp;
                                     <label>
                                         <b>B</b>
                                     </label>
-                                    <input type="checkbox" name="clasificacionCorral[]" class="minimal" value="B" style="position: absolute; opacity: 0!important;">
+                                    <input type="checkbox" name="clasificacionCarpetaCorral[]" class="minimal" value="B" style="position: absolute; opacity: 0!important;">
                                     &nbsp;
                                     <label>
                                         <b>B+</b>
                                     </label>
-                                    <input type="checkbox" name="clasificacionCorral[]" class="minimal" value="B+" style="position: absolute; opacity: 0!important;">
+                                    <input type="checkbox" name="clasificacionCarpetaCorral[]" class="minimal" value="B+" style="position: absolute; opacity: 0!important;">
                                     &nbsp;
                                     <label>
                                         <b>MB</b>
                                     </label>
-                                    <input type="checkbox" name="clasificacionCorral[]" class="minimal" value="MB" style="position: absolute; opacity: 0!important;">
+                                    <input type="checkbox" name="clasificacionCarpetaCorral[]" class="minimal" value="MB" style="position: absolute; opacity: 0!important;">
                                     &nbsp;
                                     <label>
                                         <b>AP</b>
                                     </label>
-                                    <input type="checkbox" name="clasificacionCorral[]" class="minimal" value="AP" style="position: absolute; opacity: 0!important;">
+                                    <input type="checkbox" name="clasificacionCarpetaCorral[]" class="minimal" value="AP" style="position: absolute; opacity: 0!important;">
                                     &nbsp;
                                     <label>
                                         <b>G</b>
                                     </label>
-                                    <input type="checkbox" name="clasificacionCorral[]" class="minimal" value="G" style="position: absolute; opacity: 0!important;">
+                                    <input type="checkbox" name="clasificacionCarpetaCorral[]" class="minimal" value="G" style="position: absolute; opacity: 0!important;">
                                     
                                 </div>
 
@@ -233,7 +233,7 @@
 
                                     <label>Min</label><br>
 
-                                    <input type="number" name="minGrasa" class="form-control" value="0">
+                                    <input type="number" step="0.05" name="minGrasa" class="form-control" value="0">
                                     
                                 </div>
 
@@ -245,7 +245,7 @@
 
                                 <div class="form-group">
 
-                                    <input type="number" name="maxGrasa" class="form-control" value="0">
+                                    <input type="number" step="0.05" name="maxGrasa" class="form-control" value="0">
                                     
                                 </div>
 
