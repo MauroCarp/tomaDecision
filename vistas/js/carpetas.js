@@ -54,61 +54,63 @@ $('.tablaCarpetas').DataTable( {
 
 const btnNuevaCarpeta = document.getElementById('btnNuevaCarpeta')
 
-btnNuevaCarpeta.addEventListener('click',()=>{
+if(btnNuevaCarpeta != null){
+    btnNuevaCarpeta.addEventListener('click',()=>{
 
-    document.getElementById('modalNuevaCarpetaCorral').classList.add('showPerfilModal')
-    document.getElementById('modalNuevaCarpetaCorral').classList.remove('hideElement')
+        document.getElementById('modalNuevaCarpetaCorral').classList.add('showPerfilModal')
+        document.getElementById('modalNuevaCarpetaCorral').classList.remove('hideElement')
 
-    document.getElementById('btnCargarCarpetaCorral').innerText = 'Cargar Carpeta'
-    document.getElementById('tituloRangoMM').classList.add('hideElement')
-    document.getElementById('inputsRangoMM').classList.add('hideElement')
-    
-
-    document.getElementById('modalCarpeta').style.width = '1000px'
-
-    document.getElementById('carpetasList').style.width = '50%'
-
-    document.getElementById('DataTables_Table_1').style.width = '100%'
-
-    let params = {
-        fetchUrl:'cargarSelect',
-        accion:'perfiles',
-        value:'nombre',
-        optText:'nombre',
-        idSelect:'perfilCarpetaCorral'
-    }
-
-    cargarSelect(params)
-
-    // CARGAR PRIORIDAD
-
-    let url = 'fetch/cargarSelect.fetch.php'
-
-	let formData = new FormData()
-
-	formData.append('accion','prioridad')
-
-	fetch(url,{
-		method:'post',
-		body:formData
-	}).then(resp=>resp.json())
-	.then(respuesta=>{
+        document.getElementById('btnCargarCarpetaCorral').innerText = 'Cargar Carpeta'
+        document.getElementById('tituloRangoMM').classList.add('hideElement')
+        document.getElementById('inputsRangoMM').classList.add('hideElement')
         
-        if(respuesta)
-            document.getElementById('prioridadCarpetaCorral').value = Number(respuesta.prioridad) + 1         
-        else
-            document.getElementById('prioridadCarpetaCorral').value = 1
-                     
-    })
-    .catch(err=>console.log(err))
-    
-})
 
+        document.getElementById('modalCarpeta').style.width = '1000px'
+
+        document.getElementById('carpetasList').style.width = '50%'
+
+        document.getElementById('DataTables_Table_1').style.width = '100%'
+
+        let params = {
+            fetchUrl:'cargarSelect',
+            accion:'perfiles',
+            value:'nombre',
+            optText:'nombre',
+            idSelect:'perfilCarpetaCorral'
+        }
+
+        cargarSelect(params)
+
+        // CARGAR PRIORIDAD
+
+        let url = 'fetch/cargarSelect.fetch.php'
+
+        let formData = new FormData()
+
+        formData.append('accion','prioridad')
+
+        fetch(url,{
+            method:'post',
+            body:formData
+        }).then(resp=>resp.json())
+        .then(respuesta=>{
+            
+            if(respuesta)
+                document.getElementById('prioridadCarpetaCorral').value = Number(respuesta.prioridad) + 1         
+            else
+                document.getElementById('prioridadCarpetaCorral').value = 1
+                        
+        })
+        .catch(err=>console.log(err))
+        
+    })
+}
 // BTN NUEVO CORRAL
 
 const btnNuevoCorral = document.getElementById('btnNuevoCorral')
 
-btnNuevoCorral.addEventListener('click',()=>{
+if(btnNuevoCorral != null){
+    btnNuevoCorral.addEventListener('click',()=>{
 
     document.getElementById('modalNuevaCarpetaCorral').classList.add('showPerfilModal')
     document.getElementById('modalNuevaCarpetaCorral').classList.remove('hideElement')
@@ -137,25 +139,26 @@ btnNuevoCorral.addEventListener('click',()=>{
 
     let url = 'fetch/cargarSelect.fetch.php'
 
-	let formData = new FormData()
+    let formData = new FormData()
 
-	formData.append('accion','prioridad')
+    formData.append('accion','prioridad')
 
-	fetch(url,{
-		method:'post',
-		body:formData
-	}).then(resp=>resp.json())
-	.then(respuesta=>{
+    fetch(url,{
+        method:'post',
+        body:formData
+    }).then(resp=>resp.json())
+    .then(respuesta=>{
         
         if(respuesta)
             document.getElementById('prioridadCarpetaCorral').value = Number(respuesta.prioridad) + 1         
         else
             document.getElementById('prioridadCarpetaCorral').value = 1
-                     
+                        
     })
     .catch(err=>console.log(err))
-    
-})
+
+    })
+}
 
 
 // MOSTAR CARPETAS ACTIVAS
@@ -181,7 +184,7 @@ btnNuevoCorral.addEventListener('click',()=>{
         
         let infoTextSpan = document.createElement('SPAN')
         infoTextSpan.setAttribute('class','info-box-text')
-        infoTextSpan.innerText = props.destino
+        infoTextSpan.innerText = `${props.destino} - ${props.descripcion}` 
         
         let infoContentDiv = document.createElement('DIV')
         infoContentDiv.setAttribute('class','info-box-content')
@@ -220,7 +223,7 @@ btnNuevoCorral.addEventListener('click',()=>{
         li.appendChild(link)
 
         let colDiv = document.createElement('DIV')
-        colDiv.setAttribute('class','col-lg-9')
+        colDiv.setAttribute('class',props.colRow)
 
         colDiv.appendChild(li)
 
@@ -228,7 +231,7 @@ btnNuevoCorral.addEventListener('click',()=>{
 
     }
 
-    const mostrarCarpetasActivas = ()=>{
+    const mostrarCarpetasActivas = (operario)=>{
     
         let url = 'fetch/carpetas.fetch.php'
 
@@ -264,14 +267,24 @@ btnNuevoCorral.addEventListener('click',()=>{
 
                     let percentage = `${(reg.animales * 100) / reg.cantidad}%`
                     
+                    let clasification = (reg.clasificacion != '') ? reg.clasificacion : `${reg.minGrasa} mm / ${reg.maxGrasa} mm`
+
                     let props = {
                         description,
                         percentage,
-                        clasification:reg.clasificacion,
+                        clasification,
                         destino:reg.destino,
+                        descripcion:reg.descripcion,
                         animales:reg.animales,
                         color,
-                        idCarpeta:reg.idCarpeta
+                        idCarpeta:reg.idCarpeta,
+                        colRow:'col-lg-9'
+                    }
+
+                    if(operario){
+                        
+                        props.colRow = 'col-lg-3'
+
                     }
 
                     docFragment.appendChild(generarCarpeta(props))
@@ -298,8 +311,10 @@ btnNuevoCorral.addEventListener('click',()=>{
 
     let url = window.location.href
 
-    if(url.includes('inicio'))
-        mostrarCarpetasActivas()
+    if(url.includes('inicio') && document.getElementById('carpetasScroll') != null)
+        mostrarCarpetasActivas(false)
+    else
+        mostrarCarpetasActivas(true)
 
     
 // ELIMINAR CARPETA
