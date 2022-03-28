@@ -27,6 +27,8 @@
             <div class="modal-body">
 
                 <button class="btn btn-primary" id="btnNuevaCarpeta"><b>Nueva Carpeta</b></button>
+                
+                <button class="btn btn-primary" id="btnNuevoCorral"><b>Nuevo Corral</b></button>
 
                 <div class="box-body">
 
@@ -70,12 +72,13 @@
         
         </div>
 
-            
+
+
         <!--=====================================
-         NUEVA CARPETA
+         NUEVA/O CARPETA/CORRAL
         ======================================-->
 
-        <div class="modal-content hideElement" id="modalNuevaCarpeta">
+        <div class="modal-content hideElement" id="modalNuevaCarpetaCorral">
     
             <!--=====================================
             CABEZA DEL MODAL
@@ -83,7 +86,7 @@
     
             <div class="modal-header" style="background:#3c8dbc; color:white">
     
-                <h4 class="modal-title">Nueva Carpeta</h4>
+                <h4 class="modal-title" id="tituloModal">Nueva Carpeta</h4>
     
             </div>
     
@@ -91,17 +94,17 @@
                 
                 <div class="box" style="border-top:none;">
 
-                    <form method='post' id="nuevaCarpetaForm">
+                    <form method='post' id="nuevoForm">
                         
                         <div class="row">
                             
-                            <div class="col-md-12">
+                            <div class="col-xs-12 col-lg-6">
 
                                 <div class="form-group">
                                     
-                                    <label for="perfilCarpeta">Perfil</label>
+                                    <label for="perfilCarpetaCorral">Perfil</label>
                                 
-                                    <select class="form-control" id="perfilCarpeta" name="perfilCarpeta">
+                                    <select class="form-control" id="perfilCarpetaCorral" name="perfilCarpetaCorral">
                                          
                                     
                                     </select>
@@ -110,17 +113,30 @@
 
                             </div>
 
+                                                        
+                            <div class="col-xs-12 col-lg-6">
+
+                                <div class="form-group">
+                                    
+                                    <label for="descripcionCarpetaCorral">Descripci&oacute;n</label>
+                                
+                                    <input type="text" class="form-control" id="descripcionCarpetaCorral" name="descripcionCarpetaCorral">
+                                
+                                </div>
+
+                            </div>
+
                         </div>
-                        
+
                         <div class="row">
                             
                             <div class="col-md-4">
 
                                 <div class="form-group">
                                         
-                                    <label for="animalesCarpeta">Cant. Animales</label>
+                                    <label for="animalesCarpetaCorral">Cant. Animales</label>
                                 
-                                    <input type="number" class="form-control" name="animalesCarpeta" id="animalesCarpeta" value="1">          
+                                    <input type="number" class="form-control" name="animalesCarpetaCorral" id="animalesCarpetaCorral" value="1">          
 
                                 </div>
 
@@ -130,9 +146,9 @@
                                 
                                 <div class="form-group">
                                         
-                                        <label for="pesoMin">Peso Minimo</label>
+                                        <label for="pesoMinCarpetaCorral">Peso Minimo</label>
                                     
-                                        <input type="number" class="form-control" name="pesoMin" id="pesoMin"  value="0">          
+                                        <input type="number" class="form-control" name="pesoMinCarpetaCorral" id="pesoMinCarpetaCorral"  value="0">          
         
                                 </div>
                                 
@@ -142,9 +158,9 @@
 
                                 <div class="form-group">
                                         
-                                        <label for="pesoMin">Peso Maximo</label>
+                                        <label for="pesoMaxCarpetaCorral">Peso Maximo</label>
                                     
-                                        <input type="number" class="form-control" name="pesoMax" id="pesoMax"  value="0">          
+                                        <input type="number" class="form-control" name="pesoMaxCarpetaCorral" id="pesoMaxCarpetaCorral"  value="0">          
         
                                 </div>
 
@@ -158,9 +174,9 @@
                                 
                                 <div class="form-group">
                                         
-                                        <label for="prioridad">Prioridad</label>
+                                        <label for="prioridadCarpetaCorral">Prioridad</label>
                                     
-                                        <input type="number" class="form-control" name="prioridad" id="prioridad">          
+                                        <input type="number" class="form-control" name="prioridadCarpetaCorral" id="prioridadCarpetaCorral">          
         
                                 </div>
 
@@ -175,39 +191,69 @@
                                     <label>
                                         <b>F</b>
                                     </label>
-                                    <input type="checkbox" name="clasificacionCarpeta[]" class="minimal" value="F" style="position: absolute; opacity: 0!important;">
+                                    <input type="checkbox" name="clasificacionCorral[]" class="minimal" value="F" style="position: absolute; opacity: 0!important;">
                                     &nbsp;
                                     <label>
                                         <b>B</b>
                                     </label>
-                                    <input type="checkbox" name="clasificacionCarpeta[]" class="minimal" value="B" style="position: absolute; opacity: 0!important;">
+                                    <input type="checkbox" name="clasificacionCorral[]" class="minimal" value="B" style="position: absolute; opacity: 0!important;">
                                     &nbsp;
                                     <label>
                                         <b>B+</b>
                                     </label>
-                                    <input type="checkbox" name="clasificacionCarpeta[]" class="minimal" value="B+" style="position: absolute; opacity: 0!important;">
+                                    <input type="checkbox" name="clasificacionCorral[]" class="minimal" value="B+" style="position: absolute; opacity: 0!important;">
                                     &nbsp;
                                     <label>
                                         <b>MB</b>
                                     </label>
-                                    <input type="checkbox" name="clasificacionCarpeta[]" class="minimal" value="MB" style="position: absolute; opacity: 0!important;">
+                                    <input type="checkbox" name="clasificacionCorral[]" class="minimal" value="MB" style="position: absolute; opacity: 0!important;">
                                     &nbsp;
                                     <label>
                                         <b>AP</b>
                                     </label>
-                                    <input type="checkbox" name="clasificacionCarpeta[]" class="minimal" value="AP" style="position: absolute; opacity: 0!important;">
+                                    <input type="checkbox" name="clasificacionCorral[]" class="minimal" value="AP" style="position: absolute; opacity: 0!important;">
                                     &nbsp;
                                     <label>
                                         <b>G</b>
                                     </label>
-                                    <input type="checkbox" name="clasificacionCarpeta[]" class="minimal" value="G" style="position: absolute; opacity: 0!important;">
+                                    <input type="checkbox" name="clasificacionCorral[]" class="minimal" value="G" style="position: absolute; opacity: 0!important;">
                                     
                                 </div>
 
                             </div>
                         </div>
+                        
+                        <label class="hideElement" id="tituloRangoMM">Rango MM Grasa</label>
 
-                        <button type="submit" form="nuevaCarpetaForm" class="btn btn-block btn-success" id="btnCargarCarpeta" name="btnCargarCarpeta">Cargar Carpeta</button>
+                        <div class="row hideElement" id="inputsRangoMM">                
+                            
+                            <div class="col-xs-6 col-lg-3">
+                                    
+                                <div class="form-group">
+
+                                    <label>Min</label><br>
+
+                                    <input type="number" name="minGrasa" class="form-control" value="0">
+                                    
+                                </div>
+
+                            </div>
+
+                            <div class="col-xs-6 col-lg-3">
+
+                                <label>Max</label><br>
+
+                                <div class="form-group">
+
+                                    <input type="number" name="maxGrasa" class="form-control" value="0">
+                                    
+                                </div>
+
+                            </div>
+                            
+                        </div>
+
+                        <button type="submit" form="nuevaCarpetaCorralForm" class="btn btn-block btn-success" id="btnCargarCarpetaCorral" name="btnCargarCarpetaCorral"></button>
                         
                     </form>
 

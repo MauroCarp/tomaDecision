@@ -120,42 +120,7 @@
             <div class="modal-body">
                 
                 <div class="box" style="border-top:none;">
-
-                    <div class="info-box">
-
-                        <span class="info-box-icon bg-green">MB</span>
-
-                        <div class="info-box-content">
-
-                            <div class="row">
-                                
-                                <div class="col-lg-3">
-
-                                    <span class="info-box-text">Peso</span>
-                                    <span class="info-box-number">410</span>
-                                    
-                                </div>
-
-                                <div class="col-lg-3">
-
-                                    <span class="info-box-text">MM</span>
-                                    <span class="info-box-number">8.5</span>
-                                
-                                </div>
-
-                                <div class="col-lg-4">
-                                    
-                                    <span class="info-box-text">Sexo</span>
-                                    <span class="info-box-number">Macho</span>
-
-                                </div>
-                            
-                            </div>
-                            
-                        </div>
-
-                    </div>           
-
+                
                     <form method='post' id="newPerfilForm">
                     
                         <div class="form-group">

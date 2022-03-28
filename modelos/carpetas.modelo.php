@@ -225,7 +225,7 @@ class ModeloCarpetas{
     
     if($datos == 'desctivar'){
       
-      $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET activa = 0 WHERE $item = :$item");
+      $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET activa = 0, prioridad = null WHERE $item = :$item");
       
     }
 

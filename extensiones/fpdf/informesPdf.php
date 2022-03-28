@@ -43,6 +43,8 @@ class informePDF{
             $datos = 'desctivar';
 
             $desactivarCarpeta = ControladorCarpetas::ctrEditarCarpeta($item, $carpeta[0]['idCarpeta'],$datos);
+
+            $priorizarCarpetas = ControladorCarpetas::ctrPriorizar($carpeta[0]['prioridad']);
             
         }
 

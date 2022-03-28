@@ -50,25 +50,32 @@ $('.tablaCarpetas').DataTable( {
   
 });
 
-// BTN NUEVO PERFIL
+// BTN NUEVA CARPETA
 
 const btnNuevaCarpeta = document.getElementById('btnNuevaCarpeta')
 
 btnNuevaCarpeta.addEventListener('click',()=>{
 
-    document.getElementById('modalNuevaCarpeta').classList.toggle('hideElement')
-    document.getElementById('modalNuevaCarpeta').classList.toggle('showPerfilModal')
+    document.getElementById('modalNuevaCarpetaCorral').classList.add('showPerfilModal')
+    document.getElementById('modalNuevaCarpetaCorral').classList.remove('hideElement')
+
+    document.getElementById('btnCargarCarpetaCorral').innerText = 'Cargar Carpeta'
+    document.getElementById('tituloRangoMM').classList.add('hideElement')
+    document.getElementById('inputsRangoMM').classList.add('hideElement')
+    
 
     document.getElementById('modalCarpeta').style.width = '1000px'
 
     document.getElementById('carpetasList').style.width = '50%'
+
+    document.getElementById('DataTables_Table_1').style.width = '100%'
 
     let params = {
         fetchUrl:'cargarSelect',
         accion:'perfiles',
         value:'nombre',
         optText:'nombre',
-        idSelect:'perfilCarpeta'
+        idSelect:'perfilCarpetaCorral'
     }
 
     cargarSelect(params)
@@ -88,9 +95,62 @@ btnNuevaCarpeta.addEventListener('click',()=>{
 	.then(respuesta=>{
         
         if(respuesta)
-            document.getElementById('prioridad').value = Number(respuesta.prioridad) + 1         
+            document.getElementById('prioridadCarpetaCorral').value = Number(respuesta.prioridad) + 1         
         else
-            document.getElementById('prioridad').value = 1
+            document.getElementById('prioridadCarpetaCorral').value = 1
+                     
+    })
+    .catch(err=>console.log(err))
+    
+})
+
+// BTN NUEVO CORRAL
+
+const btnNuevoCorral = document.getElementById('btnNuevoCorral')
+
+btnNuevoCorral.addEventListener('click',()=>{
+
+    document.getElementById('modalNuevaCarpetaCorral').classList.add('showPerfilModal')
+    document.getElementById('modalNuevaCarpetaCorral').classList.remove('hideElement')
+
+    document.getElementById('btnCargarCarpetaCorral').innerText = 'Cargar Corral'
+    document.getElementById('tituloRangoMM').classList.remove('hideElement')
+    document.getElementById('inputsRangoMM').classList.remove('hideElement')
+
+    document.getElementById('modalCarpeta').style.width = '1000px'
+
+    document.getElementById('carpetasList').style.width = '50%'
+
+    document.getElementById('DataTables_Table_1').style.width = '100%'
+
+    let params = {
+        fetchUrl:'cargarSelect',
+        accion:'perfiles',
+        value:'nombre',
+        optText:'nombre',
+        idSelect:'perfilCarpetaCorral'
+    }
+
+    cargarSelect(params)
+
+    // CARGAR PRIORIDAD
+
+    let url = 'fetch/cargarSelect.fetch.php'
+
+	let formData = new FormData()
+
+	formData.append('accion','prioridad')
+
+	fetch(url,{
+		method:'post',
+		body:formData
+	}).then(resp=>resp.json())
+	.then(respuesta=>{
+        
+        if(respuesta)
+            document.getElementById('prioridadCarpetaCorral').value = Number(respuesta.prioridad) + 1         
+        else
+            document.getElementById('prioridadCarpetaCorral').value = 1
                      
     })
     .catch(err=>console.log(err))
