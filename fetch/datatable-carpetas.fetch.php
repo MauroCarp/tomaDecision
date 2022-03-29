@@ -33,12 +33,12 @@ class TablaCarpetas{
 			foreach ($carpetas as $key => $carpeta) {
 		
                 $color =  'yellow';
-                $boton =  'disabled';
+                $boton =  "disabled style='cursor:not-allow;pointer-events:none;'";
 
-                if($carpeta['completa'] == 1){
+                if($carpeta['completa'] == 1 OR $carpeta['cantidad'] == 0){
                     
-                    $color =  'green';
-                    $boton =  '';
+					$color =  'green';
+					$boton =  '';
 
                 }
     
