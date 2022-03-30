@@ -42,6 +42,8 @@
                                     
                                     <th style="width: 10px">#</th>
                                 
+                                    <th>Perfil</th>
+
                                     <th>Carpeta</th>
 
                                     <th>Cantidad</th>
@@ -86,7 +88,14 @@
     
             <div class="modal-header" style="background:#3c8dbc; color:white">
     
+                <div class="box-tools pull-right">
+
+                    <button type="button" class="btn btn-box-tool" id="removeNuevaCarpeta"><i class="fa fa-times"></i></button>
+
+                </div>
+
                 <h4 class="modal-title" id="tituloModal">Nueva Carpeta</h4>
+
     
             </div>
     
@@ -191,32 +200,32 @@
                                     <label>
                                         <b>F</b>
                                     </label>
-                                    <input type="checkbox" name="clasificacionCarpetaCorral[]" class="minimal" value="F" style="position: absolute; opacity: 0!important;">
+                                    <input type="checkbox" name="clasificacionCarpetaCorral[]" class="minimal cbClasificacion" value="F" style="position: absolute; opacity: 0!important;">
                                     &nbsp;
                                     <label>
                                         <b>B</b>
                                     </label>
-                                    <input type="checkbox" name="clasificacionCarpetaCorral[]" class="minimal" value="B" style="position: absolute; opacity: 0!important;">
+                                    <input type="checkbox" name="clasificacionCarpetaCorral[]" class="minimal cbClasificacion" value="B" style="position: absolute; opacity: 0!important;">
                                     &nbsp;
                                     <label>
                                         <b>B+</b>
                                     </label>
-                                    <input type="checkbox" name="clasificacionCarpetaCorral[]" class="minimal" value="B+" style="position: absolute; opacity: 0!important;">
+                                    <input type="checkbox" name="clasificacionCarpetaCorral[]" class="minimal cbClasificacion" value="B+" style="position: absolute; opacity: 0!important;">
                                     &nbsp;
                                     <label>
                                         <b>MB</b>
                                     </label>
-                                    <input type="checkbox" name="clasificacionCarpetaCorral[]" class="minimal" value="MB" style="position: absolute; opacity: 0!important;">
+                                    <input type="checkbox" name="clasificacionCarpetaCorral[]" class="minimal cbClasificacion" value="MB" style="position: absolute; opacity: 0!important;">
                                     &nbsp;
                                     <label>
                                         <b>AP</b>
                                     </label>
-                                    <input type="checkbox" name="clasificacionCarpetaCorral[]" class="minimal" value="AP" style="position: absolute; opacity: 0!important;">
+                                    <input type="checkbox" name="clasificacionCarpetaCorral[]" class="minimal cbClasificacion" value="AP" style="position: absolute; opacity: 0!important;">
                                     &nbsp;
                                     <label>
                                         <b>G</b>
                                     </label>
-                                    <input type="checkbox" name="clasificacionCarpetaCorral[]" class="minimal" value="G" style="position: absolute; opacity: 0!important;">
+                                    <input type="checkbox" name="clasificacionCarpetaCorral[]" class="minimal cbClasificacion" value="G" style="position: absolute; opacity: 0!important;">
                                     
                                 </div>
 

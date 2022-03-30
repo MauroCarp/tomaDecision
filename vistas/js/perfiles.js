@@ -63,6 +63,20 @@ if(btnNuevoPerfil != null){
         value = document.getElementById('apenasGordasConfInputId').value
         document.getElementById('apenasGordasConfOutputId').innerHTML = value    
 
+        
+        let removeModalNueva = document.getElementById('removeNuevoPerfil')
+        
+        removeModalNueva.addEventListener('click',()=>{
+
+            document.getElementById('modalNuevoPerfil').classList.remove('showPerfilModal')
+            document.getElementById('modalNuevoPerfil').classList.add('hideElement')
+
+            document.getElementById('modalPerfil').style.width = '400px'
+
+            document.getElementById('perfilesList').style.width = '100%'
+
+        })
+
     })
 
     // BTN EDITAR PERFIL
@@ -108,14 +122,28 @@ if(btnNuevoPerfil != null){
                 document.querySelector('output[name=muyBuenasConfEditOutput]').innerHTML = respuesta.muyBuenas
                 document.querySelector('output[name=apenasGordasConfEditOutput]').innerHTML = respuesta.apenasGordas
 
-
             })
+
             .catch(err=>console.error(err))
 
 
         })
 
     }
+
+            
+    let removeModalEditar = document.getElementById('removeEditarPerfil')
+        
+    removeModalEditar.addEventListener('click',()=>{
+
+        document.getElementById('modalEditarPerfil').classList.remove('showPerfilModal')
+        document.getElementById('modalEditarPerfil').classList.add('hideElement')
+
+        document.getElementById('modalPerfil').style.width = '400px'
+
+        document.getElementById('perfilesList').style.width = '100%'
+
+    })
 
 
     // ELIMINAR PERFILES

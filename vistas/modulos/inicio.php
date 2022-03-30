@@ -51,6 +51,9 @@
                 
               </div>
 
+              <?php
+              if($_SESSION['perfil'] == 'Administrador'){
+              ?>
                               
               <div class="box" id="tablaIngresos">
                   
@@ -72,13 +75,16 @@
                 
               </div>
 
-              <?php
-              if($_SESSION['perfil'] == 'Administrador'){
-              ?>
               <div class="box"  id="seccionClasificacion">
                   
                 <div class="box-header with-border">
                   
+                  <div class="box-tools pull-right">
+                  
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                  
+                  </div>
+
                   <div class="row"  style="font-size:1.3em">
                     
                     <div class="col-md-3">
@@ -117,16 +123,38 @@
                 </div>
 
               </div>
-              <?php
-              }
-              ?>
 
               <?php
+
+              }
 
               if($_SESSION['perfil'] == 'Operario'){
-              
+                
                 include 'vistas/modulos/inicio/carpetasActivasOperario.php';
+                
+              ?>
 
+                <div class="box" id="tablaIngresos">
+                  
+                  <div class="box-header with-border">
+                  
+                    <h3 class="box-title"><i class="ion-ios-list-outline"></i> Animales Ingresados</h3>
+            
+                  </div>
+                  
+                  <div class="box-body">
+
+                    <?php
+                    
+                    include "inicio/ingresos.php";
+                  
+                    ?>
+
+                  </div>
+                
+                </div>
+
+              <?php
               }
               ?>
 

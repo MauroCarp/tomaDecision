@@ -100,7 +100,7 @@ class ControladorCarpetas{
                     new swal({
 
                         icon: "error",
-                        title: "Se debe elegir al menos  clasificación de animal/Rango de MM",
+                        title: "Se debe elegir al menos  clasificación de animal/Rango de mm",
                         showConfirmButton: true,
                         confirmButtonText: "Cerrar"
 

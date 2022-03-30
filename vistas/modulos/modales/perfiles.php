@@ -112,7 +112,13 @@
             ======================================-->
     
             <div class="modal-header" style="background:#3c8dbc; color:white">
-    
+                
+                <div class="box-tools pull-right">
+
+                    <button type="button" class="btn btn-box-tool" id="removeNuevoPerfil"><i class="fa fa-times"></i></button>
+
+                </div>
+
                 <h4 class="modal-title">Nuevo Perfil</h4>
     
             </div>
@@ -164,6 +170,12 @@
         <div class="modal-content hideElement" id="modalEditarPerfil">
 
             <div class="modal-header" style="background:#3c8dbc; color:white">
+
+                <div class="box-tools pull-right">
+
+                    <button type="button" class="btn btn-box-tool" id="removeEditarPerfil"><i class="fa fa-times"></i></button>
+
+                </div>
 
                 <h4 class="modal-title">Editar Perfil</h4>
 

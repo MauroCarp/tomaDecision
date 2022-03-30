@@ -18,7 +18,7 @@
             
             <div class="form-group">
                 
-                <label for="mmGrasa">MM Grasa</label>
+                <label for="mmGrasa">mm Grasa</label>
             
                 <input type="number" step="0.10" class="form-control" id="mmGrasa" name="mmGrasa">
             

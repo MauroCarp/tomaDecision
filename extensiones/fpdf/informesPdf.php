@@ -83,7 +83,7 @@ class informePDF{
         $pdf->SetFillColor(220,220,220);
 
         $pdf->Cell(30,7,'RFID',1,0,'L',1);
-        $pdf->Cell(30,7,'MM Grasa',1,0,'C',1);
+        $pdf->Cell(30,7,'mm Grasa',1,0,'C',1);
         $pdf->Cell(25,7,'Peso',1,0,'C',1);
         $pdf->Cell(25,7,'Sexo',1,0,'C',1);
         $pdf->Cell(40,7,utf8_decode('Clasificación'),1,1,'C',1);

@@ -53,6 +53,7 @@ class TablaCarpetas{
 				$datosJson .='[
 					"'.$cont.'",
 					"'.$carpeta["destino"].'",
+					"'.$carpeta["descripcion"].'",
                     "'.$carpeta["cantidad"].'",
                     "'.$carpeta["fecha"].'",
                     "'.$progressBar.'",

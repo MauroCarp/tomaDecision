@@ -55,6 +55,7 @@ $('.tablaCarpetas').DataTable( {
 const btnNuevaCarpeta = document.getElementById('btnNuevaCarpeta')
 
 if(btnNuevaCarpeta != null){
+
     btnNuevaCarpeta.addEventListener('click',()=>{
 
         document.getElementById('modalNuevaCarpetaCorral').classList.add('showPerfilModal')
@@ -65,9 +66,9 @@ if(btnNuevaCarpeta != null){
         document.getElementById('inputsRangoMM').classList.add('hideElement')
         
 
-        document.getElementById('modalCarpeta').style.width = '1000px'
+        document.getElementById('modalCarpeta').style.width = '1100px'
 
-        document.getElementById('carpetasList').style.width = '50%'
+        document.getElementById('carpetasList').style.width = '60%'
 
         document.getElementById('DataTables_Table_1').style.width = '100%'
 
@@ -104,12 +105,28 @@ if(btnNuevaCarpeta != null){
         .catch(err=>console.log(err))
         
     })
-}
-// BTN NUEVO CORRAL
 
-const btnNuevoCorral = document.getElementById('btnNuevoCorral')
 
-if(btnNuevoCorral != null){
+    let removeModalNueva = document.getElementById('removeNuevaCarpeta')
+    
+    removeModalNueva.addEventListener('click',()=>{
+
+        document.getElementById('modalNuevaCarpetaCorral').classList.remove('showPerfilModal')
+        document.getElementById('modalNuevaCarpetaCorral').classList.add('hideElement')
+
+        document.getElementById('modalCarpeta').style.width = '600px'
+
+        document.getElementById('carpetasList').style.width = '100%'
+
+    })
+
+
+
+
+    // BTN NUEVO CORRAL
+
+    const btnNuevoCorral = document.getElementById('btnNuevoCorral')
+
     btnNuevoCorral.addEventListener('click',()=>{
 
     document.getElementById('modalNuevaCarpetaCorral').classList.add('showPerfilModal')
@@ -119,9 +136,9 @@ if(btnNuevoCorral != null){
     document.getElementById('tituloRangoMM').classList.remove('hideElement')
     document.getElementById('inputsRangoMM').classList.remove('hideElement')
 
-    document.getElementById('modalCarpeta').style.width = '1000px'
+    document.getElementById('modalCarpeta').style.width = '1100px'
 
-    document.getElementById('carpetasList').style.width = '50%'
+    document.getElementById('carpetasList').style.width = '60%'
 
     document.getElementById('DataTables_Table_1').style.width = '100%'
 
@@ -158,6 +175,20 @@ if(btnNuevoCorral != null){
     .catch(err=>console.log(err))
 
     })
+
+    let checkboxClasif = document.getElementsByClassName("cbClasificacion")
+console.log(checkboxClasif);
+
+    for (const checkbox of checkboxClasif) {
+
+        checkbox.addEventListener('change',function(){
+
+            console.log('hola');
+            
+        })
+        
+     
+    }
 }
 
 
@@ -279,7 +310,7 @@ if(btnNuevoCorral != null){
                         animales:reg.animales,
                         color,
                         idCarpeta:reg.idCarpeta,
-                        colRow:'col-lg-9'
+                        colRow:'col-lg-12'
                     }
 
                     if(operario){
