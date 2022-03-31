@@ -29,7 +29,7 @@ class ControladorAnimales{
 		$datos['tas3'] = $tas3;
 
 		$respuesta = ModeloAnimales::mdlNuevoAnimal($tabla, $datos);
-
+		
 		if($respuesta == 'ok'){
 			
 			$item = 'completa';
@@ -39,84 +39,176 @@ class ControladorAnimales{
 			$carpetas = ControladorCarpetas::ctrMostrarCarpetas($item,$valor,'prioridad');
 
 			if(sizeof($carpetas) > 0){
-				
+
 				for ($i=0; $i < sizeof($carpetas) ; $i++) { 
-
-					$clasificacion = explode('/',$carpetas[$i]['clasificacion']);
 					
-					$destino = $carpetas[$i]['destino'];
-
-					$item = 'nombre';
-
-					$perfil = ControladorPerfiles::ctrMostrarPerfiles($item,$destino);
-
-					$clasificacionAnimal = null;
-
-					if($tas3 >= $perfil['flacas']){
+					if($carpetas[$i]['activa'] == 1){
 						
-						$clasificacionAnimal = 'F';
+						if($carpetas[$i]['clasificacion'] != ''){							
+							// CLASIFICACION POR FORMULA
 
-					}else if($tas3 > $perfil['buenas'] AND $tas3 < $perfil['flacas']){
+							$clasificacion = explode('/',$carpetas[$i]['clasificacion']);
+							
+							$destino = $carpetas[$i]['destino'];
+		
+							$item = 'nombre';
+		
+							$perfil = ControladorPerfiles::ctrMostrarPerfiles($item,$destino);
+		
+							$clasificacionAnimal = null;
+		
+							if($tas3 >= ($perfil['flacas'] + 230)){
+								
+								$clasificacionAnimal = 'F';
+		
+							}else if($tas3 > ($perfil['buenas'] + 200) AND $tas3 < ($perfil['flacas'] + 230)){
+		
+								$clasificacionAnimal = 'B';
+		
+							}
+							else if($tas3 >= ($perfil['buenasMas'] + 175) AND $tas3 < ($perfil['buenas'] + 200) ){
+		
+								$clasificacionAnimal = 'B+';
+		
+							}
+							else if($tas3 >= ($perfil['muyBuenas'] + 125) AND $tas3 < ($perfil['buenasMas'] + 175)){
+		
+								$clasificacionAnimal = 'MB';
+		
+							}
+							else if($tas3 >= ($perfil['apenasGordas'] + 110) AND $tas3 < ($perfil['muyBuenas'] + 125)){
+		
+								$clasificacionAnimal = 'AP';
+		
+							}
+							else if($tas3 < ($perfil['apenasGordas'] + 110)){
+		
+								$clasificacionAnimal = 'G';
+		
+							}
 
-						$clasificacionAnimal = 'B';
+							if(in_array($clasificacionAnimal,$clasificacion) AND $datos['peso'] >= $carpetas[$i]['pesoMin'] AND $datos['peso'] <= $carpetas[$i]['pesoMax']){
 
-					}
-					else if($tas3 >= $perfil['buenasMas'] AND $tas3 < $perfil['buenas']){
+								$item = 'idAnimal';
+		
+								$valor = ControladorAnimales::ctrMostrarUltimoReg() ;
+		
+								$datos = array('idCarpeta'=>$carpetas[$i]['idCarpeta'],'clasificacion'=>$clasificacionAnimal);
+		
+								$errors['editarAnimal'] =  ControladorAnimales::ctrEditarAnimal($item,$valor[0],$datos);
+								
+								$item = 'idCarpeta';
+		
+								$errors['editarCarpeta'] =  ControladorCarpetas::ctrSumarAnimal($item,$carpetas[$i]['idCarpeta']);
+								
+								if(in_array('ok',$errors)){
+		
+									$datos['status'] = 'ok';
+									$datos['carpeta'] = $carpetas[$i]['destino'];
+									$datos['descripcion'] = $carpetas[$i]['descripcion'];
+									$datos['rfid'] = $_POST["rfid"];
+									$datos['peso'] = $_POST["peso"];
 
-						$clasificacionAnimal = 'B+';
-
-					}
-					else if($tas3 >= $perfil['muyBuenas'] AND $tas3 < $perfil['buenasMas']){
-
-						$clasificacionAnimal = 'MB';
-
-					}
-					else if($tas3 >= $perfil['apenasGordas'] AND $tas3 < $perfil['muyBuenas']){
-
-						$clasificacionAnimal = 'AP';
-
-					}
-					else if($tas3 < $perfil['apenasGordas']){
-
-						$clasificacionAnimal = 'G';
-
-					}
-					
-					if(in_array($clasificacionAnimal,$clasificacion) AND $datos['peso'] >= $carpetas[$i]['pesoMin'] AND $datos['peso'] <= $carpetas[$i]['pesoMax']){
-
-						$item = 'idAnimal';
-
-						$valor = ControladorAnimales::ctrMostrarUltimoReg() ;
-
-						$datos = array('idCarpeta'=>$carpetas[$i]['idCarpeta'],'clasificacion'=>$clasificacionAnimal);
-
-						$errors['editarAnimal'] =  ControladorAnimales::ctrEditarAnimal($item,$valor[0],$datos);
-						
-						$item = 'idCarpeta';
-
-						$errors['editarCarpeta'] =  ControladorCarpetas::ctrSumarAnimal($item,$carpetas[$i]['idCarpeta']);
-						
-						if(in_array('ok',$errors)){
-
-							$datos['status'] = 'ok';
-							$datos['carpeta'] = $carpetas[$i]['destino'];
-							$datos['rfid'] = $_POST["rfid"];
-							$datos['peso'] = $_POST["peso"];
-							return $datos;
-
+									return $datos;
+		
+								}else{
+		
+									return 'error';
+		
+								}
+		
+							}else{
+								
+								if(($i + 1) == sizeof($carpetas)){
+		
+									return array('status'=>'ok');
+								
+								}else{
+									return array('status'=>'ok','descripcion'=>'No Clasifica');
+								}
+		
+							}
+							
 						}else{
 
-							return 'error';
+							// CLASIFICACION POR MM DE GRASA
+
+							$minGrasaCarpeta = $carpetas[$i]['minGrasa'];
+							$maxGrasaCarpeta = $carpetas[$i]['maxGrasa'];
+
+							$mmGrasa = $datos['mmGrasa'];
+
+													
+							if($mmGrasa  >= $minGrasaCarpeta AND $mmGrasa  <= $maxGrasaCarpeta AND $datos['peso'] >= $carpetas[$i]['pesoMin'] AND $datos['peso'] <= $carpetas[$i]['pesoMax']){
+		
+								$item = 'idAnimal';
+		
+								$valor = ControladorAnimales::ctrMostrarUltimoReg() ;
+		
+								$clasificacion = $minGrasaCarpeta."mm / ".$maxGrasaCarpeta."mm";
+
+								$datos = array('idCarpeta'=>$carpetas[$i]['idCarpeta'],'clasificacion'=>$clasificacion);
+		
+								$errors['editarAnimal'] =  ControladorAnimales::ctrEditarAnimal($item,$valor[0],$datos);
+								
+								$item = 'idCarpeta';
+		
+								$errors['editarCarpeta'] =  ControladorCarpetas::ctrSumarAnimal($item,$carpetas[$i]['idCarpeta']);
+								
+								if(in_array('ok',$errors)){
+		
+									$datos['status'] = 'ok';
+									$datos['carpeta'] = $carpetas[$i]['destino'];
+									$datos['descripcion'] = $carpetas[$i]['descripcion'];
+									$datos['rfid'] = $_POST["rfid"];
+									$datos['peso'] = $_POST["peso"];
+									return $datos;
+		
+								}else{
+		
+									return 'error';
+		
+								}
+		
+							}else{
+		
+											return array('status'=>'ok',
+											'descripcion'=>'No Clasifica',
+											'clasificacion'=>'-',
+											'rfid'=>'-',
+											'peso'=>'-');
+
+								// if(($i + 1) == sizeof($carpetas)){
+		
+								// 	return array('status'=>'ok');
+								
+								// }else{
+
+								// 		return array('status'=>'ok',
+								// 		'descripcion'=>'No Clasifica',
+								// 		'clasificacion'=>'-',
+								// 		'rfid'=>'-',
+								// 		'peso'=>'-',
+								// 	);
+
+								// }
+		
+							}
+
 
 						}
 
 					}else{
 
-						if(($i + 1) == sizeof($carpetas)){
+						$item = 'RFID';
 
-							return array('status'=>'ok');
-						
-						}
+						$valor = $_POST["rfid"];
+		
+						$eliminarAnimal = ModeloAnimales::mdlEliminarAnimal($tabla,$item,$valor);
+		
+						$datos['status'] = 'error';
+						$datos['motivo'] = 'noCarpeta';
+						return $datos;
 
 					}
 

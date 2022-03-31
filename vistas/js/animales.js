@@ -114,6 +114,8 @@ $('.tablaIngresos').DataTable( {
               timer: 3000
               });
 
+              console.log(respuesta);
+              
               if(respuesta.status == 'ok'){
 
                     Toast.fire({
@@ -122,7 +124,7 @@ $('.tablaIngresos').DataTable( {
                       title: 'Animal Ingresado'
 
                   })
-
+                  
                   
                   $('.tablaIngresos').DataTable().ajax.reload();
 
@@ -141,7 +143,7 @@ $('.tablaIngresos').DataTable( {
                   
                   mostrarCarpetasActivas()
 
-                  document.getElementById('destinoAnimal').innerText = respuesta.carpeta
+                  document.getElementById('destinoAnimal').innerText = respuesta.descripcion
                   document.getElementById('clasificacionAnimal').innerText = respuesta.clasificacion
                   document.getElementById('rfidAnimal').innerText = respuesta.rfid
                   document.getElementById('pesoAnimal').innerText = respuesta.peso
