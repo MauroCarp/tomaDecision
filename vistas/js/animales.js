@@ -15,6 +15,7 @@
 
 $('.tablaIngresos').DataTable( {
   "ajax": "fetch/datatable-ingresos.fetch.php",
+  "bSort" : false,
   "deferRender": true,
   "retrieve": true,
   "processing": true,
@@ -23,7 +24,6 @@ $('.tablaIngresos').DataTable( {
   "info":     false,
   "bLengthChange": false,
   "pageLength": 5,
-  // "order": [[ 0, "desc" ]],
   
   "language": {
 

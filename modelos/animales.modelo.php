@@ -76,7 +76,7 @@ class ModeloAnimales{
 
 	static public function mdlMostrarAnimalesBetween($tabla,$item,$valor,$valor2){
 
-        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item BETWEEN :valor AND :valor2 ORDER BY date DESC");
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item BETWEEN :valor AND :valor2 ORDER BY idAnimal DESC");
         
         $stmt -> bindParam(":valor", $valor, PDO::PARAM_STR);
         $stmt -> bindParam(":valor2", $valor2, PDO::PARAM_STR);
