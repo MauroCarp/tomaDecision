@@ -3,7 +3,7 @@
 class ControladorAnimales{
 
 	/*=============================================
-	CREAR PRODUCTORES
+	NUEVO ANIMAL
 	=============================================*/
 
 	static public function ctrNuevoAnimal($data){
@@ -124,7 +124,13 @@ class ControladorAnimales{
 									return array('status'=>'ok');
 								
 								}else{
-									return array('status'=>'ok','descripcion'=>'No Clasifica');
+											
+									return array('status'=>'ok',
+									'descripcion'=>'No Clasifica',
+									'clasificacion'=>'-',
+									'rfid'=>'-',
+									'peso'=>'-');
+
 								}
 		
 							}
