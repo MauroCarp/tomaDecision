@@ -194,16 +194,18 @@ class ControladorCarpetas{
 
             $valor = $_GET['idCarpeta'];
 
-            $respuesta = ModeloCarpetas::mdlEliminarCarpeta($tabla, $item, $valor);
-            // var_dump($respuesta);
-            if($respuesta == "ok"){
+            $errors['carpeta'] = ModeloCarpetas::mdlEliminarCarpeta($tabla, $item, $valor);
+
+            $errors['animales'] = ControladorAnimales::ctrEliminarAnimal($item, $valor);
+
+            if(in_array('error',$errors)){
 
                 echo '<script>
 
                 new swal({
 
-                    icon: "success",
-                    title: "¡La carpeta ha sido eliminada correctamente!",
+                    icon: "error",
+                    title: "Hubo un error al eliminar la carpeta",
                     showConfirmButton: true,
                     confirmButtonText: "Cerrar"
 
@@ -220,15 +222,14 @@ class ControladorCarpetas{
 
                 </script>';
 
-
             }else{
 
                 echo '<script>
 
                 new swal({
 
-                    icon: "error",
-                    title: "Hubo un error al eliminar la carpeta",
+                    icon: "success",
+                    title: "¡La carpeta ha sido eliminada correctamente!",
                     showConfirmButton: true,
                     confirmButtonText: "Cerrar"
 
@@ -287,13 +288,13 @@ class ControladorCarpetas{
                 return $resp = ControladorCarpetas::ctrEditarCarpeta($item, $valor,$datos);
             }
 
-            if(in_array('ok',$errors)){
-                
-                return 'ok';
-
-            }else{
+            if(in_array('error',$errors)){
                 
                 return 'error';
+                
+            }else{
+                
+                return 'ok';
 
             }
 

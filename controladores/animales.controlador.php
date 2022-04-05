@@ -101,7 +101,11 @@ class ControladorAnimales{
 		
 								$errors['editarCarpeta'] =  ControladorCarpetas::ctrSumarAnimal($item,$carpetas[$i]['idCarpeta']);
 								
-								if(in_array('ok',$errors)){
+								if(in_array('error',$errors)){
+		
+									return 'error';
+
+								}else{
 		
 									$datos['status'] = 'ok';
 									$datos['carpeta'] = $carpetas[$i]['destino'];
@@ -110,11 +114,7 @@ class ControladorAnimales{
 									$datos['peso'] = $_POST["peso"];
 
 									return $datos;
-		
-								}else{
-		
-									return 'error';
-		
+
 								}
 		
 							}else{
@@ -155,28 +155,29 @@ class ControladorAnimales{
 		
 								$errors['editarCarpeta'] =  ControladorCarpetas::ctrSumarAnimal($item,$carpetas[$i]['idCarpeta']);
 								
-								if(in_array('ok',$errors)){
+								if(in_array('error',$errors)){
+									
+									return 'error';
+
+								}else{
 		
 									$datos['status'] = 'ok';
 									$datos['carpeta'] = $carpetas[$i]['destino'];
 									$datos['descripcion'] = $carpetas[$i]['descripcion'];
 									$datos['rfid'] = $_POST["rfid"];
 									$datos['peso'] = $_POST["peso"];
+
 									return $datos;
-		
-								}else{
-		
-									return 'error';
 		
 								}
 		
 							}else{
 		
-											return array('status'=>'ok',
-											'descripcion'=>'No Clasifica',
-											'clasificacion'=>'-',
-											'rfid'=>'-',
-											'peso'=>'-');
+								return array('status'=>'ok',
+								'descripcion'=>'No Clasifica',
+								'clasificacion'=>'-',
+								'rfid'=>'-',
+								'peso'=>'-');
 
 								// if(($i + 1) == sizeof($carpetas)){
 		
@@ -317,46 +318,23 @@ class ControladorAnimales{
 
 	}
 
-	  /*=============================================
-	ELIMINAR PERFIL
+	/*=============================================
+	ELIMINAR ANIMAL
 	=============================================*/
 
-	static public function mdlEliminarAnimal($tabla, $item, $valor){
-
-		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE $item = :$item");
-
-		$stmt -> bindParam(":".$item, $valor, PDO::PARAM_INT);
-
-		if($stmt -> execute()){
-
-			return "ok";
+	static public function ctrEliminarAnimal($item,$valor){
 		
-		}else{
-
-			return "error";	
-
-		}
-
-		$stmt -> close();
-
-		$stmt = null;
-
-
-	}
-
-
-		/*=============================================
-	ELIMINAR PERFIL
-	=============================================*/
-
-	static public function ctrEliminarAnimal(){
+		$tabla = 'animales';
 
         if(isset($_GET['idAnimal'])){
 
-			$tabla = 'animales';
-
 			return $eliminarAnimal = ModeloAnimales::mdlEliminarAnimal($tabla,$item,$valor);
 
+		}
+
+		if($item == 'idCarpeta'){
+
+			return $respuesta = ModeloAnimales::mdlEliminarAnimal($tabla,$item,$valor);
 
 		}
 
