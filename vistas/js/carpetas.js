@@ -177,8 +177,7 @@ if(btnNuevaCarpeta != null){
     })
 
     let checkboxClasif = document.getElementsByClassName("cbClasificacion")
-console.log(checkboxClasif);
-
+    
     for (const checkbox of checkboxClasif) {
 
         checkbox.addEventListener('change',function(){
@@ -321,6 +320,22 @@ console.log(checkboxClasif);
 
                     docFragment.appendChild(generarCarpeta(props))
 
+                    setTimeout(() => {
+                        
+                        let hrefInformes = document.getElementsByClassName('btnInformeCarpeta')
+                        
+                        for (const iterator of hrefInformes) {
+                                
+                           iterator.addEventListener('click',()=>{
+                    
+                               iterator.style.display = 'none'
+                               
+                           })
+                            
+                        }
+                        
+                    }, 600);
+
                 })
 
                 row.appendChild(docFragment)
@@ -383,19 +398,6 @@ setTimeout(() => {
             });
     
         })
-        
-    }
-
-    // INFORMES CARPETAS
-
-    let hrefInformes = document.getElementsByClassName('btnInformeCarpeta')
-    for (const iterator of hrefInformes) {
-        
-       iterator.addEventListener('click',()=>{
-
-           iterator.style.display = 'none'
-           
-       })
         
     }
 
