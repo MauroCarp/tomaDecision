@@ -10,9 +10,7 @@
                           <th style="width:10%">Peso</th>
                           
                           <th style="width:10%">Sexo</th>
-                          
-                          <th style="width:10%">Eco Ref</th>
-                          
+                                                    
                           <th style="width:15%" >Clasificaci&oacute;n</th>
                           
                           <th style="width:20%">Destino</th>

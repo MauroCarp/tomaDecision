@@ -100,7 +100,6 @@ class TablaIngresos{
 					"'.$animal["mmGrasa"].'",
 					"'.$animal["peso"].'",
 					"'.$sexo.'",
-					"'.$animal["ecoRef"].'",
 					"'.$label.'",
 					"'.$destino.'",
 					"'.$deleteBtn.'"
