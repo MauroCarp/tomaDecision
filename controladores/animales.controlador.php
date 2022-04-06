@@ -192,18 +192,6 @@ class ControladorAnimales{
 
 						}
 
-					}else{
-
-						$item = 'RFID';
-
-						$valor = $_POST["rfid"];
-		
-						$eliminarAnimal = ModeloAnimales::mdlEliminarAnimal($tabla,$item,$valor);
-		
-						$datos['status'] = 'error';
-						$datos['motivo'] = 'noCarpeta';
-						return $datos;
-
 					}
 
 				}
