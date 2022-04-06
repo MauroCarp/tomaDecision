@@ -182,12 +182,9 @@ if(btnNuevaCarpeta != null){
     let inputMinGrasa = document.querySelector('input[name="minGrasa"]')
     let inputMaxGrasa = document.querySelector('input[name="maxGrasa"]')
 
-    // AL SELECCIONAR MINMAX DESCARTIVAR CHECKS
+    const desactivarInputsMinMax = (valueMin,valueMax)=>{
 
-    inputMaxGrasa.addEventListener('change',()=>{
-
-        if(inputMaxGrasa.value != 0){
-
+        if(valueMin != 0 || valueMax != 0){
 
             for (const check of document.getElementsByClassName('icheckbox_minimal-blue')) {
                 
@@ -217,6 +214,19 @@ if(btnNuevaCarpeta != null){
 
         }
 
+    }
+    // AL SELECCIONAR MINMAX DESCARTIVAR CHECKS
+
+    inputMaxGrasa.addEventListener('change',()=>{
+
+        desactivarInputsMinMax(inputMinGrasa.value,inputMaxGrasa.value)
+       
+    })
+
+    inputMinGrasa.addEventListener('change',()=>{
+
+        desactivarInputsMinMax(inputMinGrasa.value,inputMaxGrasa.value)
+       
     })
 
     // AL SELECCIONAR CHECK DESACTIVAR MINMAX

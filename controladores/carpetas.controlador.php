@@ -23,13 +23,50 @@ class ControladorCarpetas{
                     $cantidad = null;
                 
                 }
+                
+                $pesoMax = $_POST['pesoMaxCarpetaCorral'];
                     
+                if($_POST['pesoMaxCarpetaCorral'] == 0){
+
+                    $pesoMax = 10000;
+                    
+                }
+
+
+                if($_POST['pesoMaxCarpetaCorral'] < $_POST['pesoMinCarpetaCorral']){
+
+                    echo '<script>
+
+                    new swal({
+
+                        icon: "error",
+                        title: "Hubo un error al cargar la carpeta. El peso Min no puede ser mayor al peso Max",
+                        showConfirmButton: true,
+                        confirmButtonText: "Cerrar"
+
+                    }).then(function(result){
+
+                        if(result.value){
+                        
+                            window.location = "inicio";
+
+                        }
+
+                    });
+                
+
+                    </script>';
+
+                    die();
+
+                }
+
 
                 $datos = array("destino"=>$_POST["perfilCarpetaCorral"],
                                 "descripcion"=>$_POST["descripcionCarpetaCorral"],
                                 "cantidad"=>$_POST["animalesCarpetaCorral"],
                                 "pesoMin"=>$_POST["pesoMinCarpetaCorral"],
-                                "pesoMax"=>$_POST["pesoMaxCarpetaCorral"],
+                                "pesoMax"=>$pesoMax,
                                 "prioridad"=>$_POST["prioridadCarpetaCorral"],
                                 "clasificacion"=>$clasificacion,
                                 "minGrasa"=>$_POST["minGrasa"],

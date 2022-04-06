@@ -9,7 +9,16 @@ class TablaCarpetas{
   	=============================================*/ 
 
 	public function mostrarTablaCarpetas(){
+	
+		function formatearFecha($fecha){
 
+			$fechaExplode = explode('-',$fecha);
+		  
+			$fechaFormateada = $fechaExplode[2]."-".$fechaExplode[1]."-".$fechaExplode[0];
+		  
+			return $fechaFormateada;
+		  
+		}
 
 		$item = null;
 		$valor = null;
@@ -49,13 +58,17 @@ class TablaCarpetas{
                 $button = "<a href='extensiones/fpdf/informesPdf.php?informe=carpeta&idCarpeta=".$carpeta['idCarpeta']."' class='btn btn-primary' ".$boton." target='_blank'>Informe</a>";
 
                 $btnEliminar = "<div class='btn-group'><button class='btn btn-danger btnEliminarCarpeta' idCarpeta='".$carpeta['idCarpeta']."'><i class='fa fa-times'></i></button></div>";
+			
+				$fechaCarpeta = formatearFecha($carpeta["fecha"]);
+
+				$cantidad = ($carpeta["cantidad"] != 0)  ? $carpeta["cantidad"] : 'Libre';
 
 				$datosJson .='[
 					"'.$cont.'",
 					"'.$carpeta["destino"].'",
 					"'.$carpeta["descripcion"].'",
-                    "'.$carpeta["cantidad"].'",
-                    "'.$carpeta["fecha"].'",
+                    "'.$cantidad.'",
+                    "'.$fechaCarpeta.'",
                     "'.$progressBar.'",
                     "'.$button.'",
                     "'.$btnEliminar.'"
