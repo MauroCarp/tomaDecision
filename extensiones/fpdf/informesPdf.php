@@ -52,10 +52,12 @@ class informePDF{
 
         $destino = $carpeta[0]['destino'];
 
-        $titulo = "Informe Carpeta $destino - Fecha: $today";
+        $descripcion = $carpeta[0]['descripcion'];
 
-        $cabezera = $titulo;
+        $cabezera = "Informe Carpeta $destino - $descripcion";
 
+        $fecha = "Fecha: $today";
+        
         include 'cabezera.php';
 
         $pdf->SetFont('helvetica','B',12);
@@ -66,13 +68,27 @@ class informePDF{
         $pdf->Cell(20,7,'Peso Max.',0,1,'L',0);
         
         $pdf->SetFont('helvetica','',12);
-        $pdf->Cell(35,7,$carpeta[0]['cantidad'],0,0,'C',0);
+
+        $cantidad = ($carpeta[0]['cantidad'] == 0) ? "Libre" : $carpeta[0]['cantidad'];
+
+        $pdf->Cell(35,7,$cantidad,0,0,'C',0);
 
         $clasificacion = ($carpeta[0]['clasificacion'] != '') ? $carpeta[0]['clasificacion'] : $carpeta[0]['minGrasa']." mm / ".$carpeta[0]['maxGrasa']." mm"; 
 
         $pdf->Cell(40,7,$clasificacion,0,0,'C',0);
-        $pdf->Cell(25,7,$carpeta[0]['pesoMin'],0,0,'C',0);
-        $pdf->Cell(20,7,$carpeta[0]['pesoMax'],0,1,'C',0);
+
+        $pesoMin = $carpeta[0]['pesoMin'];
+        $pesoMax = $carpeta[0]['pesoMax'];
+
+        if($carpeta[0]['pesoMax'] == 10000){
+        
+            $pesoMin = 'Libre';
+            $pesoMax = 'Libre';
+
+        } 
+
+        $pdf->Cell(25,7,$pesoMin,0,0,'C',0);
+        $pdf->Cell(20,7,$pesoMax,0,1,'C',0);
 
         $item = 'idCarpeta';
 
@@ -90,6 +106,7 @@ class informePDF{
         
         $valido = true;
         $pesoTotal = 0;
+        $totalAnimales = 0;
         $pesoMin = ($carpeta[0]['animales'] != 0) ? 9999 : 0;
         $pesoMax = 0;
 
@@ -145,7 +162,7 @@ class informePDF{
             $pdf->Cell(40,7,$clasificacion,0,1,'C',1);
 
             $pesoTotal += $animal['peso'];
-
+            $totalAnimales++;
             $pesoMin = ($animal['peso'] < $pesoMin) ? $animal['peso'] : $pesoMin;
             $pesoMax = ($animal['peso'] > $pesoMax) ? $animal['peso'] : $pesoMax;
 
@@ -168,11 +185,11 @@ class informePDF{
         $pdf->Cell(0.01,7,'',1,0,'C',0);
         $pdf->Cell(30,7,'Desv. Est.',0,1,'C',0);
         
-        $pesoPromedio = ($carpeta[0]['cantidad'] != 0) ? $pesoTotal / $carpeta[0]['cantidad'] : 0;
+        $pesoPromedio = $pesoTotal / $totalAnimales;
         
         $pdf->Cell(30,7,$pesoTotal." Kg",0,0,'C',0);
         $pdf->Cell(0.01,7,'',1,0,'C',0);
-        $pdf->Cell(35,7,$pesoPromedio." Kg",0,0,'C',0);
+        $pdf->Cell(35,7,number_format($pesoPromedio,0)." Kg",0,0,'C',0);
         $pdf->Cell(0.01,7,'',1,0,'C',0);
         $pdf->Cell(30,7,$pesoMin." Kg",0,0,'C',0);
         $pdf->Cell(0.01,7,'',1,0,'C',0);
