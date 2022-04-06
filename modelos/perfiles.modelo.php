@@ -10,13 +10,13 @@ class ModeloPerfiles{
 
     static public function mdlNuevoPerfil($tabla,$datos){
         
-        $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(nombre,flacas,buenas,buenasMas,muyBuenas,apenasGordas) VALUES(:nombre,:flacas,:buenas,:buenasMas,:muyBuenas,:apenasGordas)");
+        $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(nombre,flacas,buenas,buenasMas,muyBuenas,apenasGordas,fecha) VALUES(:nombre,:flacas,:buenas,:buenasMas,:muyBuenas,:apenasGordas, CURRENT_DATE)");
 
-		$flacas = (230 + ($datos['flacas']));
-		$buenas = (200 + ($datos['buenas']));
-		$buenasMas = (175 + ($datos['buenasMas']));
-		$muyBuenas = (125 + ($datos['muyBuenas']));
-		$apenasGordas = (110 + ($datos['apenasGordas']));
+		$flacas = ($datos['flacas']);
+		$buenas = ($datos['buenas']);
+		$buenasMas = ($datos['buenasMas']);
+		$muyBuenas = ($datos['muyBuenas']);
+		$apenasGordas = ($datos['apenasGordas']);
         
 		$stmt -> bindParam(":nombre", $datos['nombre'], PDO::PARAM_STR);
         $stmt -> bindParam(":flacas", $flacas, PDO::PARAM_STR);
