@@ -49,8 +49,13 @@ class ModeloPerfiles{
 
       if($item != null){
 
-        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item ORDER BY activo DESC, fecha DESC");
+        $stmt = Conexion::conectar()->prepare("SELECT SUM(flacas + :flacas) as flacas,SUM(buenas + :buenas) as buenas,SUM(buenasMas + :buenasMas) as buenasMas ,SUM(muyBuenas + :muyBuenas) as muyBuenas,SUM(apenasGordas + :apenasGordas) as apenasGordas, id, nombre, activo, fecha  FROM $tabla WHERE $item = :$item ORDER BY activo DESC, fecha DESC");
         
+		$stmt -> bindValue(":flacas", 230);
+        $stmt -> bindValue(":buenas", 200);
+        $stmt -> bindValue(":buenasMas", 175);
+        $stmt -> bindValue(":muyBuenas", 125);
+        $stmt -> bindValue(":apenasGordas", 110);
         $stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
           
         $stmt -> execute();
@@ -59,10 +64,15 @@ class ModeloPerfiles{
         
       }else{
         
-        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla ORDER BY activo DESC, fecha DESC");
+        $stmt = Conexion::conectar()->prepare("SELECT SUM(flacas + :flacas) as flacas,SUM(buenas + :buenas) as buenas,SUM(buenasMas + :buenasMas) as buenasMas ,SUM(muyBuenas + :muyBuenas) as muyBuenas,SUM(apenasGordas + :apenasGordas) as apenasGordas, id, nombre, activo, fecha FROM $tabla ORDER BY activo DESC,fecha DESC");
+		$stmt -> bindValue(":flacas", 230);
+        $stmt -> bindValue(":buenas", 200);
+        $stmt -> bindValue(":buenasMas", 175);
+        $stmt -> bindValue(":muyBuenas", 125);
+        $stmt -> bindValue(":apenasGordas", 110);
           
         $stmt -> execute();
-  
+		
         return $stmt -> fetchAll();
       
       }

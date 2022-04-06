@@ -29,7 +29,7 @@ class FetchAnimales{
         $valor = $this->idPerfil;
 
 		$respuesta = ControladorPerfiles::ctrMostrarPerfiles($item,$valor);
-
+        
         $flacas = $respuesta['flacas'];
         $buenas = $respuesta['buenas'];
         $buenasMas = $respuesta['buenasMas'];

@@ -54,7 +54,7 @@
                                     $valor = null;
 
                                     $perfiles = ControladorPerfiles::ctrMostrarPerfiles($item,$valor);
-                                
+
                                     for ($i=0; $i < sizeof($perfiles) ; $i++) { 
                                     
                                         $confgActivo = ($perfiles[$i]['activo'] == 1) ? $activo = array('icon'=>'check','btn'=>'success') : $activo = array('icon'=>'ban','btn'=>'danger');
