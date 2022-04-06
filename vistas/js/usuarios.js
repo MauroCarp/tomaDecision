@@ -197,9 +197,9 @@ ELIMINAR USUARIO
 =============================================*/
 $(".tablas").on("click", ".btnEliminarUsuario", function(){
 
-  var idUsuario = $(this).attr("idUsuario");
-  var fotoUsuario = $(this).attr("fotoUsuario");
-  var usuario = $(this).attr("usuario");
+  let idUsuario = $(this).attr("idUsuario");
+  let fotoUsuario = $(this).attr("fotoUsuario");
+  let usuario = $(this).attr("usuario");
 
   new swal({
     title: '¿Está seguro de borrar el usuario?',

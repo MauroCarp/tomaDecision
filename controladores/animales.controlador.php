@@ -29,7 +29,7 @@ class ControladorAnimales{
 		$datos['tas3'] = $tas3;
 
 		$respuesta = ModeloAnimales::mdlNuevoAnimal($tabla, $datos);
-		
+
 		if($respuesta == 'ok'){
 			
 			$item = 'completa';
@@ -44,8 +44,9 @@ class ControladorAnimales{
 					
 					if($carpetas[$i]['activa'] == 1){
 						
-						if($carpetas[$i]['clasificacion'] != ''){							
+						if($carpetas[$i]['clasificacion'] != ''){
 							// CLASIFICACION POR FORMULA
+							return 'hola clasificacion';
 
 							$clasificacion = explode('/',$carpetas[$i]['clasificacion']);
 							
@@ -57,31 +58,31 @@ class ControladorAnimales{
 		
 							$clasificacionAnimal = null;
 		
-							if($tas3 >= ($perfil['flacas'] + 230)){
+							if($tas3 >= ($perfil['flacas'])){
 								
 								$clasificacionAnimal = 'F';
 		
-							}else if($tas3 > ($perfil['buenas'] + 200) AND $tas3 < ($perfil['flacas'] + 230)){
+							}else if($tas3 > ($perfil['buenas']) AND $tas3 < ($perfil['flacas'])){
 		
 								$clasificacionAnimal = 'B';
 		
 							}
-							else if($tas3 >= ($perfil['buenasMas'] + 175) AND $tas3 < ($perfil['buenas'] + 200) ){
+							else if($tas3 >= ($perfil['buenasMas']) AND $tas3 < ($perfil['buenas']) ){
 		
 								$clasificacionAnimal = 'B+';
 		
 							}
-							else if($tas3 >= ($perfil['muyBuenas'] + 125) AND $tas3 < ($perfil['buenasMas'] + 175)){
+							else if($tas3 >= ($perfil['muyBuenas']) AND $tas3 < ($perfil['buenasMas'])){
 		
 								$clasificacionAnimal = 'MB';
 		
 							}
-							else if($tas3 >= ($perfil['apenasGordas'] + 110) AND $tas3 < ($perfil['muyBuenas'] + 125)){
+							else if($tas3 >= ($perfil['apenasGordas']) AND $tas3 < ($perfil['muyBuenas'])){
 		
 								$clasificacionAnimal = 'AP';
 		
 							}
-							else if($tas3 < ($perfil['apenasGordas'] + 110)){
+							else if($tas3 < ($perfil['apenasGordas'])){
 		
 								$clasificacionAnimal = 'G';
 		
@@ -121,22 +122,22 @@ class ControladorAnimales{
 								
 								if(($i + 1) == sizeof($carpetas)){
 		
-									return array('status'=>'ok');
-								
-								}else{
-											
 									return array('status'=>'ok',
 									'descripcion'=>'No Clasifica',
 									'clasificacion'=>'-',
 									'rfid'=>'-',
 									'peso'=>'-');
+								
+								}else{
+									
+									break;
 
 								}
 		
 							}
 							
 						}else{
-
+							return 'hola MM';
 							// CLASIFICACION POR MM DE GRASA
 
 							$minGrasaCarpeta = $carpetas[$i]['minGrasa'];
@@ -179,29 +180,21 @@ class ControladorAnimales{
 		
 							}else{
 		
-								return array('status'=>'ok',
-								'descripcion'=>'No Clasifica',
-								'clasificacion'=>'-',
-								'rfid'=>'-',
-								'peso'=>'-');
-
-								// if(($i + 1) == sizeof($carpetas)){
+								if(($i + 1) == sizeof($carpetas)){
 		
-								// 	return array('status'=>'ok');
+									return array('status'=>'ok',
+									'descripcion'=>'No Clasifica',
+									'clasificacion'=>'-',
+									'rfid'=>'-',
+									'peso'=>'-');
 								
-								// }else{
+								}else{
+									
+									break;
 
-								// 		return array('status'=>'ok',
-								// 		'descripcion'=>'No Clasifica',
-								// 		'clasificacion'=>'-',
-								// 		'rfid'=>'-',
-								// 		'peso'=>'-',
-								// 	);
-
-								// }
+								}
 		
 							}
-
 
 						}
 

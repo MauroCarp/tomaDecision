@@ -438,20 +438,14 @@ if(btnNuevaCarpeta != null){
         mostrarCarpetasActivas(true)
 
     
-// ELIMINAR CARPETA
-setTimeout(() => {
-    
-    let btnsEliminarCarpetas = document.getElementsByClassName('btnEliminarCarpeta')
-    
-    for (const btn of btnsEliminarCarpetas) {
-            
-        btn.addEventListener('click',(e)=>{
+        // ELIMINAR CARPETA
+        
+        $('.tablaCarpetas').on('click','.btnEliminarCarpeta',function(e){
 
             e.preventDefault()
-            let id = (e.path[0].attributes.length > 1) ? e.path[0].attributes.idcarpeta.value : e.path[1].attributes.idcarpeta.value 
-            console.log(id);
-            
-    
+                
+            let id = $(this).attr('idcarpeta')
+                
             new swal({
                 title: '¿Eliminar Carpeta?',
                 text: "¡Si no lo está puede cancelar la accíón!",
@@ -470,12 +464,9 @@ setTimeout(() => {
                 }
     
             });
-    
-        })
-        
-    }
 
-}, 800);
+        })
+
 
 
 
