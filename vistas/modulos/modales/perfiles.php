@@ -55,34 +55,39 @@
 
                                     $perfiles = ControladorPerfiles::ctrMostrarPerfiles($item,$valor);
 
-                                    for ($i=0; $i < sizeof($perfiles) ; $i++) { 
-                                    
-                                        $confgActivo = ($perfiles[$i]['activo'] == 1) ? $activo = array('icon'=>'check','btn'=>'success') : $activo = array('icon'=>'ban','btn'=>'danger');
-
-                                       echo " 
-                                        <tr>
-                                
-                                            <td>".($i+1)."</td>
+                                    if($perfiles[0]['id'] != null){
                                         
-                                            <td>".$perfiles[$i]['nombre']."</td>
-                                        
-                                            <td>                                       
-                                                
-                                                <div class='btn-group' style='float:right;'>
-                                                    
-                                                    <button class='btn btn-warning btnEditarPerfil' idPerfil='".$perfiles[$i]['id']."'><i class='fa fa-pencil'></i></button>
-                            
-                                                    <button class='btn btn-".$confgActivo['btn']." btnActDesacPerfil' idPerfil='".$perfiles[$i]['id']."'><i class='fa fa-".$confgActivo['icon']."'></i></button>
-                                                    
-                                                    <button class='btn btn-danger btnEliminarPerfil' idPerfil='".$perfiles[$i]['id']."'><i class='fa fa-times'></i></button>
-                                        
-                                                </div>
+                                        for ($i=0; $i < sizeof($perfiles) ; $i++) { 
                                             
-                                            </td>
-                                        
-                                        </tr>";
+                                            $confgActivo = ($perfiles[$i]['activo'] == 1) ? $activo = array('icon'=>'check','btn'=>'success') : $activo = array('icon'=>'ban','btn'=>'danger');
 
+                                            echo " 
+                                                <tr>
+                                        
+                                                    <td>".($i+1)."</td>
+                                                
+                                                    <td>".$perfiles[$i]['nombre']."</td>
+                                                
+                                                    <td>                                       
+                                                        
+                                                        <div class='btn-group' style='float:right;'>
+                                                            
+                                                            <button class='btn btn-warning btnEditarPerfil' idPerfil='".$perfiles[$i]['id']."'><i class='fa fa-pencil'></i></button>
+                                    
+                                                            <button class='btn btn-".$confgActivo['btn']." btnActDesacPerfil' idPerfil='".$perfiles[$i]['id']."'><i class='fa fa-".$confgActivo['icon']."'></i></button>
+                                                            
+                                                            <button class='btn btn-danger btnEliminarPerfil' idPerfil='".$perfiles[$i]['id']."'><i class='fa fa-times'></i></button>
+                                                
+                                                        </div>
+                                                    
+                                                    </td>
+                                                
+                                                </tr>";
+
+                                        }
+                                        
                                     }
+
 
                                 ?>
                                 
