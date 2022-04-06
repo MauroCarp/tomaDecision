@@ -35,9 +35,9 @@ class ControladorPerfiles{
             }
 
             $nombreValido = ControladorPerfiles::ctrMostrarPerfiles($item,$valor);
-            
-            if(!$nombreValido){
 
+            if($nombreValido['nombre'] == null){
+                
                 $tabla = "perfiles";
 
                 $datos = array("nombre"=>$_POST["nombrePerfil"],
