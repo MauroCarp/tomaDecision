@@ -176,18 +176,82 @@ if(btnNuevaCarpeta != null){
 
     })
 
-    let checkboxClasif = document.getElementsByClassName("cbClasificacion")
+
+/*-------------------------------------------------------------*/
+
+    let inputMinGrasa = document.querySelector('input[name="minGrasa"]')
+    let inputMaxGrasa = document.querySelector('input[name="maxGrasa"]')
+
+    // AL SELECCIONAR MINMAX DESCARTIVAR CHECKS
+
+    inputMaxGrasa.addEventListener('change',()=>{
+
+        if(inputMaxGrasa.value != 0){
+
+
+            for (const check of document.getElementsByClassName('icheckbox_minimal-blue')) {
+                
+                check.classList.remove('checked')
+
+                check.setAttribute('aria-checked','false')
+
+                check.style.cursor = 'not-allow'
+                check.style.pointerEvents = 'none'
+                check.style.backgroundColor = 'rgba(200,200,200,.9)'
+
+                check.firstElementChild.setAttribute('disabled','disabled')
+                
+            }
+
+        }else{
+            
+            for (const check of document.getElementsByClassName('icheckbox_minimal-blue')) {
+                
+                check.style.cursor = 'pointer'
+                check.style.pointerEvents = 'auto'
+                check.style.backgroundColor = 'rgb(255,255,255)'
+
+                check.firstElementChild.removeAttribute('disabled')
+                
+            }
+
+        }
+
+    })
+
+    // AL SELECCIONAR CHECK DESACTIVAR MINMAX
+    let checkboxClasif = document.getElementsByClassName("iCheck-helper")
     
+    let checkeds = 0
+
     for (const checkbox of checkboxClasif) {
 
-        checkbox.addEventListener('change',function(){
+        checkbox.addEventListener('click',()=>{
+           
+            if(checkbox.previousElementSibling.checked){
 
-            console.log('hola');
-            
+                checkeds++
+                inputMinGrasa.setAttribute('readOnly','readOnly')
+                inputMaxGrasa.setAttribute('readOnly','readOnly')
+
+                
+            }else{
+                
+                checkeds--
+                if(checkeds == 0){
+
+                    inputMinGrasa.removeAttribute('readOnly')
+                    inputMaxGrasa.removeAttribute('readOnly')
+                
+                }
+
+
+            }
+
         })
         
-     
     }
+
 }
 
 
