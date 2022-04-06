@@ -45,9 +45,8 @@ class ControladorAnimales{
 					if($carpetas[$i]['activa'] == 1){
 						
 						if($carpetas[$i]['clasificacion'] != ''){
-							// CLASIFICACION POR FORMULA
-							return 'hola clasificacion';
 
+							// CLASIFICACION POR FORMULA
 							$clasificacion = explode('/',$carpetas[$i]['clasificacion']);
 							
 							$destino = $carpetas[$i]['destino'];
@@ -119,25 +118,20 @@ class ControladorAnimales{
 								}
 		
 							}else{
-								
+
 								if(($i + 1) == sizeof($carpetas)){
-		
+									
 									return array('status'=>'ok',
 									'descripcion'=>'No Clasifica',
 									'clasificacion'=>'-',
 									'rfid'=>'-',
 									'peso'=>'-');
-								
-								}else{
 									
-									break;
-
 								}
-		
+
 							}
 							
 						}else{
-							return 'hola MM';
 							// CLASIFICACION POR MM DE GRASA
 
 							$minGrasaCarpeta = $carpetas[$i]['minGrasa'];
