@@ -16,12 +16,6 @@
       
     </div>
 
-    <div class="box-footer text-center">
-
-    <a href="#" class="uppercase" data-toggle="modal" data-target="#ventanaModalCarpetas">Ver todas las carpetas</a>
-
-    </div>
-
   </div>
 
 </div>
