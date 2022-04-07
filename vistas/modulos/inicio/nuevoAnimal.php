@@ -37,6 +37,18 @@
             </div>
         
         </div>
+      
+        <div class="col-lg-1">
+            
+            <div class="form-group">
+                
+                <label for="aob">AOB</label>
+            
+                <input type="text" class="form-control" id="aob" name="aob" disabled>
+            
+            </div>
+        
+        </div>
 
         <div class="col-lg-2">
 
@@ -84,7 +96,7 @@
         
         </div>
 
-        <div class="col-lg-2">
+        <div class="col-lg-1">
             
             <div class="form-group">
                 
