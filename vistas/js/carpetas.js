@@ -121,9 +121,6 @@ if(btnNuevaCarpeta != null){
 
     })
 
-
-
-
     // BTN NUEVO CORRAL
 
     const btnNuevoCorral = document.getElementById('btnNuevoCorral')
@@ -262,6 +259,177 @@ if(btnNuevaCarpeta != null){
         })
         
     }
+
+
+    /****** 
+    CARGAR NUEVA CARPETA
+                                                    ***** */
+
+    document.getElementById('nuevaCarpetaCorralForm')
+    .addEventListener('submit',(e)=>{
+        
+        e.preventDefault()
+        
+        const data = Object.fromEntries(
+            
+            new FormData(e.target)
+
+        )
+
+        let clasificacionCarpetaCorral = []
+
+        for (const iterator of document.querySelectorAll("input[name='clasificacionCarpetaCorral[]']")) {
+        
+               if(iterator.checked){
+                   clasificacionCarpetaCorral.push(iterator.value)
+               };
+                
+        }
+        
+        data.clasificacionCarpetaCorral = clasificacionCarpetaCorral.join('/');
+
+        data.accion = 'nuevaCarpeta'
+
+        let url = 'fetch/carpetas.fetch.php'
+
+        $.ajax({
+            method:'post',
+            url,
+            data,
+            success:(respuesta)=>{
+                
+                let data = JSON.parse(respuesta)
+
+                if(data == 'errorValidacion'){
+
+                    new swal({
+    
+                        icon: "error",
+                        title: "Se debe elegir al menos  clasificación de animal/Rango de mm",
+                        showConfirmButton: true,
+                        confirmButtonText: "Cerrar"
+    
+                    })
+                    
+                    return 
+
+                }
+    
+                if(data == "ok"){
+    
+                    new swal({
+    
+                        icon: "success",
+                        title: "¡La carpeta ha sido guardada correctamente!",   
+                        showConfirmButton: true,
+                        confirmButtonText: "Cerrar"
+    
+                    })
+
+                    document.getElementById('descripcionCarpetaCorral').value = ''
+                    document.getElementById('pesoMinCarpetaCorral').value = 0
+                    document.getElementById('pesoMaxCarpetaCorral').value = 0
+                    document.querySelector('input[name="minGrasa"]').value = 0
+                    document.querySelector('input[name="maxGrasa"]').value = 0
+                    document.querySelector('input[name="minGrasa"]').removeAttribute('readOnly')
+                    document.querySelector('input[name="maxGrasa"]').removeAttribute('readOnly')
+
+                    for (const checks of document.querySelectorAll('input[name="clasificacionCarpetaCorral[]"]')) {
+                        
+                        checks.removeAttribute('checked')
+                        checks.parentElement.classList.remove('checked')
+                        checks.parentElement.setAttribute('aria-checked','false')
+                        
+                    }
+
+                    $('.tablaCarpetas').DataTable().ajax.reload();
+
+                    let idSeccionCarpetas = 'carpetasScrollOperario'
+
+                    let operarioValido = true
+  
+                    if(document.getElementById('seccionCarpetaAct') != null){
+  
+                      idSeccionCarpetas =  'carpetasScroll' 
+  
+                      operarioValido = false
+  
+                    } 
+  
+                    document.getElementById(idSeccionCarpetas).firstElementChild.firstElementChild.innerHTML = ''
+                    
+                    mostrarCarpetasActivas(operarioValido)
+
+                    
+                }else{
+    
+                    new swal({
+    
+                        icon: "error",
+                        title: "Hubo un error al cargar la carpeta",
+                        showConfirmButton: true,
+                        confirmButtonText: "Cerrar"
+    
+                    })
+    
+                }
+                    
+            }
+
+        })
+        
+        // fetch(url,{
+        //     method:'post',
+        //     body:data
+        // })
+        // .then(resp=> console.log(resp.json()))
+        // .then(respuesta => {
+        //     console.log(respuesta)
+
+        //     if(respuesta = 'errorValidacion'){
+
+        //         new swal({
+
+        //             icon: "error",
+        //             title: "Se debe elegir al menos  clasificación de animal/Rango de mm",
+        //             showConfirmButton: true,
+        //             confirmButtonText: "Cerrar"
+
+        //         })
+                
+        //         return 
+        //     }
+
+        //     if(respuesta == "ok"){
+
+        //         new swal({
+
+        //             icon: "success",
+        //             title: "¡La carpeta ha sido guardada correctamente!",   
+        //             showConfirmButton: true,
+        //             confirmButtonText: "Cerrar"
+
+        //         })
+
+        //     }else{
+
+        //         new swal({
+
+        //             icon: "error",
+        //             title: "Hubo un error al cargar la carpeta",
+        //             showConfirmButton: true,
+        //             confirmButtonText: "Cerrar"
+
+        //         })
+
+        //     }
+
+        // })
+        // .catch(err=>console.log(err))
+
+
+        
+    })
 
 }
 

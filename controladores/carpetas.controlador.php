@@ -6,155 +6,80 @@ class ControladorCarpetas{
 	CREAR CARPETA
 	=============================================*/
 
-	static public function ctrNuevaCarpeta(){
-
-        if(isset($_POST['btnCargarCarpetaCorral'])){
-
-            if(isset($_POST['clasificacionCarpetaCorral']) OR $_POST['maxGrasa'] != 0){
-                
-                $tabla = "carpetas";
-                    
-                $clasificacion = (isset($_POST['clasificacionCarpetaCorral'])) ? implode('/',$_POST['clasificacionCarpetaCorral']) : '';
-
-                $cantidad = $_POST["animalesCarpetaCorral"];
-
-                if($_POST["animalesCarpetaCorral"] == 0 AND $_POST["maxGrasa"] != 0){
-                    
-                    $cantidad = null;
-                
-                }
-                
-                $pesoMax = $_POST['pesoMaxCarpetaCorral'];
-                    
-                if($_POST['pesoMaxCarpetaCorral'] == 0){
-
-                    $pesoMax = 10000;
-                    
-                }
-
-
-                if($_POST['pesoMaxCarpetaCorral'] < $_POST['pesoMinCarpetaCorral']){
-
-                    echo '<script>
-
-                    new swal({
-
-                        icon: "error",
-                        title: "Hubo un error al cargar la carpeta. El peso Min no puede ser mayor al peso Max",
-                        showConfirmButton: true,
-                        confirmButtonText: "Cerrar"
-
-                    }).then(function(result){
-
-                        if(result.value){
-                        
-                            window.location = "inicio";
-
-                        }
-
-                    });
-                
-
-                    </script>';
-
-                    die();
-
-                }
-
-
-                $datos = array("destino"=>$_POST["perfilCarpetaCorral"],
-                                "descripcion"=>$_POST["descripcionCarpetaCorral"],
-                                "cantidad"=>$_POST["animalesCarpetaCorral"],
-                                "pesoMin"=>$_POST["pesoMinCarpetaCorral"],
-                                "pesoMax"=>$pesoMax,
-                                "prioridad"=>$_POST["prioridadCarpetaCorral"],
-                                "clasificacion"=>$clasificacion,
-                                "minGrasa"=>$_POST["minGrasa"],
-                                "maxGrasa"=>$_POST["maxGrasa"]
-                );
-
-                // VALIDAR PRIORIDAD
-
-                $priorizar = ControladorCarpetas::ctrPriorizar($datos['prioridad']);
-
-                $respuesta = ModeloCarpetas::mdlNuevaCarpeta($tabla, $datos);
-
-                if($respuesta == "ok"){
-
-                    echo '<script>
-
-                    new swal({
-
-                        icon: "success",
-                        title: "¡La carpeta ha sido guardada correctamente!",   
-                        showConfirmButton: true,
-                        confirmButtonText: "Cerrar"
-
-                    }).then(function(result){
-
-                        if(result.value){
-                        
-                            window.location = "inicio";
-
-                        }
-
-                    });
-                
-
-                    </script>';
-
-
-                }else{
-
-                    echo '<script>
-
-                    new swal({
-
-                        icon: "error",
-                        title: "Hubo un error al cargar la carpeta",
-                        showConfirmButton: true,
-                        confirmButtonText: "Cerrar"
-
-                    }).then(function(result){
-
-                        if(result.value){
-                        
-                            window.location = "inicio";
-
-                        }
-
-                    });
-                
-
-                    </script>';
-
-                }
+	static public function ctrNuevaCarpeta($data){
+        
+        if($data['clasificacionCarpetaCorral'] != '' OR $data['maxGrasa'] != 0){
             
-            }else{
+            $tabla = "carpetas";
+                
+            $clasificacion = (isset($data['clasificacionCarpetaCorral'])) ? $data['clasificacionCarpetaCorral'] : '';
+
+            $cantidad = $data["animalesCarpetaCorral"];
+
+            if($data["animalesCarpetaCorral"] == 0 AND $data["maxGrasa"] != 0){
+                
+                $cantidad = null;
+            
+            }
+            
+            $pesoMax = $data['pesoMaxCarpetaCorral'];
+                
+            if($data['pesoMaxCarpetaCorral'] == 0){
+
+                $pesoMax = 10000;
+                
+            }
+
+
+            if($data['pesoMaxCarpetaCorral'] < $data['pesoMinCarpetaCorral']){
 
                 echo '<script>
 
-                    new swal({
+                new swal({
 
-                        icon: "error",
-                        title: "Se debe elegir al menos  clasificación de animal/Rango de mm",
-                        showConfirmButton: true,
-                        confirmButtonText: "Cerrar"
+                    icon: "error",
+                    title: "Hubo un error al cargar la carpeta. El peso Min no puede ser mayor al peso Max",
+                    showConfirmButton: true,
+                    confirmButtonText: "Cerrar"
 
-                    }).then(function(result){
+                }).then(function(result){
 
-                        if(result.value){
-                        
-                            window.location = "inicio";
+                    if(result.value){
+                    
+                        window.location = "inicio";
 
-                        }
+                    }
 
-                    });
-                
+                });
+            
 
-                    </script>';
+                </script>';
+
+                die();
 
             }
+
+
+            $datos = array("destino"=>$data["perfilCarpetaCorral"],
+                            "descripcion"=>$data["descripcionCarpetaCorral"],
+                            "cantidad"=>$data["animalesCarpetaCorral"],
+                            "pesoMin"=>$data["pesoMinCarpetaCorral"],
+                            "pesoMax"=>$pesoMax,
+                            "prioridad"=>$data["prioridadCarpetaCorral"],
+                            "clasificacion"=>$clasificacion,
+                            "minGrasa"=>$data["minGrasa"],
+                            "maxGrasa"=>$data["maxGrasa"]
+            );
+
+            // VALIDAR PRIORIDAD
+
+            $priorizar = ControladorCarpetas::ctrPriorizar($datos['prioridad']);
+
+            return $respuesta = ModeloCarpetas::mdlNuevaCarpeta($tabla, $datos);
+        
+        }else{
+
+            return "errorValidacion";
 
         }
 

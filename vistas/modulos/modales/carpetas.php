@@ -278,10 +278,10 @@
 
 <?php
 
-$cargarCarpeta = new ControladorCarpetas();
-$cargarCarpeta -> ctrNuevaCarpeta();
+// $cargarCarpeta = new ControladorCarpetas();
+// $cargarCarpeta -> ctrNuevaCarpeta();
 
-$eliminarCarpeta = new ControladorCarpetas();
-$eliminarCarpeta -> ctrEliminarCarpeta();
+// $eliminarCarpeta = new ControladorCarpetas();
+// $eliminarCarpeta -> ctrEliminarCarpeta();
 
 ?>

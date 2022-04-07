@@ -23,6 +23,14 @@ class FetchCarpetas{
         echo json_encode($respuesta);
       
     }
+	
+    public function fetchNuevaCarpeta($data){
+        
+        $respuesta = ControladorCarpetas::ctrNuevaCarpeta($data);
+
+        echo json_encode($respuesta);
+      
+    }
 
 }
 
@@ -34,6 +42,13 @@ if(isset($_POST["accion"])){
 
         $mostrarCarpetasActivas = new FetchCarpetas();
 		$mostrarCarpetasActivas -> fetchMostrarCarpetas();
+
+    }
+
+	if($accion == 'nuevaCarpeta'){
+
+        $nuevaCarpeta = new FetchCarpetas();
+		$nuevaCarpeta -> fetchNuevaCarpeta($_POST);
 
     }
 
