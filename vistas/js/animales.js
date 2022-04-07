@@ -135,13 +135,29 @@ $('.tablaIngresos').DataTable( {
                   document.getElementById('peso').value = ''
                   document.getElementById('refEco').value = ''
 
-                  let idPerfil = document.getElementById('perfilesClasificacion').value
-              
-                  actualizarClasificacion(idPerfil)
+                  if(document.getElementById('seccionClasificacion') != null){
 
-                  document.getElementById('carpetasScroll').firstElementChild.firstElementChild.innerHTML = ''
+                    let idPerfil = document.getElementById('perfilesClasificacion').value
+                    
+                    actualizarClasificacion(idPerfil)
                   
-                  mostrarCarpetasActivas()
+                  }
+
+                  let idSeccionCarpetas = 'carpetasScrollOperario'
+
+                  let operarioValido = true
+
+                  if(document.getElementById('seccionCarpetaAct') != null){
+
+                    idSeccionCarpetas =  'carpetasScroll' 
+
+                    operarioValido = false
+
+                  } 
+
+                  document.getElementById(idSeccionCarpetas).firstElementChild.firstElementChild.innerHTML = ''
+                  
+                  mostrarCarpetasActivas(operarioValido)
 
                   document.getElementById('destinoAnimal').innerText = respuesta.descripcion
                   document.getElementById('clasificacionAnimal').innerText = respuesta.clasificacion
@@ -177,9 +193,6 @@ $('.tablaIngresos').DataTable( {
 
           })
           .catch(err=>console.log(err))
-
-
-          // console.log(e);
           
       })
 

@@ -93,6 +93,7 @@ class informePDF{
         $item = 'idCarpeta';
 
         $animales = ControladorAnimales::ctrMostrarAnimales($item, $valor);
+
         $pdf->Ln(5);
 
 
@@ -109,6 +110,7 @@ class informePDF{
         $totalAnimales = 0;
         $pesoMin = ($carpeta[0]['animales'] != 0) ? 9999 : 0;
         $pesoMax = 0;
+
 
         foreach ($animales as $key => $animal) {
 
@@ -165,7 +167,6 @@ class informePDF{
             $totalAnimales++;
             $pesoMin = ($animal['peso'] < $pesoMin) ? $animal['peso'] : $pesoMin;
             $pesoMax = ($animal['peso'] > $pesoMax) ? $animal['peso'] : $pesoMax;
-
         }
 
         $pdf->Ln(8);
@@ -186,7 +187,8 @@ class informePDF{
         $pdf->Cell(30,7,'Desv. Est.',0,1,'C',0);
         
         $pesoPromedio = $pesoTotal / $totalAnimales;
-        
+
+
         $pdf->Cell(30,7,$pesoTotal." Kg",0,0,'C',0);
         $pdf->Cell(0.01,7,'',1,0,'C',0);
         $pdf->Cell(35,7,number_format($pesoPromedio,0)." Kg",0,0,'C',0);

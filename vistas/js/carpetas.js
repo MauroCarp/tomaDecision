@@ -402,7 +402,7 @@ if(btnNuevaCarpeta != null){
                                 
                            iterator.addEventListener('click',()=>{
                     
-                               iterator.style.display = 'none'
+                               iterator.parentElement.parentElement.style.display = 'none'
                                
                            })
                             
