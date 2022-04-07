@@ -75,13 +75,13 @@
                 
               </div>
 
-              <div class="box"  id="seccionClasificacion">
+              <div class="box collapsed-box"  id="seccionClasificacion">
                   
                 <div class="box-header with-border">
                   
                   <div class="box-tools pull-right">
                   
-                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
                   
                   </div>
 
