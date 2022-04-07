@@ -90,7 +90,7 @@ class TablaIngresos{
 
 				if($animal['idCarpeta'] != null){
 			
-					$carpeta = ControladorCarpetas::ctrMostrarCarpetas($item,$animal['idCarpeta'],'fecha');
+					$carpeta = ControladorCarpetas::ctrMostrarCarpetas($item,$animal['idCarpeta'],'fecha','DESC');
 				
 					$destino = $carpeta[0]['destino'];
 				}

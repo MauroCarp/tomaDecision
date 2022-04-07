@@ -165,11 +165,11 @@ class ControladorCarpetas{
 	MOSTRAR CARPETA
 	=============================================*/
 
-	static public function ctrMostrarCarpetas($item, $valor,$orden){
+	static public function ctrMostrarCarpetas($item, $valor,$orden,$ascDesc){
 
 		$tabla = "carpetas";
 
-		$respuesta = ModeloCarpetas::mdlMostrarCarpetas($tabla, $item, $valor,$orden);
+		$respuesta = ModeloCarpetas::mdlMostrarCarpetas($tabla, $item, $valor,$orden,$ascDesc);
 
 		return $respuesta;
 
@@ -310,7 +310,7 @@ class ControladorCarpetas{
 
             $errors['sumar'] =  $respuesta = ModeloCarpetas::mdlSumarAnimal($tabla,$item,$valor);
             
-            $carpeta = ModeloCarpetas::mdlMostrarCarpetas($tabla,$item,$valor,'fecha');
+            $carpeta = ModeloCarpetas::mdlMostrarCarpetas($tabla,$item,$valor,'fecha','DESC');
 
             if($carpeta[0]['cantidad'] == $carpeta[0]['animales']){
 

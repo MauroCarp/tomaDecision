@@ -25,7 +25,7 @@ class TablaCarpetas{
   
         $orden = 'fecha';
 
-		$carpetas = ControladorCarpetas::ctrMostrarCarpetas($item,$valor,$orden);
+		$carpetas = ControladorCarpetas::ctrMostrarCarpetas($item,$valor,$orden,'DESC');
 
         if(count($carpetas) == 0){
 

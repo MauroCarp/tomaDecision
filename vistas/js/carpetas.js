@@ -15,15 +15,16 @@
 
 $('.tablaCarpetas').DataTable( {
     "ajax": "fetch/datatable-carpetas.fetch.php",
+    "bSort" : false,
     "deferRender": true,
     "retrieve": true,
     "processing": true,
-      "ordering": false,
+    "ordering": false,
     "searching": false,
     "info":     false,
     "bLengthChange": false,
     "pageLength": 5,
-    // "order": [[ 0, "desc" ]],
+    // "order": [[ 4, "asc" ]],
     
     "language": {
   

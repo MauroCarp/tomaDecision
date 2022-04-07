@@ -36,7 +36,7 @@ class ControladorAnimales{
 
 			$valor = null;
 
-			$carpetas = ControladorCarpetas::ctrMostrarCarpetas($item,$valor,'prioridad');
+			$carpetas = ControladorCarpetas::ctrMostrarCarpetas($item,$valor,'prioridad','ASC');
 
 			if(sizeof($carpetas) > 0){
 
