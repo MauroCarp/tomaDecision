@@ -71,6 +71,8 @@ include 'modales/perfiles.php';
 
 include 'modales/carpetas.php';
 
+include 'modales/verCarpeta.php';
+
 }
 
 ?>

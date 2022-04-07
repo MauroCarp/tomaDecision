@@ -54,6 +54,8 @@
 
                                     <th></th>                            
                                     
+                                    <th></th>         
+                                                       
                                     <th></th>                            
 
                                 </thead>
@@ -275,13 +277,3 @@
     </div>
                 
 </div>
-
-<?php
-
-// $cargarCarpeta = new ControladorCarpetas();
-// $cargarCarpeta -> ctrNuevaCarpeta();
-
-// $eliminarCarpeta = new ControladorCarpetas();
-// $eliminarCarpeta -> ctrEliminarCarpeta();
-
-?>

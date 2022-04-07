@@ -154,12 +154,8 @@ class ControladorAnimales{
 									'rfid'=>'-',
 									'peso'=>'-');
 								
-								}else{
-									
-									break;
-
 								}
-		
+								
 							}
 
 						}

@@ -270,7 +270,7 @@ if(btnNuevaCarpeta != null){
         
         e.preventDefault()
         
-        document.getElementById('btnCargarCarpetaCorral').setAttribute('readOnly','readOnly')
+        document.getElementById('btnCargarCarpetaCorral').setAttribute('disabled','disabled')
 
         let buttonText = document.getElementById('btnCargarCarpetaCorral').innerText
 
@@ -317,7 +317,7 @@ if(btnNuevaCarpeta != null){
     
                     })
                     
-                    document.getElementById('btnCargarCarpetaCorral').removeAttribute('readOnly')
+                    document.getElementById('btnCargarCarpetaCorral').removeAttribute('disabled')
                     document.getElementById('btnCargarCarpetaCorral').innerText = buttonText
 
                     return 
@@ -369,7 +369,7 @@ if(btnNuevaCarpeta != null){
                     
                     mostrarCarpetasActivas(operarioValido)
 
-                    document.getElementById('btnCargarCarpetaCorral').removeAttribute('readOnly')
+                    document.getElementById('btnCargarCarpetaCorral').removeAttribute('disabled')
                     document.getElementById('btnCargarCarpetaCorral').innerText = buttonText
                     
                 }else{
@@ -383,7 +383,7 @@ if(btnNuevaCarpeta != null){
     
                     })
 
-                    document.getElementById('btnCargarCarpetaCorral').removeAttribute('readOnly')
+                    document.getElementById('btnCargarCarpetaCorral').removeAttribute('disabled')
                     document.getElementById('btnCargarCarpetaCorral').innerText = buttonText
     
                 }
@@ -444,6 +444,51 @@ if(btnNuevaCarpeta != null){
 
         
     })
+
+
+    // CARGAR VER CARPETA MODAL
+
+    $('.tablaCarpetas').on('click','.btnVerCarpeta',function(){
+
+        let value = $(this).attr('idCarpeta')
+        
+        let data = new FormData()
+        data.append('accion','verCarpeta')
+        data.append('idCarpeta',value)
+
+        let url = 'fetch/carpetas.fetch.php'
+        console.log(value);
+        
+        fetch(url,{
+            method:'post',
+            body:data
+        }).then(resp => resp.json())
+        .then(respuesta=> {
+
+            console.log(respuesta);
+            let pesoMin = respuesta[0].pesoMin
+            let pesoMax = respuesta[0].pesoMax
+            
+            if(respuesta[0].pesoMax == 10000){
+           
+                pesoMin = 'Libre'
+                pesoMax = 'Libre'
+
+            }
+            
+            document.getElementById('pesoMinVerModal').innerText = pesoMin
+            document.getElementById('pesoMaxVerModal').innerText = pesoMax
+
+            document.getElementById('clasVerModal').innerText = respuesta[0].clasificacion
+            document.getElementById('mmMinVerModal').innerText = respuesta[0].minGrasa
+            document.getElementById('mmMaxVerModal').innerText = respuesta[0].maxGrasa
+            document.getElementById('prioridadVerModal').innerText = respuesta[0].prioridad
+
+        })
+        .catch(err=>console.log(err))
+
+    })
+
 
 }
 

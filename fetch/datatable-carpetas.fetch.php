@@ -58,6 +58,8 @@ class TablaCarpetas{
                 $button = "<a href='extensiones/fpdf/informesPdf.php?informe=carpeta&idCarpeta=".$carpeta['idCarpeta']."' class='btn btn-primary' ".$boton." target='_blank'>Informe</a>";
 
                 $btnEliminar = "<div class='btn-group'><button class='btn btn-danger btnEliminarCarpeta' idCarpeta='".$carpeta['idCarpeta']."'><i class='fa fa-times'></i></button></div>";
+                
+				$btnVerCarpeta = "<div class='btn-group'><button data-toggle='modal' data-target='#ventanaModalVerCarpeta' class='btn btn-default btnVerCarpeta' idCarpeta='".$carpeta['idCarpeta']."'><i class='fa fa-eye'></i></button></div>";
 			
 				$fechaCarpeta = formatearFecha($carpeta["fecha"]);
 
@@ -71,6 +73,7 @@ class TablaCarpetas{
                     "'.$fechaCarpeta.'",
                     "'.$progressBar.'",
                     "'.$button.'",
+                    "'.$btnVerCarpeta.'",
                     "'.$btnEliminar.'"
 					],';
 

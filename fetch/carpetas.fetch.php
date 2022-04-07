@@ -6,6 +6,8 @@ require_once "../modelos/carpetas.modelo.php";
 
 class FetchCarpetas{
 	
+    public $idCarpeta;
+
     public function fetchMostrarCarpetas(){
 
         $item = 'activa';
@@ -32,6 +34,18 @@ class FetchCarpetas{
       
     }
 
+    public function fetchVerCarpeta(){
+
+        $item = 'idCarpeta';
+
+        $valor = $this->idCarpeta;
+
+        $respuesta = ControladorCarpetas:: ctrMostrarCarpetas($item, $valor,'fecha','ASC');
+
+        echo json_encode($respuesta);
+
+    }
+
 }
 
 if(isset($_POST["accion"])){
@@ -49,6 +63,14 @@ if(isset($_POST["accion"])){
 
         $nuevaCarpeta = new FetchCarpetas();
 		$nuevaCarpeta -> fetchNuevaCarpeta($_POST);
+
+    }
+
+	if($accion == 'verCarpeta'){
+
+        $verCarpeta = new FetchCarpetas();
+        $verCarpeta-> idCarpeta = $_POST['idCarpeta'];
+		$verCarpeta -> fetchVerCarpeta();
 
     }
 
