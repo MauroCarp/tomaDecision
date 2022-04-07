@@ -12,7 +12,7 @@
 
                     <div class="widget-user-header bg-aqua-active" style="text-align:center;">                                                                         
 
-                      <h1 class="widget-user-username" id="destinoAnimal" style="font-size:4em;font-weight:bolder;line-height:1.5em;">DESTINO</h1>
+                      <h1 class="widget-user-username" id="destinoAnimal" style="font-size:3.1em;font-weight:bolder;line-height:1.5em;">DESTINO</h1>
 
                     </div>
 
@@ -24,7 +24,7 @@
 
                           <div class="description-block">
 
-                            <h5 class="description-header" id="rfidAnimal" style="font-size:2.5em;">-</h5>
+                            <h5 class="description-header" id="rfidAnimal" style="font-size:1.8em;">-</h5>
 
                             <span class="description-text">RFID</span>
 
@@ -36,7 +36,7 @@
 
                           <div class="description-block">
 
-                          <h5 class="description-header" id="clasificacionAnimal" style="font-size:2.5em;">-</h5>
+                          <h5 class="description-header" id="clasificacionAnimal" style="font-size:1.9em;">-</h5>
 
                             <span class="description-text">CLASIFICACIÓN</span>
 
@@ -48,7 +48,7 @@
 
                           <div class="description-block">
 
-                            <h5 class="description-header" id="pesoAnimal" style="font-size:2.5em;">-</h5>
+                            <h5 class="description-header" id="pesoAnimal" style="font-size:2em;">-</h5>
 
                             <span class="description-text">PESO</span>
 
