@@ -270,6 +270,12 @@ if(btnNuevaCarpeta != null){
         
         e.preventDefault()
         
+        document.getElementById('btnCargarCarpetaCorral').setAttribute('readOnly','readOnly')
+
+        let buttonText = document.getElementById('btnCargarCarpetaCorral').innerText
+
+        document.getElementById('btnCargarCarpetaCorral').innerText = 'Cargando'
+
         const data = Object.fromEntries(
             
             new FormData(e.target)
@@ -311,6 +317,9 @@ if(btnNuevaCarpeta != null){
     
                     })
                     
+                    document.getElementById('btnCargarCarpetaCorral').removeAttribute('readOnly')
+                    document.getElementById('btnCargarCarpetaCorral').innerText = buttonText
+
                     return 
 
                 }
@@ -360,6 +369,8 @@ if(btnNuevaCarpeta != null){
                     
                     mostrarCarpetasActivas(operarioValido)
 
+                    document.getElementById('btnCargarCarpetaCorral').removeAttribute('readOnly')
+                    document.getElementById('btnCargarCarpetaCorral').innerText = buttonText
                     
                 }else{
     
@@ -371,6 +382,9 @@ if(btnNuevaCarpeta != null){
                         confirmButtonText: "Cerrar"
     
                     })
+
+                    document.getElementById('btnCargarCarpetaCorral').removeAttribute('readOnly')
+                    document.getElementById('btnCargarCarpetaCorral').innerText = buttonText
     
                 }
                     

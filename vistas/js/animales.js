@@ -112,6 +112,8 @@ $('.tablaIngresos').DataTable( {
 
           .then(resp=>resp.json())
           .then(respuesta=> {
+
+              console.log(respuesta);
               
               let Toast =  swal.mixin({
               toast: true,
@@ -120,7 +122,7 @@ $('.tablaIngresos').DataTable( {
               timer: 3000
               });
               
-              if(respuesta.status == 'ok'){
+              if(respuesta?.status == 'ok'){
 
                     Toast.fire({
 
