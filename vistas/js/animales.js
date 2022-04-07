@@ -62,13 +62,16 @@ $('.tablaIngresos').DataTable( {
 
           e.preventDefault();
 
+          document.querySelector('button[name="nuevoAnimal"]').setAttribute('disabled','disabled')
+          document.querySelector('button[name="nuevoAnimal"]').innerText = 'Cargando'
+
           let rfid = document.getElementById('rfid').value
           let mmGrasa = document.getElementById('mmGrasa').value
           let peso = document.getElementById('peso').value
           let sexo = document.querySelector('input[name="sexo"]:checked').value
           let refEco = document.getElementById('refEco').value
 
-          let validacion = [rfid,mmGrasa,peso]
+          let validacion = [mmGrasa,peso]
 
           if(validacion.includes('')){
               
@@ -84,6 +87,10 @@ $('.tablaIngresos').DataTable( {
                   icon: 'warning',
                   reverseButtons: true
                 })
+
+                document.querySelector('button[name="nuevoAnimal"]').removeAttribute('disabled')
+                document.querySelector('button[name="nuevoAnimal"]').innerText = 'Cargar'
+
 
                 return
 
@@ -113,8 +120,6 @@ $('.tablaIngresos').DataTable( {
               showConfirmButton: false,
               timer: 3000
               });
-
-              console.log(respuesta);
               
               if(respuesta.status == 'ok'){
 
@@ -164,6 +169,9 @@ $('.tablaIngresos').DataTable( {
                   document.getElementById('rfidAnimal').innerText = respuesta.rfid
                   document.getElementById('pesoAnimal').innerText = respuesta.peso
 
+                  document.querySelector('button[name="nuevoAnimal"]').removeAttribute('disabled')
+                  document.querySelector('button[name="nuevoAnimal"]').innerText = 'Cargar'
+
                 
               }else{            
                   
@@ -188,6 +196,10 @@ $('.tablaIngresos').DataTable( {
                   })
 
                 }
+
+                document.querySelector('button[name="nuevoAnimal"]').removeAttribute('disabled')
+                document.querySelector('button[name="nuevoAnimal"]').innerText = 'Cargar'
+
 
               }
 
