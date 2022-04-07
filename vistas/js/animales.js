@@ -91,7 +91,6 @@ $('.tablaIngresos').DataTable( {
                 document.querySelector('button[name="nuevoAnimal"]').removeAttribute('disabled')
                 document.querySelector('button[name="nuevoAnimal"]').innerText = 'Cargar'
 
-
                 return
 
           }

@@ -8,37 +8,39 @@ class ControladorAnimales{
 
 	static public function ctrNuevoAnimal($data){
 
-		$tabla = "animales";
+		$item = 'completa';
 
-		$datos = array("rfid"=>$_POST["rfid"],
-						"mmGrasa"=>$_POST["mmGrasa"],
-						"peso"=>$_POST["peso"],
-						"sexo"=>$_POST["sexo"],
-						"refEco"=>$_POST["refEco"]);
+		$valor = null;
 
-		$tas1 = ($datos['mmGrasa'] * 100) / $datos['peso'];
+		$carpetas = ControladorCarpetas::ctrMostrarCarpetas($item,$valor,'prioridad','ASC');
 
-		$tas2 = $datos['peso'] / $tas1;
+		if(sizeof($carpetas) > 0){
 
-		$tas3 = ($datos['sexo'] == 'M') ? $tas2 : $tas2 - 12;
+			$tabla = "animales";
 
-		$datos['tas1'] = $tas1;
-		
-		$datos['tas2'] = $tas2;
-		
-		$datos['tas3'] = $tas3;
+			$rfid = ($_POST["rfid"] != '') ? $_POST["rfid"] : 0;
 
-		$respuesta = ModeloAnimales::mdlNuevoAnimal($tabla, $datos);
+			$datos = array("rfid"=>$rfid,
+							"mmGrasa"=>$_POST["mmGrasa"],
+							"peso"=>$_POST["peso"],
+							"sexo"=>$_POST["sexo"],
+							"refEco"=>$_POST["refEco"]);
 
-		if($respuesta == 'ok'){
+			$tas1 = ($datos['mmGrasa'] * 100) / $datos['peso'];
+
+			$tas2 = $datos['peso'] / $tas1;
+
+			$tas3 = ($datos['sexo'] == 'M') ? $tas2 : $tas2 - 12;
+
+			$datos['tas1'] = $tas1;
 			
-			$item = 'completa';
+			$datos['tas2'] = $tas2;
+			
+			$datos['tas3'] = $tas3;
 
-			$valor = null;
+			$respuesta = ModeloAnimales::mdlNuevoAnimal($tabla, $datos);
 
-			$carpetas = ControladorCarpetas::ctrMostrarCarpetas($item,$valor,'prioridad','ASC');
-
-			if(sizeof($carpetas) > 0){
+			if($respuesta == 'ok'){
 
 				for ($i=0; $i < sizeof($carpetas) ; $i++) { 
 					
@@ -50,42 +52,8 @@ class ControladorAnimales{
 							$clasificacion = explode('/',$carpetas[$i]['clasificacion']);
 							
 							$destino = $carpetas[$i]['destino'];
-		
-							$item = 'nombre';
-		
-							$perfil = ControladorPerfiles::ctrMostrarPerfiles($item,$destino);
-		
-							$clasificacionAnimal = null;
-		
-							if($tas3 >= ($perfil['flacas'])){
-								
-								$clasificacionAnimal = 'F';
-		
-							}else if($tas3 > ($perfil['buenas']) AND $tas3 < ($perfil['flacas'])){
-		
-								$clasificacionAnimal = 'B';
-		
-							}
-							else if($tas3 >= ($perfil['buenasMas']) AND $tas3 < ($perfil['buenas']) ){
-		
-								$clasificacionAnimal = 'B+';
-		
-							}
-							else if($tas3 >= ($perfil['muyBuenas']) AND $tas3 < ($perfil['buenasMas'])){
-		
-								$clasificacionAnimal = 'MB';
-		
-							}
-							else if($tas3 >= ($perfil['apenasGordas']) AND $tas3 < ($perfil['muyBuenas'])){
-		
-								$clasificacionAnimal = 'AP';
-		
-							}
-							else if($tas3 < ($perfil['apenasGordas'])){
-		
-								$clasificacionAnimal = 'G';
-		
-							}
+
+							$clasificacionAnimal = ControladorAnimales::ctrDeterminarClasificacion($destino,$tas3);
 
 							if(in_array($clasificacionAnimal,$clasificacion) AND $datos['peso'] >= $carpetas[$i]['pesoMin'] AND $datos['peso'] <= $carpetas[$i]['pesoMax']){
 
@@ -93,7 +61,7 @@ class ControladorAnimales{
 		
 								$valor = ControladorAnimales::ctrMostrarUltimoReg() ;
 		
-								$datos = array('idCarpeta'=>$carpetas[$i]['idCarpeta'],'clasificacion'=>$clasificacionAnimal);
+								$datos = array('idCarpeta'=>$carpetas[$i]['idCarpeta'],'clasificacion'=>$clasificacionAnimal,'registroClas'=>$clasificacionAnimal);
 		
 								$errors['editarAnimal'] =  ControladorAnimales::ctrEditarAnimal($item,$valor[0],$datos);
 								
@@ -110,7 +78,7 @@ class ControladorAnimales{
 									$datos['status'] = 'ok';
 									$datos['carpeta'] = $carpetas[$i]['destino'];
 									$datos['descripcion'] = $carpetas[$i]['descripcion'];
-									$datos['rfid'] = $_POST["rfid"];
+									$datos['rfid'] = $rfid;
 									$datos['peso'] = $_POST["peso"];
 
 									return $datos;
@@ -148,7 +116,11 @@ class ControladorAnimales{
 		
 								$clasificacion = $minGrasaCarpeta."mm / ".$maxGrasaCarpeta."mm";
 
-								$datos = array('idCarpeta'=>$carpetas[$i]['idCarpeta'],'clasificacion'=>$clasificacion);
+								$destino = $carpetas[$i]['destino'];
+
+								$clasificacionAnimal = ControladorAnimales::ctrDeterminarClasificacion($destino,$tas3);
+
+								$datos = array('idCarpeta'=>$carpetas[$i]['idCarpeta'],'clasificacion'=>$clasificacion,'registroClas'=>$clasificacionAnimal);
 		
 								$errors['editarAnimal'] =  ControladorAnimales::ctrEditarAnimal($item,$valor[0],$datos);
 								
@@ -165,7 +137,7 @@ class ControladorAnimales{
 									$datos['status'] = 'ok';
 									$datos['carpeta'] = $carpetas[$i]['destino'];
 									$datos['descripcion'] = $carpetas[$i]['descripcion'];
-									$datos['rfid'] = $_POST["rfid"];
+									$datos['rfid'] = $rfid;
 									$datos['peso'] = $_POST["peso"];
 
 									return $datos;
@@ -198,14 +170,7 @@ class ControladorAnimales{
 
 			}else{
 
-				$item = 'RFID';
-
-				$valor = $_POST["rfid"];
-
-				$eliminarAnimal = ModeloAnimales::mdlEliminarAnimal($tabla,$item,$valor);
-
 				$datos['status'] = 'error';
-				$datos['motivo'] = 'noCarpeta';
 				return $datos;
 			
 			}
@@ -318,6 +283,51 @@ class ControladorAnimales{
 			return $respuesta = ModeloAnimales::mdlEliminarAnimal($tabla,$item,$valor);
 
 		}
+
+	}
+
+	/*=============================================
+	DETERMINAR CLASIFICACION ANIMAL
+	=============================================*/
+	static public function ctrDeterminarClasificacion($destino,$value){
+		
+		$item = 'nombre';
+
+		$perfil = ControladorPerfiles::ctrMostrarPerfiles($item,$destino);
+
+		$clasificacionAnimal = null;
+
+		if($value >= ($perfil['flacas'])){
+			
+			$clasificacionAnimal = 'F';
+
+		}else if($value > ($perfil['buenas']) AND $value < ($perfil['flacas'])){
+
+			$clasificacionAnimal = 'B';
+
+		}
+		else if($value >= ($perfil['buenasMas']) AND $value < ($perfil['buenas']) ){
+
+			$clasificacionAnimal = 'B+';
+
+		}
+		else if($value >= ($perfil['muyBuenas']) AND $value < ($perfil['buenasMas'])){
+
+			$clasificacionAnimal = 'MB';
+
+		}
+		else if($value >= ($perfil['apenasGordas']) AND $value < ($perfil['muyBuenas'])){
+
+			$clasificacionAnimal = 'AP';
+
+		}
+		else if($value < ($perfil['apenasGordas'])){
+
+			$clasificacionAnimal = 'G';
+
+		}
+
+		return $clasificacionAnimal;
 
 	}
 

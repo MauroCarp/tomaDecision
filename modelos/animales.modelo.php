@@ -178,9 +178,10 @@ class ModeloAnimales{
 
 	static public function mdlEditarAnimal($tabla,$item,$valor,$datos){
 	
-		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET clasificacion = :clasificacion, idCarpeta = :idCarpeta WHERE $item = :$item");
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET clasificacion = :clasificacion, registroClas = :registroClas, idCarpeta = :idCarpeta WHERE $item = :$item");
 
 		$stmt -> bindParam(":clasificacion", $datos["clasificacion"], PDO::PARAM_STR);
+		$stmt -> bindParam(":registroClas", $datos["registroClas"], PDO::PARAM_STR);
 		$stmt -> bindParam(":idCarpeta", $datos["idCarpeta"], PDO::PARAM_STR);
 		$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
 

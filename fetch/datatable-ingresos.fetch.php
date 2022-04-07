@@ -37,7 +37,7 @@ class TablaIngresos{
 				
 				$style="";
 				
-				switch ($animal['clasificacion']) {
+				switch ($animal['registroClas']) {
 
 					case 'F':
 						$text = 'Flaca';
@@ -92,7 +92,8 @@ class TablaIngresos{
 			
 					$carpeta = ControladorCarpetas::ctrMostrarCarpetas($item,$animal['idCarpeta'],'fecha','DESC');
 				
-					$destino = $carpeta[0]['destino'];
+					$destino = $carpeta[0]['descripcion'];
+
 				}
 
 				$datosJson .='[
