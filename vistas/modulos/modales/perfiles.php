@@ -54,7 +54,7 @@
                                     $valor = null;
 
                                     $perfiles = ControladorPerfiles::ctrMostrarPerfiles($item,$valor);
-
+                                    
                                     if($perfiles[0]['id'] != null){
                                         
                                         for ($i=0; $i < sizeof($perfiles) ; $i++) { 

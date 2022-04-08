@@ -49,7 +49,7 @@ class ModeloPerfiles{
 
       if($item != null){
 
-        $stmt = Conexion::conectar()->prepare("SELECT SUM(flacas + :flacas) as flacas,SUM(buenas + :buenas) as buenas,SUM(buenasMas + :buenasMas) as buenasMas ,SUM(muyBuenas + :muyBuenas) as muyBuenas,SUM(apenasGordas + :apenasGordas) as apenasGordas, id, nombre, activo, fecha  FROM $tabla WHERE $item = :$item ORDER BY activo DESC, fecha DESC");
+        $stmt = Conexion::conectar()->prepare("SELECT (flacas + :flacas) as flacas,(buenas + :buenas) as buenas,(buenasMas + :buenasMas) as buenasMas ,(muyBuenas + :muyBuenas) as muyBuenas,(apenasGordas + :apenasGordas) as apenasGordas, id, nombre, activo, fecha  FROM $tabla WHERE $item = :$item ORDER BY activo DESC, fecha DESC");
         
 		$stmt -> bindValue(":flacas", 230);
         $stmt -> bindValue(":buenas", 200);
@@ -64,7 +64,8 @@ class ModeloPerfiles{
         
       }else{
         
-        $stmt = Conexion::conectar()->prepare("SELECT SUM(flacas + :flacas) as flacas,SUM(buenas + :buenas) as buenas,SUM(buenasMas + :buenasMas) as buenasMas ,SUM(muyBuenas + :muyBuenas) as muyBuenas,SUM(apenasGordas + :apenasGordas) as apenasGordas, id, nombre, activo, fecha FROM $tabla ORDER BY activo DESC,fecha DESC");
+        $stmt = Conexion::conectar()->prepare("SELECT (flacas + :flacas) as flacas,(buenas + :buenas) as buenas,(buenasMas + :buenasMas) as buenasMas ,(muyBuenas + :muyBuenas) as muyBuenas,(apenasGordas + :apenasGordas) as apenasGordas, id, nombre, activo, fecha FROM $tabla ORDER BY activo DESC,fecha DESC");
+
 		$stmt -> bindValue(":flacas", 230);
         $stmt -> bindValue(":buenas", 200);
         $stmt -> bindValue(":buenasMas", 175);
@@ -92,13 +93,13 @@ class ModeloPerfiles{
 	static public function mdlEditarPerfil($tabla, $datos){
 	
 		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET 
-    flacas = :flacas,
-    buenas = :buenas,
-    buenasMas = :buenasMas,
-    muyBuenas = :muyBuenas,
-    apenasGordas = :apenasGordas,
-    fecha = CURDATE()
-    WHERE id = :id");
+		flacas = :flacas,
+		buenas = :buenas,
+		buenasMas = :buenasMas,
+		muyBuenas = :muyBuenas,
+		apenasGordas = :apenasGordas,
+		fecha = CURDATE()
+		WHERE id = :id");
 
 		$stmt -> bindParam(":flacas", $datos["flacas"], PDO::PARAM_STR);
 		$stmt -> bindParam(":buenas", $datos["buenas"], PDO::PARAM_STR);
@@ -160,8 +161,8 @@ class ModeloPerfiles{
 	static public function mdlActivarDesactivarPerfil($tabla, $item,$valor){
 	
 		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET 
-    activo = !activo
-    WHERE $item = :$item");
+		activo = !activo
+		WHERE $item = :$item");
 
 		$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
 
@@ -180,9 +181,5 @@ class ModeloPerfiles{
 		$stmt = null;
 
 	}
-
-
-
-
 
 }
