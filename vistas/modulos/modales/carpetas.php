@@ -202,32 +202,32 @@
                                     <label>
                                         <b>F</b>
                                     </label>
-                                    <input type="checkbox" name="clasificacionCarpetaCorral[]" class="minimal cbClasificacion" value="F" style="position: absolute; opacity: 0!important;">
+                                    <input type="checkbox" name="clasificacionCarpetaCorral" class="cbClasificacion" value="F">
                                     &nbsp;
                                     <label>
                                         <b>B</b>
                                     </label>
-                                    <input type="checkbox" name="clasificacionCarpetaCorral[]" class="minimal cbClasificacion" value="B" style="position: absolute; opacity: 0!important;">
+                                    <input type="checkbox" name="clasificacionCarpetaCorral" class="cbClasificacion" value="B">
                                     &nbsp;
                                     <label>
                                         <b>B+</b>
                                     </label>
-                                    <input type="checkbox" name="clasificacionCarpetaCorral[]" class="minimal cbClasificacion" value="B+" style="position: absolute; opacity: 0!important;">
+                                    <input type="checkbox" name="clasificacionCarpetaCorral" class="cbClasificacion" value="B+">
                                     &nbsp;
                                     <label>
                                         <b>MB</b>
                                     </label>
-                                    <input type="checkbox" name="clasificacionCarpetaCorral[]" class="minimal cbClasificacion" value="MB" style="position: absolute; opacity: 0!important;">
+                                    <input type="checkbox" name="clasificacionCarpetaCorral" class="cbClasificacion" value="MB">
                                     &nbsp;
                                     <label>
                                         <b>AP</b>
                                     </label>
-                                    <input type="checkbox" name="clasificacionCarpetaCorral[]" class="minimal cbClasificacion" value="AP" style="position: absolute; opacity: 0!important;">
+                                    <input type="checkbox" name="clasificacionCarpetaCorral" class="cbClasificacion" value="AP">
                                     &nbsp;
                                     <label>
                                         <b>G</b>
                                     </label>
-                                    <input type="checkbox" name="clasificacionCarpetaCorral[]" class="minimal cbClasificacion" value="G" style="position: absolute; opacity: 0!important;">
+                                    <input type="checkbox" name="clasificacionCarpetaCorral" class="cbClasificacion" value="G">
                                     
                                 </div>
 

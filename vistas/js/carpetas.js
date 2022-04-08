@@ -184,29 +184,19 @@ if(btnNuevaCarpeta != null){
 
         if(valueMin != 0 || valueMax != 0){
 
-            for (const check of document.getElementsByClassName('icheckbox_minimal-blue')) {
+            for (const check of document.getElementsByClassName('cbClasificacion')) {
                 
-                check.classList.remove('checked')
+                check.checked = false
 
-                check.setAttribute('aria-checked','false')
-
-                check.style.cursor = 'not-allow'
-                check.style.pointerEvents = 'none'
-                check.style.backgroundColor = 'rgba(200,200,200,.9)'
-
-                check.firstElementChild.setAttribute('disabled','disabled')
+                check.setAttribute('disabled','disabled')
                 
             }
 
         }else{
             
-            for (const check of document.getElementsByClassName('icheckbox_minimal-blue')) {
+            for (const check of document.getElementsByClassName('cbClasificacion')) {
                 
-                check.style.cursor = 'pointer'
-                check.style.pointerEvents = 'auto'
-                check.style.backgroundColor = 'rgb(255,255,255)'
-
-                check.firstElementChild.removeAttribute('disabled')
+                check.removeAttribute('disabled')
                 
             }
 
@@ -228,15 +218,15 @@ if(btnNuevaCarpeta != null){
     })
 
     // AL SELECCIONAR CHECK DESACTIVAR MINMAX
-    let checkboxClasif = document.getElementsByClassName("iCheck-helper")
+    let checkboxClasif = document.getElementsByClassName("cbClasificacion")
     
     let checkeds = 0
 
     for (const checkbox of checkboxClasif) {
 
-        checkbox.addEventListener('click',()=>{
+        checkbox.addEventListener('change',()=>{
            
-            if(checkbox.previousElementSibling.checked){
+            if(checkbox.checked){
 
                 checkeds++
                 inputMinGrasa.setAttribute('readOnly','readOnly')
@@ -270,7 +260,9 @@ if(btnNuevaCarpeta != null){
         
         e.preventDefault()
         
-        document.getElementById('btnCargarCarpetaCorral').setAttribute('disabled','disabled')
+        let clasificacionCarpetaCorral = []
+        
+        // document.getElementById('btnCargarCarpetaCorral').setAttribute('disabled','disabled')
 
         let buttonText = document.getElementById('btnCargarCarpetaCorral').innerText
 
@@ -282,19 +274,20 @@ if(btnNuevaCarpeta != null){
 
         )
 
-        let clasificacionCarpetaCorral = []
+        for (const iterator of document.querySelectorAll("input[name='clasificacionCarpetaCorral']")) {
 
-        for (const iterator of document.querySelectorAll("input[name='clasificacionCarpetaCorral[]']")) {
-        
-               if(iterator.checked){
-                   clasificacionCarpetaCorral.push(iterator.value)
+            if(iterator.checked){
+                
+                clasificacionCarpetaCorral.push(iterator.value)
+
                };
                 
         }
-        
+
         data.clasificacionCarpetaCorral = clasificacionCarpetaCorral.join('/');
 
         data.accion = 'nuevaCarpeta'
+console.log(data);
 
         let url = 'fetch/carpetas.fetch.php'
 
@@ -305,7 +298,8 @@ if(btnNuevaCarpeta != null){
             success:(respuesta)=>{
                 
                 let data = JSON.parse(respuesta)
-
+                console.log(data);
+                
                 if(data == 'errorValidacion'){
 
                     new swal({
@@ -343,14 +337,15 @@ if(btnNuevaCarpeta != null){
                     document.querySelector('input[name="minGrasa"]').removeAttribute('readOnly')
                     document.querySelector('input[name="maxGrasa"]').removeAttribute('readOnly')
 
-                    for (const checks of document.querySelectorAll('input[name="clasificacionCarpetaCorral[]"]')) {
-                        
-                        checks.removeAttribute('checked')
-                        checks.parentElement.classList.remove('checked')
-                        checks.parentElement.setAttribute('aria-checked','false')
-                        
-                    }
 
+                    let checks = document.getElementsByClassName('cbClasificacion')
+                        
+                    for (const check of checks) {
+                        
+                        check.checked = false
+
+                    }
+                    
                     $('.tablaCarpetas').DataTable().ajax.reload();
 
                     let idSeccionCarpetas = 'carpetasScrollOperario'
@@ -399,6 +394,13 @@ if(btnNuevaCarpeta != null){
 
     $('.tablaCarpetas').on('click','.btnVerCarpeta',function(){
 
+        document.getElementById('pesoMinVerModal').innerText = ''
+        document.getElementById('pesoMaxVerModal').innerText = ''
+        document.getElementById('clasVerModal').innerText = ''
+        document.getElementById('mmMinVerModal').innerText = ''
+        document.getElementById('mmMaxVerModal').innerText = ''
+        document.getElementById('prioridadVerModal').innerText = ''
+
         let value = $(this).attr('idCarpeta')
         
         let data = new FormData()
@@ -406,7 +408,6 @@ if(btnNuevaCarpeta != null){
         data.append('idCarpeta',value)
 
         let url = 'fetch/carpetas.fetch.php'
-        console.log(value);
         
         fetch(url,{
             method:'post',

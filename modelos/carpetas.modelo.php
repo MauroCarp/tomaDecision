@@ -21,7 +21,7 @@ class ModeloCarpetas{
         $stmt -> bindParam(":minGrasa", $datos['minGrasa'], PDO::PARAM_STR);
         $stmt -> bindParam(":maxGrasa", $datos['maxGrasa'], PDO::PARAM_STR);
         $stmt -> bindParam(":prioridad", $datos['prioridad'], PDO::PARAM_STR);
-
+      
         if($stmt->execute()){
 
         return "ok";

@@ -12,7 +12,7 @@ class ControladorCarpetas{
             
             $tabla = "carpetas";
                 
-            $clasificacion = (isset($data['clasificacionCarpetaCorral'])) ? $data['clasificacionCarpetaCorral'] : '';
+            $clasificacion = ($data['clasificacionCarpetaCorral'] != '') ? $data['clasificacionCarpetaCorral'] : '';
 
             $cantidad = $data["animalesCarpetaCorral"];
 
