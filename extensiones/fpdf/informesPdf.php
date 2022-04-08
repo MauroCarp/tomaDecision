@@ -40,7 +40,7 @@ class informePDF{
             
             $item = 'idCarpeta';
             
-            $datos = 'desctivar';
+            $datos = 'desactivar';
 
             $desactivarCarpeta = ControladorCarpetas::ctrEditarCarpeta($item, $carpeta[0]['idCarpeta'],$datos);
 
