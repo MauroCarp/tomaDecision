@@ -17,7 +17,7 @@ class FetchPerfiles{
         
         $valor = $this->idPerfil;
 
-		$respuesta = ControladorPerfiles::ctrMostrarPerfiles($item,$valor);
+		$respuesta = ControladorPerfiles::ctrMostrarPerfilesNeutros($item,$valor);
 
         echo json_encode($respuesta);
       

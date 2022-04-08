@@ -85,6 +85,39 @@ class ModeloPerfiles{
 
   }
 
+  /*=============================================
+	MOSTRAR PERFILES NEUTROS
+	=============================================*/
+
+	static public function mdlMostrarPerfilesNeutros($tabla,$item,$valor){
+
+      if($item != null){
+
+        $stmt = Conexion::conectar()->prepare("SELECT flacas,buenas,buenasMas ,muyBuenas,apenasGordas, id, nombre, activo, fecha  FROM $tabla WHERE $item = :$item ORDER BY activo DESC, fecha DESC");
+        
+        $stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+          
+        $stmt -> execute();
+  
+        return $stmt -> fetch();
+        
+      }else{
+        
+        $stmt = Conexion::conectar()->prepare("SELECT flacas,buenas,buenasMas ,muyBuenas,apenasGordas, id, nombre, activo, fecha FROM $tabla ORDER BY activo DESC,fecha DESC");
+          
+        $stmt -> execute();
+		
+        return $stmt -> fetchAll();
+      
+      }
+      
+
+      $stmt -> close();
+
+      $stmt = null;
+
+  }
+
   
 	/*=============================================
 	EDITAR PERFIL

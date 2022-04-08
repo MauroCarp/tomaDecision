@@ -137,6 +137,20 @@ class ControladorPerfiles{
 
 	}
 
+    /*=============================================
+	MOSTRAR PERFILES NEUTROS
+	=============================================*/
+
+	static public function ctrMostrarPerfilesNeutros($item, $valor){
+
+		$tabla = "perfiles";
+
+		$respuesta = ModeloPerfiles::mdlMostrarPerfilesNeutros($tabla, $item, $valor);
+
+		return $respuesta;
+
+	}
+
 	/*=============================================
 	EDITAR PERFIL
 	=============================================*/
