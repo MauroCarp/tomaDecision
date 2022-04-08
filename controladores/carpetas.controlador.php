@@ -146,15 +146,11 @@ class ControladorCarpetas{
 	ELIMINAR CARPETA
 	=============================================*/
 
-	static public function ctrEliminarCarpeta(){
-
-        if(isset($_GET['idCarpeta'])){
+	static public function ctrEliminarCarpeta($valor){
 
             $tabla = "carpetas";
 
             $item = 'idCarpeta';
-
-            $valor = $_GET['idCarpeta'];
 
             $errors['carpeta'] = ModeloCarpetas::mdlEliminarCarpeta($tabla, $item, $valor);
 
@@ -162,55 +158,15 @@ class ControladorCarpetas{
 
             if(in_array('error',$errors)){
 
-                echo '<script>
-
-                new swal({
-
-                    icon: "error",
-                    title: "Hubo un error al eliminar la carpeta",
-                    showConfirmButton: true,
-                    confirmButtonText: "Cerrar"
-
-                }).then(function(result){
-
-                    if(result.value){
-                    
-                        window.location = "inicio";
-
-                    }
-
-                });
-            
-
-                </script>';
+                return 'error';
 
             }else{
 
-                echo '<script>
-
-                new swal({
-
-                    icon: "success",
-                    title: "¡La carpeta ha sido eliminada correctamente!",
-                    showConfirmButton: true,
-                    confirmButtonText: "Cerrar"
-
-                }).then(function(result){
-
-                    if(result.value){
-                    
-                        window.location = "inicio";
-
-                    }
-
-                });
-            
-
-                </script>';
+                return 'ok';
 
             }
             
-        }
+        
 	}
 
 	/*=============================================

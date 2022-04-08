@@ -391,58 +391,7 @@ if(btnNuevaCarpeta != null){
             }
 
         })
-        
-        // fetch(url,{
-        //     method:'post',
-        //     body:data
-        // })
-        // .then(resp=> console.log(resp.json()))
-        // .then(respuesta => {
-        //     console.log(respuesta)
-
-        //     if(respuesta = 'errorValidacion'){
-
-        //         new swal({
-
-        //             icon: "error",
-        //             title: "Se debe elegir al menos  clasificación de animal/Rango de mm",
-        //             showConfirmButton: true,
-        //             confirmButtonText: "Cerrar"
-
-        //         })
                 
-        //         return 
-        //     }
-
-        //     if(respuesta == "ok"){
-
-        //         new swal({
-
-        //             icon: "success",
-        //             title: "¡La carpeta ha sido guardada correctamente!",   
-        //             showConfirmButton: true,
-        //             confirmButtonText: "Cerrar"
-
-        //         })
-
-        //     }else{
-
-        //         new swal({
-
-        //             icon: "error",
-        //             title: "Hubo un error al cargar la carpeta",
-        //             showConfirmButton: true,
-        //             confirmButtonText: "Cerrar"
-
-        //         })
-
-        //     }
-
-        // })
-        // .catch(err=>console.log(err))
-
-
-        
     })
 
 
@@ -687,7 +636,47 @@ if(btnNuevaCarpeta != null){
             
                 if(result.value){
             
-                    window.location = `index.php?ruta=inicio&idCarpeta=${id}`
+                    let url = 'fetch/carpetas.fetch.php'
+
+                    let data  = new FormData()
+                    data.append('accion','eliminarCarpeta')
+                    data.append('idCarpeta',id)
+
+                    fetch(url,{
+                        method:'post',
+                        body:data
+                    })
+                    .then(resp => resp.json())
+                    .then(respuesta=>{
+                    
+                        if(respuesta == 'ok'){
+
+                            new swal({
+
+                                icon: "success",
+                                title: "¡La carpeta ha sido eliminada correctamente!",
+                                showConfirmButton: true,
+                                confirmButtonText: "Cerrar"
+
+                            })
+
+                            $('.tablaCarpetas').DataTable().ajax.reload();
+            
+                        }else{
+
+                            new swal({
+
+                                icon: "error",
+                                title: "Hubo un error al eliminar la carpeta",
+                                showConfirmButton: true,
+                                confirmButtonText: "Cerrar"
+
+                            })
+                        
+                        }
+
+                    })
+                    .catch(err=>console.log(err))
     
                 }
     

@@ -3,6 +3,9 @@
 require_once "../controladores/carpetas.controlador.php";
 require_once "../modelos/carpetas.modelo.php";
 
+require_once "../controladores/animales.controlador.php";
+require_once "../modelos/animales.modelo.php";
+
 
 class FetchCarpetas{
 	
@@ -32,6 +35,16 @@ class FetchCarpetas{
 
         echo json_encode($respuesta);
       
+    }
+
+    public function fetchEliminarCarpeta(){
+
+        $valor = $this->idCarpeta;
+
+        $respuesta = ControladorCarpetas:: ctrEliminarCarpeta($valor);
+
+        echo json_encode($respuesta);
+
     }
 
     public function fetchVerCarpeta(){
@@ -71,6 +84,14 @@ if(isset($_POST["accion"])){
         $verCarpeta = new FetchCarpetas();
         $verCarpeta-> idCarpeta = $_POST['idCarpeta'];
 		$verCarpeta -> fetchVerCarpeta();
+
+    }
+
+	if($accion == 'eliminarCarpeta'){
+
+        $eliminarCarpeta = new FetchCarpetas();
+        $eliminarCarpeta-> idCarpeta = $_POST['idCarpeta'];
+		$eliminarCarpeta -> fetchEliminarCarpeta();
 
     }
 
