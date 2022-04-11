@@ -23,7 +23,7 @@ class TablaCarpetas{
 		$item = null;
 		$valor = null;
   
-        $orden = 'fecha';
+        $orden = 'idCarpeta';
 
 		$carpetas = ControladorCarpetas::ctrMostrarCarpetas($item,$valor,$orden,'DESC');
 
