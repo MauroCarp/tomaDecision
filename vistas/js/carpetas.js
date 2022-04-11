@@ -262,7 +262,7 @@ if(btnNuevaCarpeta != null){
         
         let clasificacionCarpetaCorral = []
         
-        // document.getElementById('btnCargarCarpetaCorral').setAttribute('disabled','disabled')
+        document.getElementById('btnCargarCarpetaCorral').setAttribute('disabled','disabled')
 
         let buttonText = document.getElementById('btnCargarCarpetaCorral').innerText
 
@@ -287,7 +287,6 @@ if(btnNuevaCarpeta != null){
         data.clasificacionCarpetaCorral = clasificacionCarpetaCorral.join('/');
 
         data.accion = 'nuevaCarpeta'
-console.log(data);
 
         let url = 'fetch/carpetas.fetch.php'
 
@@ -399,7 +398,7 @@ console.log(data);
         document.getElementById('clasVerModal').innerText = ''
         document.getElementById('mmMinVerModal').innerText = ''
         document.getElementById('mmMaxVerModal').innerText = ''
-        document.getElementById('prioridadVerModal').innerText = ''
+        document.getElementById('sexoVerModal').innerText = ''
 
         let value = $(this).attr('idCarpeta')
         
@@ -432,7 +431,7 @@ console.log(data);
             document.getElementById('clasVerModal').innerText = respuesta[0].clasificacion
             document.getElementById('mmMinVerModal').innerText = respuesta[0].minGrasa
             document.getElementById('mmMaxVerModal').innerText = respuesta[0].maxGrasa
-            document.getElementById('prioridadVerModal').innerText = respuesta[0].prioridad
+            document.getElementById('sexoVerModal').innerText = (respuesta[0].sexo != '') ? respuesta[0].sexo : '-'
 
         })
         .catch(err=>console.log(err))

@@ -63,6 +63,7 @@ class ControladorCarpetas{
             $datos = array("destino"=>$data["perfilCarpetaCorral"],
                             "descripcion"=>$data["descripcionCarpetaCorral"],
                             "cantidad"=>$data["animalesCarpetaCorral"],
+                            "sexo"=>$data['sexoCarpetaCorral'],
                             "pesoMin"=>$data["pesoMinCarpetaCorral"],
                             "pesoMax"=>$pesoMax,
                             "prioridad"=>$data["prioridadCarpetaCorral"],

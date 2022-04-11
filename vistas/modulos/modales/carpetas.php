@@ -141,7 +141,7 @@
 
                         <div class="row">
                             
-                            <div class="col-md-4">
+                            <div class="col-md-3">
 
                                 <div class="form-group">
                                         
@@ -153,7 +153,19 @@
 
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-3">
+                                
+                                <div class="form-group">
+                                        
+                                        <label for="prioridadCarpetaCorral">Prioridad <br>N°</label>
+                                    
+                                        <input type="number" class="form-control" name="prioridadCarpetaCorral" id="prioridadCarpetaCorral">          
+        
+                                </div>
+
+                            </div>
+                            
+                            <div class="col-md-3">
                                 
                                 <div class="form-group">
                                         
@@ -165,7 +177,7 @@
                                 
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-3">
 
                                 <div class="form-group">
                                         
@@ -181,19 +193,37 @@
 
                         <div class="row">
 
-                            <div class="col-md-3">
-                                
+                            <div class="col-md-5">
+
                                 <div class="form-group">
-                                        
-                                        <label for="prioridadCarpetaCorral">Prioridad</label>
                                     
-                                        <input type="number" class="form-control" name="prioridadCarpetaCorral" id="prioridadCarpetaCorral">          
-        
+                                    <label>Sexo</label><br>
+
+                                    <label>
+                                        <b>M/H</b>
+                                    </label>
+                                    &nbsp;
+                                    <input type="radio" name="sexoCarpetaCorral" value="" checked>
+                                    &nbsp;
+                                    <label>
+                                        <b>M</b>
+                                    </label>
+                                    &nbsp;
+                                    <input type="radio" name="sexoCarpetaCorral" value="M">
+                                    &nbsp;
+                                    <label>
+                                        <b>H</b>
+                                    </label>
+                                    &nbsp;
+                                    <input type="radio" name="sexoCarpetaCorral" value="H">
+                                    &nbsp;
+                                
                                 </div>
 
                             </div>
 
-                            <div class="col-md-9">
+
+                            <div class="col-md-7">
 
                                 <div class="form-group">
                                     
@@ -232,6 +262,7 @@
                                 </div>
 
                             </div>
+
                         </div>
                         
                         <label class="hideElement" id="tituloRangoMM">Rango MM Grasa</label>

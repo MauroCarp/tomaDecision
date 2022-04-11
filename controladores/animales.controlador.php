@@ -55,7 +55,7 @@ class ControladorAnimales{
 
 							$clasificacionAnimal = ControladorAnimales::ctrDeterminarClasificacion($destino,$tas3);
 
-							if(in_array($clasificacionAnimal,$clasificacion) AND $datos['peso'] >= $carpetas[$i]['pesoMin'] AND $datos['peso'] <= $carpetas[$i]['pesoMax']){
+							if(in_array($clasificacionAnimal,$clasificacion) AND $datos['peso'] >= $carpetas[$i]['pesoMin'] AND $datos['peso'] <= $carpetas[$i]['pesoMax'] AND ($carpetas[$i]['sexo'] == $datos['sexo'] OR $carpetas[$i]['sexo'] == '')){
 
 								$item = 'idAnimal';
 		
@@ -108,7 +108,7 @@ class ControladorAnimales{
 							$mmGrasa = $datos['mmGrasa'];
 
 													
-							if($mmGrasa  >= $minGrasaCarpeta AND $mmGrasa  <= $maxGrasaCarpeta AND $datos['peso'] >= $carpetas[$i]['pesoMin'] AND $datos['peso'] <= $carpetas[$i]['pesoMax']){
+							if($mmGrasa  >= $minGrasaCarpeta AND $mmGrasa  <= $maxGrasaCarpeta AND $datos['peso'] >= $carpetas[$i]['pesoMin'] AND $datos['peso'] <= $carpetas[$i]['pesoMax'] AND $carpetas[$i]['sexo'] == $datos['sexo']){
 		
 								$item = 'idAnimal';
 		

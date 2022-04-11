@@ -100,9 +100,9 @@
 
                                         <div class="description-block">
 
-                                            <h5 class="description-header" id="prioridadVerModal"></h5>
+                                            <h5 class="description-header" id="sexoVerModal"></h5>
 
-                                            <span class="description-text">PRIORIDAD</span>
+                                            <span class="description-text">SEXO</span>
 
                                         </div>
 

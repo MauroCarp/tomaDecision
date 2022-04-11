@@ -36,6 +36,7 @@ class informePDF{
 
         $carpeta = ControladorCarpetas::ctrMostrarCarpetas($item,$valor,$orden,'ASC');
 
+        
         if($carpeta[0]['activa']){
             
             $item = 'idCarpeta';
