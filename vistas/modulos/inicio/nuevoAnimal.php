@@ -18,9 +18,9 @@
             
             <div class="form-group">
                 
-                <label for="mmGrasa">mm Grasa</label>
+                <label for="peso">Peso</label>
             
-                <input type="number" step="0.10" class="form-control" id="mmGrasa" name="mmGrasa">
+                <input type="text" class="form-control" id="peso" name="peso">
             
             </div>
         
@@ -30,14 +30,14 @@
             
             <div class="form-group">
                 
-                <label for="peso">Peso</label>
+                <label for="mmGrasa">mm Grasa</label>
             
-                <input type="text" class="form-control" id="peso" name="peso">
+                <input type="number" step="0.10" class="form-control" id="mmGrasa" name="mmGrasa">
             
             </div>
         
         </div>
-      
+
         <div class="col-lg-1">
             
             <div class="form-group">

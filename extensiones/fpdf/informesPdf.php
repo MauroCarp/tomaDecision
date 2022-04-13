@@ -55,7 +55,12 @@ class informePDF{
 
         $descripcion = $carpeta[0]['descripcion'];
 
-        $cabezera = "Informe Carpeta $destino - $descripcion";
+        $cabezera = "Informe de Carpeta";
+        
+        $perfil = "Perfil: $destino";
+
+        $destino = "Destino: $descripcion";
+        
 
         $fecha = "Fecha: $today";
         
@@ -112,8 +117,11 @@ class informePDF{
         $pesoMin = ($carpeta[0]['animales'] != 0) ? 9999 : 0;
         $pesoMax = 0;
 
-
+        $pesos = array();
+        
         foreach ($animales as $key => $animal) {
+
+            $pesos[] = $animal['peso'];
 
             if($valido){
                 $pdf->SetFillColor(250,250,250);
@@ -123,7 +131,7 @@ class informePDF{
                 $valido = true;
             }
 
-            if($animal['sexo'] == 'm')
+            if($animal['sexo'] == 'M')
                 $sexo = 'Macho';
             else
                 $sexo = 'Hembra';
@@ -168,6 +176,7 @@ class informePDF{
             $totalAnimales++;
             $pesoMin = ($animal['peso'] < $pesoMin) ? $animal['peso'] : $pesoMin;
             $pesoMax = ($animal['peso'] > $pesoMax) ? $animal['peso'] : $pesoMax;
+
         }
 
         $pdf->Ln(8);
@@ -198,7 +207,23 @@ class informePDF{
         $pdf->Cell(0.01,7,'',1,0,'C',0);
         $pdf->Cell(30,7,$pesoMax." Kg",0,0,'C',0);
         $pdf->Cell(0.01,7,'',1,0,'C',0);
-        $pdf->Cell(30,7,5,0,1,'C',0);
+
+        $distanciasCuadrada = array();
+
+        foreach ($pesos as $key => $value) {
+
+            $distancia = $pesoPromedio - $value;
+
+            $distanciasCuadrada[] = pow(abs($distancia),2);
+
+        }
+
+        $sumaDistanciasCuadradas = array_sum($distanciasCuadrada);
+
+        $desvioEstandar  = $sumaDistanciasCuadradas / $totalAnimales;
+
+
+        $pdf->Cell(30,7,number_format(sqrt($desvioEstandar),2),0,1,'C',0);
 
         $pdf->Ln(5);
         $pdf->SetFont('Times','B',14);

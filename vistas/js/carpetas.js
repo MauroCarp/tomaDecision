@@ -115,7 +115,7 @@ if(btnNuevaCarpeta != null){
         document.getElementById('modalNuevaCarpetaCorral').classList.remove('showPerfilModal')
         document.getElementById('modalNuevaCarpetaCorral').classList.add('hideElement')
 
-        document.getElementById('modalCarpeta').style.width = '600px'
+        document.getElementById('modalCarpeta').style.width = '670px'
 
         document.getElementById('carpetasList').style.width = '100%'
 
@@ -551,6 +551,16 @@ if(btnNuevaCarpeta != null){
                     
                     let clasification = (reg.clasificacion != '') ? reg.clasificacion : `${reg.minGrasa} mm / ${reg.maxGrasa} mm`
 
+                    let sexo = 'M/H'
+
+                    if(reg.sexo == 'M')
+                        sexo = 'MACHO'
+
+                    if(reg.sexo == 'H')
+                        sexo = 'HEMBRA'
+
+                    clasification +=  ` - ${sexo}` 
+
                     let props = {
                         description,
                         percentage,
@@ -622,7 +632,9 @@ if(btnNuevaCarpeta != null){
             e.preventDefault()
                 
             let id = $(this).attr('idcarpeta')
-                
+
+            let button = $(this)
+
             new swal({
                 title: '¿Eliminar Carpeta?',
                 text: "¡Si no lo está puede cancelar la accíón!",
@@ -635,7 +647,9 @@ if(btnNuevaCarpeta != null){
               }).then(function(result){
             
                 if(result.value){
-            
+
+                    button.attr('disabled','disabled')
+
                     let url = 'fetch/carpetas.fetch.php'
 
                     let data  = new FormData()
@@ -648,7 +662,7 @@ if(btnNuevaCarpeta != null){
                     })
                     .then(resp => resp.json())
                     .then(respuesta=>{
-                    
+                        
                         if(respuesta == 'ok'){
 
                             new swal({
@@ -661,6 +675,8 @@ if(btnNuevaCarpeta != null){
                             })
 
                             $('.tablaCarpetas').DataTable().ajax.reload();
+
+                            button.removeAttr('disabled')
             
                         }else{
 
@@ -672,6 +688,9 @@ if(btnNuevaCarpeta != null){
                                 confirmButtonText: "Cerrar"
 
                             })
+
+                            button.removeAttr('disabled')
+
                         
                         }
 
