@@ -161,7 +161,7 @@ class ModeloAnimales{
 	CONTAR ANIMALES
 	=============================================*/
 
-	static public function mdlContarAnimales($tabla,$item,$valor,$valor2){
+	static public function mdlContarAnimales($tabla,$item,$valor,$valor2 = null){
       
     $empresa = $_COOKIE['empresa'];
 

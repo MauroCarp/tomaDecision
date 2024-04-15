@@ -9,6 +9,9 @@ require_once "../modelos/animales.modelo.php";
 require_once "../controladores/perfiles.controlador.php";
 require_once "../modelos/perfiles.modelo.php";
 
+require_once "../controladores/analisis.controlador.php";
+require_once "../modelos/analisis.modelo.php";
+
 
 class FetchAnimales{
 	
@@ -125,27 +128,36 @@ class FetchAnimales{
       
     }
 
-    public function fetchEliminarAnimal(){
+    public function fetchEliminarAnimal($analisis = false){
 
         $item = 'idAnimal';
         
         $value = $this->idAnimal;
         
-        $animal = ControladorAnimales::ctrMostrarAnimales($item,$value);
+        if(!$analisis){
 
-        $err = array();
-		
-        $err['eliminar'] = ControladorAnimales::ctrEliminarAnimal($item,$value);
+            $animal = ControladorAnimales::ctrMostrarAnimales($item,$value);
+    
+            $err = array();
+            
+            $err['eliminar'] = ControladorAnimales::ctrEliminarAnimal($item,$value);
+    
+            $datos = 'restar';
+    
+            $item = 'idCarpeta';
+    
+            $valor = $animal[0]['idCarpeta'];
+            
+            $err['restar'] = ControladorCarpetas::ctrEditarCarpeta($item,$valor,$datos);
+    
+            echo json_encode($err);
 
-        $datos = 'restar';
+        } else {
 
-        $item = 'idCarpeta';
+            $respuesta = ControladorAnimales::ctrEliminarAnimal($item,$value,$analisis);
 
-        $valor = $animal[0]['idCarpeta'];
-        
-        $err['restar'] = ControladorCarpetas::ctrEditarCarpeta($item,$valor,$datos);
-
-        echo json_encode($err);
+            echo $respuesta;
+        }
       
     }
 
@@ -196,7 +208,8 @@ if(isset($_POST["accion"])){
 
         $eliminarAnimal = new FetchAnimales();
 		$eliminarAnimal -> idAnimal = $_POST['idAnimal'];
-		$eliminarAnimal -> fetchEliminarAnimal();
+        $analisis = ($_POST['analisis']) ? true : false;
+		$eliminarAnimal -> fetchEliminarAnimal($analisis);
 
     }
 
