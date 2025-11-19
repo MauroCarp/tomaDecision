@@ -1036,12 +1036,15 @@ function Output($dest='', $name='', $isUTF8=false)
 
 protected function _dochecks()
 {
-	// Check mbstring overloading
-	if(ini_get('mbstring.func_overload') & 2)
+	// Check mbstring overloading (compatible con PHP >= 8.2)
+	if(function_exists('ini_get') && (ini_get('mbstring.func_overload') & 2))
 		$this->Error('mbstring overloading must be disabled');
-	// Ensure runtime magic quotes are disabled
-	if(get_magic_quotes_runtime())
-		@set_magic_quotes_runtime(0);
+	// Desactivar magic quotes si las funciones existen (removidas en PHP modernos)
+	if(function_exists('get_magic_quotes_runtime') && get_magic_quotes_runtime()){
+		if(function_exists('set_magic_quotes_runtime')){
+			@set_magic_quotes_runtime(0);
+		}
+	}
 }
 
 protected function _checkoutput()

@@ -1,5 +1,10 @@
 <?php
 
+// Helper para conversión segura UTF-8 a ISO-8859-1 evitando función deprecated utf8_decode
+function utf8_to_iso($str){
+    return mb_convert_encoding($str,'ISO-8859-1','UTF-8');
+}
+
 function desvioEstandarExcel($arr,$prom,$total){
 
     $distanciasCuadrada = array();
@@ -349,7 +354,7 @@ class ControladorCarpetas{
         
                 $destino = $carpeta[0]['destino'];
         
-                $descripcion = utf8_decode($carpeta[0]['descripcion']);
+                $descripcion = utf8_to_iso($carpeta[0]['descripcion']);
         
                 $cabezera = "Informe de Carpeta";
                 
@@ -413,7 +418,7 @@ class ControladorCarpetas{
 
                 $cantidad = ($carpeta[0]['cantidad'] == 0) ? "Libre" : $carpeta[0]['cantidad'];
 
-                echo utf8_decode("<table border='0'> 
+                echo utf8_to_iso("<table border='0'> 
         
                     <tr> 
                         <td style='font-weight:bold; border:1px solid #eee;' colspan='7' align='center'>Informe de Carpeta</td>
@@ -588,7 +593,7 @@ class ControladorCarpetas{
 
                             $fecha = date('d-m-Y',strtotime($animal['date']));
 
-                            echo utf8_decode("<tr> 
+                            echo utf8_to_iso("<tr> 
                                 <td style='border:1px solid #eee;'>".$fecha."</td> 
                                 <td style='border:1px solid #eee;'>".$animal['RFID']."</td> 
                                 <td style='border:1px solid #eee;'>".number_format($animal['mmGrasa'],2,'.','')."</td> 

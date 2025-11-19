@@ -1,9 +1,9 @@
 <?php
 require_once "../../controladores/carpetas.controlador.php";
-require_once " ../../../../modelos/carpetas.modelo.php";
+require_once "../../modelos/carpetas.modelo.php";
 
 require_once "../../controladores/animales.controlador.php";
-require_once " ../../../../modelos/animales.modelo.php";
+require_once "../../modelos/animales.modelo.php";
 
 function formatearFecha($fecha){
     
@@ -39,9 +39,16 @@ class informePDF{
     
     public function informeCarpeta(){
 
-        //REQUERIMOS LA CLASE TCPDF
-
-        include('fpdf.php');
+        // Cargamos FPDF vía Composer si existe, sino fallback local
+        if(!class_exists('FPDF')){
+            $autoloadPath = __DIR__ . '/../../vendor/autoload.php';
+            if(file_exists($autoloadPath)){
+                require_once $autoloadPath;
+            }
+        }
+        if(!class_exists('FPDF')){
+            require_once __DIR__ . '/fpdf.php';
+        }
 
         // ---------------------------------------------------------
         $item = 'idCarpeta';
@@ -93,7 +100,7 @@ class informePDF{
         $pdf->SetFont('helvetica','B',12);
         
         $pdf->Cell(35,7,'Total Animales',0,0,'L',0);
-        $pdf->Cell(40,7,utf8_decode('Clasificación'),0,0,'C',0);
+        $pdf->Cell(40,7,mb_convert_encoding('Clasificación','ISO-8859-1','UTF-8'),0,0,'C',0);
         $pdf->Cell(25,7,'Peso Min.',0,0,'L',0);
         $pdf->Cell(20,7,'Peso Max.',0,1,'L',0);
         
@@ -229,7 +236,7 @@ class informePDF{
         $pdf->Cell(25,7,'mm Grasa',1,0,'C',1);
         $pdf->Cell(20,7,'Peso',1,0,'C',1);
         $pdf->Cell(20,7,'Sexo',1,0,'C',1);
-        $pdf->Cell(40,7,utf8_decode('Clasificación'),1,1,'C',1);
+        $pdf->Cell(40,7,mb_convert_encoding('Clasificación','ISO-8859-1','UTF-8'),1,1,'C',1);
         
         foreach ($animalesPorClasificacion as $clasificacion => $animales) {
         
