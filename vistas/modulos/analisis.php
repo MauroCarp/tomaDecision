@@ -28,7 +28,10 @@
       <div class="row">
         
         <div class="col-lg-6">
+        
+        <div class="col-lg-6">
 
+          <div class="card">
           <div class="card">
 
               <table class="table table-hover table-bordered table-lg tablaAnalisis" id="table">
@@ -63,6 +66,7 @@
                   <tbody>
 
                     <?php
+                    <?php
 
                       $animales = ControladorAnalisis::ctrMostrarAnimales();
 
@@ -94,9 +98,15 @@
 
                     <?php  }
                     ?>
+                    <?php  }
+                    ?>
 
                   </tbody>
+                  </tbody>
 
+              </table>
+
+          </div>
               </table>
 
           </div>
@@ -105,9 +115,13 @@
       
       </div>
 
+
     </section>
 
+
   </div>
+</body>
+
 </body>
 
 
