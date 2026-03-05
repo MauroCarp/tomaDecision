@@ -325,14 +325,19 @@ const mostrarCarpetasActivas = (operario)=>{
                 
             row.appendChild(docFragment)
 
-            if(document.getElementById('carpetasScroll') != null){
+            let url = window.location.href
 
-                document.getElementById('carpetasScroll').firstElementChild.firstElementChild.appendChild(row)
+            if(!url.includes('analisis')){
+
+                if(document.getElementById('carpetasScroll') != null){
+
+                    document.getElementById('carpetasScroll').firstElementChild.firstElementChild.appendChild(row)
+                    
+                }else{
                 
-            }else{
-                
-                document.getElementById('carpetasScrollOperario').firstElementChild.firstElementChild.appendChild(row)
-            
+                    document.getElementById('carpetasScrollOperario').firstElementChild.firstElementChild.appendChild(row)
+                    
+                }
             }
 
         }
@@ -591,7 +596,7 @@ const mostrarCarpetasActivas = (operario)=>{
                         return 
 
                     }
-        
+                    console.log(data)
                     if(data == "ok"){
         
                         new swal({
@@ -717,12 +722,11 @@ const mostrarCarpetasActivas = (operario)=>{
 
     let url = window.location.href
 
-    
     if(url.includes('inicio') && document.getElementById('carpetasScroll') != null){
 
         mostrarCarpetasActivas(false)
 
-    }else if(!url.includes('usuario') && !url.includes('analisis')){
+    }else if(!url.includes('usuario')){
         
         mostrarCarpetasActivas(true)
 

@@ -91,7 +91,7 @@ if(btnNuevoPerfil != null){
             showPerfilModal('modalEditarPerfil','modalNuevoPerfil')
 
         let url = 'fetch/perfiles.fetch.php'
-        
+
         let formData = new FormData()
         formData.append('accion','mostrarPerfil')
         formData.append('idPerfil',idPerfil)
@@ -102,7 +102,7 @@ if(btnNuevoPerfil != null){
         })
         .then(resp=>resp.json())
         .then(respuesta=>{
-
+            console.log(respuesta)
             document.getElementById('nombrePerfilEdit').value = respuesta.nombre
             document.getElementById('idPerfilEdit').value = respuesta.id
 

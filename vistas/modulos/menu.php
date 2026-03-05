@@ -3,7 +3,9 @@
 	 <section class="sidebar">
 
 		<ul class="sidebar-menu">
-	
+			
+	<?php if($_SESSION['empresa'] != 'Estrategia' && $_COOKIE['empresa'] != 'Estrategia'){ ?>
+
 			<li class="active">
 				
 				<a href="inicio">
@@ -16,56 +18,58 @@
 			</li>
 				
 <?php
-
-if($_SESSION["perfil"] == "Administrador"){
+ 
+	if($_SESSION["perfil"] == "Administrador" && ($_SESSION["empresa"] != "Estrategia" && $_COOKIE["empresa"] != "Estrategia")){
+		
+				echo '
+					<li>
 	
-			echo '
-				<li>
-
-				<a href="#" data-toggle="modal" data-target="#ventanaModalCarpetas" id="menuCarpetas">
-
-				<i class="fa fa-files-o" style="font-size:1.2em;padding-right:5px;"></i>
-				<span>Carpetas </span>
-
-				</a>
-
+					<a href="#" data-toggle="modal" data-target="#ventanaModalCarpetas" id="menuCarpetas">
+	
+					<i class="fa fa-files-o" style="font-size:1.2em;padding-right:5px;"></i>
+					<span>Carpetas </span>
+	
+					</a>
+	
+					</li>
+	
+					<li>
+	
+					<a href="#" data-toggle="modal" data-target="#ventanaModalPerfiles" id="menuPerfiles">
+	
+					<i class="fa fa-sliders" style="font-size:1.8em;"></i>
+					<span>&nbsp;Perfiles</span>
+	
+					</a>
+	
+				</li>';
+	}
+	
+	if($_SESSION["usuario"] == "Jorge" || $_SESSION["usuario"] == "Tecnico"){
+	
+				echo '<li>
+	
+					<a href="analisis">
+	
+						<i class="fa fa-line-chart"></i>
+						<span>Analisis</span>
+	
+					</a>
+	
 				</li>
-
+	
 				<li>
-
-				<a href="#" data-toggle="modal" data-target="#ventanaModalPerfiles" id="menuPerfiles">
-
-				<i class="fa fa-sliders" style="font-size:1.8em;"></i>
-				<span>&nbsp;Perfiles</span>
-
-				</a>
-
-			</li>';
-}
-
-if($_SESSION["usuario"] == "Jorge" || $_SESSION["usuario"] == "Tecnico"){
-
-			echo '<li>
-
-				<a href="analisis">
-
-					<i class="fa fa-line-chart"></i>
-					<span>Analisis</span>
-
-				</a>
-
-			</li>
-
-			<li>
-
-				<a href="usuarios">
-
-					<i class="fa fa-user"></i>
-					<span>Usuarios</span>
-
-				</a>
-
-			</li>';
+	
+					<a href="usuarios">
+	
+						<i class="fa fa-user"></i>
+						<span>Usuarios</span>
+	
+					</a>
+	
+				</li>';
+	
+	}
 
 }
 
@@ -79,20 +83,26 @@ if($_SESSION["usuario"] == "Jorge" || $_SESSION["usuario"] == "Tecnico"){
 
 <?php
 
-if($_SESSION["perfil"] == "Administrador"){
+if($_SESSION["usuario"] != "tecnicoEstrategia"){
 
-include 'modales/perfiles.php';
+	if($_SESSION["perfil"] == "Administrador"){
 
-sleep(3);
+	include 'modales/perfiles.php';
 
-if($_COOKIE['mobile'] == 'false'){
-	include 'modales/carpetas.php';
-}else{
-	include 'modales/carpetaMobile.php';
+	sleep(3);
+
+	var_dump($_COOKIE);
+	if($_COOKIE['mobile'] == 'false'){
+		include 'modales/carpetas.php';
+	}else{
+		include 'modales/carpetaMobile.php';
+	}
+
+	include 'modales/verCarpeta.php';
+
+	}
+	
 }
 
-include 'modales/verCarpeta.php';
-
-}
 
 ?>

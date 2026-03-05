@@ -1,5 +1,9 @@
 <?php
 
+// Helper para conversión segura UTF-8 a ISO-8859-1 evitando función deprecated utf8_decode
+function utf8_to_iso($str){
+    return mb_convert_encoding($str,'ISO-8859-1','UTF-8');
+}
 function desvioEstandarExcel($arr,$prom,$total){
 
     $distanciasCuadrada = array();
@@ -64,7 +68,6 @@ class ControladorCarpetas{
                     if(result.value){
                     
                         window.location = "inicio";
-
                     }
 
                 });
@@ -76,7 +79,7 @@ class ControladorCarpetas{
 
             }
 
-            $fechaCarpeta = ($data['fechaCarpeta'] != '') ? $data['fechaCarpeta'] : '';
+            $fechaCarpeta = isset($data['fechaCarpeta']) ? $data['fechaCarpeta'] : date('Y-m-d');
 
             $datos = array("destino"=>$data["perfilCarpetaCorral"],
                             "empresa"=>$_COOKIE["empresa"],
@@ -349,7 +352,7 @@ class ControladorCarpetas{
         
                 $destino = $carpeta[0]['destino'];
         
-                $descripcion = utf8_decode($carpeta[0]['descripcion']);
+                $descripcion = utf8_to_iso($carpeta[0]['descripcion']);
         
                 $cabezera = "Informe de Carpeta";
                 
@@ -405,15 +408,17 @@ class ControladorCarpetas{
                     }
                 }
 
-                $pesoPromedio = $data['pesoTotal'] / $data['totalAnimales'];
-                $mmPromedio = $data['mmTotal'] / $data['totalAnimales'];
+                $totalAnimales = (int)$data['totalAnimales'];
 
-                $desvioPeso = desvioEstandarExcel($data['pesos'],$pesoPromedio,$data['totalAnimales']);
-                $desvioMm = desvioEstandarExcel($data['mm'],$mmPromedio,$data['totalAnimales']);
+                $pesoPromedio = ($totalAnimales > 0) ? ($data['pesoTotal'] / $totalAnimales) : 0;
+                $mmPromedio = ($totalAnimales > 0) ? ($data['mmTotal'] / $totalAnimales) : 0;
+
+                $desvioPeso = (!empty($data['pesos']) && $totalAnimales > 0) ? desvioEstandarExcel($data['pesos'],$pesoPromedio,$totalAnimales) : 0;
+                $desvioMm = (!empty($data['mm']) && $totalAnimales > 0) ? desvioEstandarExcel($data['mm'],$mmPromedio,$totalAnimales) : 0;
 
                 $cantidad = ($carpeta[0]['cantidad'] == 0) ? "Libre" : $carpeta[0]['cantidad'];
 
-                echo utf8_decode("<table border='0'> 
+                echo utf8_to_iso("<table border='0'> 
         
                     <tr> 
                         <td style='font-weight:bold; border:1px solid #eee;' colspan='7' align='center'>Informe de Carpeta</td>
@@ -471,7 +476,7 @@ class ControladorCarpetas{
                         <td></td>
                         <td style='border:1px solid #eee;'>FLACAS</td>
                         <td style='border:1px solid #eee;'>" . count($animalesPorClasificacion['F']) . "</td>
-                        <td style='border:1px solid #eee;'>" . (count($animalesPorClasificacion['F']) * 100) / $data['totalAnimales'] . "</td>
+                        <td style='border:1px solid #eee;'>" . ((count($animalesPorClasificacion['F']) != 0) ? (count($animalesPorClasificacion['F']) * 100) / $data['totalAnimales'] : 0) . "</td>
                     </tr>
 
                     <tr>
@@ -483,7 +488,7 @@ class ControladorCarpetas{
                         <td></td>
                         <td style='border:1px solid #eee;'>BUENAS</td>
                         <td style='border:1px solid #eee;'>" . count($animalesPorClasificacion['B']) . "</td>
-                        <td style='border:1px solid #eee;'>" . (count($animalesPorClasificacion['B']) * 100) / $data['totalAnimales'] . "</td>
+                        <td style='border:1px solid #eee;'>" . ((count($animalesPorClasificacion['B']) != 0) ? (count($animalesPorClasificacion['B']) * 100) / $data['totalAnimales'] : 0). "</td>
                     </tr>
 
                     <tr>
@@ -495,7 +500,7 @@ class ControladorCarpetas{
                         <td></td>
                         <td style='border:1px solid #eee;'>BUENAS+</td>
                         <td style='border:1px solid #eee;'>" . count($animalesPorClasificacion['B+']) . "</td>
-                        <td style='border:1px solid #eee;'>" . (count($animalesPorClasificacion['B+']) * 100) / $data['totalAnimales'] . "</td>
+                        <td style='border:1px solid #eee;'>" . ((count($animalesPorClasificacion['B+']) != 0) ? (count($animalesPorClasificacion['B+']) * 100) / $data['totalAnimales'] : 0) . "</td>
                     </tr>
   
                     <tr>
@@ -507,7 +512,7 @@ class ControladorCarpetas{
                         <td></td>
                         <td style='border:1px solid #eee;'>MUY BUENAS</td>
                         <td style='border:1px solid #eee;'>" . count($animalesPorClasificacion['MB']) . "</td>
-                        <td style='border:1px solid #eee;'>" . (count($animalesPorClasificacion['MB']) * 100) / $data['totalAnimales'] . "</td>
+                        <td style='border:1px solid #eee;'>" . ((count($animalesPorClasificacion['MB']) != 0) ? (count($animalesPorClasificacion['MB']) * 100) / $data['totalAnimales'] : 0) . "</td>
                     </tr>
   
                     <tr>
@@ -516,13 +521,13 @@ class ControladorCarpetas{
                         <td colspan='4'></td>
                         <td style='border:1px solid #eee;'>APENAS GORDAS</td>
                         <td style='border:1px solid #eee;'>" . count($animalesPorClasificacion['AP']) . "</td>
-                        <td style='border:1px solid #eee;'>" . (count($animalesPorClasificacion['AP']) * 100) / $data['totalAnimales'] . "</td>
+                        <td style='border:1px solid #eee;'>" . ((count($animalesPorClasificacion['AP']) != 0) ? (count($animalesPorClasificacion['AP']) * 100) / $data['totalAnimales'] : 0) . "</td>
                     </tr>
                     <tr>
                         <td colspan='6'> </td>
                         <td style='border:1px solid #eee;'>GORDAS</td>
                         <td style='border:1px solid #eee;'>" . count($animalesPorClasificacion['G']) . "</td>
-                        <td style='border:1px solid #eee;'>" . (count($animalesPorClasificacion['G']) * 100) / $data['totalAnimales'] . "</td>
+                        <td style='border:1px solid #eee;'>" . ((count($animalesPorClasificacion['G']) != 0) ? (count($animalesPorClasificacion['G']) * 100) / $data['totalAnimales'] : 0)  . "</td>
                     </tr>
 
                     <tr>
@@ -588,7 +593,7 @@ class ControladorCarpetas{
 
                             $fecha = date('d-m-Y',strtotime($animal['date']));
 
-                            echo utf8_decode("<tr> 
+                            echo utf8_to_iso("<tr> 
                                 <td style='border:1px solid #eee;'>".$fecha."</td> 
                                 <td style='border:1px solid #eee;'>".$animal['RFID']."</td> 
                                 <td style='border:1px solid #eee;'>".number_format($animal['mmGrasa'],2,'.','')."</td> 

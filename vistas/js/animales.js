@@ -143,12 +143,18 @@ const cargarAnimalesSD = ()=>{
 
 
 $('.tablaIngresos').DataTable( {
-  "ajax": "fetch/datatable-ingresos.fetch.php",
+  "ajax": {
+    "url": "fetch/datatable-ingresos.fetch.php",
+    "dataSrc": function(json) {
+      console.log("Respuesta AJAX:", json);
+      return json.data || json;
+    }
+  },
   "bSort" : false,
   "deferRender": true,
   "retrieve": true,
   "processing": true,
-	"ordering": false,
+  "ordering": false,
   "searching": false,
   "info":     false,
   "bLengthChange": false,

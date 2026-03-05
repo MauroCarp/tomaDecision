@@ -45,6 +45,7 @@ class ControladorAnimales{
 		$datos['clasificacion'] = ControladorAnimales::ctrDeterminarClasificacion(null,$tas3,$datos['sexo']);
 
 		$respuesta = ModeloAnimales::mdlNuevoAnimal($tabla, $datos);
+		ModeloAnimales::mdlNuevoAnimal('analisis',$datos);
 		
 		if($respuesta == 'ok'){
 
@@ -423,11 +424,11 @@ class ControladorAnimales{
 	ELIMINAR ANIMAL
 	=============================================*/
 
-	static public function ctrEliminarAnimal($item,$valor){
+	static public function ctrEliminarAnimal($item,$valor,$analisis = false){
 		
-		$tabla = 'animales';
+		$tabla = (!$analisis) ? 'animales' : 'analisis';
 
-		return $respuesta = ModeloAnimales::mdlEliminarAnimal($tabla,$item,$valor);
+		return ModeloAnimales::mdlEliminarAnimal($tabla,$item,$valor);
 
 	}
 

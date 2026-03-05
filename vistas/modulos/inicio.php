@@ -1,5 +1,17 @@
   <?php
 
+  if($_SESSION["usuario"] == "tecnicoEstrategia"){
+  
+    echo '<script>
+  
+      window.location = "index.php?ruta=estrategia/index";
+  
+    </script>';
+  
+    return;
+  
+  }
+
   if($_SESSION["perfil"] == "Especial"){
   
     echo '<script>
@@ -56,7 +68,7 @@
                   
                   <div class="box-header with-border">
                   
-                    <h3 class="box-title"><i class="ion-ios-list-outline"></i> Animales Ingresados</h3>
+                    <h3 class="box-title"><i class="ion-ios-list-outline"></i> Animales Ingresados <small>Solo se muestran los registros del dia actual.</small></h3>
             
                   </div>
                   
@@ -135,7 +147,7 @@
                   
                   <div class="box-header with-border">
                   
-                    <h3 class="box-title"><i class="ion-ios-list-outline"></i> Animales Ingresados</h3>
+                    <h3 class="box-title"><i class="ion-ios-list-outline"></i> Animales Ingresados <small>Solo se muestran los registros del dia actual.</small> </h3>
             
                   </div>
                   

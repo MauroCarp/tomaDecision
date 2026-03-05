@@ -32,7 +32,8 @@ class ControladorUsuarios{
 						$_SESSION["usuario"] = $respuesta["usuario"];
 						$_SESSION["foto"] = $respuesta["foto"];
 						$_SESSION["perfil"] = $respuesta["perfil"];
-						
+						$_SESSION["empresa"] = $respuesta["empresa"];
+					
 						echo '<script>	
 
 						let date = new Date()
@@ -46,26 +47,19 @@ class ControladorUsuarios{
 						</script>';
 
 						if( isset($_POST['rememberme']) ){
-														
+												
 							// Set cookie variables
 							$value =  encrypt_decrypt('encrypt', $respuesta["id"]);
 			
 							echo '<script>	
 
-							let date = new Date()
-
-							date.setTime(date.getTime()+(30*24*60*60*1000))
-
-							let expires = date.toGMTString()
-							
-							document.cookie = `rememberme = '.$value.'";path=/sanidadAnimal;Expires=${expires}`
+							document.cookie = `rememberme='.$value.';path=/;expires=Thu, 31 Dec 2025 23:59:59 UTC`
 
 							</script>';
 							
 						}
 
 							
-			 
 						/*=============================================
 						REGISTRAR FECHA PARA SABER EL ÚLTIMO LOGIN
 						=============================================*/
@@ -84,14 +78,25 @@ class ControladorUsuarios{
 						$valor2 = $respuesta["id"];
 
 						$ultimoLogin = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2);
-
+						
 						if($ultimoLogin == "ok"){
+						
 
-							echo '<script>
+							if($_SESSION['empresa'] != 'Estrategia'){
 
-								window.location = "inicio";
-
-							</script>';
+								echo '<script>
+								
+								window.location = "index.php?ruta=inicio";
+								
+								</script>';
+							} else {
+							
+								echo '<script>
+								
+								window.location = "index.php?ruta=estrategia";
+								
+								</script>';
+							}
 
 						}				
 						

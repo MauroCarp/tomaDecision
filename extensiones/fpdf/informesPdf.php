@@ -17,7 +17,7 @@ function formatearFecha($fecha){
 
 function desvioEstandar($arr){
 
-    $media = array_sum($arr) / count($arr);
+    $media = (count($arr) != 0) ? array_sum($arr) / count($arr) : 0;
 
     // Calcula la suma de los cuadrados de las diferencias con la media
     $sumatoriaCuadrados = 0;
@@ -27,7 +27,7 @@ function desvioEstandar($arr){
     }
 
     // Calcula la desviación estándar
-    return sqrt($sumatoriaCuadrados / (count($arr) - 1));
+    return (count($arr) > 1) ? sqrt($sumatoriaCuadrados / (count($arr) - 1)) : 0;
 }
 
 $informe = (isset($_GET['informe'])) ?  $_GET['informe'] : false;
@@ -93,7 +93,7 @@ class informePDF{
         $pdf->SetFont('helvetica','B',12);
         
         $pdf->Cell(35,7,'Total Animales',0,0,'L',0);
-        $pdf->Cell(40,7,utf8_decode('Clasificación'),0,0,'C',0);
+        $pdf->Cell(40,7,mb_convert_encoding('Clasificación', 'ISO-8859-1', 'UTF-8'),0,0,'C',0);
         $pdf->Cell(25,7,'Peso Min.',0,0,'L',0);
         $pdf->Cell(20,7,'Peso Max.',0,1,'L',0);
         
@@ -155,8 +155,8 @@ class informePDF{
             }
         }
 
-        $pesoPromedio = $data['pesoTotal'] / $data['totalAnimales'];
-        $mmPromedio = $data['mmTotal'] / $data['totalAnimales'];
+        $pesoPromedio = ($data['totalAnimales'] != 0) ? $data['pesoTotal'] / $data['totalAnimales'] : 0;
+        $mmPromedio = ($data['totalAnimales'] != 0) ? $data['mmTotal'] / $data['totalAnimales'] : 0;
 
         $desvioPeso = desvioEstandar($data['pesos']);
         $desvioMm = desvioEstandar($data['mm']);
@@ -179,7 +179,7 @@ class informePDF{
         $pdf->Cell(10,7,'',0,0,'L',0);
         $pdf->Cell(43,7,'FLACAS',1,0,'L',0);
         $pdf->Cell(15,7,count($animalesPorClasificacion['F']),1,0,'L',0);
-        $pdf->Cell(15,7,number_format((count($animalesPorClasificacion['F']) * 100) / $data['totalAnimales'],2),1,1,'L',0);
+        $pdf->Cell(15,7,($data['totalAnimales'] != 0) ? number_format((count($animalesPorClasificacion['F']) * 100) / $data['totalAnimales'],2) : 0,1,1,'L',0);
 
         $pdf->Cell(20,7,'MAX',1,0,'L',0);
         $pdf->Cell(15,7,$data['pesoMax'],1,0,'L',0);
@@ -189,7 +189,7 @@ class informePDF{
         $pdf->Cell(10,7,'',0,0,'L',0);
         $pdf->Cell(43,7,'BUENA',1,0,'L',0);
         $pdf->Cell(15,7,count($animalesPorClasificacion['B']),1,0,'L',0);
-        $pdf->Cell(15,7,number_format((count($animalesPorClasificacion['B']) * 100) / $data['totalAnimales'],2),1,1,'L',0);
+        $pdf->Cell(15,7,($data['totalAnimales'] != 0) ? number_format((count($animalesPorClasificacion['B']) * 100) / $data['totalAnimales'],2) : 0,1,1,'L',0);
 
         $pdf->Cell(20,7,'PROM',1,0,'L',0);
         $pdf->Cell(15,7,number_format($pesoPromedio,0),1,0,'L',0);
@@ -199,7 +199,7 @@ class informePDF{
         $pdf->Cell(10,7,'',0,0,'L',0);
         $pdf->Cell(43,7,'BUENA+',1,0,'L',0);
         $pdf->Cell(15,7,count($animalesPorClasificacion['B+']),1,0,'L',0);
-        $pdf->Cell(15,7,number_format((count($animalesPorClasificacion['B+']) * 100) / $data['totalAnimales'],2),1,1,'L',0);
+        $pdf->Cell(15,7,($data['totalAnimales'] != 0) ? number_format((count($animalesPorClasificacion['B+']) * 100) / $data['totalAnimales'],2) : 0,1,1,'L',0);
 
         $pdf->Cell(20,7,'DESVIO',1,0,'L',0);
         $pdf->Cell(15,7,number_format($desvioPeso,2),1,0,'L',0);
@@ -209,19 +209,19 @@ class informePDF{
         $pdf->Cell(10,7,'',0,0,'L',0);
         $pdf->Cell(43,7,'MUY BUENAS',1,0,'L',0);
         $pdf->Cell(15,7,count($animalesPorClasificacion['MB']),1,0,'L',0);
-        $pdf->Cell(15,7,number_format((count($animalesPorClasificacion['MB']) * 100) / $data['totalAnimales'],2),1,1,'L',0);
+        $pdf->Cell(15,7,($data['totalAnimales'] != 0) ? number_format((count($animalesPorClasificacion['MB']) * 100) / $data['totalAnimales'],2) : 0,1,1,'L',0);
 
         $pdf->Cell(20,7,'TOTAL',1,0,'L',0);
         $pdf->Cell(15,7,$data['pesoTotal'],1,0,'L',0);
         $pdf->Cell(55,7,'',0,0,'L',0);
         $pdf->Cell(43,7,'APENAS GORDAS',1,0,'L',0);
         $pdf->Cell(15,7,count($animalesPorClasificacion['AP']),1,0,'L',0);
-        $pdf->Cell(15,7,number_format((count($animalesPorClasificacion['AP']) * 100) / $data['totalAnimales'],2),1,1,'L',0);
+        $pdf->Cell(15,7,($data['totalAnimales'] != 0) ? number_format((count($animalesPorClasificacion['AP']) * 100) / $data['totalAnimales'],2) : 0,1,1,'L',0);
 
         $pdf->Cell(90,7,'',0,0,'L',0);
         $pdf->Cell(43,7,'GORDAS',1,0,'L',0);
         $pdf->Cell(15,7,count($animalesPorClasificacion['G']),1,0,'L',0);
-        $pdf->Cell(15,7,number_format((count($animalesPorClasificacion['G']) * 100) / $data['totalAnimales'],2),1,1,'L',0);
+        $pdf->Cell(15,7,($data['totalAnimales'] != 0) ? number_format((count($animalesPorClasificacion['G']) * 100) / $data['totalAnimales'],2) : 0,1,1,'L',0);
    
         $pdf->Ln(2);
 
@@ -229,7 +229,7 @@ class informePDF{
         $pdf->Cell(25,7,'mm Grasa',1,0,'C',1);
         $pdf->Cell(20,7,'Peso',1,0,'C',1);
         $pdf->Cell(20,7,'Sexo',1,0,'C',1);
-        $pdf->Cell(40,7,utf8_decode('Clasificación'),1,1,'C',1);
+        $pdf->Cell(40,7,mb_convert_encoding('Clasificación', 'ISO-8859-1', 'UTF-8'),1,1,'C',1);
         
         foreach ($animalesPorClasificacion as $clasificacion => $animales) {
         

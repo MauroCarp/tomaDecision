@@ -76,7 +76,7 @@
 							
 							<div class="pull-right">
 								
-								<a href="salir" class="btn btn-default btn-flat">Salir</a>
+								<a href="index.php?ruta=salir" class="btn btn-default btn-flat">Salir</a>
 
 							</div>
 

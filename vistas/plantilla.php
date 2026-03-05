@@ -1,6 +1,26 @@
 <?php
 
+// if(!isset($_COOKIE['logintomadecision']) AND !$_COOKIE['logintomadecision']){
+
+
+//   echo '<script>
+//   window.location = "login/index.php"
+//   </script>';
+
+
+
+// }
+
 session_start();
+
+// if(array_key_exists('empresa',$_SESSION) && (($_SESSION['empresa'] == 'Estrategia' || $_COOKIE['empresa'] == 'Estrategia')) && $_SERVER['REQUEST_URI'] == '/'){
+
+//   echo '<script>
+//   window.location = "index.php?ruta=estrategia/index"
+//   </script>';
+
+// }
+
 
 $logo = 'tomaDecision';
 
@@ -153,20 +173,12 @@ if(isset($_COOKIE['fecha'])){
   <!-- ESTILOS PROPIOS -->
   <link rel="stylesheet" href="vistas/dist/css/styles.css">
 
-  <!-- Sliders/-->
-  <link  rel="stylesheet" src="vistas/plugins/bootstrap-slider/slider.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.min.css"/>
   <!--=====================================
   PLUGINS DE JAVASCRIPT
   ======================================-->
 
   <!-- jQuery 3 -->
-  <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/rowgroup/1.1.3/js/dataTables.rowGroup.min.js"></script>
-
+  <script src="vistas/bower_components/jquery/dist/jquery.min.js"></script>
   
   <!-- Bootstrap 3.3.7 -->
   <script src="vistas/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -178,7 +190,7 @@ if(isset($_COOKIE['fecha'])){
   <script src="vistas/dist/js/adminlte.min.js"></script>
 
   <!-- DataTables -->
-  <!-- <script src="vistas/bower_components/datatables.net/js/jquery.dataTables.min.js"></script> -->
+  <script src="vistas/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
   <script src="vistas/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
   <script src="vistas/bower_components/datatables.net-bs/js/dataTables.responsive.min.js"></script>
   <script src="vistas/bower_components/datatables.net-bs/js/responsive.bootstrap.min.js"></script>
@@ -186,6 +198,11 @@ if(isset($_COOKIE['fecha'])){
   <!-- SweetAlert 2 -->
   <script src="vistas/plugins/sweetalert2/sweetalert2.js"></script>
   <script src="vistas/plugins/sweetalert2/sweetalert2.all.js"></script>
+  
+  <!-- SELECT2 SELECTOR https://select2.org/getting-started/installation -->
+
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
    <!-- By default SweetAlert2 doesn't support IE. To enable IE 11 support, include Promise polyfill:-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
@@ -212,12 +229,6 @@ if(isset($_COOKIE['fecha'])){
   <!-- ChartJS http://www.chartjs.org/-->
   <script src="vistas/bower_components/chartjs/dist/chart.min.js"></script>
   <script src="vistas/bower_components/chartjs/dist/chartjs-plugin-datalabels.js"></script>
-
-  <!-- Sliders/-->
-  <script src="vistas/plugins/bootstrap-slider/bootstrap-slider.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js"></script>
-
-  <!-- <script src="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/ag-grid-community.min.js"></script> -->
 
 </head>
 
@@ -261,12 +272,14 @@ CUERPO DOCUMENTO
 
     include "modulos/login.php";
 
-  }
+  }?>
 
-  ?>
+  <script src="vistas/js/plantilla.js"></script>
+  
+<?php
 
+if(array_key_exists('empresa', $_SESSION) && $_SESSION["empresa"] != 'Estrategia' && array_key_exists('empresa', $_COOKIE) && $_COOKIE["empresa"] != 'Estrategia'){ ?>
 
-<script src="vistas/js/plantilla.js"></script>
 <script src="vistas/js/inicio.js"></script>
 <script src="vistas/js/animales.js"></script>
 <script src="vistas/js/carpetas.js"></script>
@@ -275,6 +288,12 @@ CUERPO DOCUMENTO
 <script src="vistas/js/perfiles.js"></script>
 <script src="vistas/js/analisis.js"></script>
 <script src="vistas/js/usuarios.js"></script>
+ 
+<?php } else { ?>
+  <script src="vistas/js/estrategia/estrategia.js"></script>
+
+<?php }
+?>
 
 </body>
 </html>
